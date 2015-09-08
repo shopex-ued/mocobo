@@ -49,7 +49,6 @@ def rename_svg_glyph_names(data):
 def generate_scss(data):
   print "Generate SCSS"
   font_name = data['name']
-  font_version = data['version']
   css_prefix = data['prefix']
   variables_file_path = os.path.join(SCSS_FOLDER_PATH, '_icons-variables.scss')
   icons_file_path = os.path.join(SCSS_FOLDER_PATH, '_icons-icons.scss')
@@ -59,7 +58,6 @@ def generate_scss(data):
   d.append('// --------------------------\n')
   d.append('$icons-font-path: "../fonts" !default;')
   d.append('$icons-font-family: "%s" !default;' % (font_name) )
-  d.append('$icons-version: "%s" !default;' % (font_version) )
   d.append('$icons-prefix: %s !default;' % (css_prefix) )
   d.append('')
   for icon in data['icons']:

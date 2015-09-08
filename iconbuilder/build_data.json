@@ -1,7 +1,7 @@
 {
-  "build_hash": "c247358af18025f5b853d7979abce1b8",
+  "build_hash": "f89aac7a706242a554b41714f4d8a5eb",
   "prefix": "icon-",
-  "version": "1.5.2",
+  "version": "1.0.0-alpha",
   "name": "icons",
   "icons": [
     {
@@ -25,175 +25,175 @@
       "name": "bag"
     },
     {
-      "code": "0x282f",
+      "code": "0x2806",
       "name": "business"
     },
     {
-      "code": "0x2806",
+      "code": "0x2807",
       "name": "card"
     },
     {
-      "code": "0x2807",
+      "code": "0x2808",
       "name": "cart"
     },
     {
-      "code": "0x2808",
+      "code": "0x2809",
       "name": "chatbox"
     },
     {
-      "code": "0x2809",
+      "code": "0x280a",
       "name": "clock"
     },
     {
-      "code": "0x280a",
+      "code": "0x280b",
       "name": "coin"
     },
     {
-      "code": "0x280b",
+      "code": "0x280c",
       "name": "coupon"
     },
     {
-      "code": "0x280c",
+      "code": "0x280d",
       "name": "discover"
     },
     {
-      "code": "0x280d",
+      "code": "0x280e",
       "name": "edit"
     },
     {
-      "code": "0x280e",
+      "code": "0x280f",
       "name": "eye"
     },
     {
-      "code": "0x280f",
+      "code": "0x2810",
       "name": "forward"
     },
     {
-      "code": "0x2810",
+      "code": "0x2811",
       "name": "freeship"
     },
     {
-      "code": "0x2811",
+      "code": "0x2812",
       "name": "grid"
     },
     {
-      "code": "0x2812",
+      "code": "0x2813",
       "name": "heart"
     },
     {
-      "code": "0x2813",
+      "code": "0x2814",
       "name": "help"
     },
     {
-      "code": "0x2814",
+      "code": "0x2815",
       "name": "home"
     },
     {
-      "code": "0x2815",
+      "code": "0x2816",
       "name": "list"
     },
     {
-      "code": "0x2816",
+      "code": "0x2817",
       "name": "location"
     },
     {
-      "code": "0x2817",
+      "code": "0x2818",
       "name": "lock"
     },
     {
-      "code": "0x2818",
+      "code": "0x2819",
       "name": "mail"
     },
     {
-      "code": "0x2830",
+      "code": "0x281a",
       "name": "menu"
     },
     {
-      "code": "0x2819",
+      "code": "0x281b",
       "name": "mobile"
     },
     {
-      "code": "0x281a",
+      "code": "0x281c",
       "name": "more"
     },
     {
-      "code": "0x281b",
+      "code": "0x281d",
       "name": "order"
     },
     {
-      "code": "0x281c",
+      "code": "0x281e",
       "name": "package"
     },
     {
-      "code": "0x281d",
+      "code": "0x281f",
       "name": "paper"
     },
     {
-      "code": "0x281e",
+      "code": "0x2820",
       "name": "reduce"
     },
     {
-      "code": "0x281f",
+      "code": "0x2821",
       "name": "refund"
     },
     {
-      "code": "0x2820",
+      "code": "0x2822",
       "name": "return"
     },
     {
-      "code": "0x2821",
+      "code": "0x2823",
       "name": "saleoff"
     },
     {
-      "code": "0x2822",
+      "code": "0x2824",
       "name": "scan"
     },
     {
-      "code": "0x2823",
+      "code": "0x2825",
       "name": "search"
     },
     {
-      "code": "0x2824",
+      "code": "0x2826",
       "name": "send"
     },
     {
-      "code": "0x2825",
+      "code": "0x2827",
       "name": "share"
     },
     {
-      "code": "0x2826",
+      "code": "0x2828",
       "name": "shop"
     },
     {
-      "code": "0x2827",
+      "code": "0x2829",
       "name": "spanner"
     },
     {
-      "code": "0x2828",
+      "code": "0x282a",
       "name": "speaker"
     },
     {
-      "code": "0x2829",
+      "code": "0x282b",
       "name": "star"
     },
     {
-      "code": "0x282a",
+      "code": "0x282c",
       "name": "tags"
     },
     {
-      "code": "0x282b",
+      "code": "0x282d",
       "name": "trash"
     },
     {
-      "code": "0x282c",
+      "code": "0x282e",
       "name": "trunk"
     },
     {
-      "code": "0x282d",
+      "code": "0x282f",
       "name": "user"
     },
     {
-      "code": "0x282e",
+      "code": "0x2830",
       "name": "wallet"
     }
   ]
