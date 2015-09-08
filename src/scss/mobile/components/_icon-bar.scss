@@ -1,0 +1,121 @@
+@import "global";
+
+//
+// @variables
+//
+$include-html-icon-bar-classes: $include-html-classes !default;
+
+// We use these to style the icon-bar and items
+$icon-bar-class: 'icon-bar' !default;
+$icon-bar-bg: $oil !default;
+$icon-bar-font-color: $white !default;
+$icon-bar-font-color-hover: $icon-bar-font-color !default;
+$icon-bar-font-size: to-rem(12) !default;
+$icon-bar-hover-color: $primary-color !default;
+$icon-bar-icon-color: $white !default;
+$icon-bar-icon-color-hover: $icon-bar-icon-color !default;
+$icon-bar-icon-size: $icon-bar-font-size * 2 !default;
+$icon-bar-image-width: $icon-bar-icon-size !default;
+$icon-bar-image-height: $icon-bar-icon-size !default;
+$icon-bar-item-padding: to-rem(5 2) !default;
+$icon-bar-item-padding-vertical: to-rem(2 5) !default;
+
+// We use this to set default opacity for disabled icons.
+$icon-bar-disabled-opacity: 0.7 !default;
+
+//
+// @mixins
+//
+
+// We use this mixin to create the base styles for icon bar element.
+@mixin icon-bar-base {
+    width: 100%;
+    overflow: hidden;
+    > .item {
+        float: left;
+        margin: 0 auto;
+        padding: $icon-bar-item-padding;
+        width: 25%;
+        text-align: center;
+        i, img {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+    &.vertical {
+        width: auto;
+        height: 100%;
+        > .item {
+            display: block;
+            float: none;
+            margin: auto;
+            width: auto;
+            padding: $icon-bar-item-padding-vertical;
+            i {
+                width: $icon-bar-image-width + to-rem(15);
+            }
+        }
+    }
+}
+
+// We use this mixin to create the other styles for icon bars.
+@mixin icon-bar-style($bg: $icon-bar-bg, $font-size: $icon-bar-font-size, $color: $icon-bar-font-color, $color-hover: $icon-bar-font-color-hover, $hover-bg: $icon-bar-hover-color, $icon-size: $icon-bar-icon-size, $icon-color: $icon-bar-icon-color, $icon-color-hover: $icon-bar-icon-color-hover, $image-width: $icon-bar-image-width, $image-height: $icon-bar-image-height, $disabled: true) {
+    background: $bg;
+    > .item {
+        label {
+            font-size: $font-size;
+            color: $color;
+        }
+        i {
+            vertical-align: middle;
+            font-size: $icon-size;
+            line-height: 1.33333;
+            color: $icon-color;
+        }
+        img {
+            height: $image-height;
+            width: $image-width;
+        }
+        &:hover,
+        &.active {
+            background: $hover-bg;
+            label {
+                color: $color-hover;
+            }
+            i {
+                color: $icon-color-hover;
+            }
+        }
+        @if $disabled {
+            &.disabled {
+                opacity: $icon-bar-disabled-opacity;
+                pointer-events: none;
+                > * {
+                    opacity: $icon-bar-disabled-opacity;
+                }
+            }
+        }
+    }
+}
+
+@include exports("icon-bar") {
+    @if $include-html-icon-bar-classes {
+        .#{$icon-bar-class} {
+            @include icon-bar-base;
+            @include icon-bar-style;
+            // Counts
+            &.three-up > .item {
+                width: percentage(1 / 3);
+            }
+            &.four-up > .item {
+                width: percentage(1 / 4);
+            }
+            &.five-up > .item {
+                width: percentage(1 / 5);
+            }
+            &.six-up > .item {
+                width: percentage(1 / 6);
+            }
+        }
+    }
+}

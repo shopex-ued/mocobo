@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>表单</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>表单</h1>
+</header>
+
+<div class="container">
+  <h1>常规表单</h1>
+  <form action="" method="post">
+    <div class="row form-row">
+      <div class="grid-12 columns">
+        <label>常规输入框
+          <input type="text" placeholder="grid-12.columns" />
+        </label>
+        <label>圆角输入框
+          <input type="text" class="radius" placeholder=".radius" />
+        </label>
+        <label>圆角样式2
+          <input type="text" class="round" placeholder=".round" />
+        </label>
+        <label>小输入框
+          <input type="text" class="tiny" placeholder=".tiny" />
+        </label>
+        <label>小输入框
+          <input type="text" class="small" placeholder=".small" />
+        </label>
+        <label>大输入框
+          <input type="text" class="large" placeholder=".large" />
+        </label>
+      </div>
+    </div>
+    <div class="row form-row">
+      <div class="grid-4 columns">
+        <label>Input Label
+          <input type="text" placeholder="grid-4.columns" />
+        </label>
+      </div>
+      <div class="grid-4 columns">
+        <label>Input Label
+          <input type="text" placeholder="grid-4.columns" />
+        </label>
+      </div>
+      <div class="grid-4 columns">
+        <div class="row collapse">
+          <label>Input Label</label>
+          <div class="grid-8 columns">
+            <input type="text" placeholder="grid-8.columns" />
+          </div>
+          <div class="grid-4 columns">
+            <span class="postfix">cc</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row form-row">
+      <div class="grid-12 columns">
+        <label>Select Box
+          <select>
+            <option value="husker">Husker</option>
+            <option value="starbuck">Starbuck</option>
+            <option value="hotdog">Hot Dog</option>
+            <option value="apollo">Apollo</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="row form-row">
+      <div class="grid-12 columns">
+        <label>Choose Your Favorite</label>
+        <input type="radio" name="pokemon" value="Red" id="pokemonRed"><label for="pokemonRed">Red</label>
+        <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Blue</label>
+      </div>
+    </div>
+    <div class="row form-row">
+      <div class="grid-12 columns">
+        <label>Check these out</label>
+        <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
+        <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
+      </div>
+    </div>
+    <div class="row form-row">
+      <div class="grid-12 columns">
+        <label>Textarea Label
+          <textarea placeholder="grid-12.columns"></textarea>
+        </label>
+      </div>
+    </div>
+  </form>
+  <h1>水平排列的标签和输入框</h1>
+  <form action="" method="post">
+    <div class="row form-inline">
+      <div class="grid-2 columns">
+        <label for="right-label" class="text-right">输入</label>
+      </div>
+      <div class="grid-10 columns">
+        <input type="text" id="right-label" placeholder="Inline Text Input">
+      </div>
+    </div>
+  </form>
+  <h1>利用fieldset标签</h1>
+  <form action="" method="post">
+    <fieldset>
+      <legend>Fieldset Legend</legend>
+      <label>Input Label
+        <input type="text" placeholder="请输入代码">
+      </label>
+    </fieldset>
+  </form>
+  <h1>前/后缀</h1>
+  <form action="" method="post">
+    <div class="row collapse">
+      <div class="grid-3 columns">
+        <span class="prefix">http://</span>
+      </div>
+      <div class="grid-9 columns">
+        <input type="text" placeholder="Enter your URL...">
+      </div>
+    </div>
+    <div class="row">
+      <div class="grid-12 columns">
+        <div class="row collapse">
+          <div class="grid-10 columns">
+            <input type="text" placeholder="Hex Value">
+          </div>
+          <div class="grid-2 columns">
+            <a href="#" class="btn postfix">Go</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="grid-6 columns">
+        <div class="row collapse prefix-radius">
+          <div class="grid-3 columns">
+            <span class="prefix">Label</span>
+          </div>
+          <div class="grid-9 columns">
+            <input type="text" placeholder="Value">
+          </div>
+        </div>
+      </div>
+      <div class="grid-6 columns">
+        <div class="row collapse postfix-radius">
+          <div class="grid-9 columns">
+            <input type="text" placeholder="Value">
+          </div>
+          <div class="grid-3 columns">
+            <span class="postfix">Label</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="grid-6 columns">
+        <div class="row collapse prefix-round">
+          <div class="grid-3 columns">
+            <a href="#" class="prefix btn">Go</a>
+          </div>
+          <div class="grid-9 columns">
+            <input type="text" placeholder="Value">
+          </div>
+        </div>
+      </div>
+      <div class="grid-6 columns">
+        <div class="row collapse postfix-round">
+          <div class="grid-9 columns">
+            <input type="text" placeholder="Value">
+          </div>
+          <div class="grid-3 columns">
+            <a href="#" class="postfix btn alert">Go</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <h1>错误提示</h1>
+  <form action="" method="post">
+    <div class="row">
+      <div class="large-6 columns error">
+        <label class="error">Error
+          <input type="text" class="error" />
+        </label>
+        <span class="alert-box error">Invalid entry</span>
+      </div>
+      <div class="large-6 columns error">
+        <label>Another Error
+          <input type="text" />
+        </label>
+        <span class="alert-box error">Invalid entry</span>
+      </div>
+    </div>
+    <textarea class="error" placeholder="Message..."></textarea>
+    <span class="alert-box error">Invalid entry</span>
+  </form>
+
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

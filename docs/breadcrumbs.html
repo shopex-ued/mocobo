@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>面包屑导航</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>面包屑导航</h1>
+</header>
+<div class="container">
+  <h1>示例</h1>
+  <ul class="breadcrumbs">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Features</a></li>
+    <li class="unavailable"><a href="#">Gene Splicing</a></li>
+    <li class="current"><a href="#">Cloning</a></li>
+  </ul>
+  <p>或者：</p>
+  <nav class="breadcrumbs">
+    <a href="#">Home</a>
+    <a href="#">Features</a>
+    <a class="unavailable" href="#">Gene Splicing</a>
+    <a class="current" href="#">Cloning</a>
+  </nav>
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

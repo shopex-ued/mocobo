@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>分割的按钮</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>分割的按钮</h1>
+</header>
+
+<div class="container">
+
+  <h1>基本</h1>
+  <a href="#" class="btn split">Split Button <span data-dropdown="drop"></span></a>
+  <ul id="drop" class="dropdown-menu" data-dropdown-content>
+    <li><a href="#">This is a link</a></li>
+    <li><a href="#">This is another</a></li>
+    <li><a href="#">Yet another</a></li>
+  </ul>
+
+  <h1>更多样式</h1>
+  <a href="#" class="btn split [tiny small large] [secondary alert success...] round">Split Button <span data-dropdown="drop1"></span></a>
+  <ul id="drop1" class="dropdown-menu" data-dropdown-content>
+    <li><a href="#">This is a link</a></li>
+    <li><a href="#">This is another</a></li>
+    <li><a href="#">Yet another</a></li>
+  </ul>
+
+  <h1>自定义下拉箭头样式</h1>
+  <a href="#" class="btn split no-pip">Custom Pip<span><i class="icon-arrow-down"></i></span></a>
+
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

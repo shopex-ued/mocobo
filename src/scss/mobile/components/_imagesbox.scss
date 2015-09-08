@@ -1,0 +1,142 @@
+@import "global";
+@import "block-grid";
+
+//
+// @variables
+//
+$include-html-imagesbox-classes: $include-html-classes !default;
+
+$imagesbox-class: 'imagesbox' !default;
+// We use these to set the background colors for parts of Imagesbox.
+$imagesbox-bg: $oil !default;
+$imagesbox-caption-bg: $imagesbox-bg !default;
+$imagesbox-carousel-bg: rgba(51, 51, 51, 0.8) !default;
+$imagesbox-img-bg: $imagesbox-bg !default;
+
+// We use these to style the close button
+$imagesbox-close-color: $iron !default;
+$imagesbox-close-size: to-rem(30) !default;
+
+// We use these to style the arrows
+$imagesbox-arrow-size: to-rem(12) !default;
+$imagesbox-arrow-color: $imagesbox-close-color !default;
+
+// We use these to style captions
+$imagesbox-caption-font-color: $iron !default;
+$imagesbox-caption-font-size: to-rem(14) !default;
+$imagesbox-caption-padding: to-rem(10 30 20) !default;
+
+// We use these to make the image and carousel height and style
+$imagesbox-active-img-height: 85% !default;
+$imagesbox-carousel-height: 120px !default;
+$imagesbox-carousel-thumb-width: 120px !default;
+$imagesbox-carousel-thumb-active-border: 1px solid rgb(255, 255, 255) !default;
+
+@include exports("imagesbox") {
+    @if $include-html-imagesbox-classes {
+        // We decided to not create a mixin for Imagesbox because it relies
+        // on predefined classes and structure to work properly.
+        // The variables above should give enough control.
+        /* Imagesbox Styles */
+        .#{$imagesbox-class}-thumbs, #{data("imagesbox")} {
+            @extend .clearfix;
+            margin-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+            li {
+                float: left;
+                margin-right: to-rem(10);
+                margin-bottom: to-rem(10);
+            }
+            &[class*="block-grid-"] {
+                margin-left: -($block-grid-default-spacing / 2);
+                li {
+                    margin-right: 0;
+                    margin-bottom: 0;
+                }
+            }
+        }
+        .#{$imagesbox-class}-blackout {
+            background: $imagesbox-bg;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 998;
+            width: 100%;
+            height: 100%;
+            .#{$imagesbox-class}-close {
+                display: block;
+            }
+        }
+        .#{$imagesbox-class}-container {
+            position: relative;
+            z-index: 998;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+        .#{$imagesbox-class}-touch-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            color: $base;
+            font-size: .6em;
+        }
+        .visible-img {
+            position: relative;
+            height: 95%;
+            img {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                max-height: 100%;
+                max-width: 100%;
+            }
+        }
+        .#{$imagesbox-class}-caption {
+            background: $imagesbox-caption-bg;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: $imagesbox-caption-padding;
+            margin-bottom: 0;
+            line-height: 1.3;
+            color: $imagesbox-caption-font-color;
+            font-size: $imagesbox-caption-font-size;
+            text-align: center;
+        }
+        .#{$imagesbox-class}-close {
+            display: none;
+            z-index: 999;
+            padding-left: to-rem(20);
+            padding-top: to-rem(10);
+            line-height: 1;
+            color: $imagesbox-close-color;
+            font-size: $imagesbox-close-size;
+            &:hover,
+            &:focus {
+                color: $iron;
+            }
+        }
+        .#{$imagesbox-class}-assembled {
+            .carousel {
+                overflow: hidden;
+            }
+            .#{$imagesbox-class}-container {
+                height: 100%;
+                .carousel > ul {
+                    display: none;
+                }
+            }
+        }
+        // If you want to show a imagesbox, but only have a single image come through as the thumbnail
+        .#{$imagesbox-class}-alumb li {
+            display: none;
+            &.cover {
+                display: block;
+            }
+        }
+    }
+}

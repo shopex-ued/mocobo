@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>选项卡</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>选项卡</h1>
+</header>
+
+<div class="container">
+
+  <h1>示例</h1>
+  <ul class="tabs" data-tab>
+    <li class="controller active"><a href="#panel1">Tab 1</a></li>
+    <li class="controller"><a href="#panel2">Tab 2</a></li>
+    <li class="controller"><a href="#panel3">Tab 3</a></li>
+    <li class="controller"><a href="#panel4">Tab 4</a></li>
+  </ul>
+  <div class="tabs-content">
+    <div class="content active" id="panel1">
+      <p>This is the first panel of the basic tab example. You can place all sorts of content here including a grid.</p>
+    </div>
+    <div class="content" id="panel2">
+      <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
+    </div>
+    <div class="content" id="panel3">
+      <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
+    </div>
+    <div class="content" id="panel4">
+      <p>This is the fourth panel of the basic tab example. This is the fourth panel of the basic tab example.</p>
+    </div>
+  </div>
+
+  <h1>垂直选项卡</h1>
+  <div class="container clearfix">
+    <ul class="tabs vertical" data-tab>
+      <li class="controller active"><a href="#panel11">Tab 1</a></li>
+      <li class="controller"><a href="#panel21">Tab 2</a></li>
+      <li class="controller"><a href="#panel31">Tab 3</a></li>
+      <li class="controller"><a href="#panel41">Tab 4</a></li>
+    </ul>
+    <div class="tabs-content vertical">
+      <div class="content active" id="panel11">
+        <p>This is the first panel of the basic tab example. You can place all sorts of content here including a grid.</p>
+      </div>
+      <div class="content" id="panel21">
+        <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
+      </div>
+      <div class="content" id="panel31">
+        <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
+      </div>
+      <div class="content" id="panel41">
+        <p>This is the fourth panel of the basic tab example. This is the fourth panel of the basic tab example.</p>
+      </div>
+    </div>
+  </div>
+
+  <h1>带圆角的选项卡</h1>
+  <ul class="tabs radius" data-tab>
+    <li class="controller active"><a href="#panel1">Tab 1</a></li>
+    <li class="controller"><a href="#panel2">Tab 2</a></li>
+    <li class="controller"><a href="#panel3">Tab 3</a></li>
+    <li class="controller"><a href="#panel4">Tab 4</a></li>
+  </ul>
+  <div class="tabs-content">
+    <div class="content active" id="panel1">
+      <p>This is the first panel of the basic tab example. You can place all sorts of content here including a grid.</p>
+    </div>
+    <div class="content" id="panel2">
+      <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
+    </div>
+    <div class="content" id="panel3">
+      <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
+    </div>
+    <div class="content" id="panel4">
+      <p>This is the fourth panel of the basic tab example. This is the fourth panel of the basic tab example.</p>
+    </div>
+  </div>
+
+  <h1>仿iOS分节选项卡</h1>
+  <ul class="segmented-tabs" data-tab>
+    <li class="controller active"><a href="#content1">全部</a></li>
+    <li class="controller"><a href="#content2">已使用</a></li>
+    <li class="controller"><a href="#content3">未使用</a></li>
+  </ul>
+  <div class="tabs-content">
+    <div class="content active" id="content1">
+      <p>This is the first panel of the basic tab example. You can place all sorts of content here including a grid.</p>
+    </div>
+    <div class="content" id="content2">
+      <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
+    </div>
+    <div class="content" id="content3">
+      <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
+    </div>
+  </div>
+
+  <h1>仿Android条形选项卡</h1>
+  <ul class="bar-tabs" data-tab>
+    <li class="controller active"><a href="#content11">全部</a></li>
+    <li class="controller"><a href="#content21">已使用</a></li>
+    <li class="controller"><a href="#content31">未使用</a></li>
+  </ul>
+  <div class="tabs-content">
+    <div class="content active" id="content11">
+      <p>This is the first panel of the basic tab example. You can place all sorts of content here including a grid.</p>
+    </div>
+    <div class="content" id="content21">
+      <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
+    </div>
+    <div class="content" id="content31">
+      <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
+    </div>
+  </div>
+
+  <h1>脚本控制参数</h1>
+  <p>所有的控制参数都可用 <code>data-options</code> 绑定，比如： <code>deep_linking: true, scroll_to_content: false</code> 。</p>
+  <ul class="tabs" data-tab role="tablist" data-options="deep_linking: false, scroll_to_content: false">
+    <li class="controller" role="presentational">
+      <a href="#tabs-deeplink-1" role="tab" tabindex="-1" aria-selected="false" controls="tabs-deeplink-1">Tab 1</a>
+    </li>
+    <li class="controller" role="presentational">
+      <a href="#tabs-deeplink-2" role="tab" tabindex="-1" aria-selected="false" controls="tabs-deeplink-2">Tab 2</a>
+    </li>
+    <li class="controller active" role="presentational">
+      <a href="#tabs-deeplink-3" role="tab" tabindex="0" aria-selected="true" controls="tabs-deeplink-3">Tab 3</a>
+    </li>
+  </ul>
+  <div class="tabs-content">
+    <section id="tabs-deeplink-1" role="tabpanel" aria-hidden="true" class="content" tabindex="-1">
+      <h2>First Panel Header</h2>
+      <p id="tabs-deeplink-content-1">First panel content goes here...</p>
+    </section>
+    <section id="tabs-deeplink-2" role="tabpanel" aria-hidden="true" class="content" tabindex="-1">
+      <h2>Second Panel Header</h2>
+      <p id="tabs-deeplink-content-2"> Second panel content goes here...</p>
+    </section>
+    <section id="tabs-deeplink-3" role="tabpanel" aria-hidden="false" class="content active">
+      <h2>Third Panel Header</h2>
+      <p id="tabs-deeplink-content-3"> Third panel content goes here...</p>
+    </section>
+  </div>
+
+  <h1>回调</h1>
+  <p>回调有两种方式：</p>
+  <pre>
+  $(document).mobile({
+    tab: {
+      callback : function (tab) {
+        console.log(tab);
+      }
+    }
+  });
+  </pre>
+  以及
+  <pre>
+  $('#myTabs').on('toggled', function (event, tab) {
+    console.log(tab);
+  });
+  </pre>
+
+  <h1>可选项</h1>
+  <pre>
+  $(document).mobile({
+    tabs: {
+      // specify the class used for active (or open) accordion panels
+      active_class: 'active',
+      // Match the location hash to a label
+      deep_linking : false,
+      // Use location hash to scroll to content when document loaded or refresh
+      scroll_to_content : true,
+      // the event type(hover or click)?
+      is_hover : false
+    }
+  });
+  </pre>
+
+  <h1>当添加了新的​选项卡</h1>
+  <pre>
+  $(document).mobile('tab', 'reflow');
+  </pre>
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

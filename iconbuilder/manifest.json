@@ -1,0 +1,200 @@
+{
+  "build_hash": "f89aac7a706242a554b41714f4d8a5eb",
+  "prefix": "icon-",
+  "version": "1.5.2",
+  "name": "icons",
+  "icons": [
+    {
+      "code": "0x2801",
+      "name": "arrow-back"
+    },
+    {
+      "code": "0x2802",
+      "name": "arrow-down"
+    },
+    {
+      "code": "0x2803",
+      "name": "arrow-forward"
+    },
+    {
+      "code": "0x2804",
+      "name": "arrow-up"
+    },
+    {
+      "code": "0x2805",
+      "name": "bag"
+    },
+    {
+      "code": "0x282f",
+      "name": "business"
+    },
+    {
+      "code": "0x2806",
+      "name": "card"
+    },
+    {
+      "code": "0x2807",
+      "name": "cart"
+    },
+    {
+      "code": "0x2808",
+      "name": "chatbox"
+    },
+    {
+      "code": "0x2809",
+      "name": "clock"
+    },
+    {
+      "code": "0x280a",
+      "name": "coin"
+    },
+    {
+      "code": "0x280b",
+      "name": "coupon"
+    },
+    {
+      "code": "0x280c",
+      "name": "discover"
+    },
+    {
+      "code": "0x280d",
+      "name": "edit"
+    },
+    {
+      "code": "0x280e",
+      "name": "eye"
+    },
+    {
+      "code": "0x280f",
+      "name": "forward"
+    },
+    {
+      "code": "0x2810",
+      "name": "freeship"
+    },
+    {
+      "code": "0x2811",
+      "name": "grid"
+    },
+    {
+      "code": "0x2812",
+      "name": "heart"
+    },
+    {
+      "code": "0x2813",
+      "name": "help"
+    },
+    {
+      "code": "0x2814",
+      "name": "home"
+    },
+    {
+      "code": "0x2815",
+      "name": "list"
+    },
+    {
+      "code": "0x2816",
+      "name": "location"
+    },
+    {
+      "code": "0x2817",
+      "name": "lock"
+    },
+    {
+      "code": "0x2818",
+      "name": "mail"
+    },
+    {
+      "code": "0x2830",
+      "name": "menu"
+    },
+    {
+      "code": "0x2819",
+      "name": "mobile"
+    },
+    {
+      "code": "0x281a",
+      "name": "more"
+    },
+    {
+      "code": "0x281b",
+      "name": "order"
+    },
+    {
+      "code": "0x281c",
+      "name": "package"
+    },
+    {
+      "code": "0x281d",
+      "name": "paper"
+    },
+    {
+      "code": "0x281e",
+      "name": "reduce"
+    },
+    {
+      "code": "0x281f",
+      "name": "refund"
+    },
+    {
+      "code": "0x2820",
+      "name": "return"
+    },
+    {
+      "code": "0x2821",
+      "name": "saleoff"
+    },
+    {
+      "code": "0x2822",
+      "name": "scan"
+    },
+    {
+      "code": "0x2823",
+      "name": "search"
+    },
+    {
+      "code": "0x2824",
+      "name": "send"
+    },
+    {
+      "code": "0x2825",
+      "name": "share"
+    },
+    {
+      "code": "0x2826",
+      "name": "shop"
+    },
+    {
+      "code": "0x2827",
+      "name": "spanner"
+    },
+    {
+      "code": "0x2828",
+      "name": "speaker"
+    },
+    {
+      "code": "0x2829",
+      "name": "star"
+    },
+    {
+      "code": "0x282a",
+      "name": "tags"
+    },
+    {
+      "code": "0x282b",
+      "name": "trash"
+    },
+    {
+      "code": "0x282c",
+      "name": "trunk"
+    },
+    {
+      "code": "0x282d",
+      "name": "user"
+    },
+    {
+      "code": "0x282e",
+      "name": "wallet"
+    }
+  ]
+}

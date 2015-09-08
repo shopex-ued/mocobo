@@ -1,0 +1,211 @@
+@import "global";
+@import "grid";
+
+//
+// @variables
+//
+$include-html-modal-classes: $include-html-classes !default;
+
+$modal-class: "modal" !default;
+$modal-overlay-class: "modal-bg" !default;
+$close-modal-class: "close-modal" !default;
+
+// We use these to control the style of the modal overlay.
+$modal-overlay-bg: rgba($black, 0.45) !default;
+
+// We use these to control the style of the modal itself.
+$modal-bg: $white !default;
+$modal-default-width: 90% !default;
+$modal-max-width: $row-width !default;
+$modal-padding: to-rem(15) !default;
+$modal-box-shadow: 0 0 10px rgba($black, 0.3) !default;
+
+// We use these to style the modal close button
+$modal-close-font-size: to-rem(30) !default;
+$modal-close-top: to-rem(5) !default;
+$modal-close-padding: to-rem(0 4) !default;
+$modal-close-side: to-rem(10) !default;
+$modal-close-color: $base !default;
+
+// We use this to set the default radius used throughout the core.
+$modal-radius: $global-radius !default;
+
+// We use these to control the modal border
+$modal-border-width: 1px !default;
+$modal-border-style: solid !default;
+$modal-border-color: $steel !default;
+
+// Set base z-index
+$z-index-base: 1005 !default;
+
+//We use these to control the modal main part
+$modal-header-margin: to-rem(-5) (-$modal-padding) to-rem(5) !default;
+$modal-header-padding: 0 $modal-padding to-rem(5) !default;
+$modal-header-border: 1px solid $smoke !default;
+$modal-header-font-size: to-rem($rem-base) !default;
+$modal-header-height: to-rem(24) !default;
+$modal-footer-margin: to-rem(5) (-$modal-padding) to-rem(-5) !default;
+$modal-footer-padding: to-rem(10) $modal-padding 0 !default;
+$modal-footer-border: 1px solid $smoke !default;
+
+//
+// @mixins
+//
+
+// We use this to create the modal background overlay styles
+@mixin modal-bg($include-z-index-value: true) {
+    // Autoprefixer should be used to avoid such variables needed when Mobile for Sites can do so in the near future.
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: if($include-z-index-value, $z-index-base - 1, auto);
+    background: $modal-overlay-bg;
+}
+
+// We use this mixin to create the structure of a modal modal
+//
+// $base-style - Provides modal base styles, can be set to false to override. Default: true, Options: false
+// $width - Sets modal width Default: $modal-default-width || 80%
+//
+@mixin modal-base($base-style: true, $width: $modal-default-width, $max-width: $modal-max-width, $border-radius: $modal-radius) {
+    @if $base-style {
+        display: none;
+        position: fixed;
+        top: 50%;
+        z-index: $z-index-base;
+        @if not $width {
+            left: 0;
+            width: 100%;
+        }
+        border-radius: $border-radius;
+        visibility: hidden;
+        transform: translateY(-50%);
+        // Make sure rows don't have a min-width on them
+        .#{$grid-columns-class} {
+            min-width: 0;
+        }
+        // Get rid of margin from first and last element inside modal
+        // > :first-child {
+        //     margin-top: 0;
+        // }
+        // > :last-child {
+        //     margin-bottom: 0;
+        // }
+    }
+    @if $width {
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: $width;
+        max-width: $max-width;
+    }
+}
+
+// We use this to style the modal modal defaults
+//
+// $bg - Sets background color of modal modal. Default: $modal-bg || $white
+// $padding - Padding to apply to modal modal. Default: $modal-padding.
+// $border - Choose whether modal uses a border. Default: true, Options: false
+// $border-style - Set modal border style. Default: $modal-border-style || solid
+// $border-width - Width of border (i.e. 1px). Default: $modal-border-width.
+// $border-color - Color of border. Default: $modal-border-color.
+// $box-shadow - Choose whether or not to include the default box-shadow. Default: true, Options: false
+// $radius - If true, set to modal radius which is $global-radius || explicitly set radius amount in px (ex. $radius:10px). Default: false
+@mixin modal-style($bg: false, $padding: false, $border: false, $border-style: $modal-border-style, $border-width: $modal-border-width, $border-color: $modal-border-color, $box-shadow: false, $radius: false) {
+    @if $bg {
+        background-color: $bg;
+    }
+    @if $padding != false {
+        padding: $padding;
+    }
+    @if $border {
+        border: $border-width $border-style $border-color;
+    }
+    // We can choose whether or not to include the default box-shadow.
+    @if $box-shadow {
+        box-shadow: $modal-box-shadow;
+    }
+    // We can control how much radius is used on the modal
+    @if $radius == true {
+        @include radius($modal-radius);
+    }
+    @else if $radius {
+        @include radius($radius);
+    }
+}
+
+// We use this to create a close button for the modal modal
+//
+// $color - Default: $modal-close-color || $base
+@mixin modal-close($color: $modal-close-color) {
+    position: absolute;
+    top: $modal-close-top;
+    right: $modal-close-side;
+    padding: $modal-close-padding;
+    line-height: 1;
+    font-size: $modal-close-font-size;
+    color: $color;
+}
+
+@include exports("modal") {
+    @if $include-html-modal-classes {
+        /* Reveal Modals */
+        .#{$modal-overlay-class} {
+            @include modal-bg;
+        }
+        .#{$modal-class} {
+            @include modal-base;
+            @include modal-style($bg: $modal-bg, $padding: $modal-padding, $border: true, $box-shadow: true, $radius: false);
+            // &.radius {
+            //     @include modal-style($radius: true);
+            // }
+            &.collapse {
+                @include modal-style($padding: 0);
+            }
+            &.tiny {
+                width: 40%;
+            }
+            &.small {
+                width: 60%;
+            }
+            &.large {
+                width: 95%;
+            }
+            &.full {
+                top: 0;
+                width: 100%;
+                max-width: none;
+                height: 100%;
+                height: 100vh;
+                min-height: 100vh;
+                transform: translateY(0);
+            }
+            // Modals pushed to back
+            &.toback {
+                z-index: $z-index-base - 2;
+            }
+            > .#{$close-modal-class} {
+                @include modal-close;
+            }
+            > header {
+                margin: $modal-header-margin;
+                padding: $modal-header-padding;
+                border-bottom: $modal-header-border;
+                line-height: $modal-header-height;
+                font-size: $modal-header-font-size;
+            }
+            > footer {
+                margin: $modal-footer-margin;
+                padding: $modal-footer-padding;
+                border-top: $modal-footer-border;
+                text-align: right;
+                .btn {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

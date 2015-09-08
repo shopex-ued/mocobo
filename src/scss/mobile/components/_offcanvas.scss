@@ -1,0 +1,389 @@
+@import "global";
+@import "type";
+@import "icons/icons-variables";
+
+//
+// @variables
+//
+// Off Canvas Tab Bar Variables
+$include-html-offcanvas-classes: $include-html-classes !default;
+
+$navbar-bg: $oil !default;
+$navbar-height: to-rem(44) !default;
+$navbar-icon-width: $navbar-height !default;
+$navbar-line-height: $navbar-height !default;
+$navbar-color: $white !default;
+$navbar-middle-padding: 0 to-rem(10) !default;
+
+// Off Canvas Divider Styles
+$navbar-left-section-border: solid 1px scale-color($navbar-bg, $lightness: -50%) !default;
+$navbar-right-section-border: $navbar-left-section-border;
+
+// Off Canvas Tab Bar Headers
+$navbar-header-color: $white !default;
+$navbar-header-weight: $font-weight-normal !default;
+$navbar-header-line-height: $navbar-height !default;
+$navbar-header-margin: 0 !default;
+
+// Off Canvas Menu Variables
+$offcanvas-class: 'offcanvas' !default;
+$offcanvas-width: to-rem(250) !default;
+// $offcanvas-height: to-rem(300) !default;
+$offcanvas-bg: $oil !default;
+$offcanvas-bg-hover: scale-color($navbar-bg, $lightness: -30%) !default;
+$offcanvas-bg-active: scale-color($navbar-bg, $lightness: -30%) !default;
+
+// Off Canvas Menu List Variables
+$offcanvas-label-padding: 0.3rem to-rem(15) !default;
+$offcanvas-label-color: $aluminum !default;
+$offcanvas-label-font-size: to-rem(12) !default;
+$offcanvas-label-font-weight: $font-weight-bold !default;
+$offcanvas-label-bg: $tuatara !default;
+$offcanvas-label-border-top: 1px solid scale-color($offcanvas-label-bg, $lightness: 14%) !default;
+$offcanvas-label-border-bottom: none !default;
+$offcanvas-label-margin: 0 !default;
+$offcanvas-link-padding: to-rem(8) !default;
+$offcanvas-link-color: rgba($white, 0.7) !default;
+$offcanvas-link-border-bottom: 1px solid scale-color($offcanvas-bg, $lightness: -25%) !default;
+$offcanvas-back-bg: $tuatara !default;
+$offcanvas-back-border-top: $offcanvas-label-border-top !default;
+$offcanvas-back-border-bottom: $offcanvas-label-border-bottom !default;
+$offcanvas-back-hover-bg: scale-color($offcanvas-back-bg, $lightness: -30%) !default;
+$offcanvas-back-hover-border-top: 1px solid scale-color($offcanvas-label-bg, $lightness: 14%) !default;
+$offcanvas-back-hover-border-bottom: none !default;
+
+// Off Canvas Menu Icon Variables
+$navbar-menu-icon-color: $white !default;
+$navbar-menu-icon-hover: scale-color($navbar-menu-icon-color, $lightness: -30%) !default;
+$navbar-menu-icon-width: $navbar-icon-width !default;
+$navbar-menu-icon-height: $navbar-height !default;
+$navbar-menu-icon-padding: 0 !default;
+$navbar-menu-icon-font-size: to-rem(24) !default;
+
+// Off Canvas Back-Link Overlay
+$offcanvas-overlay-transition: background 300ms $easeInOutQuint !default;
+$offcanvas-overlay-box-shadow: -4px 0 3px rgba($black, 0.5) !default;
+$offcanvas-overlay-background: rgba($white, 0.2) !default;
+$offcanvas-overlay-background-hover: rgba($white, 0.05) !default;
+
+// Transition Variables
+$menu-slide: transform 300ms $easeInOutQuint !default;
+
+// MIXINS
+// Remove transition flicker on phones
+@mixin kill-flicker {
+    // -webkit-transform: translateZ(0x);
+    backface-visibility: hidden;
+}
+
+//Open 3D hardward acceleration
+@mixin open-3d {
+    transform: translate3d(0, 0, 0);
+}
+
+// Basic properties for the content wraps
+@mixin wrap-base {
+    position: relative;
+    width: 100%;
+}
+
+// basic styles for off canvas menu container
+@mixin offcanvas-menu {
+    @include kill-flicker;
+    * {
+        @include kill-flicker;
+    }
+    background: $offcanvas-bg;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1001;
+    width: $offcanvas-width;
+    box-sizing: content-box;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: $menu-slide 0s;
+}
+
+// OFF CANVAS WRAP
+// Wrap visible content and prevent scroll bars
+@mixin offcanvas-wrap {
+    @include kill-flicker;
+    @include wrap-base;
+    overflow: hidden;
+}
+
+// INNER WRAP
+// Main content area that moves to reveal the off canvas nav
+@mixin inner-wrap {
+    // @include kill-flicker;
+    // removed for now till chrome fixes backface issue
+    @include wrap-base;
+    @extend .clearfix;
+    transition: $menu-slide;
+}
+
+// TAB BAR
+// This is the nav bar base
+@mixin navbar-base {
+    @include kill-flicker;
+    // base styles
+    background: $navbar-bg;
+    height: $navbar-height;
+    line-height: $navbar-line-height;
+    color: $navbar-color;
+    // make sure it's below the .exit-offcanvas link
+    position: relative;
+    // z-index: 999;
+    // Typography
+    h1, h2, h3, h4, h5, h6 {
+        margin: $navbar-header-margin;
+        line-height: $navbar-header-line-height;
+        font-weight: $navbar-header-weight;
+        color: $navbar-header-color;
+    }
+}
+
+@mixin navbar-section {
+    position: absolute;
+    top: 0;
+    left: $navbar-icon-width;
+    right: $navbar-icon-width;
+    padding: $navbar-middle-padding;
+    height: $navbar-height;
+    text-align: center;
+    &.left {
+        left: 0;
+        right: $navbar-icon-width;
+        text-align: left;
+    }
+    &.right {
+        left: $navbar-icon-width;
+        right: 0;
+        text-align: right;
+    }
+}
+
+// OFF CANVAS LIST
+// This is the list of links in the off canvas menu
+@mixin offcanvas-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+        label {
+            display: block;
+            margin: $offcanvas-label-margin;
+            padding: $offcanvas-label-padding;
+            background: $offcanvas-label-bg;
+            border-bottom: $offcanvas-label-border-bottom;
+            border-top: $offcanvas-label-border-top;
+            color: $offcanvas-label-color;
+            font-size: $offcanvas-label-font-size;
+            font-weight: $offcanvas-label-font-weight;
+        }
+        a {
+            display: block;
+            padding: $offcanvas-link-padding;
+            border-bottom: $offcanvas-link-border-bottom;
+            color: $offcanvas-link-color;
+            transition: $offcanvas-overlay-transition;
+            &:hover {
+                background: $offcanvas-bg-hover;
+            }
+            &:active {
+                background: $offcanvas-bg-active;
+            }
+        }
+    }
+}
+
+// BACK LINK
+// This is an overlay that, when clicked, will toggle off the off canvas menu
+@mixin backdrop {
+    @include kill-flicker;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1002;
+    background: $offcanvas-overlay-background;
+    box-shadow: $offcanvas-overlay-box-shadow;
+    transition: $offcanvas-overlay-transition;
+    // fill the screen
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+//Left double angle quote or Right double angle quote chars
+@mixin icon-arrows($position) {
+    @if $position == left {
+        &::before {
+            content: $icon-var-arrow-back;
+            margin-right: .5rem;
+            font-family: $icons-font-family;
+            font-size: 90%;
+            font-weight: 900;
+        }
+    }
+    @else if $position == right {
+        &::after {
+            content: $icon-var-arrow-forward;
+            margin-left: .5rem;
+            font-family: $icons-font-family;
+            font-size: 90%;
+            font-weight: 900;
+        }
+    }
+}
+
+//
+// DEFAULT CLASSES
+//
+@include exports("offcanvas") {
+    @if $include-html-offcanvas-classes {
+        .#{$offcanvas-class}-wrap {
+            @include offcanvas-wrap;
+            .inner-wrap {
+                @include inner-wrap;
+            }
+            .nav-bar {
+                @include navbar-base;
+                // This is a little bonus. You don't need it for off canvas to work. Mixins to be written in the future.
+                .icon-menu {
+                    display: block;
+                    position: relative;
+                    padding: $navbar-menu-icon-padding;
+                    width: $navbar-menu-icon-width;
+                    height: $navbar-menu-icon-height;
+                    @include open-3d;
+                    text-align: center;
+                    font-size: $navbar-menu-icon-font-size;
+                    color: $navbar-menu-icon-color;
+                }
+            }
+            .pos-left,
+            .pos-right {
+                position: absolute;
+                top: 0;
+                width: $navbar-icon-width;
+                height: $navbar-height;
+            }
+            .pos-left {
+                left: 0;
+                border-right: $navbar-left-section-border;
+            }
+            .pos-right {
+                right: 0;
+                border-left: $navbar-right-section-border;
+            }
+            .nav-bar-section {
+                @include navbar-section;
+            }
+        }
+        .#{$offcanvas-class}-menu {
+            @include offcanvas-menu;
+            &.left {
+                left: 0;
+                @include translate(-100%, 0);
+            }
+            &.right {
+                right: 0;
+                @include translate(100%, 0);
+            }
+        }
+        .#{$offcanvas-class}-list {
+            @include offcanvas-list;
+        }
+        // ANIMATION CLASSES
+        // These classes are added with JS and trigger the actual animation.
+        .move-right,
+        .move-left {
+            min-height: 100%;
+            -webkit-overflow-scrolling: touch;
+        }
+        .move-right {
+            > .inner-wrap {
+                @include translate($offcanvas-width, 0);
+            }
+        }
+        .move-left {
+            > .inner-wrap {
+                @include translate(- $offcanvas-width, 0);
+            }
+        }
+        .#{$offcanvas-class}-wrap {
+            .no-transform {
+                z-index: 1003;
+                transform: none;
+            }
+            &[class*=move-],
+            &[class*=overlap] {
+                .exit-#{offcanvas-class} {
+                    @include backdrop;
+                }
+            }
+        }
+        .#{$offcanvas-class}-submenu {
+            @include kill-flicker;
+            * {
+                @include kill-flicker;
+            }
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: 1002;
+            margin: 0;
+            width: $offcanvas-width;
+            // height: $offcanvas-height;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background: $offcanvas-bg;
+            box-sizing: content-box;
+            -webkit-overflow-scrolling: touch;
+            // -webkit-transition: -webkit-#{$menu-slide};
+            transition: $menu-slide;
+            //back button style like label
+            .back > a {
+                background: $offcanvas-back-bg;
+                padding: $offcanvas-label-padding;
+                margin: $offcanvas-label-margin;
+                border-bottom: $offcanvas-back-border-bottom;
+                border-top: $offcanvas-back-border-top;
+                color: $offcanvas-label-color;
+                font-weight: $offcanvas-label-font-weight;
+                &:hover {
+                    background: $offcanvas-back-hover-bg;
+                    border-bottom: $offcanvas-back-hover-border-bottom;
+                    border-top: $offcanvas-back-hover-border-top;
+                }
+            }
+            &.left {
+                left: 0;
+                @include translate(-100%, 0);
+            }
+            &.right {
+                right: 0;
+                @include translate(100%, 0);
+            }
+            &.left.move-right,
+            &.left.overlap-right,
+            &.left.overlap,
+            &.right.move-left,
+            &.right.overlap-left,
+            &.right.overlap {
+                @include open-3d;
+            }
+        }
+        .#{$offcanvas-class}-menu.left .has-submenu > a,
+        .#{$offcanvas-class}-submenu.right .back > a {
+            @include icon-arrows($position: right);
+        }
+        .#{$offcanvas-class}-menu.right .has-submenu > a,
+        .#{$offcanvas-class}-submenu.left .back > a {
+            @include icon-arrows($position: left);
+        }
+    }
+}

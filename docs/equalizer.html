@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>多列等高</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>多列等高</h1>
+</header>
+
+<div class="container">
+
+  <h1>示例</h1>
+  <div class="row" data-equalizer>
+    <div class="grid-6 columns panel" data-equalizer-watch>
+      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+    </div>
+    <div class="grid-6 columns panel" data-equalizer-watch>
+      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+    </div>
+  </div>
+
+  <h1>嵌套的示例</h1>
+  <div class="row" data-equalizer="foo">
+    <div class="grid-6 columns">
+      <div class="panel" data-equalizer-watch="foo">
+        <h3>Parent panel</h3>
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+        <div class="row" data-equalizer="bar">
+          <div class="grid-6 columns panel" data-equalizer-watch="bar">
+            <p>Pellent habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+          </div>
+          <div class="grid-6 columns panel" data-equalizer-watch="bar">
+            ...
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-6 columns">
+      <div class="panel" data-equalizer-watch="foo">
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      </div>
+    </div>
+  </div>
+
+  <h1>其它可选项</h1>
+  <pre>
+  $(document).mobile({
+    equalizer: {
+      // Specify if Equalizer should make elements equal height once they become stacked.
+      equalize_on_stack: false,
+      // Allow equalizer to resize hidden elements
+      act_on_hidden: false
+    }
+  });
+  </pre>
+
+  <h1>可用的事件列表</h1>
+  <pre>
+  $(document).mobile({
+    equalizer: {
+      beforeChange: function(){
+        // do something before the height changes
+      },
+      afterChange: function(){
+        // do something after the height changes
+      }
+    }
+  });
+  </pre>
+  或者：
+  <pre>
+  $(document).on('beforeChange.equalizer', function(){
+    // do something before the height changes
+  });
+
+  $(document).on('afterChange.equalizer', function(){
+    // do something after the height changes
+  });
+  </pre>
+
+  <h1>当页面中添加了新的多列等高组件</h1>
+  <pre>
+  $(document).mobile('equalizer', 'reflow');
+  </pre>
+
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

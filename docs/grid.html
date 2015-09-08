@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>栅格</title>
+<meta name="viewport" content="width=device-width, target-densitydpi=device-dp, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+<style>
+.row {
+  margin-bottom: 10px;
+  box-shadow: inset 0 0 1px #d0d0d0;
+}
+.row .row {
+  border: 0 none;
+  margin-bottom: 0;
+}
+.row .columns {
+  background-color: #eee;
+  text-align: center;
+}
+.row .columns:nth-child(odd) {
+  background-color: #e3e3e3;
+}
+</style>
+</head>
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>栅格</h1>
+</header>
+
+<div class="container">
+  <h1>最大 12 栅格</h1>
+  <div class="row">
+    <div class="grid-1 columns">1</div>
+    <div class="grid-1 columns">1</div>
+    <div class="grid-1 columns">1</div>
+    <div class="grid-1 columns">1</div>
+    <div class="grid-1 columns">1</div>
+    <div class="grid-1 columns">1</div>
+    <div class="grid-1 columns">1</div>
+    <div class="grid-1 columns">1</div>
+    <div class="grid-1 columns">1</div>
+    <div class="grid-1 columns">1</div>
+    <div class="grid-1 columns">1</div>
+    <div class="grid-1 columns">1</div>
+  </div>
+  <div class="row">
+    <div class="grid-2 columns">2</div>
+    <div class="grid-2 columns">2</div>
+    <div class="grid-2 columns">2</div>
+    <div class="grid-2 columns">2</div>
+    <div class="grid-2 columns">2</div>
+    <div class="grid-2 columns">2</div>
+  </div>
+  <div class="row">
+    <div class="grid-3 columns">3</div>
+    <div class="grid-3 columns">3</div>
+    <div class="grid-3 columns">3</div>
+    <div class="grid-3 columns">3</div>
+  </div>
+  <div class="row">
+    <div class="grid-4 columns">4</div>
+    <div class="grid-4 columns">4</div>
+    <div class="grid-4 columns">4</div>
+  </div>
+  <div class="row">
+    <div class="grid-6 columns">6</div>
+    <div class="grid-6 columns">6</div>
+  </div>
+  <div class="row">
+    <div class="grid-12 columns">12</div>
+  </div>
+  <h1>可增加两边留白</h1>
+  <div class="row blank">
+    <div class="grid-6 columns">6</div>
+    <div class="grid-6 columns">6</div>
+  </div>
+  <h1>可去除两端内边距</h1>
+  <div class="row collapse">
+    <div class="grid-6 columns">6</div>
+    <div class="grid-6 columns">6</div>
+  </div>
+  <div class="row sides-collapse">
+    <div class="grid-4 columns">4</div>
+    <div class="grid-4 columns">4</div>
+    <div class="grid-4 columns">4</div>
+  </div>
+  <h1>可嵌套更多栅格</h1>
+  <div class="row blank sides-collapse">
+    <div class="grid-8 columns">
+      8/12
+      <div class="row">
+        <div class="grid-8 columns">8/12</div>
+        <div class="grid-4 columns">4/12</div>
+      </div>
+    </div>
+    <div class="grid-4 columns">
+      4/12
+      <div class="row">
+        <div class="grid-6 columns">6/12</div>
+        <div class="grid-6 columns">6/12</div>
+      </div>
+    </div>
+  </div>
+  <h1>自偏移栅格</h1>
+  <div class="row">
+    <div class="grid-1 columns">1</div>
+    <div class="grid-11 columns">11</div>
+  </div>
+  <div class="row">
+    <div class="grid-1 columns">1</div>
+    <div class="grid-10 offset-1 columns">10, 偏移 1</div>
+  </div>
+  <div class="row">
+    <div class="grid-1 columns">1</div>
+    <div class="grid-9 offset-2 columns">9, 偏移 2</div>
+  </div>
+  <div class="row">
+    <div class="grid-8 offset-4 columns">8, 偏移 4</div>
+  </div>
+  <h1>不完整的栅格列</h1>
+  <div class="row">
+    <div class="grid-3 columns">3</div>
+    <div class="grid-3 columns">3</div>
+    <div class="grid-3 columns">3</div>
+  </div>
+  <div class="row">
+    <div class="grid-3 columns">3</div>
+    <div class="grid-3 columns">3</div>
+    <div class="grid-3 columns end">3 end</div>
+  </div>
+  <h1>栅格应用在列表中</h1>
+  <div class="columns">
+    <ul class="block-grid-3">
+      <li><img class="thumb" src="statics/satelite.jpg"></li>
+      <li><img class="thumb" src="statics/space.jpg"></li>
+      <li><img class="thumb" src="statics/launch.jpg"></li>
+      <li><img class="thumb" src="statics/comet.jpg"></li>
+      <li><img class="thumb" src="statics/earth.jpg"></li>
+      <li><img class="thumb" src="statics/endevour.jpg"></li>
+      <li><img class="thumb" src="statics/moon.jpg"></li>
+    </ul>
+  </div>
+</div>
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

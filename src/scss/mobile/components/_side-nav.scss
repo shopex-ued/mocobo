@@ -1,0 +1,116 @@
+@import "global";
+@import "buttons";
+
+//
+// @variables
+//
+
+$include-html-nav-classes: $include-html-classes !default;
+
+$side-nav-class: 'side-nav' !default;
+// We use this to control padding.
+$side-nav-padding: to-rem(14 0) !default;
+
+// We use these to control list styles.
+$side-nav-list-type: none !default;
+$side-nav-list-position: outside !default;
+$side-nav-list-margin: 0 !default;
+
+// We use these to control link styles.
+$side-nav-link-color: $primary-color !default;
+$side-nav-link-color-active: scale-color($side-nav-link-color, $lightness: 30%) !default;
+$side-nav-link-color-hover: scale-color($side-nav-link-color, $lightness: 30%) !default;
+$side-nav-link-bg-hover: hsla(0, 0, 0, 0.025) !default;
+$side-nav-link-margin: 0 !default;
+$side-nav-link-padding: to-rem(11 12) !default;
+$side-nav-font-size: to-rem(14) !default;
+$side-nav-font-weight: $font-weight-normal !default;
+$side-nav-font-weight-active: $side-nav-font-weight !default;
+
+// We use these to control button styles.
+$side-nav-button-padding-horizontal: to-rem(8) !default;
+$side-nav-button-margin: to-rem(0 12) !default;
+
+// We use these to control heading styles.
+$side-nav-heading-color: $side-nav-link-color !default;
+$side-nav-heading-font-size: $side-nav-font-size !default;
+$side-nav-heading-font-weight: bold !default;
+
+// We use these to control border styles
+$side-nav-divider-size: 1px !default;
+$side-nav-divider-style: solid !default;
+$side-nav-divider-color: scale-color($white, $lightness: -10%) !default;
+$side-nav-divider-margin: to-rem(3 0) !default;
+
+//
+// @mixins
+//
+
+// We use this to style the side-nav
+//
+// $divider-color - Border color of divider. Default: $side-nav-divider-color.
+// $font-size - Font size of nav items. Default: $side-nav-font-size.
+// $link-color - Color of navigation links. Default: $side-nav-link-color.
+// $link-color-hover - Color of navigation links when hovered. Default: $side-nav-link-color-hover.
+@mixin side-nav($divider-color: $side-nav-divider-color, $font-size: $side-nav-font-size, $link-color: $side-nav-link-color, $link-color-active: $side-nav-link-color-active, $link-color-hover: $side-nav-link-color-hover, $link-bg-hover: $side-nav-link-bg-hover) {
+    display: block;
+    margin: 0;
+    list-style: $side-nav-list-type $side-nav-list-position;
+    @if $side-nav-padding {
+        padding: $side-nav-padding;
+    }
+    li {
+        @if $side-nav-list-margin {
+            margin: $side-nav-list-margin;
+        }
+        font-size: $font-size;
+        font-weight: $side-nav-font-weight;
+        a:not(.#{$buttons-class}) {
+            display: block;
+            @if $side-nav-link-margin {
+                margin: $side-nav-link-margin;
+            }
+            @if $side-nav-link-padding {
+                padding: $side-nav-link-padding;
+            }
+            color: $link-color;
+            &:hover,
+            &:focus {
+                background: $link-bg-hover;
+                color: $link-color-hover;
+            }
+            &:active {
+                color: $link-color-active;
+            }
+        }
+        .#{$buttons-class} {
+            padding-left: $side-nav-button-padding-horizontal;
+            padding-right: $side-nav-button-padding-horizontal;
+            margin: $side-nav-button-margin;
+        }
+        &.active > a:not(.#{$buttons-class}) {
+            color: $side-nav-link-color-active;
+            font-weight: $side-nav-font-weight-active;
+        }
+        &.divider {
+            height: 0;
+            margin: $side-nav-divider-margin;
+            border-top: $side-nav-divider-size $side-nav-divider-style $divider-color;
+            list-style: none;
+        }
+        &.heading {
+            color: $side-nav-heading-color;
+            font-size: $side-nav-heading-font-size;
+            font-weight: $side-nav-heading-font-weight;
+        }
+    }
+}
+
+@include exports("side-nav") {
+    @if $include-html-nav-classes {
+        /* Side navagation */
+        .#{$side-nav-class} {
+            @include side-nav;
+        }
+    }
+}

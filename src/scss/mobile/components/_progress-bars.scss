@@ -1,0 +1,115 @@
+@import "global";
+
+//
+// @variables
+//
+$include-html-progress-bar-classes: $include-html-classes !default;
+
+$progress-bar-class: 'progress' !default;
+// We use this to set the progress bar height
+$progress-bar-height: to-rem(25) !default;
+$progress-bar-color: $vapor !default;
+
+// We use these to control the border styles
+$progress-bar-border-size: 1px !default;
+$progress-bar-border-style: solid !default;
+$progress-bar-border-color: darken($progress-bar-color, 5%) !default;
+$progress-bar-border-radius: $global-radius !default;
+
+// We use these to control the margin & padding
+$progress-bar-padding: to-rem(1) !default;
+$progress-bar-margin-bottom: to-rem(10) !default;
+
+// We use these to set the meter colors
+$progress-meter-color: $primary-color !default;
+$progress-meter-shadow: inset 0 0 3px rgba($white, .2), 2px 0 1px rgba($steel, .1) !default;
+
+// @mixins
+//
+// We use this to set up the progress bar container
+@mixin progress-container {
+    margin-bottom: $progress-bar-margin-bottom;
+    padding: $progress-bar-padding;
+    height: $progress-bar-height;
+    overflow: hidden;
+    background-color: $progress-bar-color;
+    border: $progress-bar-border-size $progress-bar-border-style $progress-bar-border-color;
+    // box-shadow: inset 0 0 3px rgba($steel, .1);
+}
+
+// @mixins
+//
+// $bg - Default: $progress-meter-color || $primary-color
+@mixin progress-meter($bg: $progress-meter-color) {
+    display: block;
+    height: 100%;
+    float: left;
+    width: 0;
+    background: $bg;
+    box-shadow: $progress-meter-shadow;
+}
+
+@include exports("progress-bar") {
+    @if $include-html-progress-bar-classes {
+        /* Progress Bar */
+        .#{$progress-bar-class} {
+            @include progress-container;
+            // Meter
+            .meter {
+                @include progress-meter;
+            }
+            .meter.secondary,
+            &.secondary .meter {
+                background: $secondary-color;
+            }
+            .meter.success,
+            &.success .meter {
+                background: $success-color;
+            }
+            .meter.alert,
+            &.alert .meter {
+                background: $alert-color;
+            }
+            .meter.info,
+            &.info .meter {
+                background: $info-color;
+            }
+            .meter.warning,
+            &.warning .meter {
+                background: $warning-color;
+            }
+            &.radius {
+                @include radius($progress-bar-border-radius);
+                &::after,
+                .meter {
+                    @include radius(to-rem($progress-bar-border-radius) - $progress-bar-padding);
+                }
+            }
+            &.round {
+                @include radius($global-rounded);
+                &::after,
+                .meter {
+                    @include radius(to-rem($global-rounded) - $progress-bar-padding);
+                }
+            }
+            // Stack the meters
+            &.stack {
+                position: relative;
+                &:after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    border: $progress-bar-padding solid $progress-bar-color;
+                }
+                .meter {
+                    position: absolute;
+                    left: 0;
+                    height: $progress-bar-height - $progress-bar-padding * 2 - to-rem($progress-bar-border-size * 2);
+                }
+            }
+        }
+    }
+}

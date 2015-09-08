@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>按钮</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+<style>
+p {margin-bottom: 0;}
+.row {clear:both;}
+</style>
+</head>
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>按钮</h1>
+</header>
+<div class="container">
+
+  <h1>普通按钮和链接</h1>
+  <p><button type="button" class="tiny"><i class="icon-search"></i></button> <a href="" class="btn tiny"><i class="icon-search"></i></a></p>
+  <p><button type="button" class="small">小按钮</button> <a href="" class="btn small">小按钮(a)</a></p>
+  <p><button type="button">默认按钮</button> <a href="" class="btn">默认按钮(a)</a></p>
+  <p><button type="button" class="large">大按钮</button> <a href="" class="btn large">大按钮(a)</a></p>
+  <p><button type="button" disabled>被禁用的按钮</button> <a href="" class="btn disabled">被禁用的按钮(a)</a></p>
+
+  <h1>更加圆润的按钮</h1>
+  <p>
+    <a href="" class="btn small round">圆角按钮</a>
+    <a href="" class="btn round">圆角按钮</a>
+    <a href="" class="btn large round">圆角按钮</a>
+  </p>
+
+  <h1>通栏按钮</h1>
+  <p><button type="button" class="small expand">小按钮</button></p>
+  <p><button type="button" class="expand">默认按钮</button></p>
+  <p><button type="button" class="large expand">大按钮</button></p>
+  <div><button type="button" class="expand flat">更扁平化的按钮</button></div>
+
+  <h1>一栏两个</h1>
+  <div class="row">
+    <div class="grid-6 columns"><button type="submit" class="expand">提交</button></div>
+    <div class="grid-6 columns"><button type="button" class="secondary expand">取消</button></div>
+  </div>
+  <div class="fixed bottom"><button type="button" class="expand flat">提交订单</button></div>
+
+  <h1>各种色彩</h1>
+  <p>
+    <a href="" class="btn alert">提醒</a>
+    <a href="" class="btn success">成功</a>
+    <a href="" class="btn warning">警示</a>
+    <a href="" class="btn info">信息</a>
+    <a href="" class="btn secondary">次要</a>
+  </p>
+
+  <h1>轮廓按钮</h1>
+  <p>
+    <a href="" class="btn outline round">确认</a>
+    <a href="" class="btn outline alert">提醒</a>
+    <a href="" class="btn outline success">成功</a>
+    <a href="" class="btn outline warning">警示</a>
+    <a href="" class="btn outline info icon-mail">信息</a>
+    <a href="" class="btn outline secondary small flat">次要</a>
+  </p>
+
+  <h1>带图标的按钮</h1>
+  <p>
+    <a href="" class="btn icon-search">搜索</a>
+    <a href="" class="btn icon-arrow-back">返回</a>
+    <a href="" class="btn">下一步 <i class="icon-arrow-forward"></i></a>
+  </p>
+  <p>
+    <br>
+    <br>
+  </p>
+</div>
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Icon Font</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+<style>
+.cell-icon {
+  float: left;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 33%;
+}
+@media only screen and (min-width: 331px) {
+  .cell-icon {
+    width: 25%;
+  }
+}
+@media only screen and (min-width: 414px) {
+  .cell-icon {
+    width: 20%;
+  }
+}
+@media only screen and (min-width: 501px) {
+  .cell-icon {
+    width: 16.66667%;
+  }
+}
+@media only screen and (min-width: 581px) {
+  .cell-icon {
+    width: 14.28571%;
+  }
+}
+.preview-icon {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  line-height: 1;
+  font-size: 30px;
+  vertical-align: bottom;
+}
+
+.usage {
+  margin-top: 5px;
+  line-height: 1.1;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>The Icon Font</h1>
+</header>
+<div class="container">
+  <h1>The {{font_name}}, {{icon_count}} icons:</h1>
+  <div class="row">
+    {{content}}
+  </div>
+  <h1>Usage:</h1>
+  <pre>
+  &lt;i class="{{prefix}}mail">&lt;/i></pre>
+</div>
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

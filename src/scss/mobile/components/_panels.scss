@@ -1,0 +1,89 @@
+@import "global";
+
+//
+// @variables
+//
+$include-html-panel-classes: $include-html-classes !default;
+
+$panel-class: 'panel' !default;
+// We use these to control the background and border styles
+$panel-bg: scale-color($white, $lightness: -5%) !default;
+$panel-border-style: solid !default;
+$panel-border-size: 1px !default;
+$panel-border-radius: $global-radius !default;
+// We use this % to control how much we darken things on hover
+$panel-border-color: scale-color($panel-bg, $lightness: -11%) !default;
+
+// We use these to set default inner padding and bottom margin
+$panel-margin-bottom: to-rem(10) !default;
+$panel-padding: to-rem(10) !default;
+
+// We use these to set default font colors
+$panel-font-color: $oil !default;
+$panel-font-color-alt: $white !default;
+
+$panel-header-adjust: true !default;
+
+//
+// @mixins
+//
+// We use this mixin to create panels.
+// $bg - Sets the panel background color. Default: $panel-pg || scale-color($white, $lightness: -5%) !default
+// $padding - Sets the panel padding amount. Default: $panel-padding || to-rem(20)
+// $adjust - Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust || true
+@mixin panel($bg: $panel-bg, $padding: $panel-padding, $adjust: $panel-header-adjust, $border: true) {
+    @if $bg {
+        $bg-lightness: lightness($bg);
+        background: $bg;
+        margin-bottom: $panel-margin-bottom;
+        padding: $padding;
+        @if $border {
+            border: $panel-border-size $panel-border-style $panel-border-color;
+        }
+        @else {
+            border: 0 none;
+        }
+        @if $bg-lightness >= 50% {
+            color: $panel-font-color;
+        }
+        @else {
+            color: $panel-font-color-alt;
+        }
+        // Respect the padding, fool.
+        > :first-child {
+            margin-top: 0;
+        }
+        > :last-child {
+            margin-bottom: 0;
+        }
+        @if $adjust {
+            // We set the font color based on the darkness of the bg.
+            h1, h2, h3, h4, h5, h6 {
+                margin-bottom: to-rem(20) / 2;
+                @if $bg-lightness >= 50% {
+                    color: $panel-font-color;
+                }
+                @else {
+                    color: $panel-font-color-alt;
+                }
+                // reset header line-heights for panels
+                line-height: 1;
+            }
+            .subheader {
+                line-height: 1.4;
+            }
+        }
+    }
+}
+
+@include exports("panel") {
+    @if $include-html-panel-classes {
+        /* Panels */
+        .#{$panel-class} {
+            @include panel;
+            &.radius {
+                @include radius($panel-border-radius);
+            }
+        }
+    }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>响应式内容</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>响应式内容</h1>
+</header>
+
+<div class="container">
+
+  <h1>响应式图片</h1>
+  <img data-responsive="[statics/launch.jpg, (small)], [statics/space@2x.jpg, (retina)], [statics/comet@2x.jpg, (retina3x)]" src="statics/moon.jpg">
+
+  <h1>自定义媒体查询</h1>
+  <img data-responsive="[statics/launch.jpg, (only screen and (min-width: 1px))], [statics/space@2x.jpg, (only screen and (min-width: 321px))], [statics/comet@2x.jpg, (only screen and (min-width: 640px))]" src="statics/moon.jpg">
+
+  <h1>用于背景图片</h1>
+  <div data-responsive="[statics/launch.jpg, (only screen and (min-width: 1px))], [statics/space@2x.jpg, (only screen and (min-width: 321px))], [statics/comet@2x.jpg, (only screen and (min-width: 640px))]" src="statics/moon.jpg" style="height:200px;background-size:cover;"></div>
+
+  <h1>响应式页面</h1>
+  <p>在不同分辨率下请求不同的页面并插入到容器中。</p>
+  <div data-responsive="[badges.html, (small)], [pagination.html, (retina)], [inline-lists.html, (retina3x)]">
+    <div data-alert class="alert-box secondary radius">
+      This is the default content.
+      <a href="#" class="close">&times;</a>
+    </div>
+  </div>
+
+  <h1>预定义的媒体查询</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Media Query</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>default</td>
+        <td>默认屏幕（所有尺寸有效）</td>
+      </tr>
+      <tr>
+        <td>small</td>
+        <td>所有尺寸屏幕有效</td>
+      </tr>
+      <tr>
+        <td>small-only</td>
+        <td>在 0-640px 分辨率有效</code></td>
+      </tr>
+      <tr>
+        <td>medium</td>
+        <td>仅在 641px 以上分辨率有效</td>
+      </tr>
+      <tr>
+        <td>landscape</td>
+        <td>横屏模式</td>
+      </tr>
+      <tr>
+        <td>portrait</td>
+        <td>竖屏模式</td>
+      </tr>
+      <tr>
+        <td>retina</td>
+        <td>适合 iphone 4 以上的视网膜屏</td>
+      </tr>
+      <tr>
+        <td>retina3x</td>
+        <td>适合 iphone 6 plus 及其它 3x 高清屏</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>自定义媒体查询名称</h1>
+  <pre>
+  $(document).mobile('responsive', {
+    named_queries: {
+      my_custom_query: 'only screen and (max-width: 200px)'
+    }
+  });
+  </pre>
+
+  <h1>事件</h1>
+  <pre>
+  $(document).on('replace', 'img', function(e, new_path, original_path) {
+    console.log(e.currentTarget, new_path, original_path);
+  });
+  </pre>
+
+  <h1>当页面中添加了新的响应式内容</h1>
+  <pre>
+  $(document).mobile('responsive', 'reflow');
+  </pre>
+
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

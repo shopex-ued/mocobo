@@ -1,0 +1,107 @@
+@import "global";
+
+//
+// @variables
+//
+
+$include-html-nav-classes: $include-html-classes !default;
+
+$sub-nav-class: 'sub-nav' !default;
+// We use these to control margin and padding
+$sub-nav-bg: scale-color($white, $lightness: -10%) !default;
+$sub-nav-margin-bottom: to-rem(10) !default;
+$sub-nav-padding: to-rem(10 0) !default;
+
+// We use this to control the definition
+$sub-nav-font-size: to-rem(13) !default;
+$sub-nav-font-color: $aluminum !default;
+$sub-nav-font-weight: $font-weight-normal !default;
+$sub-nav-text-decoration: none !default;
+$sub-nav-border-radius: $global-radius !default;
+$sub-nav-font-color-hover: scale-color($sub-nav-font-color, $lightness: -25%) !default;
+
+// We use these to control the active item styles
+
+$sub-nav-active-font-weight: $font-weight-normal !default;
+$sub-nav-active-bg: $primary-color !default;
+$sub-nav-active-bg-hover: scale-color($sub-nav-active-bg, $lightness: -14%) !default;
+$sub-nav-active-color: $white !default;
+
+$sub-nav-item-padding: to-rem(3 12) !default;
+$sub-nav-item-margin: to-rem(12) !default;
+$sub-nav-item-divider: "" !default;
+$sub-nav-item-divider-margin: to-rem(12) !default;
+
+//
+// @mixins
+//
+
+// Create a sub-nav item
+//
+// $font-color - Font color. Default: $sub-nav-font-color.
+// $font-size - Font size. Default: $sub-nav-font-size.
+// $active-bg - Background of active nav item. Default: $sub-nav-active-bg.
+// $active-bg-hover - Background of active nav item, when hovered. Default: $sub-nav-active-bg-hover.
+@mixin sub-nav($font-color: $sub-nav-font-color, $font-size: $sub-nav-font-size, $active-bg: $sub-nav-active-bg, $active-bg-hover: $sub-nav-active-bg-hover) {
+    display: block;
+    @if $sub-nav-bg {
+        background: $sub-nav-bg;
+    }
+    @if $sub-nav-margin-bottom {
+        margin-bottom: $sub-nav-margin-bottom;
+    }
+    @if $sub-nav-padding {
+        padding: $sub-nav-padding;
+    }
+    overflow: hidden;
+    dt,
+    dd,
+    li {
+        float: left;
+        @if $sub-nav-item-divider == "" {
+            margin-left: $sub-nav-item-margin;
+        }
+        margin-bottom: 0;
+        font-size: $font-size;
+        font-weight: $sub-nav-font-weight;
+        color: $font-color;
+        a {
+            padding: $sub-nav-item-padding;
+            color: $sub-nav-font-color;
+            text-decoration: $sub-nav-text-decoration;
+            &:hover {
+                color: $sub-nav-font-color-hover;
+            }
+            [class|=icon] {
+                font-size: $font-size - to-rem(2);
+            }
+        }
+        &.active a {
+            @include radius($sub-nav-border-radius);
+            background: $active-bg;
+            color: $sub-nav-active-color;
+            font-weight: $sub-nav-active-font-weight;
+            &:hover {
+                background: $active-bg-hover;
+            }
+        }
+        @if $sub-nav-item-divider != "" {
+            &::before {
+                content: $sub-nav-item-divider;
+                margin: 0 $sub-nav-item-divider-margin;
+            }
+            &:first-child::before {
+                content: "";
+                margin: 0;
+            }
+        }
+    }
+}
+
+@include exports("sub-nav") {
+    @if $include-html-nav-classes {
+        .#{$sub-nav-class} {
+            @include sub-nav;
+        }
+    }
+}

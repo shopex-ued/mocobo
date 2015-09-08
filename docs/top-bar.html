@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>顶部导航栏</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+<style>
+.top-bar {margin-bottom: 10px;}
+.top-bar form{margin-left: auto; margin-right: auto;}
+.top-bar input[type=text] { width: 142px; }
+.bottom .top-bar {margin-bottom: 0;}
+</style>
+</head>
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>顶部导航栏</h1>
+</header>
+
+<div class="container">
+  <h1>示例</h1>
+  <nav class="top-bar" data-topbar role="navigation">
+    <section class="top-bar-section">
+      <ul class="left">
+        <li class="has-dropdown">
+          <a href="#">Menu</a>
+          <ul class="dropdown">
+            <li><a href="#">我的...</a></li>
+            <li><label>会员中心</label></li>
+            <li><a href="#">订单</a></li>
+            <li><a href="#">积分</a></li>
+            <li class="divider"></li>
+            <li><a href="#">评论</a></li>
+            <li><a href="#">咨询</a></li>
+            <li><a href="#">投诉</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="right">
+        <li class="has-dropdown">
+          <a href="#">Menu</a>
+          <ul class="dropdown">
+            <li><a href="#">我的...</a></li>
+            <li><label>会员中心</label></li>
+            <li><a href="#">订单</a></li>
+            <li><a href="#">积分</a></li>
+            <li class="divider"></li>
+            <li><a href="#">评论</a></li>
+            <li><a href="#">咨询</a></li>
+            <li><a href="#">投诉</a></li>
+          </ul>
+        </li>
+        <li><a href="">无菜单</a></li>
+      </ul>
+    </section>
+  </nav>
+  <header class="top-bar">
+    <div class="logo">
+      <a href=""><img src="statics/placeholder.png" alt=""></a>
+    </div>
+    <form action="" method="post">
+      <input type="text" name="" id="">
+      <select name="" id="">
+        <option value="">2342341</option>
+      </select>
+      <button type="submit" class="alert">搜索</button>
+      <a href="" class="btn">设置</a>
+    </form>
+  </header>
+  <div class="absorb">
+    <header class="top-bar" data-topbar>
+      <h1>吸附在屏幕顶部</h1>
+    </header>
+  </div>
+
+  <p align="center"><a name="1"></a>天 狗</p>
+  <p><br>
+  <br>
+  一<br>
+  <br>
+  我是一条天狗呀！<br>
+  我把月来吞了，<br>
+  我把日来吞了，<br>
+  我把一切的星球来吞了，<br>
+  我把全宇宙来吞了。<br>
+  我便是我了！<br>
+  <br>
+  二<br>
+  <br>
+  我是月底光，<br>
+  我是日底光，<br>
+  我是一切星球底光，<br>
+  我是X光线底光，<br>
+  我是全宇宙底Energy底总量！<br>
+  <br>
+  三<br>
+  <br>
+  我飞奔，<br>
+  我狂叫，<br>
+  我燃烧。<br>
+  我如烈火一样地燃烧！<br>
+  我如大海一样地狂叫！<br>
+  我如电气一样地飞跑！<br>
+  我飞跑，<br>
+  我飞跑，<br>
+  我飞跑，<br>
+  我剥我的皮，<br>
+  我食我的肉，<br>
+  我嚼我的血，<br>
+  我啮我的心肝，<br>
+  我在我神经上飞跑，<br>
+  我在我脊髓上飞跑，<br>
+  我在我脑筋上飞跑。<br>
+  <br>
+  四<br>
+  <br>
+  我便是我呀！<br>
+  我的我要爆了！</p>
+
+  <footer class="fixed bottom">
+    <div class="top-bar" data-topbar>
+      <h1>固定在底部</h1>
+    </div>
+  </footer>
+
+  <h1>可选项</h1>
+  <pre>
+  $(document).mobile({
+    topbar: {
+      index: 0,
+      start_offset: 0,
+      //Make topbar be absorbing
+      absorb_on: true,
+      //Absorbing's class
+      absorb_class: 'absorb',
+      is_hover: true
+    }
+  });
+  </pre>
+
+  <h1>当页面中添加了新的顶部导航</h1>
+  <pre>
+  $(document).mobile('topbar', 'reflow');
+  </pre>
+
+</div>
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

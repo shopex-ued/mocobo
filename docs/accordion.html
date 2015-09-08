@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>折叠（手风琴）面板</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>折叠（手风琴）面板</h1>
+</header>
+
+<div class="container">
+
+  <h1>示例</h1>
+  <ul class="accordion" data-accordion>
+    <li class="item active">
+      <a href="#panel1a">Accordion 1</a>
+      <div id="panel1a" class="content">
+        Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </div>
+    </li>
+    <li class="item">
+      <a href="#panel2a">Accordion 2</a>
+      <div id="panel2a" class="content">
+        Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </div>
+    </li>
+    <li class="item">
+      <a href="#panel3a">Accordion 3</a>
+      <div id="panel3a" class="content">
+        Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </div>
+    </li>
+  </ul>
+
+  <h1>可嵌套</h1>
+  <ul class="accordion" data-accordion>
+    <li class="item">
+      <a href="#panel1b">Accordion 1</a>
+      <div id="panel1b" class="content">
+        <ul class="accordion" data-accordion data-options="multi_expand: true">
+          <li class="item">
+            <a href="#panel1d">Accordion 1</a>
+            <div id="panel1d" class="content">
+              Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
+          </li>
+          <li class="item">
+            <a href="#panel2d">Accordion 2</a>
+            <div id="panel2d" class="content">
+              Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
+          </li>
+          <li class="item">
+            <a href="#panel3d">Accordion 3</a>
+            <div id="panel3d" class="content">
+              Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="item">
+      <a href="#panel2b">Accordion 2</a>
+      <div id="panel2b" class="content">
+        Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </div>
+    </li>
+    <li class="item">
+      <a href="#panel3b">Accordion 3</a>
+      <div id="panel3b" class="content">
+        Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </div>
+    </li>
+  </dl>
+
+  <h1>分组面板</h1>
+  <ul class="block-grid-2">
+    <li>
+      <ul class="accordion" data-accordion="myAccordionGroup">
+        <li class="item">
+          <a href="#panel1c">Accordion 1</a>
+          <div id="panel1c" class="content">
+            Panel 1. Lorem ipsum dolor
+          </div>
+        </li>
+        <li class="item">
+          <a href="#panel2c">Accordion 2</a>
+          <div id="panel2c" class="content">
+            Panel 2. Lorem ipsum dolor
+          </div>
+        </li>
+        <li class="item">
+          <a href="#panel3c">Accordion 3</a>
+          <div id="panel3c" class="content">
+            Panel 3. Lorem ipsum dolor
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <ul class="accordion" data-accordion="myAccordionGroup">
+        <li class="item">
+          <a href="#panel4c">Accordion 4</a>
+          <div id="panel4c" class="content">
+            Panel 4. Lorem ipsum dolor
+          </div>
+        </li>
+        <li class="item">
+          <a href="#panel5c">Accordion 5</a>
+          <div id="panel5c" class="content">
+            Panel 5. Lorem ipsum dolor
+          </div>
+        </li>
+        <li class="item">
+          <a href="#panel6c">Accordion 6</a>
+          <div id="panel6c" class="content">
+            Panel 6. Lorem ipsum dolor
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+
+  <h1>可选参数</h1>
+  <p>所有的参数都可用 <code>data-options</code> 绑定。</p>
+  <pre>
+  $(document).foundation({
+    accordion: {
+      // specify the class used for accordion panels
+      content_class: 'content',
+      // specify the class used for active (or open) accordion panels
+      active_class: 'active',
+      // allow multiple accordion panels to be active at the same time
+      multi_expand: false,
+      // allow accordion panels to be closed by clicking on their headers
+      // setting to false only closes accordion panels when another is opened
+      toggleable: true
+    }
+  });
+  </pre>
+
+  <h1>事件回调</h1>
+  <p>回调有两种方式：</p>
+  <pre>
+  $(document).mobile({
+    accordion: {
+      callback : function (accordion) {
+        console.log(accordion);
+      }
+    }
+  });
+  </pre>
+  以及
+  <pre>
+  $('#myAccordionGroup').on('toggled', function (event, accordion) {
+    console.log(accordion);
+  });
+  </pre>
+
+  <h1>当添加了新的​手风琴面板</h1>
+  <pre>
+  $(document).mobile('accordion', 'reflow');
+  </pre>
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

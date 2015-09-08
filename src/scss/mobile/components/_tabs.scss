@@ -1,0 +1,216 @@
+@import "global";
+@import "grid";
+
+//
+// @variables
+//
+
+$include-html-tabs-classes: $include-html-classes !default;
+
+$tabs-class: 'tabs' !default;
+
+$tabs-nav-padding: to-rem(10 12) !default;
+$tabs-nav-bg-color: $primary-color !default;
+$tabs-nav-active-bg-color: scale-color($tabs-nav-bg-color, $lightness: -12%) !default;
+$tabs-nav-hover-bg-color: scale-color($tabs-nav-bg-color, $lightness: -6%) !default;
+$tabs-nav-font-color: $white !default;
+$tabs-nav-active-font-color: $tabs-nav-font-color !default;
+$tabs-nav-font-size: to-rem(14) !default;
+
+$tabs-content-margin-bottom: to-rem(10) !default;
+$tabs-content-padding: $column-gutter / 2 !default;
+
+$tabs-vertical-nav-padding: to-rem(10 5) !default;
+
+//We use these to control the styles of segmented controllers
+$tabs-segmented-margin: to-rem(10 12) !default;
+$tabs-segmented-border: 1px solid $primary-color !default;
+$tabs-segmented-radius: $global-radius !default;
+
+$tabs-segmented-nav-height: to-rem(32) !default;
+$tabs-segmented-nav-text-align: center !default;
+$tabs-segmented-nav-font-size: to-rem(13) !default;
+$tabs-segmented-nav-bg-color: $white !default;
+$tabs-segmented-nav-font-color: $primary-color !default;
+
+$tabs-segmented-nav-active-bg-color: $primary-color !default;
+$tabs-segmented-nav-active-font-color: $white !default;
+
+$tabs-segmented-scroll-wrapper-height: to-rem(38) !default;
+
+//We use these to control the styles of bar tabs
+$tabs-bar-border-color: $gainsboro !default;
+$tabs-bar-bg-color: $white !default;
+
+$tabs-bar-nav-height: to-rem(22) !default;
+$tabs-bar-nav-padding: to-rem(11) !default;
+$tabs-bar-nav-divider-color:$gainsboro !default;
+$tabs-bar-nav-font-size: to-rem(14) !default;
+$tabs-bar-nav-font-color: $aluminum !default;
+$tabs-bar-nav-active-font-color: $oil !default;
+$tabs-bar-nav-active-bar-height: 2px !default;
+$tabs-bar-nav-active-bar-color: $primary-color !default;
+
+@include exports("tab") {
+    @if $include-html-tabs-classes {
+        /* Tabs */
+        .#{$tabs-class} {
+            @extend .clearfix;
+            margin-bottom: 0;
+            margin-left: 0;
+            list-style: none;
+            .controller {
+                position: relative;
+                margin-bottom: 0;
+                float: left;
+                list-style: none;
+                > a {
+                    display: block;
+                    background-color: $tabs-nav-bg-color;
+                    padding: $tabs-nav-padding;
+                    line-height: 1.72;
+                    font-size: $tabs-nav-font-size;
+                    color: $tabs-nav-font-color;
+                    @include transition(background-color 0.1s linear);
+                    &:hover {
+                        background-color: $tabs-nav-hover-bg-color;
+                    }
+                }
+                &.active > a {
+                    background-color: $tabs-nav-active-bg-color;
+                    @if $tabs-nav-active-font-color != $tabs-nav-font-color {
+                        color: $tabs-nav-active-font-color;
+                    }
+                }
+            }
+            &.radius {
+                .controller {
+                    &:first-child a {
+                        @include side-radius(left, $global-radius);
+                    }
+                    &:last-child a {
+                        @include side-radius(right, $global-radius);
+                    }
+                }
+            }
+            &.vertical {
+                float: left;
+                width: 20%;
+                max-width: 20%;
+                .controller {
+                    display: block;
+                    position: inherit;
+                    top: auto;
+                    float: none;
+                    > a {
+                        padding: $tabs-vertical-nav-padding;
+                    }
+                }
+            }
+        }
+        .#{$tabs-class}-content {
+            @extend .clearfix;
+            margin-bottom: $tabs-content-margin-bottom;
+            width: 100%;
+            > .content {
+                display: none;
+                // float: left;
+                padding: $tabs-content-padding 0;
+                width: 100%;
+                &.active {
+                    display: block;
+                    // float: none;
+
+                }
+                &.contained {
+                    padding: $tabs-content-padding;
+                }
+            }
+            &.vertical {
+                float: left;
+                width: 80%;
+                max-width: 80%;
+                > .content {
+                    padding: 0 $tabs-content-padding;
+                }
+            }
+        }
+        // Segmented controllers tab
+        .segmented-#{$tabs-class} {
+            position: relative;
+            display: table;
+            table-layout: fixed;
+            margin: $tabs-segmented-margin;
+            overflow: hidden;
+            background-color: transparent;
+            border: $tabs-segmented-border;
+            border-radius: $tabs-segmented-radius;
+            -webkit-touch-callout: none;
+            // Section within controller
+            .controller {
+                display: table-cell;
+                width: 1%;
+                border-left: $tabs-segmented-border;
+                line-height: $tabs-segmented-nav-height;
+                text-align: $tabs-segmented-nav-text-align;
+                font-size: $tabs-segmented-nav-font-size;
+                @include ellipsis;
+                // Remove border-left from first section
+                &:first-child {
+                    border-left-width: 0;
+                }
+                > a {
+                    display: block;
+                    background-color: $tabs-segmented-nav-bg-color;
+                    color: $tabs-segmented-nav-font-color;
+                    @include transition(background-color 0.1s linear);
+                }
+                // Selected state of segmented controller
+                &.active > a {
+                    background-color: $tabs-segmented-nav-active-bg-color;
+                    color: $tabs-segmented-nav-active-font-color;
+                }
+            }
+        }
+        .bar-#{$tabs-class} {
+            display: flex;
+            position: relative;
+            background-color: $tabs-bar-bg-color;
+            margin-bottom: 0;
+            margin-left: 0;
+            list-style: none;
+            text-align: center;
+            @include hairline(false, $tabs-bar-border-color);
+            .controller {
+                flex: 1;
+                line-height: $tabs-bar-nav-height;
+                font-size: $tabs-bar-nav-font-size;
+                > a {
+                    display: block;
+                    position: relative;
+                    padding: $tabs-bar-nav-padding 0;
+                    color: $tabs-bar-nav-font-color;
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        @include transition(background-color 0.2s linear);
+                    }
+                }
+                &:not(:last-child) > a {
+                    @include hairline(false, $tabs-bar-nav-divider-color, $direct: vertical);
+                }
+                &.active > a {
+                    color: $tabs-bar-nav-active-font-color;
+                    &::before {
+                        left: 0;
+                        bottom: 0;
+                        z-index: 1;
+                        width: 100%;
+                        height: $tabs-bar-nav-active-bar-height;
+                        background-color: $tabs-bar-nav-active-bar-color;
+                    }
+                }
+            }
+        }
+    }
+}
