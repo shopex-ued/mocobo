@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>警告提醒框</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>警告提醒框</h1>
+</header>
+<div class="container">
+  <h1>示例</h1>
+  <div data-alert class="alert-box">
+    Your content goes here.
+    <a href="#" class="close">&times;</a>
+  </div>
+
+  <h1>高级应用</h1>
+  <div data-alert class="alert-box success radius">
+    This is a success alert with a radius.
+    <a href="#" class="close">&times;</a>
+  </div>
+
+  <div data-alert class="alert-box warning round">
+    This is a warning alert that is rounded.
+    <a href="#" class="close">&times;</a>
+  </div>
+
+  <div data-alert class="alert-box info radius">
+    This is an info alert with a radius.
+    <a href="#" class="close">&times;</a>
+  </div>
+
+  <div data-alert class="alert-box alert round">
+    This is an alert - alert that is rounded.
+    <a href="#" class="close">&times;</a>
+  </div>
+
+  <div data-alert class="alert-box secondary">
+    This is a secondary alert.
+    <a href="#" class="close">&times;</a>
+  </div>
+
+  <h1>事件绑定</h1>
+  <pre>
+  $(document).on('close.alert', function(event) {
+    console.info('An alert box has been closed!');
+  });
+  </pre>
+
+  <h1>当页面中添加了新的提醒框</h1>
+  <pre>
+  $(document).mobile('alert', 'reflow');
+  </pre>
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

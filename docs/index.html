@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mobile front-end framework</title>
+<script>
+if(window.outerWidth < 541) {
+    window.location.href = 'index_iframe.html';
+}
+</script>
+<style>
+html,body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+.container{
+  width: 368px;
+  height: 792px;
+  background: url(statics/iphone-6.png) no-repeat 0 0;
+  background-size: contain;
+  margin: 0 auto;
+  position: relative;
+}
+.container .inner {
+  position: absolute;
+  left: 24px;
+  top: 120px;
+  width: 320px;
+  height: 534px;
+  overflow: hidden;
+}
+.tips {
+  position: absolute;
+  left: 24px;
+  top: 672px;
+  width: 320px;
+  font-size: 10px;
+  text-align: center;
+}
+.tips a {
+  display: inline-block;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  color: #999;
+  text-decoration: none;
+  background-color: rgba(250,250,250,0);
+}
+</style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="tips"><a href="index_iframe.html"> </a></div>
+    <div class="inner">
+      <iframe src="index_iframe.html" frameborder="0" width="100%" height="534"></iframe>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>缩略图</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>表格</h1>
+</header>
+
+<div class="container">
+  <h1>示例</h1>
+  <table>
+    <thead>
+      <tr>
+        <th width="200">Table Header</th>
+        <th>Table Header</th>
+        <th width="150">Table Header</th>
+        <th width="150">Table Header</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Content Goes Here</td>
+        <td>This is longer content</td>
+        <td>Content</td>
+        <td>Content</td>
+      </tr>
+      <tr>
+        <td>Content Goes Here</td>
+        <td>This is longer Content</td>
+        <td>Content</td>
+        <td>Content</td>
+      </tr>
+      <tr>
+        <td>Content Goes Here</td>
+        <td>This is longer Content</td>
+        <td>Content</td>
+        <td>Content</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <caption>Most Expensive Sandwiches by City</caption>
+    <tr>
+      <th scope="column">Rank</th>
+      <th scope="column">City</th>
+      <th scope="column">Price</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td scope="row">Campbell, CA</td>
+      <td scope="row">New York, NY</td>
+      <td scope="row">Sandwich, IL</td>
+    </tr>
+    <tr>
+      <td>$12.99</td>
+      <td>$9.99</td>
+      <td>$8.99</td>
+    </tr>
+  </table>
+  <table>
+    <caption>Cute Animals Per 1,000 People</caption>
+    <tr>
+      <th id="state">State</th>
+      <th id="dogs">Dogs</th>
+      <th id="cats">Cats</th>
+      <th id="rabbits">Rabbits</th>
+    </tr>
+    <tr>
+      <th id="california" headers="state">California</th>
+      <td headers="dogs california">3</td>
+      <td headers="cats california">1</td>
+      <td headers="rabbits california">10</td>
+    </tr>
+  </table>
+
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

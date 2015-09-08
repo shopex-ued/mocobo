@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>表单验证器</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>表单验证器</h1>
+</header>
+
+<div class="container">
+
+  <h1>示例</h1>
+  <form action="" method="post" data-validator>
+    <div class="form-row">
+      <label>用户名 <small>*</small>
+        <input type="text" required pattern="[a-zA-Z]+">
+      </label>
+      <small class="alert-box error">名字必填，并且只能为字母</small>
+    </div>
+    <div class="form-row">
+      <label>Email <small>*</small>
+        <input type="email" required>
+      </label>
+      <small class="alert-box error">请输入正确的电子邮箱地址</small>
+    </div>
+    <div class="form-row">
+      <label>个人主页
+        <input type="text" pattern="url" placeholder="http://">
+      </label>
+      <small class="alert-box error">请输入正确的URL地址</small>
+    </div>
+    <div class="form-row">
+      <button type="submit">提交</button>
+    </div>
+  </form>
+
+  <h1>预定义的验证模式</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>验证示例或格式</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>alpha</td>
+        <td>字母</td>
+      </tr>
+      <tr>
+        <td>alpha_numeric</td>
+        <td>字母和数字</td>
+      </tr>
+      <tr>
+        <td>integer</td>
+        <td>整数</td>
+      </tr>
+      <tr>
+        <td>number</td>
+        <td>数值</td>
+      </tr>
+      <tr>
+        <td>email</td>
+        <td>电子邮箱</td>
+      </tr>
+      <tr>
+        <td>url</td>
+        <td>url地址</td>
+      </tr>
+      <tr>
+        <td>domain</td>
+        <td>域名，如：shopex.cn</td>
+      </tr>
+      <tr>
+        <td>datetime</td>
+        <td>日期+时间，格式：YYYY-MM-DD hh:mm:ss</td>
+      </tr>
+      <tr>
+        <td>date</td>
+        <td>日期，格式：YYYY-MM-DD</td>
+      </tr>
+      <tr>
+        <td>time</td>
+        <td>时间，格式：HH:MM:SS</td>
+      </tr>
+      <tr>
+        <td>color</td>
+        <td>hex颜色值，如：#FFF或#FFFFFF</td>
+      </tr>
+      <tr>
+        <td>mobile</td>
+        <td>国内的手机号码，如：13800138000</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>可以在<code>pattern</code>属性里写上对应的验证模式名：</p>
+  <pre>
+  &lt;input type="text" pattern="int">
+  </pre>
+  <p>你还可以使用标准的 html5 中的表单属性来代替验证表达式：</p>
+  <pre>
+  &lt;input type="email" required>
+  &lt;input type="url"></pre>
+
+  <h1>自定义验证模式</h1>
+  <pre>
+  (document).mobile({
+    validator: {
+      patterns: {
+        dashes_only: /^[0-9-]*$/,
+        ip_address: /^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/
+      }
+    }
+  });
+  </pre>
+  <p>然后像使用普通验证模式一样使用它：</p>
+  <pre>&lt;input type="text" pattern="dashes_only"></pre>
+
+  <h1>相等于验证器</h1>
+  <p>如果需要再次确认输入的正确性，可以使用<code>data-equalto</code>属性：</p>
+  <form action="" method="post" data-validator>
+    <div class="form-row">
+      <label>密码 <small>*</small>
+        <input type="text" id="password" required pattern="\w+">
+      </label>
+      <small class="alert-box error">密码只能为字母、数字、下划线</small>
+    </div>
+    <div class="form-row">
+      <label>确认密码 <small>*</small>
+        <input type="text" required data-equalto="password">
+      </label>
+      <small class="alert-box error">两次密码输入不符</small>
+    </div>
+    <button type="submit">提交</button>
+  </form>
+
+  <!-- <h1>必(填/选)其一</h1>
+  <p>如果需要在多个选项或输入框中必须至少选中或输入其中一项，需要在表单元素上加入属性<code>data-oneof</code>：</p>
+  <form action="" data-validator>
+    <div class="row form-row">
+      <label>联系方式：<small class="alert-box error">请至少填写一项</small></label>
+      <div class="grid-4 columns">
+        <label>手机：</label>
+        <input type="text" class="oneof" data-oneof=".oneof">
+      </div>
+      <div class="grid-4 columns">
+        <label>电话：</label>
+        <input type="text" class="oneof" data-oneof=".oneof">
+      </div>
+      <div class="grid-4 columns">
+        <label>QQ：</label>
+        <input type="text" class="oneof" data-oneof=".oneof">
+      </div>
+    </div>
+    <div class="form-row">
+      <button type="submit">提交</button>
+    </div>
+  </form> -->
+
+  <h1>其它可选项</h1>
+  <pre>
+  $(document).mobile({
+    abide : {
+      validate_on: 'change', // change (when input value changes), blur (when input blur), manual (when call custom events)
+      focus_on_invalid: true, // automatically bring the focus to an invalid input field
+      error_labels: true, // labels with a for="inputId" will recieve an `error` class
+      error_class: 'has-error', // labels with a for="inputId" will recieve an `error` class
+      alert_element: '.alert-box',
+      // the amount of time Validator will take before it validates the form (in ms).
+      // smaller time will result in faster validation
+      timeout: 1000,
+      patterns : {
+        alpha: /^[a-zA-Z]+$/,
+        alphaNum: /^[a-zA-Z0-9]+$/,
+        int: /^[-+]?\d+$/,
+        number: /^[-+]?[1-9]\d*$/,
+
+        // http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#valid-e-mail-address
+        email : /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+
+        url: /^(https?|ftp|file|ssh):\/\/([-;:&=\+\$,\w]+@{1})?([-A-Za-z0-9\.]+)+:?(\d+)?((\/[-\+~%\/\.\w]+)?\??([-\+=&;%@\.\w]+)?#?([\w]+)?)?/,
+        // abc.de
+        domain: /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/,
+
+        datetime: /([0-2][0-9]{3})\-([0-1][0-9])\-([0-3][0-9])T([0-5][0-9])\:([0-5][0-9])\:([0-5][0-9])(Z|([\-\+]([0-1][0-9])\:00))/,
+        // YYYY-MM-DD
+        date: /(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))/,
+        // HH:MM:SS
+        time: /(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}/,
+        // MM/DD/YYYY
+        month_day_year : /(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/,
+
+        // #FFF or #FFFFFF
+        color: /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/,
+        mobile: /^0?1[3-8]\d{9}$/
+      },
+      verifiers: { // You can custom verifiers
+        diceRoll: function(el, required, parent) {
+          var possibilities = [true, false];
+          return possibilities[Math.round(Math.random())];
+        },
+        isAllowed: function(el, required, parent) {
+          var possibilities = ['a@zurb.com', 'b.zurb.com'];
+          return possibilities.indexOf(el.val) > -1;
+        }
+      }
+    }
+  });
+  </pre>
+
+  <h1>可用的事件列表</h1>
+  <pre>
+  $('#myForm')
+  .on('invalid.validator', function () {
+    var invalid_fields = $(this).find('[data-invalid]');
+    console.log(invalid_fields);
+  })
+  .on('valid.validator', function () {
+    console.log('valid!');
+  });
+  </pre>
+  <p>如果需要异步提交表单，<code>form</code>的属性需改为<code>data-validator="ajax"</code>，然后在<code>valid.validator</code>事件里写异步代码。</p>
+
+  <h1>当页面中添加了新的表单验证组件</h1>
+  <pre>
+  $(document).mobile('validator', 'reflow');
+  </pre>
+
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

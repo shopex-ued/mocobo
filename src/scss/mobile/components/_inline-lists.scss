@@ -1,0 +1,38 @@
+@import "global";
+
+//
+// @variables
+//
+$include-html-inline-list-classes: $include-html-classes !default;
+
+$inline-list-class: 'inline-list' !default;
+// We use this to control the margins and padding of the inline list.
+$inline-list-item-margin-left: to-rem(16) !default;
+$inline-list-margin: 0 0 to-rem(10) (-$inline-list-item-margin-left) !default;
+$inline-list-padding: 0 !default;
+// We use this to control the overflow of the inline list.
+$inline-list-overflow: hidden !default;
+
+//
+// @mixins
+//
+// We use this mixin to create inline lists
+@mixin inline-list {
+    margin: $inline-list-margin;
+    padding: $inline-list-padding;
+    overflow: $inline-list-overflow;
+    list-style: none;
+    > li {
+        float: left;
+        margin-left: $inline-list-item-margin-left;
+    }
+}
+
+@include exports("inline-list") {
+    @if $include-html-inline-list-classes {
+        /* Inline lists */
+        .#{$inline-list-class} {
+            @include inline-list;
+        }
+    }
+}

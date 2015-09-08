@@ -1,0 +1,23 @@
+# Grunt aliases
+---
+# Build everything
+build:
+  - 'build:assets'
+# Build assets
+'build:assets':
+  - 'clean'
+  - 'shell'
+  - 'sass'
+  - 'concat'
+  - 'uglify'
+  - 'copy'
+  - 'postcss'
+  - 'cssmin'
+  - 'newer:imagemin'
+# Default
+default:
+  - 'build'
+  # - 'watch'
+watches:
+  - 'browserSync'
+  - 'watch'

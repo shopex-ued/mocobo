@@ -1,0 +1,79 @@
+@import "global";
+
+//
+// @variables
+//
+
+$include-html-accordion-classes: $include-html-classes !default;
+
+$accordion-class: 'accordion' !default;
+$accordion-item-padding: to-rem(16) !default;
+$accordion-item-bg-color: $silver !default;
+$accordion-item-hover-bg-color: scale-color($accordion-item-bg-color, $lightness: -8%) !default;
+$accordion-item-active-bg-color: scale-color($accordion-item-bg-color, $lightness: -8%) !default;
+$accordion-item-active-font-color: $jet !default;
+$accordion-item-font-color: $jet !default;
+$accordion-item-font-size: to-rem(14) !default;
+
+$accordion-content-padding: $column-gutter / 2 !default;
+$accordion-content-active-bg-color: $white !default;
+
+//  Mixin: accordion-container()
+//  Decription: Responsible for the container component of accordions, generating styles relating to a margin of zero and a clearfix
+//  Explicit Dependencies: a clearfix mixin *is* defined.
+//  Implicit Dependencies: None
+
+@mixin accordion-container {
+    @extend .clearfix;
+    margin: 0;
+}
+
+//  Mixin: accordion-item( $bg, $hover-bg, $active-bg, $padding, $active_class,  $font-color, $font-size) {
+//    @params $bg-color: [ color or string ]: Specify the background color for the item element
+//    @params $hover-bg-color [ color or string ]: Specify the background color for the item element when hovered
+//    @params $active-bg [ color or string ]: Specify the background color for the item element when clicked and not released.
+//    @params $active_class [ string ]: Specify the class name used to keep track of which accordion tab should be visible
+//    @params $font-color [ color or string ]: Color of the font for accordion
+//    @params $font-size [ number ]: Specifiy the font-size of the text inside the item element
+//    @params $content-bg [ color ]: Background color for the content when it's visible
+//    @params $content-padding [ number ]: Padding for the content of the container
+
+@mixin accordion-item($bg: $accordion-item-bg-color, $hover-bg: $accordion-item-hover-bg-color, $active-bg: $accordion-item-active-bg-color, $padding: $accordion-item-padding, $active_class: "active", $font-color: $accordion-item-font-color, $font-size: $accordion-item-font-size, $active-font: $accordion-item-active-font-color, $content-bg: $accordion-content-active-bg-color, $content-padding: $accordion-content-padding) {
+    display: block;
+    margin-bottom: 0 !important;
+    > a {
+        display: block;
+        background: $bg;
+        padding: $padding;
+        font-size: $font-size;
+        color: $font-color;
+        &:hover {
+            background: $hover-bg;
+        }
+    }
+    > .content {
+        display: none;
+        padding: $content-padding;
+        background: $content-bg;
+    }
+    &.#{$active_class} {
+        > a {
+            background: $active-bg;
+            color: $active-font;
+        }
+        > .content {
+            display: block;
+        }
+    }
+}
+
+@include exports("accordion") {
+    @if $include-html-accordion-classes {
+        .#{$accordion-class} {
+            @include accordion-container;
+            .item {
+                @include accordion-item;
+            }
+        }
+    }
+}

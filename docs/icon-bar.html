@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>带图标的导航条</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>带图标的导航条</h1>
+</header>
+
+<div class="container">
+  <h1>示例</h1>
+  <div class="icon-bar five-up">
+    <a class="item">
+      <i class="icon-home"></i>
+      <label>Home</label>
+    </a>
+    <a class="item active">
+      <i class="icon-star"></i>
+      <label>Fav</label>
+    </a>
+    <a class="item">
+      <i class="icon-tags"></i>
+      <label>Info</label>
+    </a>
+    <a class="item">
+      <i class="icon-mail"></i>
+      <label>Mail</label>
+    </a>
+    <a class="item">
+      <i class="icon-heart"></i>
+      <label>Like</label>
+    </a>
+  </div>
+
+  <h1>无标题（默认四列）</h1>
+  <nav class="icon-bar">
+    <a class="item">
+      <i class="icon-home"></i>
+    </a>
+    <a class="item">
+      <i class="icon-star"></i>
+    </a>
+    <a class="item">
+      <i class="icon-tags"></i>
+    </a>
+    <a class="item disabled">
+      <i class="icon-heart"></i>
+    </a>
+  </nav>
+
+  <h1>垂直导航</h1>
+  <div class="row">
+    <div class="icon-bar vertical left">
+      <a class="item">
+        <i class="icon-home"></i>
+      </a>
+      <a class="item">
+        <i class="icon-star"></i>
+      </a>
+      <a class="item">
+        <i class="icon-tags"></i>
+      </a>
+      <a class="item">
+        <i class="icon-mail"></i>
+      </a>
+      <a class="item">
+        <i class="icon-heart"></i>
+      </a>
+      <a class="item">
+        <i class="icon-coupon"></i>
+      </a>
+    </div>
+  </div>
+
+  <h1>固定于底部</h1>
+  <p><br><br></p>
+  <div class="fixed bottom icon-bar five-up">
+    <a class="item">
+      <i class="icon-home"></i>
+      <label>Home</label>
+    </a>
+    <a class="item active">
+      <i class="icon-star"></i>
+      <label>Fav</label>
+    </a>
+    <a class="item">
+      <i class="icon-tags"></i>
+      <label>Info</label>
+    </a>
+    <a class="item">
+      <i class="icon-mail"></i>
+      <label>Mail</label>
+    </a>
+    <a class="item">
+      <i class="icon-heart"></i>
+      <label>Like</label>
+    </a>
+  </div>
+
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

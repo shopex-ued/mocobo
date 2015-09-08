@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>弹层和遮罩</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>弹层和遮罩</h1>
+</header>
+
+<div class="container">
+
+  <h1>示例</h1>
+  <a href="#" data-modal-id="myModal">Click Me For A Modal</a>
+  <div id="myModal" class="modal" data-modal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <a class="close-modal" aria-label="Close">&#215;</a>
+    <header>
+      Awesome. I have it.
+    </header>
+    <article>
+      <p class="lead">Your couch.  It is mine.</p>
+      <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+    </article>
+    <footer><a href="" class="btn close-modal">关闭</a></footer>
+  </div>
+
+  <h1>更多应用</h1>
+
+  <!-- Triggers the modals -->
+  <a href="#" data-modal-id="firstModal" class="btn">Modal in a modal&hellip;</a>
+  <a href="#" data-modal-id="videoModal" class="btn">Example Modal with Video&hellip;</a>
+  <a href="#" data-modal-id="smallModal" class="btn">Small Modal&hellip;</a>
+  <a href="#" data-modal-id="fullModal" class="btn">Full Modal&hellip;</a>
+  <!-- Modals begin -->
+  <div id="firstModal" class="modal" data-modal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="firstModalTitle">This is a modal.</h2>
+    <p>Modal makes these very easy to summon and dismiss. The close button is simply an anchor with a unicode character icon and a class of <code>close-modal</code>. Clicking anywhere outside the modal will also dismiss it.</p>
+    <p>Finally, if your modal summons another modal, the plugin will handle that for you gracefully.</p>
+    <p><a href="#" data-modal-id="secondModal" class="secondary button">Second Modal...</a></p>
+    <a class="close-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div id="secondModal" class="modal" data-modal aria-labelledby="secondModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="secondModalTitle">This is a second modal.</h2>
+    <p>See? It just slides into place after the other first modal. Very handy when you need subsequent dialogs, or when a modal option impacts or requires another decision.</p>
+    <a class="close-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div id="videoModal" class="modal large" data-modal aria-labelledby="videoModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="videoModalTitle">This modal has video</h2>
+    <div class="flex-video widescreen">
+      <iframe width="100%" src="//www.youtube-nocookie.com/embed/wnXCopXXblE?rel=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <a class="close-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div id="smallModal" class="modal small" data-modal aria-labelledby="smallModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="smallModalTitle">This is a small modal.</h2>
+    <p>See? It just slides into place after the other first modal.</p>
+    <a class="close-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div id="fullModal" class="modal full" data-modal aria-labelledby="fullModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="fullModalTitle">This is a small modal.</h2>
+    <p>See? It just slides into place after the other first modal.</p>
+    <a class="close-modal" aria-label="Close">&#215;</a>
+  </div>
+  <!-- Modals end -->
+
+  <h1>高级应用</h1>
+  <p>通过JS方式打开模态框：</p>
+  <pre>
+  // trigger by event
+  $('a.modal-link').trigger('click');
+  $('a.close-modal').trigger('click');
+
+  // or directly on the modal
+  $('#myModal').mobile('modal', 'open');
+  $('#myModal').mobile('modal', 'close');
+  </pre>
+
+  <h5>也可以在模态框中打开另一个，然后通过链接关闭它们</h5>
+  <div class="modal" id="first_modal" data-modal>
+    I'm the firstborn!
+    <a class="open-second">Click me!</a>
+  </div>
+  <div class="modal" id="second_modal" data-modal>
+    I'm the secondborn!
+    <a class="close">Close modal</a>
+  </div>
+  <a class="btn open-first">Click me!</a>
+
+  <h1>异步回调</h1>
+
+  <pre>
+  &lt;button data-modal-id="myModal" data-modal-ajax="http://some-url"&gt;
+    Click Me For A Modal
+  &lt;/button&gt;
+  &lt;a href="http://some-url" data-modal-id="myModal" data-modal-ajax="true"&gt;
+    Click Me For A Modal
+  &lt;/a&gt;
+  </pre>
+  <h5>或通过JS方式</h5>
+  <pre>
+  // just an url
+  $('#myModal').mobile('modal', 'open', 'http://some-url');
+
+  // url with extra parameters
+  $('#myModal').mobile('modal', 'open', {
+      url: 'http://some-url',
+      data: {param1: 'value1', param2: 'value2'}
+  });
+
+  // url with custom callbacks
+  $('#myModal').mobile('modal', 'open', {
+      url: 'http://some-url',
+      success: function(data) {
+          alert('modal data loaded');
+      },
+      error: function() {
+          alert('failed loading modal');
+      }
+  });
+  </pre>
+
+  <h1>事件绑定</h1>
+  <pre>
+  $(document).on('open.modal', '[data-modal]', function () {
+    var modal = $(this);
+  });
+
+  $(document).on('opened.modal', '[data-modal]', function () {
+    var modal = $(this);
+  });
+
+  $(document).on('close.modal', '[data-modal]', function () {
+    var modal = $(this);
+  });
+
+  $(document).on('closed.modal', '[data-modal]', function () {
+    var modal = $(this);
+  });
+  </pre>
+
+  <h1>可选项</h1>
+  <pre>
+  {
+    animation: 'fade',
+    animation_speed: 250,
+    close_on_overlay_click: true,
+    close_on_esc: true,
+    close_modal_class: 'close-modal',
+    multiple_opened: false,
+    overlay_class: 'modal-bg',
+    root_element: 'body',
+    css : {
+      open : {
+        'opacity': 0,
+        'visibility': 'visible',
+        'display' : 'block'
+      },
+      close : {
+        'opacity': 1,
+        'visibility': 'hidden',
+        'display': 'none'
+      }
+    }
+  }
+  </pre>
+
+  <h1>当添加了新的​模态框</h1>
+  <pre>
+  $(document).mobile('modal', 'reflow');
+  </pre>
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+<script>
+// There's no need to close a previous modal before you
+// open another one.
+$('.open-first').on('click', function() {
+  $('#first_modal').mobile('modal','open');
+});
+$('.open-second').on('click', function() {
+  $('#second_modal').mobile('modal', 'open');
+});
+$('.close').on('click', function() {
+  $('#second_modal').mobile('modal', 'close');
+});
+</script>
+
+</body>
+</html>

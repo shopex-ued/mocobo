@@ -1,0 +1,129 @@
+@import "global";
+
+//
+// @variables
+//
+$include-html-buttons-classes: $include-html-classes !default;
+
+$dropdown-buttons-class: 'dropdown-btn' !default;
+// We use these to set the color of the pip in dropdown buttons
+$dropdown-buttons-pip-color: $white !default;
+$dropdown-buttons-pip-color-alt: $oil !default;
+
+// We use these to set the size of the pip in dropdown buttons
+$buttons-pip-tiny: to-rem(3) !default;
+$buttons-pip-small: to-rem(4) !default;
+$buttons-pip-medium: to-rem(5) !default;
+$buttons-pip-large: to-rem(6) !default;
+
+// We use these to style tiny dropdown buttons
+$dropdown-buttons-padding-tiny: $buttons-pip-tiny * 3 + nth($buttons-tiny, 2) !default;
+$dropdown-buttons-pip-size-tiny: $buttons-pip-tiny !default;
+$dropdown-buttons-pip-right-tiny: nth($buttons-tiny, 2) !default;
+
+// We use these to style small dropdown buttons
+$dropdown-buttons-padding-small: $buttons-pip-small * 3 + nth($buttons-small, 2) !default;
+$dropdown-buttons-pip-size-small: $buttons-pip-small !default;
+$dropdown-buttons-pip-right-small: nth($buttons-small, 2) !default;
+
+// We use these to style medium dropdown buttons
+$dropdown-buttons-padding-medium: $buttons-pip-medium * 3 + nth($buttons-medium, 2) !default;
+$dropdown-buttons-pip-size-medium: $buttons-pip-medium !default;
+$dropdown-buttons-pip-right-medium: nth($buttons-medium, 2) !default;
+
+// We use these to style large dropdown buttons
+$dropdown-buttons-padding-large: $buttons-pip-large * 3 + nth($buttons-large, 2) !default;
+$dropdown-buttons-pip-size-large: $buttons-pip-large !default;
+$dropdown-buttons-pip-right-large: nth($buttons-large, 2) !default;
+
+// @mixins
+//
+// Dropdown Button Mixin
+//
+// We use this mixin to build off of the button mixin and add dropdown button styles
+//
+// $padding - Determines the size of button you're working with. Default: medium. Options [tiny, small, medium, large]
+// $pip-color - Color of the little triangle that points to the dropdown. Default: $white.
+// $base-style - Add in base-styles. This can be set to false. Default:true
+
+@mixin dropdown-button($padding: medium, $pip-color: $dropdown-buttons-pip-color, $base-style: true) {
+    // We add in base styles, but they can be negated by setting to 'false'.
+    @if $base-style {
+        position: relative;
+        // This creates the base styles for the triangle pip
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border-color: $dropdown-buttons-pip-color transparent transparent transparent;
+            border-style: solid;
+            transform: translateY(-50%);
+            margin-top: $dropdown-buttons-pip-size-medium / 2;
+        }
+    }
+    // If we're dealing with tiny buttons, use these styles
+    @if $padding == tiny {
+        padding-right: $dropdown-buttons-padding-tiny;
+        &::after {
+            border-width: $dropdown-buttons-pip-size-tiny;
+            right: $dropdown-buttons-pip-right-tiny;
+            margin-top: $dropdown-buttons-pip-size-tiny / 2;
+        }
+    }
+    // If we're dealing with small buttons, use these styles
+    @if $padding == small {
+        padding-right: $dropdown-buttons-padding-small;
+        &::after {
+            border-width: $dropdown-buttons-pip-size-small;
+            right: $dropdown-buttons-pip-right-small;
+            margin-top: $dropdown-buttons-pip-size-small / 2;
+        }
+    }
+    // If we're dealing with default (medium) buttons, use these styles
+    @if $padding == medium {
+        padding-right: $dropdown-buttons-padding-medium;
+        &::after {
+            border-width: $dropdown-buttons-pip-size-medium;
+            right: $dropdown-buttons-pip-right-medium;
+        }
+    }
+    // If we're dealing with large buttons, use these styles
+    @if $padding == large {
+        padding-right: $dropdown-buttons-padding-large;
+        &::after {
+            border-width: $dropdown-buttons-pip-size-large;
+            right: $dropdown-buttons-pip-right-large;
+            margin-top: $dropdown-buttons-pip-size-large / 2;
+        }
+    }
+    // We can control the pip color. We didn't use logic in this case, just set it and forget it.
+    @if $pip-color {
+        &::after {
+            border-top-color: $pip-color;
+        }
+    }
+}
+
+@include exports("dropdown-button") {
+    @if $include-html-buttons-classes {
+        /* Dropdown buttons */
+        .#{$buttons-class}.#{$dropdown-buttons-class}, button.#{$dropdown-buttons-class} {
+            @include dropdown-button;
+            &.tiny {
+                @include dropdown-button(tiny, $base-style: false);
+            }
+            &.small {
+                @include dropdown-button(small, $base-style: false);
+            }
+            &.large {
+                @include dropdown-button(large, $base-style: false);
+            }
+            &.secondary::after {
+                border-top-color: $dropdown-buttons-pip-color-alt;
+            }
+        }
+    }
+}

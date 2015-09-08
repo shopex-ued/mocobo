@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>下拉按钮</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>下拉按钮</h1>
+</header>
+<div class="container">
+
+  <h1>示例</h1>
+  <button type="button" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown-btn">Dropdown Button</button><br>
+  <ul id="drop1" data-dropdown-content class="dropdown-menu" aria-hidden="true">
+    <li><a href="#">This is a link</a></li>
+    <li><a href="#">This is another</a></li>
+    <li><a href="#">Yet another</a></li>
+  </ul>
+
+  <h1>更多样式</h1>
+  <button type="button" data-dropdown="drop1" aria-controls="drop1" class="dropdown-btn secondary flat" aria-expanded="false">Dropdown Button</button><br>
+  <button type="button" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown-btn tiny alert">Dropdown Button</button><br>
+  <button type="button" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown-btn small round success">Dropdown Button</button><br>
+  <button type="button" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown-btn large info">Dropdown Button</button><br>
+  <button type="button" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown-btn flat warning expand">Dropdown Button</button>
+  <button type="button" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown-btn" disabled>Dropdown Button</button><br>
+
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

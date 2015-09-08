@@ -1,0 +1,291 @@
+@import "global";
+
+//
+// @variables
+//
+$include-html-buttons-classes: $include-html-classes !default;
+
+$buttons-class: 'btn' !default;
+// We use these to build padding for buttons.
+$buttons-tiny: to-rem(3 6) !default;
+$buttons-small: to-rem(5 15) !default;
+$buttons-medium: to-rem(7 20) !default;
+$buttons-large: to-rem(9 30) !default;
+
+// We use this to control the display property.
+$buttons-display: inline-block !default;
+$buttons-margin-bottom: to-rem(15) !default;
+
+// We use these to control buttons text styles.
+$buttons-font-color: $white !default;
+$buttons-font-color-alt: $oil !default;
+$buttons-font-weight: $font-weight-bold !default;
+$buttons-font-align: center !default;
+
+$buttons-font-size-tiny: to-rem(12) !default;
+$buttons-line-height-tiny: 1.5 !default;
+
+$buttons-font-size-small: to-rem(12) !default;
+$buttons-line-height-small: 2 !default;
+
+$buttons-font-size-medium: to-rem(14) !default;
+$buttons-line-height-medium: 2 !default;
+
+$buttons-font-size-large: to-rem(17) !default;
+$buttons-line-height-large: 2 !default;
+
+// We use these to control various hover effects.
+$buttons-function-factor: -20% !default;
+$buttons-outline-function-factor: 0 !default;
+
+// We use these to control buttons border styles.
+$buttons-border-width: 1px !default;
+$buttons-border-style: solid !default;
+$buttons-bg-color: $primary-color !default;
+$buttons-bg-hover: scale-color($buttons-bg-color, $lightness: $buttons-function-factor) !default;
+$buttons-outline-bg-hover: transparentize($buttons-bg-color, $buttons-outline-function-factor) !default;
+$buttons-border-color: rgba($steel, .2) !default;
+
+$secondary-buttons-bg-color: $secondary-color !default;
+$secondary-buttons-bg-hover: scale-color($secondary-buttons-bg-color, $lightness: $buttons-function-factor) !default;
+$secondary-outline-buttons-bg-hover: transparentize($secondary-buttons-bg-color, $buttons-outline-function-factor) !default;
+$secondary-buttons-border-color: $secondary-buttons-bg-hover !default;
+
+$success-buttons-bg-color: $success-color !default;
+$success-buttons-bg-hover: scale-color($success-buttons-bg-color, $lightness: $buttons-function-factor) !default;
+$success-outline-buttons-bg-hover: transparentize($success-buttons-bg-color, $buttons-outline-function-factor) !default;
+$success-buttons-border-color: $success-buttons-bg-hover !default;
+
+$alert-buttons-bg-color: $alert-color !default;
+$alert-buttons-bg-hover: scale-color($alert-buttons-bg-color, $lightness: $buttons-function-factor) !default;
+$alert-outline-buttons-bg-hover: transparentize($alert-buttons-bg-color, $buttons-outline-function-factor) !default;
+$alert-buttons-border-color: $alert-buttons-bg-hover !default;
+
+$warning-buttons-bg-color: $warning-color !default;
+$warning-buttons-bg-hover: scale-color($warning-buttons-bg-color, $lightness: $buttons-function-factor) !default;
+$warning-outline-buttons-bg-hover: transparentize($warning-buttons-bg-color, $buttons-outline-function-factor) !default;
+$warning-buttons-border-color: $warning-buttons-bg-hover !default;
+
+$info-buttons-bg-color: $info-color !default;
+$info-buttons-bg-hover: scale-color($info-buttons-bg-color, $lightness: $buttons-function-factor) !default;
+$info-outline-buttons-bg-hover: transparentize($info-buttons-bg-color, $buttons-outline-function-factor) !default;
+$info-buttons-border-color: $info-buttons-bg-hover !default;
+
+// We use this to set the default radius used throughout the core.
+$buttons-radius: $global-radius !default;
+$buttons-round: $global-rounded !default;
+
+// We use this to set default opacity for disabled buttons.
+$buttons-disabled-opacity: .6 !default;
+
+//
+// @MIXIN
+//
+// We use this mixin to create a default buttons base.
+//
+// $style - Sets base styles. Can be set to false. Default: true.
+// $display - Used to control display property. Default: $buttons-display || inline-block
+// $radius - Used to control border-radius property. Default: $buttons-radius || 3px
+@mixin button-base($style: true, $display: $buttons-display, $radius: $buttons-radius) {
+    @if $display {
+        display: $display;
+    }
+    @if $style {
+        // -webkit-appearance: none;
+        appearance: none;
+        position: relative;
+        margin: 0 0 $buttons-margin-bottom;
+        border: $buttons-border-width $buttons-border-style $buttons-border-color;
+        border-radius: $radius;
+        font-weight: $buttons-font-weight;
+        text-align: $buttons-font-align;
+    }
+}
+
+// @MIXIN
+//
+// We use this mixin to add buttons size styles
+//
+// $padding - Used to build padding for buttons Default: $buttons-medium ||= to-rem(12)
+// $full-width - We can set $full-width:true to remove side padding extend width - Default: false
+
+@mixin button-size($padding: $buttons-medium, $full-width: false) {
+    // We can set $full-width:true to remove side padding extend width.
+    @if $full-width {
+        width: 100%;
+    }
+    // We control which padding styles come through,
+    // these can be turned off by setting $padding:false
+    @if $padding {
+        padding: $padding;
+        // We control the font-size based on mixin input.
+        @if $padding == $buttons-tiny {
+            font-size: $buttons-font-size-tiny;
+            line-height: $buttons-line-height-tiny;
+        }
+        @else if $padding == $buttons-small {
+            font-size: $buttons-font-size-small;
+            line-height: $buttons-line-height-small;
+        }
+        @else if $padding == $buttons-medium {
+            font-size: $buttons-font-size-medium;
+            line-height: $buttons-line-height-medium;
+        }
+        @else if $padding == $buttons-large {
+            font-size: $buttons-font-size-large;
+            line-height: $buttons-line-height-large;
+        }
+    }
+}
+
+// @MIXIN
+//
+// we use this mixin to create the buttons hover and border colors
+
+// @MIXIN
+//
+// We use this mixin to add buttons color styles
+//
+// $bg - Background color. We can set $bg:false for a transparent background. Default: $primary-color.
+// $disabled - We can set $disabled:true to create a disabled transparent buttons. Default: false
+// $bg-hover - Button hover background color.
+// $color - Button font color.
+@mixin button-style($bg: $buttons-bg-color, $disabled: false, $bg-hover: null, $border-color: null, $color: null) {
+    // We control which background styles are used,
+    // these can be removed by setting $bg:false
+    $bg-lightness: 0;
+    $bg-hover-lightness: 0;
+    @if type-of($bg) == color {
+        @if $bg-hover == null {
+            $bg-hover: if($bg == $buttons-bg-color, $buttons-bg-hover, scale-color($bg, $lightness: $buttons-function-factor));
+        }
+        // This find the lightness percentage of the background color.
+        $bg-lightness: lightness($bg);
+        $bg-hover-lightness: lightness($bg-hover);
+        background-color: $bg;
+    }
+    @else if $bg {
+        background: $bg;
+    }
+    @if $border-color {
+        border-color: $border-color;
+    }
+    @if $color {
+        color: $color;
+    }
+    @else {
+        // We control the text color for you based on the background color.
+        color: if($bg-lightness > 70%, $buttons-font-color-alt, $buttons-font-color);
+    }
+    @if $bg-hover {
+        @if $bg-hover-lightness == 0 {
+            $bg-hover-lightness: lightness($bg-hover);
+        }
+        &:hover,
+        &:focus {
+            background-color: $bg-hover;
+            color: if($bg-hover-lightness > 70%, $buttons-font-color-alt, $buttons-font-color);
+        }
+    }
+    // We can set $disabled:true to create a disabled transparent buttons.
+    @if $disabled {
+        box-shadow: none;
+        opacity: $buttons-disabled-opacity;
+        @if $bg {
+            &:hover,
+            &:focus {
+                background-color: $bg;
+            }
+        }
+    }
+}
+
+@include exports("buttons") {
+    @if $include-html-buttons-classes {
+        /* Buttons */
+        // Default styles applied outside of media query
+        button,
+        .#{$buttons-class} {
+            @include button-base;
+            @include button-size;
+            @include button-style;
+            @include single-transition(background-color);
+            &.secondary {
+                @include button-style($bg: $secondary-buttons-bg-color, $bg-hover: $secondary-buttons-bg-hover);
+                &.outline {
+                    @include button-style($bg: null, $bg-hover: $secondary-outline-buttons-bg-hover, $border-color: $secondary-buttons-bg-color, $color: $secondary-buttons-bg-color);
+                }
+            }
+            &.success {
+                @include button-style($bg: $success-buttons-bg-color, $bg-hover: $success-buttons-bg-hover);
+                &.outline {
+                    @include button-style($bg: null, $bg-hover: $success-outline-buttons-bg-hover, $border-color: $success-buttons-bg-color, $color: $success-buttons-bg-color);
+                }
+            }
+            &.alert {
+                @include button-style($bg: $alert-buttons-bg-color, $bg-hover: $alert-buttons-bg-hover);
+                &.outline {
+                    @include button-style($bg: null, $bg-hover: $alert-outline-buttons-bg-hover, $border-color: $alert-buttons-bg-color, $color: $alert-buttons-bg-color);
+                }
+            }
+            &.warning {
+                @include button-style($bg: $warning-buttons-bg-color, $bg-hover: $warning-buttons-bg-hover);
+                &.outline {
+                    @include button-style($bg: null, $bg-hover: $warning-outline-buttons-bg-hover, $border-color: $warning-buttons-bg-color, $color: $warning-buttons-bg-color);
+                }
+            }
+            &.info {
+                @include button-style($bg: $info-buttons-bg-color, $bg-hover: $info-buttons-bg-hover);
+                &.outline {
+                    @include button-style($bg: null, $bg-hover: $info-outline-buttons-bg-hover, $border-color: $info-buttons-bg-color, $color: $info-buttons-bg-color);
+                }
+            }
+            &.outline {
+                @include button-style($bg: $white, $bg-hover: $buttons-outline-bg-hover, $border-color: $buttons-bg-color, $color: $buttons-bg-color);
+            }
+            &.large {
+                @include button-size($padding: $buttons-large);
+            }
+            &.small {
+                @include button-size($padding: $buttons-small);
+            }
+            &.tiny {
+                @include button-size($padding: $buttons-tiny);
+            }
+            &.expand {
+                @include button-size($padding: false, $full-width: true);
+            }
+            &.flat {
+                border-radius: 0;
+            }
+            &.round {
+                border-radius: $buttons-round;
+            }
+            &.disabled,
+            &:disabled {
+                @include button-style($bg: $buttons-bg-color, $disabled: true, $bg-hover: $buttons-bg-hover);
+                &.secondary {
+                    @include button-style($bg: $secondary-buttons-bg-color, $disabled: true, $bg-hover: $secondary-buttons-bg-hover);
+                }
+                &.success {
+                    @include button-style($bg: $success-buttons-bg-color, $disabled: true, $bg-hover: $success-buttons-bg-hover);
+                }
+                &.alert {
+                    @include button-style($bg: $alert-buttons-bg-color, $disabled: true, $bg-hover: $alert-buttons-bg-hover);
+                }
+                &.warning {
+                    @include button-style($bg: $warning-buttons-bg-color, $disabled: true, $bg-hover: $warning-buttons-bg-hover);
+                }
+                &.info {
+                    @include button-style($bg: $info-buttons-bg-color, $disabled: true, $bg-hover: $info-buttons-bg-hover);
+                }
+            }
+            &[class*=icon-]::before {
+                margin-right: $body-font-size / 2;
+            }
+        }
+        a.#{$buttons-class} {
+            text-decoration: none;
+        }
+    }
+}

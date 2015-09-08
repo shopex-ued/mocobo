@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>进度条</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>进度条</h1>
+</header>
+
+<div class="container">
+
+  <h1>示例</h1>
+  <div class="progress">
+    <span class="meter"></span>
+  </div>
+
+  <h1>更多应用示例</h1>
+  <pre>
+  &lt;div class="progress [grid-#] [secondary alert success...] [radius round]">
+    &lt;span class="meter" style="width: [1-100]%">&lt;/span>
+  &lt;/div>
+  </pre>
+  <p>如：</p>
+  <div class="progress grid-6">
+    <span class="meter" style="width: 40%"></span>
+  </div>
+  <div class="progress radius success grid-8">
+    <span class="meter" style="width: 80%"></span>
+  </div>
+  <div class="progress nice round alert large-10">
+    <span class="meter" style="width: 30%"></span>
+  </div>
+  <div class="progress secondary nice">
+    <span class="meter" style="width: 50%"></span>
+  </div>
+
+  <h1>多个进度条层叠</h1>
+  <div class="progress">
+    <span class="meter" style="width: 20%"></span>
+    <span class="meter success" style="width: 30%"></span>
+    <span class="meter alert" style="width: 30%"></span>
+  </div>
+  <p>此时所有进度条百分比和为100%。或者：</p>
+  <div class="progress stack round">
+    <span class="meter alert" style="width: 80%"></span>
+    <span class="meter warning" style="width: 60%"></span>
+    <span class="meter info" style="width: 40%"></span>
+    <span class="meter success" style="width: 30%"></span>
+    <span class="meter" style="width: 20%"></span>
+  </div>
+  <p>此时每一个进度条百分比不受前面的影响（注意百分比越大越靠前）。</p>
+
+  <h1>可选参数</h1>
+  <p>所有的参数都可用 <code>data-options</code> 绑定。</p>
+  <pre>
+  $(document).foundation({
+    accordion: {
+      // specify the class used for accordion panels
+      content_class: 'content',
+      // specify the class used for active (or open) accordion panels
+      active_class: 'active',
+      // allow multiple accordion panels to be active at the same time
+      multi_expand: false,
+      // allow accordion panels to be closed by clicking on their headers
+      // setting to false only closes accordion panels when another is opened
+      toggleable: true
+    }
+  });
+  </pre>
+
+  <h1>事件回调</h1>
+  <p>回调有两种方式：</p>
+  <pre>
+  $(document).mobile({
+    accordion: {
+      callback : function (accordion) {
+        console.log(accordion);
+      }
+    }
+  });
+  </pre>
+  以及
+  <pre>
+  $('#myAccordionGroup').on('toggled', function (event, accordion) {
+    console.log(accordion);
+  });
+  </pre>
+
+  <h1>当添加了新的​手风琴面板</h1>
+  <pre>
+  $(document).mobile('accordion', 'reflow');
+  </pre>
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

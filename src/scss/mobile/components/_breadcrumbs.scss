@@ -1,0 +1,100 @@
+@import "global";
+
+//
+// Breadcrumb Variables
+//
+$include-html-nav-classes: $include-html-classes !default;
+
+$crumb-class: 'breadcrumbs' !default;
+// We use this to set the background color for the breadcrumb container.
+$crumb-bg: scale-color($secondary-color, $lightness: 55%) !default;
+
+// We use these to set the padding around the breadcrumbs.
+$crumb-padding: to-rem(9 14 9) !default;
+$crumb-side-padding: to-rem(12) !default;
+
+// We use these to control border styles.
+$crumb-function-factor: -10% !default;
+$crumb-border-size: 1px !default;
+$crumb-border-style: solid !default;
+$crumb-border-color: scale-color($crumb-bg, $lightness: $crumb-function-factor) !default;
+$crumb-radius: $global-radius !default;
+
+// We use these to set various text styles for breadcrumbs.
+$crumb-font-color: $primary-color !default;
+$crumb-font-color-current: $oil !default;
+$crumb-font-color-unavailable: $aluminum !default;
+
+// We use these to control the slash between breadcrumbs
+$crumb-slash-color: $base !default;
+$crumb-slash: "/" !default;
+
+//
+// Breadcrumb Mixins
+//
+
+// We use this mixin to create a container around our breadcrumbs
+@mixin crumb-container {
+    display: block;
+    background-color: $crumb-bg;
+    margin-left: 0;
+    padding: $crumb-padding;
+    overflow: hidden;
+    border: $crumb-border-size $crumb-border-style $crumb-border-color;
+    list-style: none;
+}
+
+// We use this mixin to create breadcrumb styles from list items.
+@mixin crumbs {
+    // A normal state will make the links look and act like clickable breadcrumbs.
+    float: left;
+    margin: 0;
+    color: $crumb-font-color;
+    line-height: 1;
+    a {
+        color: $crumb-font-color;
+    }
+    // Current is for the link of the current page
+    &.current {
+        color: $crumb-font-color-current;
+        a {
+            color: $crumb-font-color-current;
+        }
+    }
+    // Unavailable removed color and link styles so it looks inactive.
+    &.unavailable {
+        color: $crumb-font-color-unavailable;
+        a {
+            color: $crumb-font-color-unavailable;
+        }
+        &:hover,
+        &:hover a,
+        &:focus,
+        a:focus {
+            color: $crumb-font-color-unavailable;
+        }
+    }
+    &::before {
+        content: $crumb-slash;
+        position: relative;
+        top: 1px;
+        margin: 0 $crumb-side-padding;
+        color: $crumb-slash-color;
+    }
+    &:first-child::before {
+        content: " ";
+        margin: 0;
+    }
+}
+
+@include exports("breadcrumbs") {
+    @if $include-html-nav-classes {
+        .#{$crumb-class} {
+            @include crumb-container;
+            @include radius($crumb-radius);
+            > * {
+                @include crumbs;
+            }
+        }
+    }
+}

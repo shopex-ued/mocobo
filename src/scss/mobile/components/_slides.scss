@@ -1,0 +1,297 @@
+@import "global";
+
+//
+// @variables
+//
+$include-html-slides-classes: $include-html-classes !default;
+
+// Graceful Loading Wrapper and preloader
+$slides-class: "slide" !default;
+$slides-wrapper-class: "slideshow-wrapper" !default;
+$slides-preloader-class: "preloader" !default;
+
+// We use these to control the caption styles
+$slides-container-bg: none !default;
+$slides-caption-bg: rgba(51, 51, 51, 0.8) !default;
+$slides-caption-font-color: $white !default;
+$slides-caption-font-size: to-rem(14) !default;
+$slides-caption-position: "bottom" !default;
+
+// Supported values: "bottom", "under"
+$slides-caption-padding: to-rem(10 14) !default;
+$slides-caption-height: auto !default;
+
+// We use these to control the left/right nav styles
+$slides-nav-bg: transparent !default;
+$slides-nav-bg-hover: rgba(0, 0, 0, 0.3) !default;
+$slides-nav-arrow-color: $white !default;
+$slides-nav-arrow-color-hover: $white !default;
+
+// We use these to control the timer styles
+$slides-timer-bg: rgba(255, 255, 255, 0.3) !default;
+$slides-timer-show-progress-bar: true !default;
+
+// We use these to control the bullet nav styles
+$slides-bullet-nav-color: $iron !default;
+$slides-bullet-nav-color-active: $aluminum !default;
+$slides-bullet-radius: to-rem(9) !default;
+
+// We use these to controls the style of slide numbers
+$slides-number-bg: rgba(0, 0, 0, 0) !default;
+$slides-number-font-color: $white !default;
+$slides-number-padding: to-rem(5) !default;
+
+@include exports("slides") {
+    @if $include-html-slides-classes {
+        /* Images slides */
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Graceful Loading */
+        .#{$slides-wrapper-class} {
+            position: relative;
+            ul {
+                // Prevent bullets showing before .slide-container is loaded
+                list-style-type: none;
+                margin: 0;
+                // Hide all list items
+                li,
+                li .slide-caption {
+                    display: none;
+                }
+                // ...except for the first one
+                li:first-child {
+                    display: block;
+                }
+            }
+            .#{$slides-class}-container {
+                background-color: transparent;
+                // Show images when .slide-container is loaded
+                li {
+                    display: block;
+                    .slide-caption {
+                        display: block;
+                    }
+                }
+                .slide-bullets li {
+                    display: inline-block;
+                }
+            }
+            .#{$slides-preloader-class} {
+                @include radius($global-rounded);
+                animation-duration: 1.5s;
+                animation-iteration-count: infinite;
+                animation-name: rotate;
+                animation-timing-function: linear;
+                border-color: $charcoal $white;
+                border: solid 3px;
+                display: block;
+                height: 40px;
+                left: 50%;
+                margin-left: -20px;
+                margin-top: -20px;
+                position: absolute;
+                top: 50%;
+                width: 40px;
+            }
+        }
+        .#{$slides-class}-container {
+            background: $slides-container-bg;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            .previews {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                position: relative;
+                // Prevents images (and captions) from disappearing after first rotation on Chrome for Android
+                transform: translateZ(0);
+                img {
+                    display: block;
+                    max-width: 100%;
+                }
+                > * {
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    margin-left: 100%;
+                    &:first-child {
+                        margin-left: 0;
+                    }
+                    .#{$slides-class}-caption {
+                        @if $slides-caption-position == "bottom" {
+                            bottom: 0;
+                            position: absolute;
+                        }
+                        @else if $slides-caption-position == "under" {
+                            position: relative;
+                        }
+                        background-color: $slides-caption-bg;
+                        color: $slides-caption-font-color;
+                        font-size: $slides-caption-font-size;
+                        padding: $slides-caption-padding;
+                        width: 100%;
+                    }
+                }
+            }
+            .#{$slides-class}-number {
+                left: 10px;
+                background: $slides-number-bg;
+                color: $slides-number-font-color;
+                font-size: 12px;
+                position: absolute;
+                span {
+                    font-weight: 700;
+                    padding: $slides-number-padding;
+                }
+                top: 10px;
+                z-index: 10;
+            }
+            .#{$slides-class}-timer {
+                position: absolute;
+                top: 12px;
+                right: 10px;
+                height: 6px;
+                width: 100px;
+                z-index: 10;
+                .#{$slides-class}-progress {
+                    @if $slides-timer-show-progress-bar {
+                        height: 3px;
+                        background-color: $slides-timer-bg;
+                        display: block;
+                        width: 0;
+                        position: relative;
+                        right: 20px;
+                        top: 5px;
+                    }
+                }
+                // Play button
+                & > span {
+                    border: solid 4px $white;
+                    border-bottom: none;
+                    border-top: none;
+                    display: none;
+                    height: 14px;
+                    position: absolute;
+                    top: 0;
+                    width: 11px;
+                    right: 0;
+                }
+                // Pause button
+                &.paused {
+                    & > span {
+                        top: 0;
+                        width: 11px;
+                        height: 14px;
+                        border: inset 8px;
+                        border-left-style: solid;
+                        border-color: transparent;
+                        border-left-color: $white;
+                        right: -4px;
+                        &.dark {
+                            border-left-color: $oil;
+                        }
+                    }
+                }
+            }
+            &:hover .#{$slides-class}-timer > span {
+                display: block;
+            }
+            // Let's get those controls to be right in the center on each side
+            .#{$slides-class}-prev,
+            .#{$slides-class}-next {
+                background-color: $slides-nav-bg;
+                color: white;
+                height: 60px;
+                line-height: 50px;
+                margin-top: -25px;
+                position: absolute;
+                text-indent: -9999px !important;
+                top: 45%;
+                width: 36px;
+                z-index: 10;
+                &:hover {
+                    background-color: $slides-nav-bg-hover;
+                }
+                & > span {
+                    border: inset 10px;
+                    display: block;
+                    height: 0;
+                    margin-top: -10px;
+                    position: absolute;
+                    top: 50%;
+                    width: 0;
+                }
+            }
+            .#{$slides-class}-prev {
+                left: 0;
+                & > span {
+                    border-right-style: solid;
+                    border-color: transparent;
+                    border-right-color: $slides-nav-arrow-color;
+                }
+                &:hover > span {
+                    border-right-color: $slides-nav-arrow-color-hover;
+                }
+            }
+            .#{$slides-class}-next {
+                right: 0;
+                & > span {
+                    border-color: transparent;
+                    border-left-style: solid;
+                    border-left-color: $slides-nav-arrow-color;
+                    left: 50%;
+                    margin-left: -4px;
+                }
+                &:hover > span {
+                    border-left-color: $slides-nav-arrow-color-hover;
+                }
+            }
+        }
+        .#{$slides-class}-bullets-container {
+            text-align: center;
+        }
+        .#{$slides-class}-bullets {
+            display: block;
+            float: none;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            top: 10px;
+            li {
+                background: $slides-bullet-nav-color;
+                display: inline-block;
+                // float: left;
+                float: none;
+                height: $slides-bullet-radius;
+                margin-right: 6px;
+                width: $slides-bullet-radius;
+                @include radius($global-rounded);
+                &.active {
+                    background: $slides-bullet-nav-color-active;
+                }
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+        .touch {
+            .#{$slides-class}-container {
+                .#{$slides-class}-prev,
+                .#{$slides-class}-next {
+                    display: none;
+                }
+            }
+            .#{$slides-class}-bullets {
+                display: none;
+            }
+        }
+    }
+}

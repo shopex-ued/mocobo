@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>下拉菜单</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>下拉菜单</h1>
+</header>
+<div class="container">
+
+  <h1>示例</h1>
+  <a data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" href="javascript:void(0);">Has Dropdown</a>
+  <ul id="drop1" class="dropdown-menu" data-dropdown-content aria-hidden="true" tabindex="-1">
+    <li><a href="#">This is a link</a></li>
+    <li><a href="#">This is another</a></li>
+    <li><a href="#">Yet another</a></li>
+  </ul>
+  |
+  <a data-dropdown="drop2" aria-controls="drop2" aria-expanded="false" href="">Has Content Dropdown</a>
+  <div id="drop2" data-dropdown-content class="dropdown-menu content radius" aria-hidden="true" tabindex="-1">
+    <p>Some text that people will think is awesome! Some text that people will think is awesome! Some text that people will think is awesome!</p>
+  </div>
+
+  <h1>更多样式</h1>
+  <a href="#" class="btn" data-dropdown="drop">Link Dropdown &raquo;</a>
+  <ul id="drop" class="[tiny small medium large content] dropdown-menu" data-dropdown-content>
+    <li><a href="#">This is a link</a></li>
+    <li><a href="#">This is another</a></li>
+    <li><a href="#">Yet another</a></li>
+  </ul>
+  <h1>控制弹出方向</h1>
+  <a href="#" data-options="align:right" data-dropdown="drop3" class="btn">Right</a>
+  <a href="#" data-options="align:bottom" data-dropdown="drop3" class="btn">Bottom</a>
+  <a href="#" data-options="align:left" data-dropdown="drop3" class="btn">Left</a>
+  <a href="#" data-options="align:top" data-dropdown="drop3" class="btn">Top</a>
+  <ul id="drop3" class="dropdown-menu" data-dropdown-content>
+    <li><a href="#">This is a link</a></li>
+    <li><a href="#">This is another</a></li>
+    <li><a href="#">Yet another</a></li>
+  </ul>
+
+  <h1>控制自动关闭</h1>
+  <p>
+    如果不想点击菜单内的链接后关闭菜单，可以设<code>aria-autoclose="false"</code>
+  </p>
+  <a class="btn" data-dropdown="autoCloseExample" aria-controls="autoCloseExample" aria-expanded="false">Link Dropdown &raquo;</a>
+  <ul id="autoCloseExample" class="dropdown-menu" data-dropdown-content tabindex="-1" aria-hidden="true" aria-autoclose="false" tabindex="-1">
+    <li><a href="#">This is a link</a></li>
+    <li><a href="#">This is another</a></li>
+    <li><a href="#">Yet another</a></li>
+  </ul>
+
+  <h1>控制自动隐藏时间</h1>
+  <a href="#" data-dropdown="hover1" data-options="is_hover:true; hover_timeout:5000">Has Hover Dropdown</a>
+  <ul id="hover1" class="dropdown-menu" data-dropdown-content>
+    <li><a href="#">This is a link</a></li>
+    <li><a href="#">This is another</a></li>
+    <li><a href="#">Yet another</a></li>
+  </ul>
+
+  <h1>其它可选项</h1>
+  <pre>
+  $(document).mobile({
+    dropdown: {
+      // specify the class used for active dropdowns
+      active_class: 'open'
+    }
+  });
+  </pre>
+
+  <h1>当页面中添加了新的下拉菜单</h1>
+  <pre>
+  $(document).mobile('dropdown', 'reflow');
+  </pre>
+
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

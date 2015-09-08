@@ -1,0 +1,99 @@
+// Icons
+// --------------------------
+
+.#{$icons-prefix}arrow-back,
+.#{$icons-prefix}arrow-down,
+.#{$icons-prefix}arrow-forward,
+.#{$icons-prefix}arrow-up,
+.#{$icons-prefix}bag,
+.#{$icons-prefix}business,
+.#{$icons-prefix}card,
+.#{$icons-prefix}cart,
+.#{$icons-prefix}chatbox,
+.#{$icons-prefix}clock,
+.#{$icons-prefix}coin,
+.#{$icons-prefix}coupon,
+.#{$icons-prefix}discover,
+.#{$icons-prefix}edit,
+.#{$icons-prefix}eye,
+.#{$icons-prefix}forward,
+.#{$icons-prefix}freeship,
+.#{$icons-prefix}grid,
+.#{$icons-prefix}heart,
+.#{$icons-prefix}help,
+.#{$icons-prefix}home,
+.#{$icons-prefix}list,
+.#{$icons-prefix}location,
+.#{$icons-prefix}lock,
+.#{$icons-prefix}mail,
+.#{$icons-prefix}menu,
+.#{$icons-prefix}mobile,
+.#{$icons-prefix}more,
+.#{$icons-prefix}order,
+.#{$icons-prefix}package,
+.#{$icons-prefix}paper,
+.#{$icons-prefix}reduce,
+.#{$icons-prefix}refund,
+.#{$icons-prefix}return,
+.#{$icons-prefix}saleoff,
+.#{$icons-prefix}scan,
+.#{$icons-prefix}search,
+.#{$icons-prefix}send,
+.#{$icons-prefix}share,
+.#{$icons-prefix}shop,
+.#{$icons-prefix}spanner,
+.#{$icons-prefix}speaker,
+.#{$icons-prefix}star,
+.#{$icons-prefix}tags,
+.#{$icons-prefix}trash,
+.#{$icons-prefix}trunk,
+.#{$icons-prefix}user,
+.#{$icons-prefix}wallet { @extend .icon; }
+.#{$icons-prefix}arrow-back::before { content: $icon-var-arrow-back; }
+.#{$icons-prefix}arrow-down::before { content: $icon-var-arrow-down; }
+.#{$icons-prefix}arrow-forward::before { content: $icon-var-arrow-forward; }
+.#{$icons-prefix}arrow-up::before { content: $icon-var-arrow-up; }
+.#{$icons-prefix}bag::before { content: $icon-var-bag; }
+.#{$icons-prefix}business::before { content: $icon-var-business; }
+.#{$icons-prefix}card::before { content: $icon-var-card; }
+.#{$icons-prefix}cart::before { content: $icon-var-cart; }
+.#{$icons-prefix}chatbox::before { content: $icon-var-chatbox; }
+.#{$icons-prefix}clock::before { content: $icon-var-clock; }
+.#{$icons-prefix}coin::before { content: $icon-var-coin; }
+.#{$icons-prefix}coupon::before { content: $icon-var-coupon; }
+.#{$icons-prefix}discover::before { content: $icon-var-discover; }
+.#{$icons-prefix}edit::before { content: $icon-var-edit; }
+.#{$icons-prefix}eye::before { content: $icon-var-eye; }
+.#{$icons-prefix}forward::before { content: $icon-var-forward; }
+.#{$icons-prefix}freeship::before { content: $icon-var-freeship; }
+.#{$icons-prefix}grid::before { content: $icon-var-grid; }
+.#{$icons-prefix}heart::before { content: $icon-var-heart; }
+.#{$icons-prefix}help::before { content: $icon-var-help; }
+.#{$icons-prefix}home::before { content: $icon-var-home; }
+.#{$icons-prefix}list::before { content: $icon-var-list; }
+.#{$icons-prefix}location::before { content: $icon-var-location; }
+.#{$icons-prefix}lock::before { content: $icon-var-lock; }
+.#{$icons-prefix}mail::before { content: $icon-var-mail; }
+.#{$icons-prefix}menu::before { content: $icon-var-menu; }
+.#{$icons-prefix}mobile::before { content: $icon-var-mobile; }
+.#{$icons-prefix}more::before { content: $icon-var-more; }
+.#{$icons-prefix}order::before { content: $icon-var-order; }
+.#{$icons-prefix}package::before { content: $icon-var-package; }
+.#{$icons-prefix}paper::before { content: $icon-var-paper; }
+.#{$icons-prefix}reduce::before { content: $icon-var-reduce; }
+.#{$icons-prefix}refund::before { content: $icon-var-refund; }
+.#{$icons-prefix}return::before { content: $icon-var-return; }
+.#{$icons-prefix}saleoff::before { content: $icon-var-saleoff; }
+.#{$icons-prefix}scan::before { content: $icon-var-scan; }
+.#{$icons-prefix}search::before { content: $icon-var-search; }
+.#{$icons-prefix}send::before { content: $icon-var-send; }
+.#{$icons-prefix}share::before { content: $icon-var-share; }
+.#{$icons-prefix}shop::before { content: $icon-var-shop; }
+.#{$icons-prefix}spanner::before { content: $icon-var-spanner; }
+.#{$icons-prefix}speaker::before { content: $icon-var-speaker; }
+.#{$icons-prefix}star::before { content: $icon-var-star; }
+.#{$icons-prefix}tags::before { content: $icon-var-tags; }
+.#{$icons-prefix}trash::before { content: $icon-var-trash; }
+.#{$icons-prefix}trunk::before { content: $icon-var-trunk; }
+.#{$icons-prefix}user::before { content: $icon-var-user; }
+.#{$icons-prefix}wallet::before { content: $icon-var-wallet; }

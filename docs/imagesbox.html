@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>图片查看器</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>图片查看器</h1>
+</header>
+
+<div class="container">
+
+  <h1>建立图片查看器</h1>
+  <ul class="block-grid-3" data-imagesbox>
+    <li><a href="statics/space.jpg"><img class="thumb" src="statics/space.jpg"></a></li>
+    <li><a href="statics/comet.jpg"><img class="thumb" src="statics/comet.jpg"></a></li>
+    <li><a href="statics/earth.jpg"><img class="thumb" src="statics/earth.jpg"></a></li>
+  </ul>
+
+  <!-- <h1>使用响应图片</h1>
+  <ul class="block-grid-3" data-imagesbox>
+    <li><a href="statics/endevour.jpg" data-imagesbox-responsive="[statics/launch@2x.jpg, (retina)], [statics/endevour@2x.jpg, (retina3x)]"><img class="thumb" src="statics/endevour.jpg"></a></li>
+    <li><a href="statics/comet.jpg" data-imagesbox-responsive="[statics/moon@2x.jpg, (retina)], [statics/comet@2x.jpg, (retina3x)]"><img class="thumb" src="statics/comet.jpg"></a></li>
+    <li><a href="statics/earth.jpg" data-imagesbox-responsive="[statics/muwu@2x.jpg, (retina)], [statics/earth@2x.jpg, (retina3x)]"><img class="thumb" src="statics/earth.jpg"></a></li>
+  </ul> -->
+
+  <h1>照片专辑</h1>
+  如果你希望在页面上只显示一张图片，在查看大图里切换多图，或者想在照片上加些文字介绍，可以这么做：
+  <ul class="imagesbox-alumb grid-4" data-imagesbox>
+    <li class="cover"><a href="statics/space.jpg"><img class="thumb" data-caption="caption here..." src="statics/space.jpg"></a></li>
+    <li><a href="statics/comet.jpg"><img class="thumb" data-caption="caption 2 here..." src="statics/comet.jpg"></a></li>
+    <li><a href="statics/earth.jpg"><img class="thumb" data-caption="caption 3 here..." src="statics/earth.jpg"></a></li>
+  </ul>
+
+  <h1>其它可选项</h1>
+  <pre>
+  $(document).mobile({
+    imagesbox: {
+      // specify the classes or IDs will close clearing when clicked.
+      close_selectors : '.imagesbox-close',
+
+      // specify the classes or IDs that will open clearing when clicked, defaults to the entire li element
+      open_selectors : '',
+
+      // specify the classes or IDs that will be skipped in carousel
+      skip_selector : '',
+
+      touch_label : '&larr;&nbsp;Swipe to Advance&nbsp;&rarr;'
+    }
+  });
+  </pre>
+
+  <h1>可用的事件列表</h1>
+  <ul>
+    <li><code>open.imagesbox</code> before a thumbnail is expanded</li>
+    <li><code>opened.imagesbox</code> after the large image has opened</li>
+    <li><code>close.imagesbox</code> before the large image is closed</li>
+    <li><code>closed.imagesbox</code> after the large image has closed</li>
+    <li><code>change.imagesbox</code> when the large image changes</li>
+    <li><code>resized.imagesbox</code> after the large image is resized, before it becomes visible</li>
+  </ul>
+
+
+  <h1>当页面中添加了新的图片查看器</h1>
+  <pre>
+  $(document).mobile('imagesbox', 'reflow');
+  </pre>
+
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

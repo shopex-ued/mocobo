@@ -1,0 +1,161 @@
+@import "global";
+
+//
+// @variables
+//
+$include-pagination-classes: $include-html-classes !default;
+
+$pagination-class: 'pagination' !default;
+// We use these to control the pagination container
+$pagination-height: to-rem(24) !default;
+$pagination-margin: to-rem(-5) !default;
+
+// We use these to set the list-item properties
+$pagination-li-float: left !default;
+$pagination-li-height: to-rem(24) !default;
+$pagination-li-font-color: $jet !default;
+$pagination-li-font-size: to-rem(14) !default;
+$pagination-li-margin: to-rem(5) !default;
+
+// We use these for the pagination anchor links
+$pagination-link-padding: to-rem(1 10 1) !default;
+$pagination-link-font-color: $aluminum !default;
+$pagination-link-active-bg: scale-color($white, $lightness: -10%) !default;
+
+// We use these for disabled anchor links
+$pagination-link-disabled-font-color: $aluminum !default;
+$pagination-link-disabled-bg-active: transparent !default;
+
+// We use these for currently selected anchor links
+$pagination-link-current-background: $primary-color !default;
+$pagination-link-current-font-color: $white !default;
+$pagination-link-current-font-weight: $font-weight-bold !default;
+$pagination-link-current-active-bg: $primary-color !default;
+
+// @mixins
+//
+// Style the pagination container. Currently only used when centering elements.
+// $center - Default: false, Options: true
+@mixin pagination-container($center: false) {
+    @if $center {
+        text-align: center;
+    }
+}
+
+// @mixins
+// Style disabled list items
+@mixin pagination-disabled-item {
+    a, button {
+        color: $pagination-link-disabled-font-color;
+        pointer-events: none;
+    }
+    &:hover a,
+    & a:focus,
+    &:hover button,
+    & button:focus {
+        background: $pagination-link-disabled-bg-active;
+    }
+}
+
+// @mixins
+// Style the current list item. Do not assume that the current item has
+// an anchor <a> element.
+// $has-anchor - Default: true, Options: false
+@mixin pagination-current-item($has-anchor: true) {
+    @if $has-anchor {
+        a, button {
+            background: $pagination-link-current-background;
+            color: $pagination-link-current-font-color;
+            font-weight: $pagination-link-current-font-weight;
+            &:hover,
+            &:focus {
+                background: $pagination-link-current-active-bg;
+            }
+        }
+    }
+    @else {
+        background: $pagination-link-current-background;
+        padding: $pagination-link-padding;
+        height: auto;
+        color: $pagination-link-current-font-color;
+        font-weight: $pagination-link-current-font-weight;
+        @include radius;
+        &:hover,
+        &:focus {
+            background: $pagination-link-current-active-bg;
+        }
+    }
+}
+
+// @mixins
+//
+// We use this mixin to set the properties for the creating Mobile pagination
+// $center - Left or center align the li elements. Default: false
+// $base-style - Sets base styles for pagination. Default: true, Options: false
+// $use-default-classes - Makes disabled & current classes available for use. Default: true
+@mixin pagination($center: false, $base-style: true, $use-default-classes: true) {
+    @if $base-style {
+        display: block;
+        margin-left: $pagination-margin;
+        min-height: $pagination-height;
+        li {
+            height: $pagination-li-height;
+            margin-left: $pagination-li-margin;
+            color: $pagination-li-font-color;
+            font-size: $pagination-li-font-size;
+            a, button {
+                display: block;
+                padding: $pagination-link-padding;
+                background: none;
+                @include radius;
+                @include single-transition(background-color);
+                line-height: inherit;
+                color: $pagination-link-font-color;
+                font-size: 1em;
+                font-weight: normal;
+            }
+            &:hover a,
+            a:focus,
+            &:hover button,
+            button:focus {
+                background: $pagination-link-active-bg;
+            }
+            @if $use-default-classes {
+                &.disabled {
+                    @include pagination-disabled-item;
+                }
+                &.current {
+                    @include pagination-current-item;
+                }
+            }
+        }
+    }
+    // Left or center align the li elements
+    li {
+        @if $center {
+            display: inline-block;
+            margin-left: $pagination-li-margin - to-rem(4);
+            float: none;
+        }
+        @else {
+            display: block;
+            float: $pagination-li-float;
+        }
+    }
+}
+
+@include exports("pagination") {
+    @if $include-pagination-classes {
+        /* Pagination */
+        .#{$pagination-class} {
+            @include pagination;
+        }
+        /* Pagination centred wrapper */
+        .#{$pagination-class}-centered {
+            @include pagination-container(true);
+            .#{$pagination-class} {
+                @include pagination(true, false);
+            }
+        }
+    }
+}

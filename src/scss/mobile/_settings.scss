@@ -1,0 +1,1371 @@
+// Table of Contents
+// Foundation Settings
+//
+// a. Base
+// b. Global
+// c. Grid
+// d. Media Query Ranges
+// e. Typography
+// 01. Accordion
+// 02. Alert Boxes
+// 03. Badges
+// 04. Block Grid
+// 05. Breadcrumbs
+// 06. Button Groups
+// 07. Buttons
+// 08. Dropdown Buttons
+// 09. Dropdown
+// 10. Forms
+// 11. Icon Bar
+// 12. Imagesbox
+// 13. Inline Lists
+// 14. Modal
+// 15. Off-canvas
+// 16. Pagination
+// 17. Panels
+// 18. Progress Bar
+// 19. Side Nav
+// 20. Slides
+// 21. Split Buttons
+// 22. Sub Nav
+// 23. Switches
+// 24. Table Lists
+// 25. Tables
+// 26. Tabs
+// 27. Thumbnails
+// 28. Top Bar
+
+// a. Base
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// This is the default html and body font-size for the base rem value.
+// $rem-base: 16px;
+
+// Allows the use of to-rem() or lower-bound() in your settings
+@import "functions";
+
+// Data attribute namespace
+// styles get applied to [data-mysite-plugin], etc
+// $namespace: false;
+
+// The default font-size is set to 100% of the browser style sheet (usually 16px)
+// for compatibility with browser-based text zoom or user-set defaults.
+
+// Since the typical default browser font-size is 16px, that makes the calculation for grid size.
+// If you want your base font-size to be different and not have it affect the grid breakpoints,
+// set $rem-base to $base-font-size and make sure $base-font-size is a px value.
+// $base-font-size: 100%;
+
+// $base-line-height is 1.5 times of $base-font-size
+// $base-line-height: 1.5;
+
+// We use this to control whether or not CSS classes come through in the gem files.
+// $include-html-classes: true;
+// $include-js-meta-styles: true;
+
+// Warning! Meta styles are a dependancy of the Javascript.
+// $include-html-global-classes: $include-html-classes;
+
+// b. Global
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// We use these to define default font stacks
+// $font-family-sans-serif: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+// $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+// $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
+
+// We use these to define default font weights
+// $font-weight-normal: 400;
+// $font-weight-bold: 700;
+
+// Colors
+//
+// $white       : #FFFFFF;
+// $ghost       : #FAFAFA;
+// $snowwhite   : #F9F9F9;
+// $vapor       : #F6F6F6;
+// $whitesmoke 	: #F5F5F5;
+// $silver      : #EFEFEF;
+// $smoke       : #EEEEEE;
+// $gainsboro   : #DCDCDC;
+// $lightgrey	: #D3D3D3;
+// $iron        : #CCCCCC;
+// $silver		: #C0C0C0;
+// $base        : #AAAAAA;
+// $darkgrey	: #A9A9A9;
+// $aluminum    : #999999;
+// $jumbo       : #888888;
+// $grey		: #808080;
+// $monsoon     : #777777;
+// $dimgrey		: #696969;
+// $steel       : #666666;
+// $charcoal    : #555555;
+// $tuatara     : #444444;
+// $oil         : #333333;
+// $jet         : #222222;
+// $black       : #000000;
+
+// We use these as default colors throughout
+// $primary-color: #008CBA;
+// $secondary-color: #e7e7e7;
+// $alert-color: #f04124;
+// $success-color: #43AC6A;
+// $warning-color: #f08a24;
+// $info-color: #a0d3e8;
+
+//
+// Easing Timing Functions
+//
+//basic
+// $linear: linear;
+// $ease: ease;
+// $easeIn: ease-in;
+// $easeOut: ease-out;
+// $easeInOut: ease-in-out;
+
+//extended ease in
+// $easeInQuad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+// $easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+// $easeInQuart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+// $easeInQuint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+// $easeInSine: cubic-bezier(0.47, 0, 0.745, 0.715);
+// $easeInExpo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+// $easeInCirc: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+// $easeInBack: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+
+//extended ease out
+// $easeOutQuad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+// $easeOutCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+// $easeOutQuart: cubic-bezier(0.165, 0.84, 0.44, 1);
+// $easeOutQuint: cubic-bezier(0.23, 1, 0.32, 1);
+// $easeOutSine: cubic-bezier(0.39, 0.575, 0.565, 1);
+// $easeOutExpo: cubic-bezier(0.19, 1, 0.22, 1);
+// $easeOutCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
+// $easeOutBack: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+//extended ease in out
+// $easeInOutQuad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+// $easeInOutCubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+// $easeInOutQuart: cubic-bezier(0.77, 0, 0.175, 1);
+// $easeInOutQuint: cubic-bezier(0.86, 0, 0.07, 1);
+// $easeInOutSine: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+// $easeInOutExpo: cubic-bezier(1, 0, 0, 1);
+// $easeInOutCirc: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+// $easeInOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+// We use these to control various global styles
+// $body-bg: $white;
+// $body-font-color: $jet;
+// $body-font-family: $font-family-sans-serif;
+// $body-font-size-px: $rem-base * 0.75;
+// $body-font-size-rem: to-rem($body-font-size-px);
+// $body-font-size: to-em($body-font-size-px);
+// $body-font-weight: $font-weight-normal;
+// $body-font-style: normal;
+
+// We use this to control font-smoothing
+// $font-smoothing: antialiased;
+
+// We use these to control last child float direction.
+// $last-child-float: right;
+
+// We use these to make sure border radius matches unless we want it different.
+// $global-radius: 3px;
+
+// $global-rounded: 1000px;
+
+// We use these to control inset shadow shiny edges and depressions.
+// $shiny-edge-size: 0 1px 0;
+// $shiny-edge-color: rgba($white, .5);
+// $shiny-edge-active-color: rgba($black, .2);
+
+// c. Grid
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-grid-classes: $include-html-classes;
+
+// $row-width: to-rem($small-breakpoint * $rem-base);
+// $total-columns: 12;
+// $column-gutter: to-rem(16);
+// $column-blank: to-rem(24);
+
+// d. Media Query Ranges
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $small-breakpoint:  to-em(640);
+// $medium-breakpoint: to-em(1024);
+// $large-breakpoint:  to-em(1440);
+// $xlarge-breakpoint: to-em(1920);
+
+// $small-range:   (0, $small-breakpoint);
+// $medium-range:  ($small-breakpoint  + to-em(1), $medium-breakpoint);
+// $large-range:   ($medium-breakpoint + to-em(1), $large-breakpoint);
+// $xlarge-range:  ($large-breakpoint  + to-em(1), $xlarge-breakpoint);
+// $xxlarge-range: ($xlarge-breakpoint + to-em(1), to-em(99999999));
+
+// $screen: "only screen";
+
+// $landscape: "#{$screen} and (orientation: landscape)";
+// $portrait: "#{$screen} and (orientation: portrait)";
+
+// $small-up: $screen;
+// $small-only: "#{$screen} and (max-width: #{upper-bound($small-range)})";
+
+// $medium-up: "#{$screen} and (min-width:#{lower-bound($medium-range)})";
+// $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max-width:#{upper-bound($medium-range)})";
+
+// $large-up: "#{$screen} and (min-width:#{lower-bound($large-range)})";
+// $large-only: "#{$screen} and (min-width:#{lower-bound($large-range)}) and (max-width:#{upper-bound($large-range)})";
+
+// $xlarge-up: "#{$screen} and (min-width:#{lower-bound($xlarge-range)})";
+// $xlarge-only: "#{$screen} and (min-width:#{lower-bound($xlarge-range)}) and (max-width:#{upper-bound($xlarge-range)})";
+
+// $xxlarge-up: "#{$screen} and (min-width:#{lower-bound($xxlarge-range)})";
+// $xxlarge-only: "#{$screen} and (min-width:#{lower-bound($xxlarge-range)}) and (max-width:#{upper-bound($xxlarge-range)})";
+
+// $retina: (
+//  "#{$screen} and (-webkit-min-device-pixel-ratio: 2)",
+//  "#{$screen} and (device-pixel-ratio: 2)",
+//  "#{$screen} and (min-resolution: 192dpi)",
+//  "#{$screen} and (min-resolution: 2dppx)"
+// );
+
+// $retina3x: (
+//   "#{$screen} and (-webkit-min-device-pixel-ratio: 3)",
+//   "#{$screen} and (device-pixel-ratio: 3)",
+//   "#{$screen} and (min-resolution: 249dpi)",
+//   "#{$screen} and (min-resolution: 2.6dppx)"
+// );
+
+// Legacy
+// $small: $medium-up;
+// $medium: $medium-up;
+// $large: $large-up;
+
+// e. Typography
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-type-classes: $include-html-classes;
+
+// We use these to control header font styles
+// $header-font-weight: $font-weight-normal;
+// $header-font-style: normal;
+// $header-font-color: $jet;
+// $header-line-height: 1.5;
+// $header-top-margin: .2rem;
+// $header-bottom-margin: .5rem;
+// $header-text-rendering: optimizeLegibility;
+
+// We use these to control header font sizes
+// $h1-font-size: $body-font-size-rem + to-rem(6); //18px
+// $h2-font-size: $body-font-size-rem + to-rem(4); //16px
+// $h3-font-size: $body-font-size-rem + to-rem(3); //15px
+// $h4-font-size: $body-font-size-rem + to-rem(2); //14px
+// $h5-font-size: $body-font-size-rem + to-rem(1); //13px
+// $h6-font-size: $body-font-size-rem; //12px
+
+// These control how subheaders are styled.
+// $subheader-line-height: 1.4;
+// $subheader-font-color: scale-color($header-font-color, $lightness: 35%);
+// $subheader-font-weight: $font-weight-normal;
+// $subheader-top-margin: to-rem(3);
+// $subheader-bottom-margin: to-rem(8);
+
+// More text colors
+// $text-alert-color: $alert-color;
+// $text-success-color: $success-color;
+// $text-warning-color: $warning-color;
+// $text-info-color: $info-color;
+// $text-secondary-color: $steel;
+// $text-reserve-color: $aluminum;
+
+// A general <small> styling
+// $small-font-size: 60%;
+// $small-font-color: scale-color($header-font-color, $lightness: 35%);
+
+// We use these to style paragraphs
+// $paragraph-font-weight: $font-weight-normal;
+// $paragraph-font-size: $body-font-size-rem;
+// $paragraph-line-height: 1.6;
+// $paragraph-margin-bottom: to-rem($rem-base);
+// $paragraph-text-rendering: optimizeLegibility;
+
+// We use these to style <code> tags
+// $code-color: $oil;
+// $code-font-family: $font-family-monospace;
+// $code-font-weight: $font-weight-normal;
+// $code-bg-color: scale-color($secondary-color, $lightness: 70%);
+// $code-border-size: 1px;
+// $code-border-style: solid;
+// $code-border-color: scale-color($code-bg-color, $lightness: -10%);
+// $code-padding: to-rem(2 5 1);
+
+// We use these to style anchors
+// $anchor-text-decoration: none;
+// $anchor-text-decoration-hover: none;
+// $anchor-font-color: $primary-color;
+// $anchor-font-color-hover: scale-color($anchor-font-color, $lightness: -14%);
+
+// We use these to style the <hr> element
+// $hr-border-width: 1px;
+// $hr-border-style: solid;
+// $hr-border-color: $gainsboro;
+// $hr-margin: to-rem(20);
+
+// We use these to style lists
+// $list-font-size: $paragraph-font-size;
+// $list-line-height: $paragraph-line-height;
+// $list-margin-bottom: $paragraph-margin-bottom;
+// $list-style-position: outside;
+// $list-side-margin: to-rem(18);
+// $list-ordered-side-margin: to-rem(22);
+// $list-side-margin-no-bullet: 0;
+// $list-nested-margin: to-rem(20);
+// $definition-list-header-weight: $font-weight-bold;
+// $definition-list-header-margin-bottom: to-rem(5);
+// $definition-list-margin-bottom: to-rem(12);
+
+// We use these to style blockquotes
+// $blockquote-font-color: scale-color($header-font-color, $lightness: 35%);
+// $blockquote-padding: to-rem(9 20 0 19);
+// $blockquote-border: 2px solid $lightgrey;
+// $blockquote-cite-font-size: to-rem(13);
+// $blockquote-cite-font-color: scale-color($header-font-color, $lightness: 23%);
+// $blockquote-cite-link-color: $blockquote-cite-font-color;
+
+// 01. According
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-accordion-classes: $include-html-classes;
+
+// $accordion-class: 'accordion';
+// $accordion-item-padding: to-rem(16);
+// $accordion-item-bg-color: $silver;
+// $accordion-item-hover-bg-color: scale-color($accordion-item-bg-color, $lightness: -8%);
+// $accordion-item-active-bg-color: scale-color($accordion-item-bg-color, $lightness: -8%);
+// $accordion-item-active-font-color: $jet;
+// $accordion-item-font-color: $jet;
+// $accordion-item-font-size: to-rem(16);
+
+// $accordion-content-padding: $column-gutter / 2;
+// $accordion-content-active-bg-color: $white;
+
+// 02. Alert Boxes
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-alert-classes: $include-html-classes;
+
+// $alert-class: 'alert-box';
+// We use this to control alert padding.
+// $alert-padding: to-rem(10 22 10 10);
+
+// We use these to control text style.
+// $alert-font-weight: $font-weight-normal;
+// $alert-font-size: to-rem(13);
+// $alert-font-color: $white;
+// $alert-font-color-alt: scale-color($secondary-color, $lightness: -66%);
+
+// We use this for close hover effect.
+// $alert-function-factor: -14%;
+
+// We use these to control border styles.
+// $alert-border-style: solid;
+// $alert-border-width: 1px;
+// $alert-border-color: scale-color($primary-color, $lightness: $alert-function-factor);
+// $alert-bottom-margin: to-rem(20);
+
+// We use these to style the close buttons
+// $alert-close-color: $oil;
+// $alert-close-top: 50%;
+// $alert-close-position: to-rem(4);
+// $alert-close-font-size: to-rem(30);
+// $alert-close-opacity: .4;
+// $alert-close-padding: to-rem(0 4);
+// $alert-close-margin-top: to-rem(-3);
+// $alert-close-background: inherit;
+
+// We use this to control border radius
+// $alert-radius: $global-radius;
+
+// $alert-transition-speed: 300ms;
+// $alert-transition-ease: $easeOut;
+
+// 03. Badges
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-badge-classes: $include-html-classes;
+
+// We use these to style the badges
+// $badge-class: 'badge';
+// $badge-padding: to-rem(4 8 4);
+// $badge-radius: $global-radius;
+
+// We use these to style the badge text
+// $badge-font-size: to-rem(12);
+// $badge-font-weight: $font-weight-normal;
+// $badge-font-color: $oil;
+// $badge-font-color-alt: $white;
+
+// 04. Block Grid
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-block-grid-classes: $include-html-classes;
+
+// $block-grid-class: 'block-grid';
+// Enables media queries for block-grid classes. Set to false if writing semantic HTML.
+// $block-grid-media-queries: false;
+
+// We use this to control the maximum number of block grid elements per row
+// $block-grid-elements: 12;
+// $block-grid-default-spacing: to-rem(20);
+
+// $align-block-grid-to-grid: false;
+// @if $align-block-grid-to-grid {$block-grid-default-spacing: $column-gutter;}
+
+// 05. Breadcrumbs
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-nav-classes: $include-html-classes;
+
+// $crumb-class: 'breadcrumbs';
+// We use this to set the background color for the breadcrumb container.
+// $crumb-bg: scale-color($secondary-color, $lightness: 55%);
+
+// We use these to set the padding around the breadcrumbs.
+// $crumb-padding: to-rem(9 14 9);
+// $crumb-side-padding: to-rem(12);
+
+// We use these to control border styles.
+// $crumb-function-factor: -10%;
+// $crumb-border-size: 1px;
+// $crumb-border-style: solid;
+// $crumb-border-color: scale-color($crumb-bg, $lightness: $crumb-function-factor);
+// $crumb-radius: $global-radius;
+
+// We use these to set various text styles for breadcrumbs.
+// $crumb-font-color: $primary-color;
+// $crumb-font-color-current: $oil;
+// $crumb-font-color-disabled: $aluminum;
+
+// We use these to control the slash between breadcrumbs
+// $crumb-slash-color: $base;
+// $crumb-slash: "/";
+
+// 06. Button Groups
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-buttons-classes: $include-html-classes;
+
+// $button-group-class: 'btn-group';
+// Sets the margin and border.
+// $button-bar-margin-right: to-rem(10);
+// $button-group-border-width: 1px;
+// $button-group-border-style: solid;
+
+// 07. Buttons
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-buttons-classes: $include-html-classes;
+
+// We use these to build padding for buttons.
+// $buttons-tiny: to-rem(3 6);
+// $buttons-small: to-rem(5 15);
+// $buttons-medium: to-rem(7 20);
+// $buttons-large: to-rem(9 30);
+
+// We use this to control the display property.
+// $buttons-display: inline-block;
+// $buttons-margin-bottom: to-rem(15);
+
+// We use these to control button text styles.
+// $buttons-font-color: $white;
+// $buttons-font-color-alt: $oil;
+// $buttons-font-weight: $font-weight-bold;
+// $buttons-font-align: center;
+
+// $buttons-font-size-tiny: to-rem(12);
+// $buttons-line-height-tiny: 1.5;
+
+// $buttons-font-size-small: to-rem(12);
+// $buttons-line-height-small: 2;
+
+// $buttons-font-size-medium: to-rem(14);
+// $buttons-line-height-medium: 2;
+
+// $buttons-font-size-large: to-rem(17);
+// $buttons-line-height-large: 2;
+
+// We use these to control various hover effects.
+// $buttons-function-factor: -20%;
+// $buttons-outline-function-factor: 0;
+
+// We use these to control button border styles.
+// $buttons-border-width: 0;
+// $buttons-border-style: solid;
+// $buttons-bg-color: $primary-color;
+// $buttons-bg-hover: scale-color($buttons-bg-color, $lightness: $buttons-function-factor);
+// $buttons-outline-bg-hover: transparentize($buttons-bg-color, $buttons-outline-function-factor);
+// $buttons-border-color: $buttons-bg-hover;
+
+// $secondary-buttons-bg-color: $secondary-color;
+// $secondary-buttons-bg-hover: scale-color($secondary-buttons-bg-color, $lightness: $buttons-function-factor);
+// $secondary-outline-buttons-bg-hover: transparentize($secondary-buttons-bg-color, $buttons-outline-function-factor);
+// $secondary-buttons-border-color: $secondary-buttons-bg-hover;
+
+// $success-buttons-bg-color: $success-color;
+// $success-buttons-bg-hover: scale-color($success-buttons-bg-color, $lightness: $buttons-function-factor);
+// $success-outline-buttons-bg-hover: transparentize($success-buttons-bg-color, $buttons-outline-function-factor);
+// $success-buttons-border-color: $success-buttons-bg-hover;
+
+// $alert-buttons-bg-color: $alert-color;
+// $alert-buttons-bg-hover: scale-color($alert-buttons-bg-color, $lightness: $buttons-function-factor);
+// $alert-outline-buttons-bg-hover: transparentize($alert-buttons-bg-color, $buttons-outline-function-factor);
+// $alert-buttons-border-color: $alert-buttons-bg-hover;
+
+// $warning-buttons-bg-color: $warning-color;
+// $warning-buttons-bg-hover: scale-color($warning-buttons-bg-color, $lightness: $buttons-function-factor);
+// $warning-outline-buttons-bg-hover: transparentize($warning-buttons-bg-color, $buttons-outline-function-factor);
+// $warning-buttons-border-color: $warning-buttons-bg-hover;
+
+// $info-buttons-bg-color: $info-color;
+// $info-buttons-bg-hover: scale-color($info-buttons-bg-color, $lightness: $buttons-function-factor);
+// $info-outline-buttons-bg-hover: transparentize($info-buttons-bg-color, $buttons-outline-function-factor);
+// $info-buttons-border-color: $info-buttons-bg-hover;
+
+// We use this to set the default radius used throughout the core.
+// $buttons-radius: $global-radius;
+// $buttons-round: $global-rounded;
+
+// We use this to set default opacity for disabled buttons.
+// $buttons-disabled-opacity: .6;
+
+// 08. Dropdown Buttons
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-buttons-classes: $include-html-classes;
+
+// $dropdown-buttons-class: 'dropdown-btn';
+// We use these to set the color of the pip in dropdown buttons
+// $dropdown-buttons-pip-color: $white;
+// $dropdown-buttons-pip-color-alt: $oil;
+
+// We use these to set the size of the pip in dropdown buttons
+// $buttons-pip-tiny: to-rem(3);
+// $buttons-pip-small: to-rem(4);
+// $buttons-pip-medium: to-rem(5);
+// $buttons-pip-large: to-rem(6);
+
+// We use these to style tiny dropdown buttons
+// $dropdown-buttons-padding-tiny: $buttons-pip-tiny * 3 + nth($buttons-tiny, 2);
+// $dropdown-buttons-pip-size-tiny: $buttons-pip-tiny;
+// $dropdown-buttons-pip-right-tiny: nth($buttons-tiny, 2);
+
+// We use these to style small dropdown buttons
+// $dropdown-buttons-padding-small: $buttons-pip-small * 3 + nth($buttons-small, 2);
+// $dropdown-buttons-pip-size-small: $buttons-pip-small;
+// $dropdown-buttons-pip-right-small: nth($buttons-small, 2);
+
+// We use these to style medium dropdown buttons
+// $dropdown-buttons-padding-medium: $buttons-pip-medium * 3 + nth($buttons-medium, 2);
+// $dropdown-buttons-pip-size-medium: $buttons-pip-medium;
+// $dropdown-buttons-pip-right-medium: nth($buttons-medium, 2);
+
+// We use these to style large dropdown buttons
+// $dropdown-buttons-padding-large: $buttons-pip-large * 3 + nth($buttons-large, 2);
+// $dropdown-buttons-pip-size-large: $buttons-pip-large;
+// $dropdown-buttons-pip-right-large: nth($buttons-large, 2);
+
+// 09. Dropdown
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-dropdown-classes: $include-html-classes;
+
+// $dropdown-menu-class: 'dropdown-menu';
+// We use these to controls height and width styles.
+// $dropdown-menu-max-width: 200px;
+// $dropdown-menu-height: auto;
+// $dropdown-menu-max-height: none;
+
+// Used for bottom position
+// $dropdown-menu-margin-top: 2px;
+
+// Used for right position
+// $dropdown-menu-margin-left: $dropdown-menu-margin-top;
+
+// Used for left position
+// $dropdown-menu-margin-right: $dropdown-menu-margin-top;
+
+// Used for top position
+// $dropdown-menu-margin-bottom: $dropdown-menu-margin-top;
+
+// We use this to control the background color
+// $dropdown-menu-bg: $white;
+
+// We use this to set the border styles for dropdowns.
+// $dropdown-menu-border-style: solid;
+// $dropdown-menu-border-width: 1px;
+// $dropdown-menu-border-color: $gainsboro;
+
+// $dropdown-menu-zindex: 89;
+// $dropdown-menu-box-shadow: 0 0 to-rem(12) 0 rgba($black, .1);
+
+// We use these to style the triangle pip.
+// $dropdown-menu-triangle-size: to-rem(6);
+// $dropdown-menu-triangle-color: $white;
+// $dropdown-menu-triangle-side-offset: to-rem(10);
+
+// We use these to control styles for the list elements.
+// $dropdown-menu-list-style: none;
+// $dropdown-menu-font-color: $charcoal;
+// $dropdown-menu-font-size: to-rem(14);
+// $dropdown-menu-list-padding: to-rem(8 15);
+// $dropdown-menu-line-height: to-rem(18);
+// $dropdown-menu-list-hover-bg: $smoke;
+
+// We use this to control the styles for when the dropdown has custom content.
+// $dropdown-menu-content-padding: to-rem(20);
+
+// Default radius for dropdown.
+// $dropdown-menu-radius: $global-radius;
+
+// 10. Forms
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-form-classes: $include-html-classes;
+
+// $form-row-class: 'form-row';
+// $form-inline-class: 'form-inline';
+// We use this to set the base for lots of form spacing and positioning styles
+// $form-spacing: to-rem(16);
+
+// We use these to style the labels in different ways
+// $form-label-pointer: pointer;
+// $form-label-font-size: to-rem(14);
+// $form-label-font-weight: $font-weight-normal;
+// $form-label-line-height: 1.5;
+// $form-label-font-color: scale-color($black, $lightness: 30%);
+// $form-label-bottom-margin: 0;
+
+//input height
+// $input-tiny: to-rem(26);
+// $input-small: to-rem(34);
+// $input-medium: to-rem(44);
+// $input-large: to-rem(50);
+
+// $input-font-color: rgba(0,0,0,0.75);
+// $input-font-size: to-rem(14);
+// $input-bg-color: $white;
+// $input-focus-bg-color: $input-bg-color;
+// $input-border-color: scale-color($white, $lightness: -20%);
+// $input-focus-border-color: scale-color($white, $lightness: -40%);
+// $input-border-style: solid;
+// $input-border-width: 1px;
+// $input-border-radius: $global-radius;
+// $input-disabled-bg: $gainsboro;
+// $input-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+// $input-include-glowing-effect: true;
+
+// We use these to style the fieldset border and spacing.
+// $fieldset-border-width: 1px;
+// $fieldset-border-style: solid;
+// $fieldset-border-color: $gainsboro;
+// $fieldset-padding: to-rem(20);
+// $fieldset-margin: to-rem(18 0);
+
+// We use these to style the legends when you use them
+// $legend-bg: $white;
+// $legend-font-weight: $font-weight-bold;
+// $legend-padding: to-rem(0 3);
+
+// We use these to style the prefix and postfix input elements
+// $input-prefix-class: 'prefix';
+// $input-postfix-class: 'postfix';
+// $input-prefix-bg: scale-color($white, $lightness: -5%);
+// $input-prefix-border-color: scale-color($white, $lightness: -20%);
+// $input-prefix-border-size: 1px;
+// $input-prefix-border-type: solid;
+// $input-prefix-font-color: $oil;
+// $input-prefix-font-color-alt: $white;
+
+// We use this setting to turn on/off HTML5 number spinners (the up/down arrows)
+// $input-number-spinners: true;
+
+// We use these to style the error states for inputs and labels
+// $input-error-message-padding: to-rem(6 9 9);
+// $input-error-message-top: -1px;
+// $input-error-message-font-size: to-rem(12);
+// $input-error-message-font-weight: $font-weight-normal;
+// $input-error-message-font-color: $white;
+// $input-error-message-bg-color: $alert-color;
+// $input-error-message-font-color-alt: $oil;
+
+// We use this to style the glowing effect of inputs when focused
+// $glowing-effect-fade-time: .45s;
+// $glowing-effect-color: $input-focus-border-color;
+
+// We use this to style the transition when inputs are focused and when the glowing effect is disabled.
+// $input-transition-fade-time: 0.15s;
+// $input-transition-fade-timing-function: linear;
+
+// Select variables
+// $select-bg-color: $ghost;
+// $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%);
+
+// 11. Icon Bar
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// We use these to style the icon-bar and items
+// $icon-bar-class: 'icon-bar';
+// $icon-bar-bg: $oil;
+// $icon-bar-font-color: $white;
+// $icon-bar-font-color-hover: $icon-bar-font-color;
+// $icon-bar-font-size: 1rem;
+// $icon-bar-hover-color: $primary-color;
+// $icon-bar-icon-color: $white;
+// $icon-bar-icon-color-hover: $icon-bar-icon-color;
+// $icon-bar-icon-size: 1.875rem;
+// $icon-bar-image-width: 1.875rem;
+// $icon-bar-image-height: 1.875rem;
+// $icon-bar-active-color: $primary-color;
+// $icon-bar-item-padding: 1.25rem;
+
+// We use this to set default opacity for disabled icons.
+// $icon-bar-disabled-opacity: .7;
+
+// 12. Imagesbox
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-imagesbox-classes: $include-html-classes;
+
+// $imagesbox-class: 'imagesbox';
+// We use these to set the background colors for parts of Clearing.
+// $imagesbox-bg: $oil;
+// $imagesbox-caption-bg: $imagesbox-bg;
+// $imagesbox-carousel-bg: rgba(51,51,51,0.8);
+// $imagesbox-img-bg: $imagesbox-bg;
+
+// We use these to style the close button
+// $imagesbox-close-color: $iron;
+// $imagesbox-close-size: to-rem(30);
+
+// We use these to style the arrows
+// $imagesbox-arrow-size: to-rem(12);
+// $imagesbox-arrow-color: $imagesbox-close-color;
+
+// We use these to style captions
+// $imagesbox-caption-font-color: $iron;
+// $imagesbox-caption-font-size: to-rem(14);
+// $imagesbox-caption-padding: to-rem(10 30 20);
+
+// We use these to make the image and carousel height and style
+// $imagesbox-active-img-height: 85%;
+// $imagesbox-carousel-height: 120px;
+// $imagesbox-carousel-thumb-width: 120px;
+// $imagesbox-carousel-thumb-active-border: 1px solid rgb(255,255,255);
+
+// 13. Inline Lists
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-inline-list-classes: $include-html-classes;
+
+// We use this to control the margins and padding of the inline list.
+// $inline-list-item-margin-left: to-rem(16);
+// $inline-list-margin: 0 0 to-rem(10) (-$inline-list-item-margin-left);
+// $inline-list-padding: 0;
+// We use this to control the overflow of the inline list.
+// $inline-list-overflow: hidden;
+
+// 14. Modal
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-modal-classes: $include-html-classes;
+
+// $modal-class: "modal";
+// $modal-overlay-class: "modal-bg";
+// $close-modal-class: "close-modal";
+
+// We use these to control the style of the modal overlay.
+// $modal-overlay-bg: rgba($black, 0.45);
+
+// We use these to control the style of the modal itself.
+// $modal-bg: $white;
+// $modal-default-width: 90%;
+// $modal-max-width: $row-width;
+// $modal-padding: to-rem(15);
+// $modal-box-shadow: 0 0 10px rgba($black, 0.3);
+
+// We use these to style the modal close button
+// $modal-close-font-size: to-rem(30);
+// $modal-close-top: to-rem(5);
+// $modal-close-side: to-rem(10);
+// $modal-close-padding: to-rem(0 4);
+// $modal-close-color: $base;
+
+// We use this to set the default radius used throughout the core.
+// $modal-radius: $global-radius;
+
+// We use these to control the modal border
+// $modal-border-width: 1px;
+// $modal-border-style: solid;
+// $modal-border-color: $steel;
+
+// Set base z-index
+// $z-index-base: 1005;
+
+//We use these to control the modal main part
+// $modal-header-margin: to-rem(-5) (-$modal-padding) to-rem(5);
+// $modal-header-padding: 0 $modal-padding to-rem(5);
+// $modal-header-border: 1px solid $smoke;
+// $modal-header-font-size: to-rem($rem-base);
+// $modal-header-height: to-rem(24);
+// $modal-footer-margin: to-rem(5) (-$modal-padding) to-rem(-5);
+// $modal-footer-padding: to-rem(10) $modal-padding 0;
+// $modal-footer-border: 1px solid $smoke;
+
+// 15. Off-canvas
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// Off Canvas Tab Bar Variables
+// $include-html-offcanvas-classes: $include-html-classes;
+
+// $navbar-bg: $oil;
+// $navbar-height: to-rem(44);
+// $navbar-icon-width: $navbar-height;
+// $navbar-line-height: $navbar-height;
+// $navbar-color: $white;
+// $navbar-middle-padding: 0 to-rem(10);
+
+// Off Canvas Divider Styles
+// $navbar-left-section-border: solid 1px scale-color($navbar-bg, $lightness: -50%);
+// $navbar-right-section-border: $navbar-left-section-border;
+
+// Off Canvas Tab Bar Headers
+// $navbar-header-color: $white;
+// $navbar-header-weight: $font-weight-bold;
+// $navbar-header-line-height: $navbar-height;
+// $navbar-header-margin: 0;
+
+// Off Canvas Menu Variables
+// $offcanvas-class: 'offcanvas';
+// $offcanvas-width: to-rem(250);
+// $offcanvas-bg: $oil;
+// $offcanvas-bg-hover: scale-color($navbar-bg, $lightness: -30%);
+// $offcanvas-bg-active: scale-color($navbar-bg, $lightness: -30%);
+
+// Off Canvas Menu List Variables
+// $offcanvas-label-padding: .3rem to-rem(15);
+// $offcanvas-label-color: $aluminum;
+// $offcanvas-label-font-size: to-rem(12);
+// $offcanvas-label-font-weight: $font-weight-bold;
+// $offcanvas-label-bg: $tuatara;
+// $offcanvas-label-border-top: 1px solid scale-color($offcanvas-label-bg, $lightness: 14%);
+// $offcanvas-label-border-bottom: none;
+// $offcanvas-label-margin:0;
+// $offcanvas-link-padding: to-rem(8);
+// $offcanvas-link-color: rgba($white, .7);
+// $offcanvas-link-border-bottom: 1px solid scale-color($offcanvas-bg, $lightness: -25%);
+// $offcanvas-back-bg: $tuatara;
+// $offcanvas-back-border-top: $offcanvas-label-border-top;
+// $offcanvas-back-border-bottom: $offcanvas-label-border-bottom;
+// $offcanvas-back-hover-bg: scale-color($offcanvas-back-bg, $lightness: -30%);
+// $offcanvas-back-hover-border-top: 1px solid scale-color($offcanvas-label-bg, $lightness: 14%);
+// $offcanvas-back-hover-border-bottom: none;
+
+// Off Canvas Menu Icon Variables
+// $navbar-menu-icon-color: $white;
+// $navbar-menu-icon-hover: scale-color($navbar-menu-icon-color, $lightness: -30%);
+
+// $navbar-menu-icon-width: $navbar-icon-width;
+// $navbar-menu-icon-height: $navbar-height;
+// $navbar-menu-icon-padding: 0;
+// $navbar-menu-icon-font-size: to-rem(24);
+// $navbar-hamburger-icon-width: to-rem(16);
+// $navbar-hamburger-icon-left: false;
+// $navbar-hamburger-icon-top: false;
+// $navbar-hamburger-icon-thickness: 1px;
+// $navbar-hamburger-icon-gap: 6px;
+
+// Off Canvas Back-Link Overlay
+// $offcanvas-overlay-transition: background 300ms $easeInOutQuint;
+// $offcanvas-overlay-box-shadow: -4px 0 3px rgba($black, .5);
+// $offcanvas-overlay-background: rgba($white, .2);
+// $offcanvas-overlay-background-hover: rgba($white, .05);
+
+// Transition Variables
+// $menu-slide: transform 300ms $easeInOutQuint;
+
+// 16. Pagination
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-pagination-classes: $include-html-classes;
+
+// $pagination-class: 'pagination';
+// We use these to control the pagination container
+// $pagination-height: to-rem(24);
+// $pagination-margin: to-rem(-5);
+
+// We use these to set the list-item properties
+// $pagination-li-float: left;
+// $pagination-li-height: to-rem(24);
+// $pagination-li-font-color: $jet;
+// $pagination-li-font-size: to-rem(14);
+// $pagination-li-margin: to-rem(5);
+
+// We use these for the pagination anchor links
+// $pagination-link-padding: to-rem(1 10 1);
+// $pagination-link-font-color: $aluminum;
+// $pagination-link-active-bg: scale-color($white, $lightness: -10%);
+
+// We use these for disabled anchor links
+// $pagination-link-disabled-font-color: $aluminum;
+// $pagination-link-disabled-bg-active: transparent;
+
+// We use these for currently selected anchor links
+// $pagination-link-current-background: $primary-color;
+// $pagination-link-current-font-color: $white;
+// $pagination-link-current-font-weight: $font-weight-bold;
+// $pagination-link-current-active-bg: $primary-color;
+
+// 17. Panels
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-panel-classes: $include-html-classes;
+
+// $panel-class: 'panel';
+// We use these to control the background and border styles
+// $panel-bg: scale-color($white, $lightness: -5%);
+// $panel-border-style: solid;
+// $panel-border-size: 1px;
+// $panel-border-radius: $global-radius;
+// We use this % to control how much we darken things on hover
+// $panel-border-color: scale-color($panel-bg, $lightness: -11%);
+
+// We use these to set default inner padding and bottom margin
+// $panel-margin-bottom: to-rem(20);
+// $panel-padding: to-rem(20);
+
+// We use these to set default font colors
+// $panel-font-color: $oil;
+// $panel-font-color-alt: $white;
+
+// $panel-header-adjust: true;
+
+// 18. Progress Bar
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-progress-bar-classes: $include-html-classes;
+
+// $progress-bar-class: 'progress';
+// We use this to set the progress bar height
+// $progress-bar-height: to-rem(25);
+// $progress-bar-color: $vapor;
+
+// We use these to control the border styles
+// $progress-bar-border-color: scale-color($white, $lightness: 20%);
+// $progress-bar-border-size: 1px;
+// $progress-bar-border-style: solid;
+// $progress-bar-border-radius: $global-radius;
+
+// We use these to control the margin & padding
+// $progress-bar-padding: to-rem(2);
+// $progress-bar-margin-bottom: to-rem(10);
+
+// We use these to set the meter colors
+// $progress-meter-color: $primary-color;
+// $progress-meter-secondary-color: $secondary-color;
+// $progress-meter-success-color: $success-color;
+// $progress-meter-alert-color: $alert-color;
+
+// 19. Side Nav
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-nav-classes: $include-html-classes;
+
+// $side-nav-class: 'side-nav';
+// We use this to control padding.
+// $side-nav-padding: to-rem(14 0);
+
+// We use these to control list styles.
+// $side-nav-list-type: none;
+// $side-nav-list-position: outside;
+// $side-nav-list-margin: 0;
+
+// We use these to control link styles.
+// $side-nav-link-color: $primary-color;
+// $side-nav-link-color-active: scale-color($side-nav-link-color, $lightness: 30%);
+// $side-nav-link-color-hover: scale-color($side-nav-link-color, $lightness: 30%);
+// $side-nav-link-bg-hover: hsla(0, 0, 0, .025);
+// $side-nav-link-margin: 0;
+// $side-nav-link-padding: to-rem(11 12);
+// $side-nav-font-size: to-rem(14);
+// $side-nav-font-weight: $font-weight-normal;
+// $side-nav-font-weight-active: $side-nav-font-weight;
+
+// We use these to control button styles.
+// $side-nav-button-padding-horizontal: to-rem(8);
+// $side-nav-button-margin: to-rem(0 12);
+
+// We use these to control heading styles.
+// $side-nav-heading-color: $side-nav-link-color;
+// $side-nav-heading-font-size: $side-nav-font-size;
+// $side-nav-heading-font-weight: bold;
+
+// We use these to control border styles
+// $side-nav-divider-size: 1px;
+// $side-nav-divider-style: solid;
+// $side-nav-divider-color: scale-color($white, $lightness: 10%);
+// $side-nav-divider-margin: to-rem(3 0);
+
+// 20. Slides
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-slides-classes: $include-html-classes;
+
+// Graceful Loading Wrapper and preloader
+// $slides-class: "slide";
+// $slides-wrapper-class: "slideshow-wrapper";
+// $slides-preloader-class: "preloader";
+
+// We use these to control the caption styles
+// $slides-container-bg: none;
+// $slides-caption-bg: rgba(51,51,51, .8);
+// $slides-caption-font-color: $white;
+// $slides-caption-font-size: to-rem(14);
+// $slides-caption-position: "bottom"; // Supported values: "bottom", "under"
+// $slides-caption-padding: to-rem(10 14);
+// $slides-caption-height: auto;
+
+// We use these to control the left/right nav styles
+// $slides-nav-bg: transparent;
+// $slides-nav-bg-hover: rgba(0,0,0,0.3);
+// $slides-nav-arrow-color: $white;
+// $slides-nav-arrow-color-hover: $white;
+
+// We use these to control the timer styles
+// $slides-timer-bg: rgba(255,255,255,0.3);
+// $slides-timer-show-progress-bar: true;
+
+// We use these to control the bullet nav styles
+// $slides-bullet-nav-color: $iron;
+// $slides-bullet-nav-color-active: $aluminum;
+// $slides-bullet-radius: to-rem(9);
+
+// We use these to controls the style of slide numbers
+// $slides-number-bg: rgba(0,0,0,0);
+// $slides-number-font-color: $white;
+// $slides-number-padding: to-rem(5);
+
+// 21. Split Buttons
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-buttons-classes: $include-html-classes;
+
+// $split-buttons-class: 'split';
+// We use these to control different shared styles for Split Buttons
+// $split-buttons-function-factor: 10%;
+// $split-buttons-pip-color: $white;
+// $split-buttons-span-border-color: rgba(255,255,255,0.5);
+// $split-buttons-pip-color-alt: $oil;
+// $split-buttons-active-bg-tint: rgba(0,0,0,0.1);
+
+// We use these to control tiny split buttons
+// $split-buttons-pip-size-small: $buttons-pip-small;
+// $split-buttons-span-width-small: $buttons-font-size-small * $buttons-line-height-small + nth($buttons-small, 1) * 2;
+// $split-buttons-padding-small: $split-buttons-span-width-small + nth($buttons-small, 2);
+
+// We use these to control medium split buttons
+// $split-buttons-pip-size-medium: $buttons-pip-medium;
+// $split-buttons-span-width-medium: $buttons-font-size-medium * $buttons-line-height-medium + nth($buttons-medium, 1) * 2;
+// $split-buttons-padding-medium: $split-buttons-span-width-medium + nth($buttons-medium, 2);
+
+// We use these to control large split buttons
+// $split-buttons-pip-size-large: $buttons-pip-large;
+// $split-buttons-span-width-large: $buttons-font-size-large * $buttons-line-height-large + nth($buttons-large, 1) * 2;
+// $split-buttons-padding-large: $split-buttons-span-width-large + nth($buttons-large, 2);
+
+// 22. Sub Nav
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-nav-classes: $include-html-classes;
+
+// $sub-nav-class: 'sub-nav';
+// We use these to control margin and padding
+// $sub-nav-bg: scale-color($white, $lightness: -10%);
+// $sub-nav-margin-bottom: to-rem(10);
+// $sub-nav-padding: to-rem(10 0);
+
+// We use this to control the definition
+// $sub-nav-font-size: to-rem(14);
+// $sub-nav-font-color: $aluminum;
+// $sub-nav-font-weight: $font-weight-normal;
+// $sub-nav-text-decoration: none;
+// $sub-nav-border-radius: 3px;
+// $sub-nav-font-color-hover: scale-color($sub-nav-font-color, $lightness: -25%);
+
+// We use these to control the active item styles
+
+// $sub-nav-active-font-weight: $font-weight-normal;
+// $sub-nav-active-bg: $primary-color;
+// $sub-nav-active-bg-hover: scale-color($sub-nav-active-bg, $lightness: -14%);
+// $sub-nav-active-color: $white;
+// $sub-nav-active-padding: $sub-nav-padding;
+
+// $sub-nav-item-padding: to-rem(3 12);
+// $sub-nav-item-margin: to-rem(12);
+// $sub-nav-item-divider: "";
+// $sub-nav-item-divider-margin: to-rem(12);
+
+// 23. Switches
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-form-classes: $include-html-classes;
+
+// $switch-class: 'switch';
+// Controlling background color for the switch container
+// $switch-bg: $gainsboro;
+// $switch-radius: $global-radius;
+
+// We use these to control the switch heights for our default classes
+// $switch-height-tiny: to-rem(24);
+// $switch-height-small: to-rem(28);
+// $switch-height-medium: to-rem(32);
+// $switch-height-large: to-rem(40);
+
+// We use these to style the switch-paddle
+// $switch-paddle-bg: $white;
+// $switch-paddle-transition-speed: .15s;
+// $switch-paddle-transition-ease: ease-out;
+// $switch-active-color: $primary-color;
+
+// 24. Table Lists
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-table-list-classes: $include-html-classes;
+
+// $table-list-class: 'table-list';
+// We use this to control the margins and padding of the table list.
+// $table-list-top-margin: to-rem(10);
+// $table-list-bottom-margin: to-rem(10);
+// $table-list-margin-left: 0;
+// $table-list-margin-right: 0;
+// $table-list-padding-left: 0;
+// $table-list-paragraph-font-size: to-rem(12);
+
+// $table-list-border-color: $gainsboro;
+
+// $table-list-item-padding-top: to-rem(11);
+// $table-list-item-padding-left: ($column-blank / 2);
+// $table-list-item-margin-top: - $table-list-item-padding-top;
+// $table-list-item-margin-left: - $table-list-item-padding-left;
+// $table-list-item-badge-padding: to-rem(65);
+// $table-list-item-overflow: hidden;
+// $table-list-item-border-color: $gainsboro;
+// $table-list-item-border-left: ($column-blank / 2);
+// $table-list-item-font-size: to-rem(14);
+
+// $table-list-item-left-icon-margin: to-rem(5);
+// $table-list-item-left-icon-size: to-rem(20);
+// $table-list-item-left-icon-color: $steel;
+// $table-list-item-active-bg-color: $whitesmoke;
+
+// $table-list-divider-padding-top: to-rem(6);
+// $table-list-divider-padding-left: $table-list-item-padding-left;
+// $table-list-divider-font-color: $aluminum;
+// $table-list-divider-bg-color: $ghost;
+
+// $table-list-thumb-width: to-rem(45);
+// $table-list-thumb-margin: to-rem(10);
+
+// $table-list-nav-distance: to-rem(15);
+// $table-list-nav-icon-color: $base;
+// $table-list-nav-icon-size: to-rem(16);
+
+// We use this to control the list items
+// $table-list-display: block;
+
+// We use this to control any elements within table list items
+// $table-list-children-display: block;
+
+// 25. Tables
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-table-classes: $include-html-classes;
+
+// These control the background color for the table and even rows
+// $table-bg: $white;
+// $table-even-row-bg: $snow;
+
+// These control the table cell border style
+// $table-border-style: solid;
+// $table-border-size: 1px;
+// $table-border-color: $gainsboro;
+
+// These control the table head styles
+// $table-head-bg: $whitesmoke;
+// $table-head-font-size: to-rem(14);
+// $table-head-font-color: $jet;
+// $table-head-font-weight: $font-weight-bold;
+// $table-head-padding: to-rem(8 10 10);
+
+// These control the table foot styles
+// $table-foot-bg: $table-head-bg;
+// $table-foot-font-size: $table-head-font-size;
+// $table-foot-font-color: $table-head-font-color;
+// $table-foot-font-weight: $table-head-font-weight;
+// $table-foot-padding: $table-head-padding;
+
+// These control the caption
+// $table-caption-bg: transparent;
+// $table-caption-font-color: $table-head-font-color;
+// $table-caption-font-size: to-rem(16);
+// $table-caption-font-weight: bold;
+
+// These control the row padding and font styles
+// $table-row-padding: to-rem(9 10);
+// $table-row-font-size: to-rem(14);
+// $table-row-font-color: $jet;
+// $table-line-height: to-rem(18);
+
+// These are for controlling the layout, display and margin of tables
+// $table-layout: auto;
+// $table-display: table-cell;
+// $table-margin-bottom: to-rem(20);
+
+// 26. Tabs
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-tabs-classes: $include-html-classes;
+
+// $tabs-nav-padding: to-rem(10 12);
+// $tabs-nav-bg-color: $primary-color;
+// $tabs-nav-active-bg-color: scale-color($tabs-nav-bg-color, $lightness: -12%);
+// $tabs-nav-hover-bg-color: scale-color($tabs-nav-bg-color, $lightness: -6%);
+// $tabs-nav-font-color: $white;
+// $tabs-nav-active-font-color: $tabs-nav-font-color;
+// $tabs-nav-font-size: to-rem(14);
+
+// $tabs-content-margin-bottom: to-rem(10);
+// $tabs-content-padding: $column-gutter / 2;
+
+// $tabs-vertical-nav-padding: to-rem(10 5);
+
+//We use these to control the styles of segmented controllers
+// $tabs-segmented-margin: to-rem(10 12);
+// $tabs-segmented-border: 1px solid $primary-color;
+// $tabs-segmented-radius: $global-radius;
+
+// $tabs-segmented-nav-height: to-rem(32);
+// $tabs-segmented-nav-text-align: center;
+// $tabs-segmented-nav-font-size: to-rem(13);
+// $tabs-segmented-nav-bg-color: $white;
+// $tabs-segmented-nav-font-color: $primary-color;
+
+// $tabs-segmented-nav-active-bg-color: $primary-color;
+// $tabs-segmented-nav-active-font-color: $white;
+
+// $tabs-segmented-scroll-wrapper-height: to-rem(38);
+
+//We use these to control the styles of bar tabs
+// $tabs-bar-border-color: $gainsboro;
+// $tabs-bar-bg-color: $white;
+
+// $tabs-bar-nav-height: to-rem(22);
+// $tabs-bar-nav-padding: to-rem(11);
+// $tabs-bar-nav-divider-color:$gainsboro;
+// $tabs-bar-nav-font-size: to-rem(14);
+// $tabs-bar-nav-font-color: $aluminum;
+// $tabs-bar-nav-active-font-color: $oil;
+// $tabs-bar-nav-active-bar-height: 2px;
+// $tabs-bar-nav-active-bar-color: $primary-color;
+
+// 27. Thumbnails
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-media-classes: $include-html-classes;
+
+// $thumb-class: 'thumb';
+// We use these to control border styles
+// $thumb-border-width: 4px;
+// $thumb-border-style: solid;
+// $thumb-border-color: $white;
+// $thumb-box-margin: 1px;
+// $thumb-box-shadow: 0 0 0 1px $gainsboro;
+// $thumb-box-shadow-hover: 0 0 6px 1px rgba($primary-color,0.5);
+
+// Radius and transition speed for thumbs
+// $thumb-radius: $global-radius;
+// $thumb-transition-speed: 200ms;
+
+// 28. Top Bar
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-top-bar-classes: $include-html-classes;
+
+// $topbar-class: 'top-bar';
+// Background color for the top bar
+// $topbar-bg-color: $oil;
+// $topbar-bg: $topbar-bg-color;
+// $topbar-font-color: $white;
+
+// Height and margin
+// $topbar-height: to-rem(45);
+// $topbar-margin-bottom: 0;
+
+// Controlling the styles for the title in the top bar
+// $topbar-title-weight: $font-weight-normal;
+// $topbar-title-font-size: $h1-font-size;
+
+// Set the link colors and styles for top-level nav
+// $topbar-link-color: $white;
+// $topbar-link-color-hover: $white;
+// $topbar-link-color-active: $white;
+// $topbar-link-color-active-hover: $white;
+// $topbar-link-weight: $font-weight-normal;
+// $topbar-link-font-size: $h5-font-size;
+// $topbar-link-hover-lightness: -10%; // Darken by 10%
+// $topbar-link-bg: $topbar-bg;
+// $topbar-link-bg-hover: $jet;
+// $topbar-link-bg-color-hover: $charcoal;
+// $topbar-link-bg-active: $primary-color;
+// $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
+// $topbar-link-padding: ($topbar-height / 3);
+// $topbar-back-link-size: to-rem(18);
+// $topbar-link-dropdown-padding: to-rem(20);
+// $topbar-button-font-size: $h6-font-size;
+// $topbar-button-top: 7px;
+
+// Style the top bar dropdown elements
+// $topbar-dropdown-bg: $oil;
+// $topbar-dropdown-link-color: $white;
+// $topbar-dropdown-link-color-hover: $topbar-link-color-hover;
+// $topbar-dropdown-link-bg-hover: $jet;
+// $topbar-dropdown-link-weight: $font-weight-normal;
+// $topbar-dropdown-toggle-size: 5px;
+// $topbar-dropdown-toggle-color: $white;
+// $topbar-dropdown-toggle-alpha: .4;
+
+// $topbar-dropdown-label-color: $monsoon;
+// $topbar-dropdown-label-font-weight: $font-weight-bold;
+// $topbar-dropdown-label-font-size: to-rem(10);
+
+// Top menu icon styles
+// $topbar-menu-link-font-size: to-rem(13);
+// $topbar-menu-link-weight: $font-weight-bold;
+// $topbar-menu-link-color: $white;
+// $topbar-menu-link-color-toggled: $jumbo;
+// $topbar-menu-icon-color: $white;
+// $topbar-menu-icon-width: $topbar-height;
+// $topbar-menu-icon-color-toggled: $jumbo;
+// $topbar-menu-icon-position: right; // Change to left for a left menu icon
+
+// Transitions and breakpoint styles
+// $topbar-transition-speed: 300ms;
+
+// Top-bar input styles
+// $topbar-input-height: to-rem(28);
+
+// Divider Styles
+// $topbar-divider-border: solid 1px scale-color($topbar-bg-color, $lightness: 13%);
+
+// $topbar-arrows: true; //Set false to remove the triangle icon from the menu item
+// $topbar-dropdown-arrows: true; //Set false to remove the \00bb >> text from dropdown subnavigation li//
