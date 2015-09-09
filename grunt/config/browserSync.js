@@ -2,7 +2,7 @@
 module.exports = {
     docs: {
         options: {
-            proxy: 'localhost',
+            proxy: 'http://localhost/mocob/docs',
             watchTask: true
         },
         bsFiles: {
