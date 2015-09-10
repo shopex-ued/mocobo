@@ -1,4 +1,4 @@
-//Open the Mobile Framework JS
+//Open the Mobile Front-end Codebase JS
 $(document).mobile();
 
 if ((/MicroMessenger/i).test(window.navigator.userAgent)) {
