@@ -1,4 +1,5 @@
 @import "global";
+@import "icons";
 @import "buttons";
 @import "dropdown-buttons";
 
@@ -169,7 +170,7 @@ $split-buttons-padding-large: $split-buttons-span-width-large + nth($buttons-lar
                 span::after {
                     border-style: none;
                 }
-                span > [class^=icon-] {
+                span > [class^=#{$icons-class}-] {
                     position: absolute;
                     top: 50%;
                     left: 50%;

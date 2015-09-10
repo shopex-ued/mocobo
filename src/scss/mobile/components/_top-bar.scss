@@ -1,5 +1,6 @@
 @import "global";
 @import "grid";
+@import "icons";
 @import "buttons";
 @import "forms";
 @import "type";
@@ -140,7 +141,7 @@ $topbar-arrows: true !default;
             %pos {
                 position: absolute;
                 top: 0;
-                [class^=icon-] {
+                [class^=#{$icons-class}-] {
                     padding: 0 $topbar-link-padding;
                     font-size: $topbar-back-link-size;
                 }
