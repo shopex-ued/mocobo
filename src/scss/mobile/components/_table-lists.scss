@@ -72,7 +72,7 @@ $table-list-children-display: block !default;
             list-style: none; // Remove usual bullet styles from table list
             @include hairline(double, $table-list-border-color, 0); // Double grey border.
             &.has-icon .item {
-                [class^=icon-]::before {
+                [class^=#{$icons-class}-]::before {
                     margin-right: $table-list-item-left-icon-margin;
                     vertical-align: -2px;
                     // color: $table-list-item-left-icon-color;

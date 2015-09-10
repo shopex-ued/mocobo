@@ -1,4 +1,5 @@
 @import "global";
+@import "icons";
 
 //
 // @variables
@@ -261,27 +262,27 @@ $buttons-disabled-opacity: .6 !default;
             &.round {
                 border-radius: $buttons-round;
             }
-            &.disabled,
-            &:disabled {
-                @include button-style($bg: $buttons-bg-color, $disabled: true, $bg-hover: $buttons-bg-hover);
-                &.secondary {
-                    @include button-style($bg: $secondary-buttons-bg-color, $disabled: true, $bg-hover: $secondary-buttons-bg-hover);
-                }
-                &.success {
-                    @include button-style($bg: $success-buttons-bg-color, $disabled: true, $bg-hover: $success-buttons-bg-hover);
-                }
-                &.alert {
-                    @include button-style($bg: $alert-buttons-bg-color, $disabled: true, $bg-hover: $alert-buttons-bg-hover);
-                }
-                &.warning {
-                    @include button-style($bg: $warning-buttons-bg-color, $disabled: true, $bg-hover: $warning-buttons-bg-hover);
-                }
-                &.info {
-                    @include button-style($bg: $info-buttons-bg-color, $disabled: true, $bg-hover: $info-buttons-bg-hover);
-                }
-            }
-            &[class*=icon-]::before {
+            &[class^=#{$icons-class}-]::before {
                 margin-right: $body-font-size / 2;
+            }
+        }
+        button:disabled,
+        a.disabled {
+            @include button-style($bg: $buttons-bg-color, $disabled: true, $bg-hover: $buttons-bg-hover);
+            &.secondary {
+                @include button-style($bg: $secondary-buttons-bg-color, $disabled: true, $bg-hover: $secondary-buttons-bg-hover);
+            }
+            &.success {
+                @include button-style($bg: $success-buttons-bg-color, $disabled: true, $bg-hover: $success-buttons-bg-hover);
+            }
+            &.alert {
+                @include button-style($bg: $alert-buttons-bg-color, $disabled: true, $bg-hover: $alert-buttons-bg-hover);
+            }
+            &.warning {
+                @include button-style($bg: $warning-buttons-bg-color, $disabled: true, $bg-hover: $warning-buttons-bg-hover);
+            }
+            &.info {
+                @include button-style($bg: $info-buttons-bg-color, $disabled: true, $bg-hover: $info-buttons-bg-hover);
             }
         }
         a.#{$buttons-class} {

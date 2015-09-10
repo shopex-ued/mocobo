@@ -261,14 +261,6 @@ $base-bg-color: $white !default;
     // flex-direction: column;
 }
 
-// We use these as default colors throughout
-$primary-color: #008CBA !default; // bondi-blue
-$secondary-color: #e7e7e7 !default; // white-lilac
-$alert-color: #f04124 !default; // cinnabar
-$success-color: #43AC6A !default; // sea-green
-$warning-color: #f08a24 !default; // carrot
-$info-color: #a0d3e8 !default; // cornflower
-
 // We use these to define default font stacks
 $font-family-sans-serif: STXiHei, STHeiTi, Helvetica Neue, Helvetica, Droid Sans Fallback, Roboto, Arial, sans-serif !default;
 $font-family-serif: Georgia, Cambria, Times New Roman, Times, serif !default;
@@ -279,8 +271,8 @@ $font-weight-normal: 400 !default;
 $font-weight-bold: 700 !default;
 
 // We use these to control various global styles
-$body-bg: #fff !default;
-$body-font-color: #222 !default;
+$body-bg: $white !default;
+$body-font-color: $jet !default;
 $body-font-family: $font-family-sans-serif !default;
 $body-font-size-px: $rem-base * 0.75 !default;
 $body-font-size-rem: to-rem($body-font-size-px) !default;
