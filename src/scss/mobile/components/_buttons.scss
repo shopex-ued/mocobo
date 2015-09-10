@@ -190,7 +190,6 @@ $buttons-disabled-opacity: .6 !default;
     }
     // We can set $disabled:true to create a disabled transparent buttons.
     @if $disabled {
-        box-shadow: none;
         opacity: $buttons-disabled-opacity;
         @if $bg {
             &:hover,
@@ -267,8 +266,8 @@ $buttons-disabled-opacity: .6 !default;
             }
         }
         button:disabled,
-        a.disabled {
-            @include button-style($bg: $buttons-bg-color, $disabled: true, $bg-hover: $buttons-bg-hover);
+        .#{$buttons-class}.disabled {
+            @include button-style($bg: null, $disabled: true);
             &.secondary {
                 @include button-style($bg: $secondary-buttons-bg-color, $disabled: true, $bg-hover: $secondary-buttons-bg-hover);
             }
