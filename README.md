@@ -45,4 +45,4 @@ Enjoy!
 
 #License
 
-Mocob is licensed under the [MIT license](LICENSE).
+mocob is licensed under the [MIT license](LICENSE).
