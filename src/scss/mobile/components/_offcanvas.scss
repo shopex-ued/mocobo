@@ -1,6 +1,6 @@
 @import "global";
 @import "type";
-@import "icons/icons-variables";
+@import "icons";
 
 //
 // @variables
@@ -221,7 +221,7 @@ $menu-slide: transform 300ms $easeInOutQuint !default;
 @mixin icon-arrows($position) {
     @if $position == left {
         &::before {
-            content: $icon-var-arrow-back;
+            content: $icon-arrow-back;
             margin-right: .5rem;
             font-family: $icons-font-family;
             font-size: 90%;
@@ -230,7 +230,7 @@ $menu-slide: transform 300ms $easeInOutQuint !default;
     }
     @else if $position == right {
         &::after {
-            content: $icon-var-arrow-forward;
+            content: $icon-arrow-forward;
             margin-left: .5rem;
             font-family: $icons-font-family;
             font-size: 90%;

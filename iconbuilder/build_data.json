@@ -1,7 +1,6 @@
 {
-  "build_hash": "f89aac7a706242a554b41714f4d8a5eb",
-  "prefix": "icon-",
-  "version": "1.0.0-alpha",
+  "class_name": "icon",
+  "build_hash": "d80a338aeb",
   "name": "icons",
   "icons": [
     {

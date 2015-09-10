@@ -41,8 +41,8 @@ build_data = copy.deepcopy(manifest_data)
 build_data['icons'] = []
 
 font_name = manifest_data['name']
+m.update(manifest_data['class_name'] + ';')
 m.update(font_name + ';')
-m.update(manifest_data['prefix'] + ';')
 
 for dirname, dirnames, filenames in os.walk(INPUT_SVG_DIR):
   for filename in filenames:
@@ -128,7 +128,7 @@ for dirname, dirnames, filenames in os.walk(INPUT_SVG_DIR):
 
   fontfile = '%s/icons' % (OUTPUT_FONT_DIR)
 
-build_hash = m.hexdigest()
+build_hash = m.hexdigest()[0:10]
 
 if build_hash == manifest_data.get('build_hash') and init_len:
   print "Source files unchanged, did not rebuild fonts"

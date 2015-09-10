@@ -3,7 +3,7 @@
 @import "buttons";
 @import "switches";
 @import "thumbs";
-@import "icons/icons-variables";
+@import "icons";
 
 //
 // @variables
@@ -120,7 +120,7 @@ $table-list-children-display: block !default;
             //         font-weight: 600;
             //     }
             //     &.selected .nav-right::after{
-            //         content: $icon-var-arrow-forward;
+            //         content: $icon-arrow-forward;
             //     }
             // }
             // &.inverted {
@@ -172,7 +172,7 @@ $table-list-children-display: block !default;
                 }
                 //列表默认为向右箭头；
                 > .nav-right::before {
-                    content: $icon-var-arrow-forward;
+                    content: $icon-arrow-forward;
                     position: absolute;
                     top: 50%;
                     right: $table-list-nav-distance;
@@ -217,7 +217,7 @@ $table-list-children-display: block !default;
                 &.collapse {
                     //二级列表默认为向下箭头；
                     > .nav-right::before {
-                        content: $icon-var-arrow-down;
+                        content: $icon-arrow-down;
                     }
                     .table-list {
                         display: none;
@@ -249,7 +249,7 @@ $table-list-children-display: block !default;
                         }
                         //二级列表展开后，变为向上箭头；
                         > .nav-right::before {
-                            content: $icon-var-arrow-up;
+                            content: $icon-arrow-up;
                         }
                     }
                 }

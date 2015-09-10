@@ -2,6 +2,7 @@
 @import "alert-boxes";
 @import "buttons";
 @import "grid";
+@import "icons";
 
 //
 // @variables
@@ -503,6 +504,9 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
                 padding: 0;
                 border-color: $buttons-border-color;
                 // background-color: $buttons-bg-color;
+            }
+            [class^=#{$icons-class}-] {
+                font-size: $input-prefix-icon-size;
             }
         }
         /* Separate prefix and postfix styles when on span or label so buttons keep their own */

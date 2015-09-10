@@ -1,0 +1,187 @@
+@import "global";
+
+//
+// @variables
+//
+$include-html-icons-classes: $include-html-classes !default;
+
+$icons-hash: "d80a338aeb" !default;
+$icons-font-path: "../fonts" !default;
+$icons-font-family: "icons" !default;
+$icons-class: "icon" !default;
+
+$icon-arrow-back: "\2801";
+$icon-arrow-down: "\2802";
+$icon-arrow-forward: "\2803";
+$icon-arrow-up: "\2804";
+$icon-bag: "\2805";
+$icon-business: "\2806";
+$icon-card: "\2807";
+$icon-cart: "\2808";
+$icon-chatbox: "\2809";
+$icon-clock: "\280a";
+$icon-coin: "\280b";
+$icon-coupon: "\280c";
+$icon-discover: "\280d";
+$icon-edit: "\280e";
+$icon-eye: "\280f";
+$icon-forward: "\2810";
+$icon-freeship: "\2811";
+$icon-grid: "\2812";
+$icon-heart: "\2813";
+$icon-help: "\2814";
+$icon-home: "\2815";
+$icon-list: "\2816";
+$icon-location: "\2817";
+$icon-lock: "\2818";
+$icon-mail: "\2819";
+$icon-menu: "\281a";
+$icon-mobile: "\281b";
+$icon-more: "\281c";
+$icon-order: "\281d";
+$icon-package: "\281e";
+$icon-paper: "\281f";
+$icon-reduce: "\2820";
+$icon-refund: "\2821";
+$icon-return: "\2822";
+$icon-saleoff: "\2823";
+$icon-scan: "\2824";
+$icon-search: "\2825";
+$icon-send: "\2826";
+$icon-share: "\2827";
+$icon-shop: "\2828";
+$icon-spanner: "\2829";
+$icon-speaker: "\282a";
+$icon-star: "\282b";
+$icon-tags: "\282c";
+$icon-trash: "\282d";
+$icon-trunk: "\282e";
+$icon-user: "\282f";
+$icon-wallet: "\2830";
+
+@include exports("icons") {
+    @if $include-html-icons-classes {
+        /* Icons */
+        @font-face {
+            font-family: $icons-font-family;
+            src: url("#{$icons-font-path}/icons.woff?v=#{$icons-hash}") format("woff"),
+                url("#{$icons-font-path}/icons.ttf?v=#{$icons-hash}") format("truetype"),
+                url("#{$icons-font-path}/icons.svg?v=#{$icons-hash}#svg") format("svg");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .#{$icons-class}::before {
+            display: inline-block;
+            min-width: 1em;
+            vertical-align: 0;
+            line-height: 1;
+            font-family: $icons-font-family;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            -webkit-font-smoothing: antialiased;
+            text-transform: none;
+            text-rendering: auto;
+            speak: none;
+        }
+
+        // Icons
+        .#{$icons-class}-arrow-back,
+        .#{$icons-class}-arrow-down,
+        .#{$icons-class}-arrow-forward,
+        .#{$icons-class}-arrow-up,
+        .#{$icons-class}-bag,
+        .#{$icons-class}-business,
+        .#{$icons-class}-card,
+        .#{$icons-class}-cart,
+        .#{$icons-class}-chatbox,
+        .#{$icons-class}-clock,
+        .#{$icons-class}-coin,
+        .#{$icons-class}-coupon,
+        .#{$icons-class}-discover,
+        .#{$icons-class}-edit,
+        .#{$icons-class}-eye,
+        .#{$icons-class}-forward,
+        .#{$icons-class}-freeship,
+        .#{$icons-class}-grid,
+        .#{$icons-class}-heart,
+        .#{$icons-class}-help,
+        .#{$icons-class}-home,
+        .#{$icons-class}-list,
+        .#{$icons-class}-location,
+        .#{$icons-class}-lock,
+        .#{$icons-class}-mail,
+        .#{$icons-class}-menu,
+        .#{$icons-class}-mobile,
+        .#{$icons-class}-more,
+        .#{$icons-class}-order,
+        .#{$icons-class}-package,
+        .#{$icons-class}-paper,
+        .#{$icons-class}-reduce,
+        .#{$icons-class}-refund,
+        .#{$icons-class}-return,
+        .#{$icons-class}-saleoff,
+        .#{$icons-class}-scan,
+        .#{$icons-class}-search,
+        .#{$icons-class}-send,
+        .#{$icons-class}-share,
+        .#{$icons-class}-shop,
+        .#{$icons-class}-spanner,
+        .#{$icons-class}-speaker,
+        .#{$icons-class}-star,
+        .#{$icons-class}-tags,
+        .#{$icons-class}-trash,
+        .#{$icons-class}-trunk,
+        .#{$icons-class}-user,
+        .#{$icons-class}-wallet { @extend .icon; }
+        .#{$icons-class}-arrow-back::before { content: $icon-arrow-back; }
+        .#{$icons-class}-arrow-down::before { content: $icon-arrow-down; }
+        .#{$icons-class}-arrow-forward::before { content: $icon-arrow-forward; }
+        .#{$icons-class}-arrow-up::before { content: $icon-arrow-up; }
+        .#{$icons-class}-bag::before { content: $icon-bag; }
+        .#{$icons-class}-business::before { content: $icon-business; }
+        .#{$icons-class}-card::before { content: $icon-card; }
+        .#{$icons-class}-cart::before { content: $icon-cart; }
+        .#{$icons-class}-chatbox::before { content: $icon-chatbox; }
+        .#{$icons-class}-clock::before { content: $icon-clock; }
+        .#{$icons-class}-coin::before { content: $icon-coin; }
+        .#{$icons-class}-coupon::before { content: $icon-coupon; }
+        .#{$icons-class}-discover::before { content: $icon-discover; }
+        .#{$icons-class}-edit::before { content: $icon-edit; }
+        .#{$icons-class}-eye::before { content: $icon-eye; }
+        .#{$icons-class}-forward::before { content: $icon-forward; }
+        .#{$icons-class}-freeship::before { content: $icon-freeship; }
+        .#{$icons-class}-grid::before { content: $icon-grid; }
+        .#{$icons-class}-heart::before { content: $icon-heart; }
+        .#{$icons-class}-help::before { content: $icon-help; }
+        .#{$icons-class}-home::before { content: $icon-home; }
+        .#{$icons-class}-list::before { content: $icon-list; }
+        .#{$icons-class}-location::before { content: $icon-location; }
+        .#{$icons-class}-lock::before { content: $icon-lock; }
+        .#{$icons-class}-mail::before { content: $icon-mail; }
+        .#{$icons-class}-menu::before { content: $icon-menu; }
+        .#{$icons-class}-mobile::before { content: $icon-mobile; }
+        .#{$icons-class}-more::before { content: $icon-more; }
+        .#{$icons-class}-order::before { content: $icon-order; }
+        .#{$icons-class}-package::before { content: $icon-package; }
+        .#{$icons-class}-paper::before { content: $icon-paper; }
+        .#{$icons-class}-reduce::before { content: $icon-reduce; }
+        .#{$icons-class}-refund::before { content: $icon-refund; }
+        .#{$icons-class}-return::before { content: $icon-return; }
+        .#{$icons-class}-saleoff::before { content: $icon-saleoff; }
+        .#{$icons-class}-scan::before { content: $icon-scan; }
+        .#{$icons-class}-search::before { content: $icon-search; }
+        .#{$icons-class}-send::before { content: $icon-send; }
+        .#{$icons-class}-share::before { content: $icon-share; }
+        .#{$icons-class}-shop::before { content: $icon-shop; }
+        .#{$icons-class}-spanner::before { content: $icon-spanner; }
+        .#{$icons-class}-speaker::before { content: $icon-speaker; }
+        .#{$icons-class}-star::before { content: $icon-star; }
+        .#{$icons-class}-tags::before { content: $icon-tags; }
+        .#{$icons-class}-trash::before { content: $icon-trash; }
+        .#{$icons-class}-trunk::before { content: $icon-trunk; }
+        .#{$icons-class}-user::before { content: $icon-user; }
+        .#{$icons-class}-wallet::before { content: $icon-wallet; }
+    }
+}
