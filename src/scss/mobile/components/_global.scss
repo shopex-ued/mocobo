@@ -185,6 +185,7 @@ $base-bg-color: $white !default;
         &::before {
             content: "";
             position: absolute;
+            background-color: $color;
             @if $direct == horizontal {
                 left: $start;
                 @if $end == true {
@@ -195,6 +196,7 @@ $base-bg-color: $white !default;
                 }
                 top: -1px;
                 height: 1px;
+                @include transform(scaleY(0.5));
             }
             @else {
                 left: 0;
@@ -206,14 +208,14 @@ $base-bg-color: $white !default;
                     bottom: $end;
                 }
                 width: 1px;
+                @include transform(scaleX(0.5));
             }
-            background-color: $color;
-            @include transform(scaleY(0.5));
         }
     }
     &::after {
         content: "";
         position: absolute;
+        background-color: $color;
         @if $direct == horizontal {
             left: $start;
             @if $end == true {
@@ -224,6 +226,7 @@ $base-bg-color: $white !default;
             }
             bottom: 0;
             height: 1px;
+            @include transform(scaleY(0.5));
         } @else {
             right: 0;
             top: $start;
@@ -234,9 +237,8 @@ $base-bg-color: $white !default;
                 bottom: $end;
             }
             width: 1px;
+            @include transform(scaleX(0.5));
         }
-        background-color: $color;
-        @include transform(scaleY(0.5));
     }
 }
 
@@ -290,7 +292,7 @@ $body-font-style: normal !default;
 $font-smoothing: antialiased !default;
 
 // We use these to make sure border radius matches unless we want it different.
-$global-radius: 3px !default;
+$global-radius: to-rem(3) !default;
 $global-rounded: 1000px !default;
 
 // We use these to control inset shadow shiny edges and depressions.
