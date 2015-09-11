@@ -14,5 +14,6 @@
 dist
 node_modules
 bower_components
+fontbuilder/build_data.json
 
 npm-debug.log
