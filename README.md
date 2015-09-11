@@ -1,6 +1,6 @@
-# mocob
+# mocobo
 
-mocob is a MObile front-end COdeBase. You can quickly prototype and build sites or apps that work on any mobile device with mocob.
+mocobo is a MObile front-end COdeBase for quickly develop. You can quickly prototype and build sites or apps that work on any mobile device with mocob.
 
 #Requirement
 
@@ -13,8 +13,8 @@ mocob is a MObile front-end COdeBase. You can quickly prototype and build sites 
 #Getting Started
 
 ```bash
-git clone https://github.com/cz848/mocob
-cd mocob
+git clone https://github.com/shopex-ued/mocobo
+cd mocobo
 npm install -g grunt-cli
 npm install
 grunt
@@ -22,7 +22,7 @@ grunt
 Then you can see the folders list:
 
 ```
-mocob/
+mocobo/
 ├── dist/
 │   └── ...
 ├── docs/
@@ -45,4 +45,4 @@ Enjoy!
 
 #License
 
-mocob is licensed under the [MIT license](LICENSE).
+mocobo is licensed under the [MIT license](LICENSE).
