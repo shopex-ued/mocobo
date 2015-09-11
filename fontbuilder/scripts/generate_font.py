@@ -11,11 +11,11 @@ import json
 import copy
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-ROOT_PATH = os.path.join(SCRIPT_PATH, '..', '..')
-INPUT_SVG_DIR = os.path.join(ROOT_PATH, 'src', 'icons')
-OUTPUT_FONT_DIR = os.path.join(ROOT_PATH, 'src', 'fonts')
-MANIFEST_PATH = os.path.join(SCRIPT_PATH, '..', 'manifest.json')
-BUILD_DATA_PATH = os.path.join(SCRIPT_PATH, '..', 'build_data.json')
+BUILDER_PATH = os.path.join(SCRIPT_PATH, '..')
+INPUT_SVG_DIR = os.path.join(BUILDER_PATH, 'icons')
+OUTPUT_FONT_DIR = os.path.join(BUILDER_PATH, '..', 'dist', 'fonts')
+MANIFEST_PATH = os.path.join(BUILDER_PATH, 'manifest.json')
+BUILD_DATA_PATH = os.path.join(BUILDER_PATH, 'build_data.json')
 AUTO_WIDTH = False
 KERNING = 15
 
@@ -31,8 +31,9 @@ f.descent = 64
 
 manifest_file = open(MANIFEST_PATH, 'r')
 manifest_data = json.loads(manifest_file.read())
-# if you want rebuild font file with icon unchanged, uncomment the following line of code.
-# manifest_data['icons'] = []
+# if you want rebuild font file with icon unchanged, comment the following line of code.
+if 'icons' not in manifest_data:
+  manifest_data['icons'] = []
 init_len = len(manifest_data['icons'])
 manifest_file.close()
 print "Load Manifest, Icons: %s" % ( len(manifest_data['icons']) )
@@ -40,7 +41,7 @@ print "Load Manifest, Icons: %s" % ( len(manifest_data['icons']) )
 build_data = copy.deepcopy(manifest_data)
 build_data['icons'] = []
 
-font_name = manifest_data['name']
+font_name = manifest_data['font_name']
 m.update(manifest_data['class_name'] + ';')
 m.update(font_name + ';')
 
@@ -119,7 +120,7 @@ for dirname, dirnames, filenames in os.walk(INPUT_SVG_DIR):
         glyph.round()
       else:
         # force a manual size when autowidth is disabled
-        print " - Standard Width: %s" % (name)
+        # print " - Standard Width: %s" % (name)
         glyph.width = 512
 
     # resize glyphs if autowidth is enabled
@@ -130,11 +131,12 @@ for dirname, dirnames, filenames in os.walk(INPUT_SVG_DIR):
 
 build_hash = m.hexdigest()[0:10]
 
-if build_hash == manifest_data.get('build_hash') and init_len:
+if build_hash == manifest_data.get('build_hash') and init_len and os.path.isfile(fontfile + '.svg'):
   print "Source files unchanged, did not rebuild fonts"
 
 else:
   manifest_data['build_hash'] = build_hash
+  build_data['build_hash'] = build_hash
 
   f.fontname = font_name
   f.familyname = font_name
@@ -171,11 +173,11 @@ else:
 
   print "Save Manifest, Icons: %s" % ( len(manifest_data['icons']) )
   f = open(MANIFEST_PATH, 'w')
-  f.write( json.dumps(manifest_data, indent=2, separators=(',', ': ')) )
+  f.write( json.dumps(manifest_data, indent=4, separators=(',', ': ')) )
   f.close()
 
   print "Save Build, Icons: %s" % ( len(build_data['icons']) )
   f = open(BUILD_DATA_PATH, 'w')
-  f.write( json.dumps(build_data, indent=2, separators=(',', ': ')) )
+  f.write( json.dumps(build_data, indent=4, separators=(',', ': ')) )
   f.close()
 

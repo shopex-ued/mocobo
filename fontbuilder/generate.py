@@ -5,7 +5,7 @@ import json
 
 BUILDER_PATH = os.path.dirname(os.path.abspath(__file__))
 ROOT_PATH = os.path.join(BUILDER_PATH, '..', '..')
-FONTS_FOLDER_PATH = os.path.join(BUILDER_PATH, '..', 'src', 'fonts')
+FONTS_FOLDER_PATH = os.path.join(BUILDER_PATH, '..', 'dist', 'fonts')
 SCSS_FOLDER_PATH = os.path.join(BUILDER_PATH, '..', 'src', 'scss', 'mobile', 'components')
 
 
@@ -27,7 +27,7 @@ def generate_font_files():
 
 def rename_svg_glyph_names(data):
   # hacky and slow (but safe) way to rename glyph-name attributes
-  svg_path = os.path.join(FONTS_FOLDER_PATH, 'icons.svg')
+  svg_path = os.path.join(FONTS_FOLDER_PATH, data['font_name'] + '.svg')
   svg_file = open(svg_path, 'r+')
   svg_text = svg_file.read()
   svg_file.seek(0)
@@ -45,7 +45,7 @@ def rename_svg_glyph_names(data):
 def generate_scss(data):
   print "Generate SCSS"
   build_hash = data['build_hash']
-  font_name = data['name']
+  font_name = data['font_name']
   css_class = data['class_name']
   icons_file_path = os.path.join(SCSS_FOLDER_PATH, '_icons.scss')
 
@@ -67,9 +67,9 @@ def generate_scss(data):
   d.append('        /* Icons */')
   d.append('        @font-face {')
   d.append('            font-family: $icons-font-family;')
-  d.append('            src: url("#{$icons-font-path}/icons.woff?v=#{$icons-hash}") format("woff"),')
-  d.append('                url("#{$icons-font-path}/icons.ttf?v=#{$icons-hash}") format("truetype"),')
-  d.append('                url("#{$icons-font-path}/icons.svg?v=#{$icons-hash}#svg") format("svg");')
+  d.append('            src: url("#{$icons-font-path}/%s.woff?v=#{$icons-hash}") format("woff"),' % (font_name))
+  d.append('                url("#{$icons-font-path}/%s.ttf?v=#{$icons-hash}") format("truetype"),' % (font_name))
+  d.append('                url("#{$icons-font-path}/%s.svg?v=#{$icons-hash}#svg") format("svg");' % (font_name))
   d.append('            font-weight: 400;')
   d.append('            font-style: normal;')
   d.append('        }\n')
@@ -87,11 +87,11 @@ def generate_scss(data):
   d.append('        }\n')
 
   d.append('        // Icons')
-  group = [] #[ '.%s' % (data['name'].lower()) ]
+  group = [] #[ '.%s' % (data['font_name'].lower()) ]
   for icon in data['icons']:
     group.append('        .#{$icons-class}-%s' % (icon['name']))
 
-  d.append(',\n'.join(group) + ' { @extend .icon; }')
+  d.append(',\n'.join(group) + ' { @extend .#{$icons-class}; }')
 
   for icon in data['icons']:
     chr_code = icon['code'].replace('0x', '\\')
@@ -103,8 +103,6 @@ def generate_scss(data):
   f = open(icons_file_path, 'w')
   f.write( '\n'.join(d) )
   f.close()
-
-  print "OK!"
 
 
 def generate_cheatsheet(data):
@@ -138,16 +136,14 @@ def generate_cheatsheet(data):
 
     content.append(item_row)
 
-  template_html = template_html.replace("{{font_name}}", data["name"])
-  template_html = template_html.replace("{{icon_count}}", str(len(data["icons"])) )
+  template_html = template_html.replace('{{font_name}}', data['font_name'])
+  template_html = template_html.replace('{{icon_count}}', str(len(data['icons'])) )
   template_html = template_html.replace('{{class}}', data['class_name'])
-  template_html = template_html.replace("{{content}}", '\n'.join(content) )
+  template_html = template_html.replace('{{content}}', '\n'.join(content) )
 
   f = open(cheatsheet_file_path, 'w')
   f.write(template_html)
   f.close()
-
-  print "OK!"
 
 
 def get_build_data():

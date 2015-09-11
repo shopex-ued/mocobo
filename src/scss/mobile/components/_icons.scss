@@ -5,7 +5,7 @@
 //
 $include-html-icons-classes: $include-html-classes !default;
 
-$icons-hash: "d80a338aeb" !default;
+$icons-hash: "635ba5afee" !default;
 $icons-font-path: "../fonts" !default;
 $icons-font-family: "icons" !default;
 $icons-class: "icon" !default;
@@ -132,7 +132,7 @@ $icon-wallet: "\2830";
         .#{$icons-class}-trash,
         .#{$icons-class}-trunk,
         .#{$icons-class}-user,
-        .#{$icons-class}-wallet { @extend .icon; }
+        .#{$icons-class}-wallet { @extend .#{$icons-class}; }
         .#{$icons-class}-arrow-back::before { content: $icon-arrow-back; }
         .#{$icons-class}-arrow-down::before { content: $icon-arrow-down; }
         .#{$icons-class}-arrow-forward::before { content: $icon-arrow-forward; }

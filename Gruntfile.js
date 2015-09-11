@@ -9,11 +9,10 @@ module.exports = function(grunt) {
         dist: 'dist/',
         docs: 'docs/',
         grunt: 'grunt/',
-        iconbuilder: 'iconbuilder/',
+        builder: 'fontbuilder/',
         js: 'src/js/',
         img: 'src/img/',
         icons: 'src/icons/',
-        fonts: 'src/fonts/',
         sassLoad: __dirname + '/src/scss',
         scss: 'src/scss/',
         vendor: 'src/vendor/'

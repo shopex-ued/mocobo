@@ -1,14 +1,5 @@
 // https://github.com/gruntjs/grunt-contrib-copy
 module.exports = {
-    font: {
-        files: [{
-            expand: true,
-            cwd: '<%= paths.fonts %>',
-            src: ['*.*'],
-            dest: '<%= paths.dist %>fonts',
-            filter: 'isFile'
-        }]
-    },
     dist: {
         files: [{
             expand: true,
