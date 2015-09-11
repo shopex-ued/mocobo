@@ -84,7 +84,7 @@ $base-bg-color: $white !default;
 // $property - Default: all, Options: http://www.w3.org/TR/css3-transitions/#animatable-properties
 // $speed - Default: 300ms
 // $ease - Default:ease-out, Options: http://css-tricks.com/almanac/properties/t/transition-timing-function/
-@mixin single-transition($property: all, $speed: 300ms, $ease: ease-out) {
+@mixin single-transition($property: all, $speed: 300ms, $ease: $easeOut) {
     transition: $property $speed $ease;
 }
 
@@ -131,13 +131,19 @@ $base-bg-color: $white !default;
 //
 // We use this to add a glowing effect to block elements
 // $selector - Used for selector state. Default: focus, Options: hover, active, visited
-// $fade-time - Default: 300ms
-// $glowing-effect-color - Default: fade-out($primary-color, .25)
-@mixin block-glowing-effect($selector: focus, $fade-time: 300ms, $glowing-effect-color: fade-out($primary-color, 0.25)) {
-    transition: box-shadow $fade-time, border-color $fade-time ease-in-out;
+// $fade-time - Default: 250ms
+// $effect-color - Default: fade-out($primary-color, .25)
+// $border-color - Default: true
+@mixin block-glowing-effect($selector: focus, $fade-time: 250ms, $effect-color: fade-out($primary-color, 0.25), $border-color: true) {
+    transition: box-shadow $fade-time $easeInOut, border-color $fade-time $easeInOut;
     &:#{$selector} {
-        border-color: $glowing-effect-color;
-        box-shadow: 0 0 5px $glowing-effect-color;
+        @if $border-color == true {
+            border-color: $effect-color;
+        }
+        @elseif $border-color {
+            border-color: $border-color;
+        }
+        box-shadow: 0 0 5px $effect-color;
     }
 }
 
@@ -278,7 +284,6 @@ $body-font-size-px: $rem-base * 0.75 !default;
 $body-font-size-rem: to-rem($body-font-size-px) !default;
 $body-font-size: to-em($body-font-size-px) !default;
 $body-font-weight: $font-weight-normal !default;
-$body-font-style: normal !default;
 
 // We use this to control font-smoothing
 $font-smoothing: antialiased !default;
@@ -394,7 +399,8 @@ $medium: $medium-up !default;
     @if $include-html-global-classes {
         /* Global */
         // Must be 100% for off canvas to work
-        html, body {
+        html,
+        body {
             min-height: 100%;
             background-color: $base-bg-color;
             text-size-adjust: 100%;
@@ -417,7 +423,6 @@ $medium: $medium-up !default;
             color: $body-font-color;
             font-family: $body-font-family;
             font-size: $body-font-size;
-            font-style: $body-font-style;
             font-weight: $body-font-weight;
             line-height: $base-line-height;
             // Set to $base-line-height to take on browser default of 150%

@@ -12,7 +12,7 @@ $include-html-form-classes: $include-html-classes !default;
 $form-row-class: 'form-row' !default;
 $form-inline-class: 'form-inline' !default;
 // We use this to set the base for lots of form spacing and positioning styles
-$form-spacing: to-rem(16) !default;
+$form-spacing: $column-gutter !default;
 
 // We use these to style the labels in different ways
 $form-label-pointer: pointer !default;
@@ -23,24 +23,38 @@ $form-label-font-color: scale-color($black, $lightness: 30%) !default;
 $form-label-bottom-margin: 0 !default;
 
 //input height
-$input-tiny: to-rem(26) !default;
+$input-tiny: to-rem(24) !default;
 $input-small: to-rem(34) !default;
 $input-medium: to-rem(44) !default;
 $input-large: to-rem(50) !default;
 
+//We use this to controll the inputs style.
 $input-font-color: rgba(0, 0, 0, 0.75) !default;
 $input-placeholder-font-color: $steel !default;
 $input-font-size: to-rem(14) !default;
 $input-bg-color: $white !default;
 $input-focus-bg-color: $input-bg-color !default;
 $input-border-color: scale-color($white, $lightness: -20%) !default;
-$input-focus-border-color: scale-color($white, $lightness: -40%) !default;
-$input-border-style: solid !default;
+$input-focus-border-color: scale-color($input-border-color, $lightness: -20%) !default;
 $input-border-width: 1px !default;
+$input-border-style: solid !default;
 $input-border-radius: $global-radius !default;
 $input-disabled-bg: $gainsboro !default;
 $input-box-shadow: inset 0 1px 2px rgba($black, 0.1) !default;
+
+//We use this to controll the radios / checkboxes style.
+$radio-medium: to-rem(24) !default;
+$checkbox-checkmark-medium: $radio-medium - to-rem(10) !default;
+$radio-bg-color: $white !default;
+$radio-border-color: $base !default;
+$radio-checked-border-color: $primary-color !default;
+$radio-border-radius: $global-rounded !default;
+
+// We use this to style the glowing effect of inputs when focused
 $input-include-glowing-effect: true !default;
+$input-glowing-effect-fade-time: .4s !default;
+$input-glowing-effect-color: rgba($input-focus-border-color, .9) !default;
+$radio-glowing-effect-color: rgba($radio-checked-border-color, .7) !default;
 
 // We use these to style the fieldset border and spacing.
 $fieldset-border-width: 1px !default;
@@ -66,7 +80,7 @@ $input-prefix-font-color-alt: $white !default;
 $input-prefix-icon-size: to-rem(24) !default;
 
 // We use this setting to turn on/off HTML5 number spinners (the up/down arrows)
-$input-number-spinners: true !default;
+$input-number-spinners: false !default;
 
 // We use these to style the error states for inputs and labels
 $input-error-message-padding: to-rem(6 9 9) !default;
@@ -76,10 +90,6 @@ $input-error-message-font-weight: $font-weight-normal !default;
 $input-error-message-font-color: $white !default;
 $input-error-message-bg-color: $alert-color !default;
 $input-error-message-font-color-alt: $oil !default;
-
-// We use this to style the glowing effect of inputs when focused
-$glowing-effect-fade-time: 0.45s !default;
-$glowing-effect-color: $input-focus-border-color !default;
 
 // We use this to style the transition when inputs are focused and when the glowing effect is disabled.
 $input-transition-fade-time: 0.15s !default;
@@ -96,19 +106,18 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
 // We use this mixin to give us form styles for rows inside of forms
 @mixin form-row-base {
     .#{$grid-row-class} {
-        margin: 0 (-$form-spacing / 2);
-        .#{$grid-columns-class} {
-            padding: 0 ($form-spacing / 2);
-        }
+        // margin: 0 (-$form-spacing / 2);
+        // .#{$grid-columns-class} {
+        //     padding: 0 ($form-spacing / 2);
+        // }
         // Use this to collapse the margins of a form row
         &.collapse {
-            margin: 0;
-            .#{$grid-columns-class} {
-                padding: 0;
-            }
-            input {
-                @include side-radius(right, 0);
-            }
+            // .#{$grid-colmns-class} {
+            //     padding: 0;
+            // }
+            // input {
+            //     @include side-radius(right, 0);
+            // }
         }
     }
     input.#{$grid-columns-class},
@@ -138,11 +147,11 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
     @include box-sizing(border-box);
     font-size: $input-font-size;
     @if $input-include-glowing-effect {
-        @include block-glowing-effect(focus, $glowing-effect-fade-time, $glowing-effect-color);
+        @include block-glowing-effect(focus, $input-glowing-effect-fade-time, $input-glowing-effect-color);
     }
     // Basic focus styles
     &:focus {
-        border-color: $input-focus-border-color;
+        // border-color: $input-focus-border-color;
         outline: none;
     }
     // Disabled Styles
@@ -150,9 +159,9 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
     //     background-color: $input-disabled-bg;
     // }
     // Disabled background input background color
-    &[disabled],
+    &:disabled,
     &[readonly],
-    fieldset[disabled] & {
+    [disabled] & {
         background-color: $input-disabled-bg;
     }
     &.tiny {
@@ -312,13 +321,11 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
     margin: 0;
     padding: ($form-spacing / 2) ($form-spacing * 1.5) ($form-spacing / 2) ($form-spacing / 3);
     &.radius {
-        @include radius($global-radius);
-    }
-    &:hover {
-        background-color: $select-hover-bg-color;
-        border-color: $input-focus-border-color;
+        @include radius($input-border-radius);
     }
     &:focus {
+        background-color: $select-hover-bg-color;
+        border-color: $input-focus-border-color;
         outline: 0 none;
     }
     // Disabled Styles
@@ -330,7 +337,6 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
 // We use this mixin to turn on/off HTML5 number spinners
 @mixin html5number($on: true) {
     @if $on == false {
-        // -webkit-appearance: none;
         appearance: none;
         margin: 0;
     }
@@ -338,8 +344,9 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
 
 @include exports("form") {
     @if $include-html-form-classes {
-        /* We use this to get basic styling on all basic form elements */
-        #{text-inputs(all, "input")} {
+        // We use this to get basic styling on all basic form elements
+        input:not([type=radio]):not([type=checkbox]),
+        textarea {
             appearance: none;
             border-radius: 0;
             @include form-element;
@@ -357,19 +364,19 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
             appearance: none;
             border-radius: 0;
         }
-        /* Respect enforced amount of rows for textarea */
-        textarea[rows] {
-            height: auto;
-        }
-        /* Not allow resize out of parent */
+        // Not allow resize out of parent
         textarea {
             max-width: 100%;
+        }
+        // Respect enforced amount of rows for textarea
+        textarea[rows] {
+            height: auto;
         }
         // style placeholder text cross browser
         ::placeholder {
             color: $input-placeholder-font-color;
         }
-        /* Add height value for select elements to match text input height */
+        // Add height value for select elements to match text input height
         select {
             @include form-select;
             height: $input-font-size + $form-spacing * 1.5 - to-rem(1);
@@ -377,25 +384,25 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
                 height: auto;
             }
         }
-        // /* Adjust margin for form elements below */
+        // // Adjust margin for form elements below
         // input[type="file"],
         // input[type="checkbox"],
         // input[type="radio"],
         // select {
         //     margin: 0 0 $form-spacing 0;
         // }
-        /* Radio and Checkbox's Style */
+        // Radio and Checkbox's Style
         input[type="radio"],
         input[type="checkbox"] {
             appearance: none;
-            outline: 0;
-            border: 1px solid $base;
-            border-radius: $global-rounded;
-            width: 22px;
-            height: 22px;
             display: inline-block;
             position: relative;
-            background-color: $white;
+            background-color: $radio-bg-color;
+            border: 1px solid $base;
+            border-radius: $radio-border-radius;
+            width: $radio-medium;
+            height: $radio-medium;
+            outline: 0;
             vertical-align: middle;
             &::before {
                 position: absolute;
@@ -404,10 +411,15 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
                 opacity: .3;
             }
             &:checked {
-                border-color: $primary-color;
+                border-color: $radio-checked-border-color;
                 &::before {
                     content: "";
-                    color: $primary-color;
+                    color: $radio-checked-border-color;
+                }
+                &:focus {
+                    @if $input-include-glowing-effect {
+                        @include block-glowing-effect(focus, $input-glowing-effect-fade-time, $radio-glowing-effect-color, false);
+                    }
                 }
             }
         }
@@ -415,9 +427,9 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
             &:checked::before {
                 top: -1px;
                 left: -1px;
-                width: 22px;
-                height: 22px;
-                padding: 5px;
+                width: $radio-medium;
+                height: $radio-medium;
+                padding: to-rem(5);
                 background-clip: content-box;
                 background-color: $primary-color;
                 border-radius: $global-rounded;
@@ -428,16 +440,16 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
                 background-color: $primary-color;
             }
             &:checked::before {
-                top: 6px;
-                left: 4px;
-                width: 12px;
-                height: 6px;
-                border-left: 2px solid $white;
-                border-bottom: 2px solid $white;
+                top: to-rem(6);
+                left: to-rem(4);
+                width: $checkbox-checkmark-medium;
+                height: $checkbox-checkmark-medium / 2;
+                border-left: to-rem(2) solid $white;
+                border-bottom: to-rem(2) solid $white;
                 transform: rotate(-45deg);
             }
         }
-        /* /a.s.o. */
+        // /a.s.o.
         input[type="checkbox"] + label,
         input[type="radio"] + label {
             display: inline-block;
@@ -445,27 +457,30 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
             margin-right: $form-spacing;
             // margin-bottom: 0;
             // vertical-align: baseline;
-
         }
-        /* Normalize file input width */
+        // Normalize file input width
         input[type="file"] {
             width: 100%;
         }
-        /* HTML5 Number spinners settings */
+        // HTML5 Number spinners settings
         input[type=number] {
-            @include html5number($input-number-spinners);
+            &
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+                @include html5number($input-number-spinners);
+            }
         }
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            @include html5number($input-number-spinners);
-        }
-        /* We add basic fieldset styling */
+        // We add basic fieldset styling
         fieldset {
             @include fieldset;
         }
-        /* Standard Forms */
+        // Standard Forms
         form {
             margin: 0 0 $form-spacing;
+            // Using forms within rows, we need to set some defaults
+            .#{$grid-row-class} {
+                @include form-row-base;
+            }
         }
         .#{$form-row-class} {
             margin-bottom: $form-spacing;
@@ -475,11 +490,7 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
                 line-height: $input-medium;
             }
         }
-        /* Using forms within rows, we need to set some defaults */
-        form .#{$grid-row-class} {
-            @include form-row-base;
-        }
-        /* Label Styles */
+        // Label Styles
         label {
             @include form-label;
             &.right {
@@ -488,44 +499,49 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
             &.inline {
                 @include form-label(inline, false);
             }
-            /* Styles for required inputs */
+            // Styles for required inputs
             small {
                 color: scale-color($form-label-font-color, $lightness: 15%);
             }
         }
-        /* Attach elements to the beginning or end of an input */
+        // Attach elements to the beginning or end of an input
         .#{$input-prefix-class},
         .#{$input-postfix-class} {
             @include prefix-postfix-base;
             @include prefix-postfix-style;
             // Adjust padding, alignment and radius if pre/post element is a button
             &.#{$buttons-class} {
-                // @include button-style;
                 padding: 0;
-                border-color: $buttons-border-color;
                 // background-color: $buttons-bg-color;
+                border-color: $buttons-border-color;
+                border-radius: 0;
+                margin-bottom: 0;
+                &.primary {
+                    background-color: $buttons-bg-color;
+                    color: $buttons-font-color;
+                }
             }
             [class^=#{$icons-class}-] {
                 font-size: $input-prefix-icon-size;
             }
         }
-        /* Separate prefix and postfix styles when on span or label so buttons keep their own */
+        // Separate prefix and postfix styles when on span or label so buttons keep their own
         .#{$input-prefix-class} {
             @include prefix;
-            &.#{$buttons-class} {
-                @include side-radius(right, 0);
-            }
+            // &.#{$buttons-class} {
+            //     @include side-radius(right, 0);
+            // }
             &.#{$buttons-class}.round {
-                border-radius: $buttons-round 0 0 $buttons-round;
+                border-radius: $global-rounded 0 0 $global-rounded;
             }
         }
         .#{$input-postfix-class} {
             @include postfix;
-            &.#{$buttons-class} {
-                @include side-radius(left, 0);
-            }
+            // &.#{$buttons-class} {
+            //     @include side-radius(left, 0);
+            // }
             &.#{$buttons-class}.round {
-                border-radius: 0 $buttons-round $buttons-round 0;
+                border-radius: 0 $global-rounded $global-rounded 0;
             }
         }
         form .#{$grid-row-class} {
@@ -534,12 +550,10 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
                 textarea,
                 select,
                 button {
-                    // @include radius(0);
-                    @include side-radius(right, $buttons-radius);
+                    @include side-radius(right, $input-border-radius);
                 }
                 .#{$input-prefix-class} {
-                    // @include radius(0);
-                    @include side-radius(left, $buttons-radius);
+                    @include side-radius(left, $input-border-radius);
                 }
             }
             .#{$input-postfix-class}-radius.#{$grid-row-class}.collapse {
@@ -547,12 +561,10 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
                 textarea,
                 select,
                 button {
-                    // @include radius(0);
-                    @include side-radius(left, $buttons-radius);
+                    @include side-radius(left, $input-border-radius);
                 }
                 .#{$input-postfix-class} {
-                    // @include radius(0);
-                    @include side-radius(right, $buttons-radius);
+                    @include side-radius(right, $input-border-radius);
                 }
             }
             .#{$input-prefix-class}-round.#{$grid-row-class}.collapse {
@@ -560,12 +572,10 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
                 textarea,
                 select,
                 button {
-                    // @include radius(0);
-                    @include side-radius(right, $buttons-round);
+                    @include side-radius(right, $global-rounded);
                 }
                 .#{$input-prefix-class} {
-                    // @include radius(0);
-                    @include side-radius(left, $buttons-round);
+                    @include side-radius(left, $global-rounded);
                 }
             }
             .#{$input-postfix-class}-round.#{$grid-row-class}.collapse {
@@ -573,12 +583,10 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
                 textarea,
                 select,
                 button {
-                    // @include radius(0);
-                    @include side-radius(left, $buttons-round);
+                    @include side-radius(left, $global-rounded);
                 }
                 .#{$input-postfix-class} {
-                    // @include radius(0);
-                    @include side-radius(right, $buttons-round);
+                    @include side-radius(right, $global-rounded);
                 }
             }
         }
@@ -599,7 +607,8 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
                 @include form-label-error-color;
             }
             input,
-            textarea {
+            textarea,
+            select {
                 border-color: $alert-color;
             }
             > label {

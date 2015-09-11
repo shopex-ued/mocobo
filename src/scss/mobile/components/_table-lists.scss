@@ -13,8 +13,8 @@ $include-html-table-list-classes: $include-html-classes !default;
 
 $table-list-class: 'table-list' !default;
 // We use this to control the margins and padding of the table list.
-$table-list-top-margin: to-rem(10) !default;
-$table-list-bottom-margin: to-rem(10) !default;
+$table-list-margin-top: to-rem(10) !default;
+$table-list-margin-bottom: to-rem(10) !default;
 $table-list-margin-left: 0 !default;
 $table-list-margin-right: 0 !default;
 $table-list-padding-left: 0 !default;
@@ -61,13 +61,18 @@ $table-list-children-display: block !default;
         .#{$table-list-class} {
             position: relative;
             padding-left: $table-list-padding-left;
-            margin-top: $table-list-top-margin;
-            margin-bottom: $table-list-bottom-margin;
-            @if $table-list-margin-left {
-                margin-left: $table-list-margin-left;
+            @if $table-list-margin-left and $table-list-margin-right {
+                margin: $table-list-margin-top $table-list-margin-right $table-list-margin-bottom $table-list-margin-left;
             }
-            @if $table-list-margin-right {
-                margin-right: $table-list-margin-right;
+            @else {
+                margin-top: $table-list-margin-top;
+                margin-bottom: $table-list-margin-bottom;
+                @if $table-list-margin-left {
+                    margin-left: $table-list-margin-left;
+                }
+                @if $table-list-margin-right {
+                    margin-right: $table-list-margin-right;
+                }
             }
             list-style: none; // Remove usual bullet styles from table list
             @include hairline(double, $table-list-border-color, 0); // Double grey border.
@@ -145,7 +150,7 @@ $table-list-children-display: block !default;
                 padding: $table-list-item-padding-top $table-list-item-padding-left;
                 overflow: $table-list-item-overflow;
                 font-size: $table-list-item-font-size;
-                -webkit-touch-callout: none; //禁止长按打开菜单；
+                -webkit-touch-callout: none;
                 @include hairline(single, $table-list-item-border-color, $table-list-item-border-left); // Single grey border start with 12px.
                 // &.radio input[type=radio],
                 // &.checkbox input[type=checkbox]{

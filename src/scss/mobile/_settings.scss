@@ -162,7 +162,6 @@
 // $body-font-size-rem: to-rem($body-font-size-px);
 // $body-font-size: to-em($body-font-size-px);
 // $body-font-weight: $font-weight-normal;
-// $body-font-style: normal;
 
 // We use this to control font-smoothing
 // $font-smoothing: antialiased;
@@ -250,7 +249,6 @@
 
 // We use these to control header font styles
 // $header-font-weight: $font-weight-normal;
-// $header-font-style: normal;
 // $header-font-color: $jet;
 // $header-line-height: 1.5;
 // $header-top-margin: .2rem;
@@ -647,7 +645,7 @@
 // $form-row-class: 'form-row';
 // $form-inline-class: 'form-inline';
 // We use this to set the base for lots of form spacing and positioning styles
-// $form-spacing: to-rem(16);
+// $form-spacing: $column-gutter;
 
 // We use these to style the labels in different ways
 // $form-label-pointer: pointer;
@@ -658,23 +656,37 @@
 // $form-label-bottom-margin: 0;
 
 //input height
-// $input-tiny: to-rem(26);
+// $input-tiny: to-rem(24);
 // $input-small: to-rem(34);
 // $input-medium: to-rem(44);
 // $input-large: to-rem(50);
 
+//We use this to controll the inputs style.
 // $input-font-color: rgba(0,0,0,0.75);
 // $input-font-size: to-rem(14);
 // $input-bg-color: $white;
 // $input-focus-bg-color: $input-bg-color;
 // $input-border-color: scale-color($white, $lightness: -20%);
-// $input-focus-border-color: scale-color($white, $lightness: -40%);
-// $input-border-style: solid;
+// $input-focus-border-color: scale-color($input-border-color, $lightness: -20%);
 // $input-border-width: 1px;
+// $input-border-style: solid;
 // $input-border-radius: $global-radius;
 // $input-disabled-bg: $gainsboro;
 // $input-box-shadow: inset 0 1px 2px rgba($black, 0.1);
+
+//We use this to controll the radios / checkboxes style.
+// $radio-medium: to-rem(24);
+// $checkbox-checkmark-medium: $radio-medium - to-rem(10);
+// $radio-bg-color: $white;
+// $radio-border-color: $base;
+// $radio-checked-border-color: $primary-color;
+// $radio-border-radius: $global-rounded;
+
+// We use this to style the glowing effect of inputs when focused
 // $input-include-glowing-effect: true;
+// $input-glowing-effect-fade-time: .4s;
+// $input-glowing-effect-color: rgba($input-focus-border-color, .7);
+// $radio-glowing-effect-color: rgba($radio-checked-border-color, .7);
 
 // We use these to style the fieldset border and spacing.
 // $fieldset-border-width: 1px;
@@ -700,7 +712,7 @@
 // $input-prefix-icon-size: to-rem(24);
 
 // We use this setting to turn on/off HTML5 number spinners (the up/down arrows)
-// $input-number-spinners: true;
+// $input-number-spinners: false;
 
 // We use these to style the error states for inputs and labels
 // $input-error-message-padding: to-rem(6 9 9);
@@ -710,10 +722,6 @@
 // $input-error-message-font-color: $white;
 // $input-error-message-bg-color: $alert-color;
 // $input-error-message-font-color-alt: $oil;
-
-// We use this to style the glowing effect of inputs when focused
-// $glowing-effect-fade-time: .45s;
-// $glowing-effect-color: $input-focus-border-color;
 
 // We use this to style the transition when inputs are focused and when the glowing effect is disabled.
 // $input-transition-fade-time: 0.15s;
@@ -1156,8 +1164,8 @@
 
 // $table-list-class: 'table-list';
 // We use this to control the margins and padding of the table list.
-// $table-list-top-margin: to-rem(10);
-// $table-list-bottom-margin: to-rem(10);
+// $table-list-margin-top: to-rem(10);
+// $table-list-margin-bottom: to-rem(10);
 // $table-list-margin-left: 0;
 // $table-list-margin-right: 0;
 // $table-list-padding-left: 0;

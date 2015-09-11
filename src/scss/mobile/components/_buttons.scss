@@ -74,7 +74,7 @@ $info-buttons-border-color: $info-buttons-bg-hover !default;
 
 // We use this to set the default radius used throughout the core.
 $buttons-radius: $global-radius !default;
-$buttons-round: $global-rounded !default;
+$buttons-rounded: $global-rounded !default;
 
 // We use this to set default opacity for disabled buttons.
 $buttons-disabled-opacity: .6 !default;
@@ -259,7 +259,7 @@ $buttons-disabled-opacity: .6 !default;
                 border-radius: 0;
             }
             &.round {
-                border-radius: $buttons-round;
+                border-radius: $buttons-rounded;
             }
             &[class^=#{$icons-class}-]::before {
                 margin-right: $body-font-size / 2;

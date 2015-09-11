@@ -67,7 +67,7 @@ $icon-wallet: "\2830";
             src: url("#{$icons-font-path}/icons.woff?v=#{$icons-hash}") format("woff"),
                 url("#{$icons-font-path}/icons.ttf?v=#{$icons-hash}") format("truetype"),
                 url("#{$icons-font-path}/icons.svg?v=#{$icons-hash}#svg") format("svg");
-            font-weight: normal;
+            font-weight: 400;
             font-style: normal;
         }
 
@@ -77,8 +77,6 @@ $icon-wallet: "\2830";
             vertical-align: 0;
             line-height: 1;
             font-family: $icons-font-family;
-            font-style: normal;
-            font-weight: normal;
             font-variant: normal;
             -webkit-font-smoothing: antialiased;
             text-transform: none;

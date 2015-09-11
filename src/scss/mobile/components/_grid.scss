@@ -23,10 +23,7 @@ $last-child-float: right !default;
 // $totalColumns - Found in settings file
 @function grid-calc($colNumber, $totalColumns) {
     $result: percentage($colNumber / $totalColumns);
-    @if $result == 0% {
-        $result: 0;
-    }
-    @return $result;
+    @return if($result == 0%, 0, $result);
 }
 
 //

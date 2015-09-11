@@ -177,14 +177,14 @@ $button-group-border-style: solid !default;
                     &,
                     > button,
                     > .#{$buttons-class} {
-                        @include side-radius(left, $buttons-round);
+                        @include side-radius(left, $buttons-rounded);
                     }
                 }
                 &:last-child {
                     &,
                     > button,
                     > .#{$buttons-class} {
-                        @include side-radius(right, $buttons-round);
+                        @include side-radius(right, $buttons-rounded);
                     }
                 }
             }

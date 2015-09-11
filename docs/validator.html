@@ -168,11 +168,14 @@
   <h1>其它可选项</h1>
   <pre>
   $(document).mobile({
-    abide : {
-      validate_on: 'change', // change (when input value changes), blur (when input blur), manual (when call custom events)
-      focus_on_invalid: true, // automatically bring the focus to an invalid input field
-      error_labels: true, // labels with a for="inputId" will recieve an `error` class
-      error_class: 'has-error', // labels with a for="inputId" will recieve an `error` class
+    validate: {
+      // change (when input value changes), blur (when input blur), manual (when call custom events)
+      validate_on: 'change',
+      // automatically bring the focus to an invalid input field
+      focus_on_invalid: true,
+      // labels with a for="inputId" will recieve an `error` class
+      error_labels: true,
+      error_class: 'has-error',
       alert_element: '.alert-box',
       // the amount of time Validator will take before it validates the form (in ms).
       // smaller time will result in faster validation

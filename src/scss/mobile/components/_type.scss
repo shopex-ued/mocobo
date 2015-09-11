@@ -8,7 +8,6 @@ $include-html-type-classes: $include-html-classes !default;
 
 // We use these to control header font styles
 $header-font-weight: $font-weight-normal !default;
-$header-font-style: normal !default;
 $header-font-color: $jet !default;
 $header-line-height: 1.5 !default;
 $header-top-margin: 0.2rem !default;
@@ -131,23 +130,12 @@ $blockquote-cite-link-color: $blockquote-cite-font-color !default;
         @include align-classes;
         /* Typography resets */
         dl,
-        dt,
+        // dt,
         dd,
         ul,
         ol,
-        li,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        pre,
-        form,
-        p,
-        blockquote,
-        th,
-        td {
+        input,
+        p {
             margin: 0;
             padding: 0;
         }
@@ -182,7 +170,6 @@ $blockquote-cite-link-color: $blockquote-cite-font-color !default;
         /* Default header styles */
         h1, h2, h3, h4, h5, h6 {
             color: $header-font-color;
-            font-style: $header-font-style;
             font-weight: $header-font-weight;
             line-height: $header-line-height;
             margin-bottom: $header-bottom-margin;
