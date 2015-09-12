@@ -34,21 +34,25 @@ $input-placeholder-font-color: $steel !default;
 $input-font-size: to-rem(14) !default;
 $input-bg-color: $white !default;
 $input-focus-bg-color: $input-bg-color !default;
-$input-border-color: scale-color($white, $lightness: -20%) !default;
-$input-focus-border-color: scale-color($input-border-color, $lightness: -20%) !default;
 $input-border-width: 1px !default;
 $input-border-style: solid !default;
+$input-border-color: scale-color($white, $lightness: -20%) !default;
+$input-focus-border-color: scale-color($input-border-color, $lightness: -20%) !default;
 $input-border-radius: $global-radius !default;
 $input-disabled-bg: $gainsboro !default;
-$input-box-shadow: inset 0 1px 2px rgba($black, 0.1) !default;
+$input-box-shadow: inset 0 2px 3px rgba($black, 0.05) !default;
 
 //We use this to controll the radios / checkboxes style.
 $radio-medium: to-rem(24) !default;
-$checkbox-checkmark-medium: $radio-medium - to-rem(10) !default;
 $radio-bg-color: $white !default;
-$radio-border-color: $base !default;
+$radio-margin: to-rem(3 0) !default;
+$radio-border-width: $input-border-width !default;
+$radio-border-style: $input-border-style !default;
+$radio-border-color: $input-border-color !default;
 $radio-checked-border-color: $primary-color !default;
 $radio-border-radius: $global-rounded !default;
+$checkbox-checkmark-medium: $radio-medium - to-rem(10) !default;
+$radio-disabled-checkmark-opacity: .5 !default;
 
 // We use this to style the glowing effect of inputs when focused
 $input-include-glowing-effect: true !default;
@@ -94,10 +98,6 @@ $input-error-message-font-color-alt: $oil !default;
 // We use this to style the transition when inputs are focused and when the glowing effect is disabled.
 $input-transition-fade-time: 0.15s !default;
 $input-transition-fade-timing-function: linear !default;
-
-// Select variables
-$select-bg-color: $ghost !default;
-$select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
 
 //
 // @MIXINS
@@ -239,8 +239,7 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
 }
 
 // We use this mixin to create postfix label styles
-@mixin postfix($border-collapse: false) {
-    left: -1px;
+@mixin postfix($border-collapse: true) {
     @if $border-collapse {
         border-left: none;
     }
@@ -307,31 +306,11 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
 
 // We use this mixin to style select elements
 @mixin form-select {
-    // -webkit-appearance: none !important;
-    appearance: none !important;
-    border-radius: 0;
     // The custom arrow has some fake horizontal padding so we can align it
     // from the right side of the element without relying on CSS3
     // We can safely use leftmost and rightmost now
-    background: $select-bg-color url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMCIgeT0iMCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iM3B4IiB2aWV3Qm94PSIwIDAgMjQgMyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8cG9seWdvbiBwb2ludHM9IjguNSwwIDEyLDMgMTUuNSwwIi8+DQo8L3N2Zz4NCg==) 100% 50% no-repeat;
-    border: $input-border-width $input-border-style $input-border-color;
-    color: $input-font-color;
-    font-size: $input-font-size;
-    line-height: normal;
-    margin: 0;
-    padding: ($form-spacing / 2) ($form-spacing * 1.5) ($form-spacing / 2) ($form-spacing / 3);
-    &.radius {
-        @include radius($input-border-radius);
-    }
-    &:focus {
-        background-color: $select-hover-bg-color;
-        border-color: $input-focus-border-color;
-        outline: 0 none;
-    }
-    // Disabled Styles
-    &:disabled {
-        background-color: $input-disabled-bg;
-    }
+    background: $input-bg-color url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMCIgeT0iMCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iM3B4IiB2aWV3Qm94PSIwIDAgMjQgMyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8cG9seWdvbiBwb2ludHM9IjguNSwwIDEyLDMgMTUuNSwwIi8+DQo8L3N2Zz4NCg==) 100% 50% no-repeat;
+    padding-right: ($form-spacing * 1.5);
 }
 
 // We use this mixin to turn on/off HTML5 number spinners
@@ -345,8 +324,9 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
 @include exports("form") {
     @if $include-html-form-classes {
         // We use this to get basic styling on all basic form elements
-        input:not([type=radio]):not([type=checkbox]),
-        textarea {
+        input,
+        textarea,
+        select {
             appearance: none;
             border-radius: 0;
             @include form-element;
@@ -379,7 +359,7 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
         // Add height value for select elements to match text input height
         select {
             @include form-select;
-            height: $input-font-size + $form-spacing * 1.5 - to-rem(1);
+            // height: $input-font-size + $form-spacing * 1.5 - to-rem(1);
             &[multiple] {
                 height: auto;
             }
@@ -394,21 +374,23 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
         // Radio and Checkbox's Style
         input[type="radio"],
         input[type="checkbox"] {
-            appearance: none;
+            // appearance: none;
             display: inline-block;
             position: relative;
-            background-color: $radio-bg-color;
-            border: 1px solid $base;
-            border-radius: $radio-border-radius;
+            margin: $radio-margin;
+            padding: 0;
             width: $radio-medium;
             height: $radio-medium;
-            outline: 0;
+            @if darken($radio-bg-color, 0) != darken($input-bg-color, 0) {
+                background-color: $radio-bg-color;
+            }
+            @if $radio-border-width != $input-border-width or $radio-border-style != $input-border-style or darken($radio-border-color, 0) != darken($input-border-color, 0) {
+                border: $radio-border-width $radio-border-style $radio-border-color;
+            }
+            border-radius: $radio-border-radius;
             vertical-align: middle;
             &::before {
                 position: absolute;
-            }
-            &:disabled::before {
-                opacity: .3;
             }
             &:checked {
                 border-color: $radio-checked-border-color;
@@ -416,10 +398,16 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
                     content: "";
                     color: $radio-checked-border-color;
                 }
-                &:focus {
-                    @if $input-include-glowing-effect {
-                        @include block-glowing-effect(focus, $input-glowing-effect-fade-time, $radio-glowing-effect-color, false);
+                @if $input-include-glowing-effect {
+                    &:focus {
+                        box-shadow: 0 0 5px $radio-glowing-effect-color;
                     }
+                }
+            }
+            &:disabled{
+                opacity: $radio-disabled-checkmark-opacity;
+                &::before {
+                    opacity: $radio-disabled-checkmark-opacity;
                 }
             }
         }
@@ -434,19 +422,22 @@ $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%) !default;
                 background-color: $primary-color;
                 border-radius: $global-rounded;
             }
+            &:disabled {
+                border-color: $radio-border-color;
+            }
         }
         input[type="checkbox"] {
             &:checked {
                 background-color: $primary-color;
-            }
-            &:checked::before {
-                top: to-rem(6);
-                left: to-rem(4);
-                width: $checkbox-checkmark-medium;
-                height: $checkbox-checkmark-medium / 2;
-                border-left: to-rem(2) solid $white;
-                border-bottom: to-rem(2) solid $white;
-                transform: rotate(-45deg);
+                &::before {
+                    top: to-rem(6);
+                    left: to-rem(4);
+                    width: $checkbox-checkmark-medium;
+                    height: $checkbox-checkmark-medium / 2;
+                    border-left: to-rem(2) solid $white;
+                    border-bottom: to-rem(2) solid $white;
+                    transform: rotate(-45deg);
+                }
             }
         }
         // /a.s.o.

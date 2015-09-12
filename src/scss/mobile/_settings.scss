@@ -666,21 +666,25 @@
 // $input-font-size: to-rem(14);
 // $input-bg-color: $white;
 // $input-focus-bg-color: $input-bg-color;
-// $input-border-color: scale-color($white, $lightness: -20%);
-// $input-focus-border-color: scale-color($input-border-color, $lightness: -20%);
 // $input-border-width: 1px;
 // $input-border-style: solid;
+// $input-border-color: scale-color($white, $lightness: -20%);
+// $input-focus-border-color: scale-color($input-border-color, $lightness: -20%);
 // $input-border-radius: $global-radius;
 // $input-disabled-bg: $gainsboro;
-// $input-box-shadow: inset 0 1px 2px rgba($black, 0.1);
+// $input-box-shadow: inset 0 2px 3px rgba($black, 0.05);
 
 //We use this to controll the radios / checkboxes style.
 // $radio-medium: to-rem(24);
-// $checkbox-checkmark-medium: $radio-medium - to-rem(10);
 // $radio-bg-color: $white;
+// $radio-margin: to-rem(3);
+// $radio-border-size: 1px;
+// $radio-border-style: solid;
 // $radio-border-color: $base;
 // $radio-checked-border-color: $primary-color;
 // $radio-border-radius: $global-rounded;
+// $checkbox-checkmark-medium: $radio-medium - to-rem(10);
+// $radio-disabled-checkmark-opacity: .5;
 
 // We use this to style the glowing effect of inputs when focused
 // $input-include-glowing-effect: true;
@@ -726,10 +730,6 @@
 // We use this to style the transition when inputs are focused and when the glowing effect is disabled.
 // $input-transition-fade-time: 0.15s;
 // $input-transition-fade-timing-function: linear;
-
-// Select variables
-// $select-bg-color: $ghost;
-// $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%);
 
 // 11. Icon Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -

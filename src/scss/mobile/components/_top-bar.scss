@@ -163,11 +163,11 @@ $topbar-arrows: true !default;
             .#{$grid-row-class} {
                 max-width: none;
             }
-            form,
-            input,
-            select {
-                // margin-bottom: 0;
-            }
+            // form,
+            // input,
+            // select {
+            //     margin-bottom: 0;
+            // }
             input,
             select {
                 display: inline-block;
@@ -191,7 +191,7 @@ $topbar-arrows: true !default;
                 // }
             }
             .logo {
-                float: left;
+                display: inline-block;
                 img {
                     min-height: 1px;
                     max-height: 100%;
