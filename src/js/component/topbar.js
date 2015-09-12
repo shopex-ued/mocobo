@@ -166,7 +166,6 @@
                 self = this;
 
             if (self.settings.absorb_topbar && self.absorbable(this.settings.absorb_topbar.parent(), this.settings)) {
-                console.log(1);
                 var distance = this.settings.absorb_topbar.data('absorbOffset') + this.settings.start_offset;
                 if ($window.scrollTop() > distance) {
                     if (!$(klass).hasClass('fixed')) {

@@ -134,7 +134,7 @@ $blockquote-cite-link-color: $blockquote-cite-font-color !default;
         dd,
         ul,
         ol,
-        input,
+        // li,
         p {
             margin: 0;
             padding: 0;
@@ -220,7 +220,7 @@ $blockquote-cite-link-color: $blockquote-cite-font-color !default;
             line-height: inherit;
         }
         small,
-        .small {
+        .text-small {
             font-size: $small-font-size;
             line-height: inherit;
         }

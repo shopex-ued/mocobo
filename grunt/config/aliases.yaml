@@ -17,7 +17,8 @@ build:
 # Default
 default:
   - 'build'
-  # - 'watch'
+  # If you want run browser-sync at default, please uncomment this line:
+  # - 'watches'
 watches:
   - 'browserSync'
   - 'watch'
