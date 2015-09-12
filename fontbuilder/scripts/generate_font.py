@@ -31,18 +31,29 @@ f.descent = 64
 
 manifest_file = open(MANIFEST_PATH, 'r')
 manifest_data = json.loads(manifest_file.read())
-# if you want rebuild font file with icon unchanged, comment the following line of code.
-if 'icons' not in manifest_data:
-  manifest_data['icons'] = []
-init_len = len(manifest_data['icons'])
-manifest_file.close()
-print "Load Manifest, Icons: %s" % ( len(manifest_data['icons']) )
+if os.path.isfile(BUILD_DATA_PATH):
+  build_data_file = open(BUILD_DATA_PATH, 'r')
+  build_data_old = json.loads(build_data_file.read())
+else:
+  build_data_old = {}
 
-build_data = copy.deepcopy(manifest_data)
+manifest_file.close()
+if os.path.isfile(BUILD_DATA_PATH):
+  build_data_file.close()
+
+# if you want rebuild font file with icon unchanged, comment the following line of code.
+if 'icons' not in build_data_old:
+  build_data_old['icons'] = []
+init_len = len(build_data_old['icons'])
+print "Load Icons: %s" % ( init_len )
+
+build_data = copy.deepcopy(build_data_old)
+build_data['font_name'] = manifest_data['font_name']
+build_data['class_name'] = manifest_data['class_name']
 build_data['icons'] = []
 
-font_name = manifest_data['font_name']
-m.update(manifest_data['class_name'] + ';')
+font_name = build_data['font_name']
+m.update(build_data['class_name'] + ';')
 m.update(font_name + ';')
 
 for dirname, dirnames, filenames in os.walk(INPUT_SVG_DIR):
@@ -55,7 +66,7 @@ for dirname, dirnames, filenames in os.walk(INPUT_SVG_DIR):
 
       # see if this file is already in the manifest
       chr_code = None
-      for icon in manifest_data['icons']:
+      for icon in build_data_old['icons']:
         if icon['name'] == name:
           chr_code = icon['code']
           break
@@ -67,7 +78,7 @@ for dirname, dirnames, filenames in os.walk(INPUT_SVG_DIR):
         while True:
           chr_code = '0x%x' % (cp)
           already_exists = False
-          for icon in manifest_data['icons']:
+          for icon in build_data_old['icons']:
             if icon.get('code') == chr_code:
               already_exists = True
               cp += 1
@@ -77,7 +88,7 @@ for dirname, dirnames, filenames in os.walk(INPUT_SVG_DIR):
             break
 
         print ' - %s' % chr_code
-        manifest_data['icons'].append({
+        build_data_old['icons'].append({
           'name': name,
           'code': chr_code
         })
@@ -131,11 +142,10 @@ for dirname, dirnames, filenames in os.walk(INPUT_SVG_DIR):
 
 build_hash = m.hexdigest()[0:10]
 
-if build_hash == manifest_data.get('build_hash') and init_len and os.path.isfile(fontfile + '.svg'):
+if build_hash == build_data_old.get('build_hash') and init_len and os.path.isfile(fontfile + '.svg'):
   print "Source files unchanged, did not rebuild fonts"
 
 else:
-  manifest_data['build_hash'] = build_hash
   build_data['build_hash'] = build_hash
 
   f.fontname = font_name
@@ -168,13 +178,7 @@ else:
   # Hint the TTF file
   subprocess.call('ttfautohint -s -f -n ' + fontfile + '.ttf ' + fontfile + '-hinted.ttf > /dev/null 2>&1 && mv ' + fontfile + '-hinted.ttf ' + fontfile + '.ttf', shell=True)
 
-  manifest_data['icons'] = sorted(manifest_data['icons'], key=lambda k: k['name'])
   build_data['icons'] = sorted(build_data['icons'], key=lambda k: k['name'])
-
-  print "Save Manifest, Icons: %s" % ( len(manifest_data['icons']) )
-  f = open(MANIFEST_PATH, 'w')
-  f.write( json.dumps(manifest_data, indent=4, separators=(',', ': ')) )
-  f.close()
 
   print "Save Build, Icons: %s" % ( len(build_data['icons']) )
   f = open(BUILD_DATA_PATH, 'w')
