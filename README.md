@@ -1,6 +1,6 @@
 # mocobo
 
-mocobo is a MObile front-end COdeBase for quickly develOp. You can quickly prototype and build sites or apps that work on any mobile device with mocob.
+mocobo is a MObile front-end COdeBase for quickly develOp. You can quickly prototype and build sites or apps that work on any mobile device with mocobo.
 
 #Requirement
 
