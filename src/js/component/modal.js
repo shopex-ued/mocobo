@@ -42,16 +42,15 @@
         },
 
         events: function(scope) {
-            var self = this,
-                S = self.S;
+            var self = this;
 
-            S(this.scope)
+            $(this.scope)
                 .off('.modal')
                 .on('click.modal', '[' + this.add_namespace('data-modal-id') + ']:not([disabled])', function(e) {
                     e.preventDefault();
 
                     if (!self.locked) {
-                        var element = S(this),
+                        var element = $(this),
                             ajax = element.data('modal-ajax'),
                             replaceContentSel = element.data('modal-replace-content');
 
@@ -70,12 +69,12 @@
                     }
                 });
 
-            S(document)
+            $(document)
                 .on('click.modal', this.close_targets(), function(e) {
                     e.preventDefault();
                     if (!self.locked) {
-                        var settings = S('[' + self.attr_name() + '].open').data(self.attr_name(true) + '-init') || self.settings,
-                            overlay_clicked = S(e.target)[0] === S('.' + settings.overlay_class)[0];
+                        var settings = $('[' + self.attr_name() + '].open').data(self.attr_name(true) + '-init') || self.settings,
+                            overlay_clicked = $(e.target)[0] === $('.' + settings.overlay_class)[0];
 
                         if (overlay_clicked) {
                             if (settings.close_on_overlay_click) {
@@ -86,12 +85,12 @@
                         }
 
                         self.locked = true;
-                        self.close.call(self, overlay_clicked ? S('[' + self.attr_name() + '].open:not(.toback)') : S(this).closest('[' + self.attr_name() + ']'));
+                        self.close.call(self, overlay_clicked ? $('[' + self.attr_name() + '].open:not(.toback)') : $(this).closest('[' + self.attr_name() + ']'));
                     }
                 });
 
-            if (S('[' + self.attr_name() + ']', this.scope).length > 0) {
-                S(this.scope)
+            if ($('[' + self.attr_name() + ']', this.scope).length > 0) {
+                $(this.scope)
                     // .off('.modal')
                     .on('open.modal', this.settings.open)
                     .on('opened.modal', this.settings.opened)
@@ -100,7 +99,7 @@
                     .on('closed.modal', this.settings.closed)
                     .on('closed.modal', this.close_video);
             } else {
-                S(this.scope)
+                $(this.scope)
                     // .off('.modal')
                     .on('open.modal', '[' + self.attr_name() + ']', this.settings.open)
                     .on('opened.modal', '[' + self.attr_name() + ']', this.settings.opened)
@@ -120,14 +119,14 @@
             if (target) {
                 if (typeof target.selector !== 'undefined') {
                     // Find the named node; only use the first one found, since the rest of the code assumes there's only one node
-                    modal = self.S('#' + target.data('modal-id')).first();
+                    modal = $('#' + target.data('modal-id')).first();
                 } else {
-                    modal = self.S(this.scope);
+                    modal = $(this.scope);
 
                     ajax_settings = target;
                 }
             } else {
-                modal = self.S(this.scope);
+                modal = $(this.scope);
             }
 
             var settings = modal.data(self.attr_name(true) + '-init');
@@ -139,7 +138,7 @@
             }
 
             if (!modal.hasClass('open')) {
-                var open_modal = self.S('[' + self.attr_name() + '].open');
+                var open_modal = $('[' + self.attr_name() + '].open');
 
                 modal.attr('tabindex', '0').attr('aria-hidden', 'false');
 
@@ -196,8 +195,8 @@
                                 modal.html(data);
                             }
 
-                            self.S(modal).mobile('section', 'reflow');
-                            self.S(modal).children().mobile();
+                            $(modal).mobile('section', 'reflow');
+                            $(modal).children().mobile();
 
                             openModal();
                         }
@@ -213,12 +212,12 @@
                     $.ajax(ajax_settings);
                 }
             }
-            self.S(window).trigger('resize');
+            $(window).trigger('resize');
         },
 
         close: function(modal) {
-            var modal = modal && modal.length ? modal : this.S(this.scope),
-                open_modals = this.S('[' + this.attr_name() + '].open'),
+            var modal = modal && modal.length ? modal : $(this.scope),
+                open_modals = $('[' + this.attr_name() + '].open'),
                 settings = modal.data(this.attr_name(true) + '-init') || this.settings,
                 self = this;
 
@@ -274,7 +273,7 @@
         },
 
         toggle_overlay: function(modal, state) {
-            if (this.S('.' + this.settings.overlay_class).length === 0) {
+            if ($('.' + this.settings.overlay_class).length === 0) {
                 this.settings.overlay = $('<div />', {
                         'class': this.settings.overlay_class
                     })

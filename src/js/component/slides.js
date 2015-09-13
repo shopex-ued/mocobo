@@ -455,20 +455,20 @@
         },
 
         events: function(instance) {
-            var slides_instance = new Slides(this.S(instance), this.S(instance).data('slides-init'));
-            this.S(instance).data(this.name + '-instance', slides_instance);
+            var slides_instance = new Slides($(instance), $(instance).data('slides-init'));
+            $(instance).data(this.name + '-instance', slides_instance);
         },
 
         reflow: function() {
             var self = this;
 
-            if (self.S(self.scope).is('[data-slides]')) {
-                var $el = self.S(self.scope);
+            if ($(self.scope).is('[data-slides]')) {
+                var $el = $(self.scope);
                 var instance = $el.data(self.name + '-instance');
                 instance.compute_dimensions();
             } else {
-                self.S('[data-slides]', self.scope).each(function(idx, el) {
-                    var $el = self.S(el);
+                $('[data-slides]', self.scope).each(function(idx, el) {
+                    var $el = $(el);
                     var opts = self.data_options($el);
                     var instance = $el.data(self.name + '-instance');
                     instance.compute_dimensions();

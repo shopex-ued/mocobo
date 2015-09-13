@@ -13,17 +13,16 @@
         },
 
         events: function() {
-            var self = this,
-                S = this.S;
+            var self = this;
 
             $(this.scope).off('.alert').on('click.alert', '[' + this.attr_name() + '] .close', function(e) {
-                var alertBox = S(this).closest('[' + self.attr_name() + ']'),
+                var alertBox = $(this).closest('[' + self.attr_name() + ']'),
                     settings = alertBox.data(self.attr_name(true) + '-init') || self.settings;
 
                 e.preventDefault();
                 alertBox.addClass('alert-close');
                 alertBox.on('transitionend webkitTransitionEnd', function(e) {
-                    S(this).trigger('close.alert').remove();
+                    $(this).trigger('close.alert').remove();
                     settings.callback();
                 });
             });

@@ -15,7 +15,6 @@
 
         events: function() {
             var self = this,
-                S = self.S,
                 move_class = '',
                 right_postfix = '',
                 left_postfix = '',
@@ -33,7 +32,7 @@
                 move_class = 'overlap';
             }
 
-            S(this.scope).off('.offcanvas')
+            $(this.scope).off('.offcanvas')
                 .on('click.offcanvas', '[' + this.attr_name() + '] .left-offcanvas-toggle', function(e) {
                     // var settings = self.get_settings(e);
                     var $off_canvas = self.get_wrapper(e);
@@ -45,7 +44,7 @@
                 })
                 .on('click.offcanvas', '[' + this.attr_name() + '] .left.offcanvas-menu a', function(e) {
                     var settings = self.get_settings(e);
-                    var parent = S(this).parent('li');
+                    var parent = $(this).parent('li');
                     var $off_canvas = self.get_wrapper(e);
 
                     if (settings.close_on_click && !parent.hasClass('has-submenu') && !parent.hasClass('back')) {
@@ -53,7 +52,7 @@
                         parent.parent().removeClass(move_class + right_postfix);
                     } else if (parent.hasClass('has-submenu')) {
                         e.preventDefault();
-                        S(this).siblings('.left.offcanvas-submenu').toggleClass(move_class + right_postfix);
+                        $(this).siblings('.left.offcanvas-submenu').toggleClass(move_class + right_postfix);
                     } else if (parent.hasClass('back')) {
                         e.preventDefault();
                         parent.parent().removeClass(move_class + right_postfix);
@@ -72,7 +71,7 @@
                 })
                 .on('click.offcanvas', '[' + this.attr_name() + '] .right.offcanvas-menu a', function(e) {
                     var settings = self.get_settings(e);
-                    var parent = S(this).parent('li');
+                    var parent = $(this).parent('li');
                     var $off_canvas = self.get_wrapper(e);
 
                     if (settings.close_on_click && !parent.hasClass('has-submenu') && !parent.hasClass('back')) {
@@ -80,7 +79,7 @@
                         parent.parent().removeClass(move_class + left_postfix);
                     } else if (parent.hasClass('has-submenu')) {
                         e.preventDefault();
-                        S(this).siblings('.right.offcanvas-submenu').toggleClass(move_class + left_postfix);
+                        $(this).siblings('.right.offcanvas-submenu').toggleClass(move_class + left_postfix);
                     } else if (parent.hasClass('back')) {
                         e.preventDefault();
                         parent.parent().removeClass(move_class + left_postfix);
@@ -146,15 +145,15 @@
         },
 
         get_settings: function(e) {
-            var offcanvas = this.S(e.target).closest('[' + this.attr_name() + ']');
+            var offcanvas = $(e.target).closest('[' + this.attr_name() + ']');
             return offcanvas.data(this.attr_name(true) + '-init') || this.settings;
         },
 
         get_wrapper: function(e) {
-            var $off_canvas = this.S(e ? e.target : this.scope).closest('.offcanvas-wrap');
+            var $off_canvas = $(e ? e.target : this.scope).closest('.offcanvas-wrap');
 
             if ($off_canvas.length === 0) {
-                $off_canvas = this.S('.offcanvas-wrap');
+                $off_canvas = $('.offcanvas-wrap');
             }
 
             return $off_canvas;

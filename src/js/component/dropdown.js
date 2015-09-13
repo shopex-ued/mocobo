@@ -23,45 +23,44 @@
         },
 
         events: function(scope) {
-            var self = this,
-                S = self.S;
+            var self = this;
 
-            S(this.scope)
+            $(this.scope)
                 .off('.dropdown')
                 .on('click.dropdown', '[' + this.attr_name() + ']', function(e) {
-                    var settings = S(this).data(self.attr_name(true) + '-init') || self.settings;
+                    var settings = $(this).data(self.attr_name(true) + '-init') || self.settings;
                     if (!settings.is_hover || 'ontouchstart' in document) {
                         e.preventDefault();
-                        if (S(this).parent('[data-modal-id]').length) {
+                        if ($(this).parent('[data-modal-id]').length) {
                             e.stopPropagation();
                         }
                         self.toggle($(this));
                     }
                 })
                 .on('click.dropdown', function(e) {
-                    var parent = S(e.target).closest('[' + self.attr_name() + '-content]');
+                    var parent = $(e.target).closest('[' + self.attr_name() + '-content]');
                     var links = parent.find('a');
 
                     if (links.length > 0 && parent.attr('aria-autoclose') !== 'false') {
-                        self.close.call(self, S('[' + self.attr_name() + '-content]'));
+                        self.close.call(self, $('[' + self.attr_name() + '-content]'));
                     }
 
                     if (e.target !== document && !$.contains(document.documentElement, e.target)) {
                         return;
                     }
 
-                    if (S(e.target).closest('[' + self.attr_name() + ']').length > 0) {
+                    if ($(e.target).closest('[' + self.attr_name() + ']').length > 0) {
                         return;
                     }
 
-                    if (!(S(e.target).data('modalId')) &&
-                        (parent.length > 0 && (S(e.target).is('[' + self.attr_name() + '-content]') ||
+                    if (!($(e.target).data('modalId')) &&
+                        (parent.length > 0 && ($(e.target).is('[' + self.attr_name() + '-content]') ||
                             $.contains(parent.first()[0], e.target)))) {
                         e.stopPropagation();
                         return;
                     }
 
-                    self.close.call(self, S('[' + self.attr_name() + '-content]'));
+                    self.close.call(self, $('[' + self.attr_name() + '-content]'));
                 })
                 .on('opened.dropdown', '[' + self.attr_name() + '-content]', function() {
                     self.settings.opened.call(this);
@@ -70,7 +69,7 @@
                     self.settings.closed.call(this);
                 });
 
-            S(window)
+            $(window)
                 .off('.dropdown')
                 .on('resize.dropdown', self.throttle(function() {
                     self.resize.call(self);
@@ -84,8 +83,8 @@
             dropdown.each(function(idx) {
                 var original_target = $('[' + self.attr_name() + '=' + dropdown[idx].id + ']') || $('aria-controls=' + dropdown[idx].id + ']');
                 original_target.attr('aria-expanded', 'false');
-                if (self.S(this).hasClass(self.settings.active_class)) {
-                    self.S(this)
+                if ($(this).hasClass(self.settings.active_class)) {
+                    $(this)
                         .css('left', '-99999px')
                         .attr('aria-hidden', 'true')
                         .removeClass(self.settings.active_class)
@@ -93,7 +92,7 @@
                         .removeClass(self.settings.active_class)
                         .removeData('target');
 
-                    self.S(this).trigger('closed.dropdown', [dropdown]);
+                    $(this).trigger('closed.dropdown', [dropdown]);
                 }
             });
             dropdown.removeClass('act-open-' + this.attr_name(true));
@@ -101,8 +100,8 @@
 
         closeall: function() {
             var self = this;
-            $.each(self.S('.act-open-' + this.attr_name(true)), function() {
-                self.close.call(self, self.S(this));
+            $.each($('.act-open-' + this.attr_name(true)), function() {
+                self.close.call(self, $(this));
             });
         },
 
@@ -128,12 +127,12 @@
             if (target.hasClass(this.settings.disabled_class)) {
                 return;
             }
-            var dropdown = this.S('#' + target.data(this.data_attr()));
+            var dropdown = $('#' + target.data(this.data_attr()));
             if (dropdown.length === 0) {
                 return;
             }
 
-            this.close.call(this, this.S('[' + this.attr_name() + '-content]').not(dropdown));
+            this.close.call(this, $('[' + this.attr_name() + '-content]').not(dropdown));
 
             if (dropdown.hasClass(this.settings.active_class)) {
                 this.close.call(this, dropdown);
@@ -146,7 +145,7 @@
         },
 
         resize: function() {
-            var dropdown = this.S('[' + this.attr_name() + '-content].open');
+            var dropdown = $('[' + this.attr_name() + '-content].open');
             var target = $(dropdown.data("target"));
 
             if (dropdown.length && target.length) {
@@ -361,10 +360,10 @@
         },
 
         off: function() {
-            this.S(this.scope).off('.dropdown');
-            this.S('html, body').off('.dropdown');
-            this.S(window).off('.dropdown');
-            this.S('[data-dropdown-content]').off('.dropdown');
+            $(this.scope).off('.dropdown');
+            $('html, body').off('.dropdown');
+            $(window).off('.dropdown');
+            $('[data-dropdown-content]').off('.dropdown');
         },
 
         reflow: function() {}

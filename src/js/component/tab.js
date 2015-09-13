@@ -17,13 +17,12 @@
         default_tab_hashes: [],
 
         init: function(scope, method, options) {
-            var self = this,
-                S = this.S;
+            var self = this;
 
             // Store the default active tabs which will be referenced when the
             // location hash is absent, as in the case of navigating the tabs and
             // returning to the first viewing via the browser Back button.
-            S('[' + this.attr_name() + '] > .active > a', this.scope).each(function() {
+            $('[' + this.attr_name() + '] > .active > a', this.scope).each(function() {
                 self.default_tab_hashes.push(this.hash);
             });
 
@@ -36,19 +35,18 @@
         },
 
         events: function() {
-            var self = this,
-                S = this.S;
+            var self = this;
 
             var usual_tab_behavior = function(e, target) {
-                var settings = S(target).closest('[' + self.attr_name() + ']').data(self.attr_name(true) + '-init');
+                var settings = $(target).closest('[' + self.attr_name() + ']').data(self.attr_name(true) + '-init');
                 if (!settings.is_hover || 'ontouchstart' in document) {
                     e.preventDefault();
                     e.stopPropagation();
-                    self.toggle_active_tab(S(target).parent());
+                    self.toggle_active_tab($(target).parent());
                 }
             };
 
-            S(this.scope)
+            $(this.scope)
                 .off('.tab')
                 // Click event: tab title
                 .on('click.tab', '[' + this.attr_name() + '] > * > a', function(e) {
@@ -57,7 +55,7 @@
                 });
 
             // Location hash change event
-            S(window).on('hashchange.tab', function(e) {
+            $(window).on('hashchange.tab', function(e) {
                 e.preventDefault();
                 self.handle_location_hash_change();
             });
@@ -65,11 +63,10 @@
 
         handle_location_hash_change: function() {
 
-            var self = this,
-                S = this.S;
+            var self = this;
 
-            S('[' + this.attr_name() + ']', this.scope).each(function() {
-                var settings = S(this).data(self.attr_name(true) + '-init');
+            $('[' + this.attr_name() + ']', this.scope).each(function() {
+                var settings = $(this).data(self.attr_name(true) + '-init');
                 if (settings.deep_linking) {
                     // Match the location hash to a label
                     var hash;
@@ -82,7 +79,7 @@
                     if (hash != '') {
                         // Check whether the location hash references a tab content div or
                         // another element on the page (inside or outside the tab content div)
-                        var hash_element = S(hash);
+                        var hash_element = $(hash);
                         if (hash_element.hasClass(settings.panel_class) && hash_element.parent().hasClass(settings.content_class)) {
                             // Tab content div
                             self.toggle_active_tab($('[' + self.attr_name() + '] > * > a[href=' + hash + ']').parent());
@@ -106,12 +103,11 @@
 
         toggle_active_tab: function(tab, location_hash) {
             var self = this,
-                S = self.S,
                 tabs = tab.closest('[' + this.attr_name() + ']'),
                 tab_link = tab.find('a'),
                 anchor = tab.children('a').first(),
                 target_hash = '#' + anchor.attr('href').split('#')[1],
-                target = S(target_hash),
+                target = $(target_hash),
                 siblings = tab.siblings(),
                 settings = tabs.data(this.attr_name(true) + '-init'),
                 go_to_hash = function(hash) {
@@ -128,7 +124,7 @@
             // allow usage of data-tab-content attribute instead of href
             if (anchor.data('tab-content')) {
                 target_hash = '#' + anchor.data('tab-content').split('#')[1];
-                target = S(target_hash);
+                target = $(target_hash);
             }
 
             if (settings.deep_linking) {
@@ -141,7 +137,7 @@
                     if (location_hash == undefined || location_hash == target_hash) {
                         tab.parent()[0].scrollIntoView();
                     } else {
-                        S(target_hash)[0].scrollIntoView();
+                        $(target_hash)[0].scrollIntoView();
                     }
                 } else {
                     // prefix the hashes so that the browser doesn't scroll down

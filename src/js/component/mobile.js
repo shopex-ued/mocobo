@@ -35,30 +35,6 @@
         }
     });
 
-    // private Fast Selector wrapper,
-    // returns jQuery object. Only use where
-    // getElementById is not available.
-    var S = function(selector, context) {
-        if (typeof selector === 'string') {
-            if (context) {
-                var cont;
-                if (context.jquery) {
-                    cont = context[0];
-                    if (!cont) {
-                        return context;
-                    }
-                } else {
-                    cont = context;
-                }
-                return $(cont.querySelectorAll(selector));
-            }
-
-            return $(document.querySelectorAll(selector));
-        }
-
-        return $(selector, context);
-    };
-
     // Namespace functions.
 
     var attr_name = function(init) {
@@ -99,7 +75,7 @@
     var bindings = function(method, options) {
         var self = this,
             bind = function() {
-                var $this = S(this),
+                var $this = $(this),
                     should_bind_events = !$this.data(self.attr_name(true) + '-init');
                 $this.data(self.attr_name(true) + '-init', $.extend({}, self.settings, (options || method), self.data_options($this)));
 
@@ -108,10 +84,10 @@
                 }
             };
 
-        if (S(this.scope).is('[' + this.attr_name() + ']')) {
+        if ($(this.scope).is('[' + this.attr_name() + ']')) {
             bind.call(this.scope);
         } else {
-            S('[' + this.attr_name() + ']', this.scope).each(bind);
+            $('[' + this.attr_name() + ']', this.scope).each(bind);
         }
         // # Patch to fix #5043 to move this *after* the if/else clause in order for Backbone and similar frameworks to have improved control over event binding and data-options updating.
         if (typeof method === 'string') {
@@ -231,10 +207,10 @@
         name: 'Mobile',
 
         media_queries: {
-            'small': S('.mobile-mq-small').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, ''),
-            'small-only': S('.mobile-mq-small-only').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, ''),
-            'medium': S('.mobile-mq-medium').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, ''),
-            'medium-only': S('.mobile-mq-medium-only').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, '')
+            'small': $('.mobile-mq-small').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, ''),
+            'small-only': $('.mobile-mq-small-only').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, ''),
+            'medium': $('.mobile-mq-medium').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, ''),
+            'medium-only': $('.mobile-mq-medium-only').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, '')
         },
 
         stylesheet: $('<style></style>').appendTo('head')[0].sheet,
@@ -262,8 +238,8 @@
                 }
             }
 
-            S(window).load(function() {
-                S(window)
+            $(window).load(function() {
+                $(window)
                     .trigger('resize.imagesbox')
                     .trigger('resize.dropdown')
                     .trigger('resize.equalizer')
@@ -302,7 +278,6 @@
             lib['attr_name'] = attr_name;
             lib['add_namespace'] = add_namespace;
             lib['bindings'] = bindings;
-            lib['S'] = this.utils.S;
         },
 
         inherit: function(scope, methods) {
@@ -342,22 +317,6 @@
 
         // methods that can be inherited in libraries
         utils: {
-
-            // Description:
-            //    Fast Selector wrapper returns jQuery object. Only use where getElementById
-            //    is not available.
-            //
-            // Arguments:
-            //    Selector (String): CSS selector describing the element(s) to be
-            //    returned as a jQuery object.
-            //
-            //    Scope (String): CSS selector describing the area to be searched. Default
-            //    is document.
-            //
-            // Returns:
-            //    Element (jQuery Object): jQuery object containing elements matching the
-            //    selector within the scope.
-            S: S,
 
             // Description:
             //    Executes a function a max of once every n milliseconds
@@ -553,7 +512,7 @@
                 }
 
                 images.each(function() {
-                    single_image_loaded(self.S(this), function() {
+                    single_image_loaded($(this), function() {
                         unloaded -= 1;
                         if (unloaded === 0) {
                             callback(images);

@@ -19,17 +19,17 @@
         events: function(instance) {
             var self = this;
             var S = this.S;
-            self.create(this.S(instance));
+            self.create($(instance));
 
-            S(this.scope)
+            $(this.scope)
                 .off('.accordion')
                 .on('click.accordion', '[' + this.attr_name() + '] > .item > a', function(e) {
                     e.preventDefault();
 
-                    var accordion = S(this).closest('[' + self.attr_name() + ']'),
+                    var accordion = $(this).closest('[' + self.attr_name() + ']'),
                         groupSelector = self.attr_name() + '=' + accordion.attr(self.attr_name()),
                         settings = accordion.data(self.attr_name(true) + '-init') || self.settings,
-                        target = S('#' + this.href.split('#')[1]).parent(),
+                        target = $('#' + this.href.split('#')[1]).parent(),
                         items = $('> .item', accordion),
                         active_item;
 
@@ -40,7 +40,7 @@
 
                     if (settings.toggleable && target.hasClass(settings.active_class)) {
                         target.toggleClass(settings.active_class, false);
-                        S(this).attr('aria-expanded', function(i, attr) {
+                        $(this).attr('aria-expanded', function(i, attr) {
                             return attr === 'true' ? 'false' : 'true';
                         });
                         settings.callback(target);
@@ -57,7 +57,7 @@
                     }
 
                     target.addClass(settings.active_class);
-                    S(this).attr('aria-expanded', 'true');
+                    $(this).attr('aria-expanded', 'true');
                     settings.callback(target);
                     target.triggerHandler('toggled', [accordion]);
                     accordion.triggerHandler('toggled', [target]);

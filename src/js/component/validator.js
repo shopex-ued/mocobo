@@ -71,7 +71,7 @@
 
         events: function(scope) {
             var self = this,
-                form = self.S(scope).attr('novalidate', 'novalidate'),
+                form = $(scope).attr('novalidate', 'novalidate'),
                 settings = form.data(this.attr_name(true) + '-init') || {};
 
             this.invalid_attr = this.add_namespace('data-invalid');
@@ -88,7 +88,7 @@
                 .off('.validator')
                 .on('submit.validator', function(e) {
                     var is_ajax = $(this).attr(self.attr_name()) === 'ajax';
-                    return self.validate(self.S(this).find('input, textarea, select, [data-validator-verifier]').not(":hidden, [data-validator-ignore]").get(), e, is_ajax);
+                    return self.validate($(this).find('input, textarea, select, [data-validator-verifier]').not(":hidden, [data-validator-ignore]").get(), e, is_ajax);
                 })
                 .on('validate.validator', function(e) {
                     if (settings.validate_on === 'manual') {
@@ -131,7 +131,7 @@
         validate: function(els, e, is_ajax) {
             var validations = this.parse_patterns(els),
                 validation_count = validations.length,
-                form = this.S(els[0]).closest('form'),
+                form = $(els[0]).closest('form'),
                 submit_event = /submit/.test(e.type);
 
             // Has to count up to make sure the focus gets applied to the top error
@@ -141,7 +141,7 @@
                         els[i].focus();
                     }
                     form.trigger('invalid.validator');
-                    this.S(els[i]).closest('form').attr(this.invalid_attr, '');
+                    $(els[i]).closest('form').attr(this.invalid_attr, '');
                     return false;
                 }
             }
@@ -195,17 +195,17 @@
         check_validation: function(el_patterns) {
             var i = el_patterns.length,
                 validations = [],
-                form = this.S(el_patterns[0][0]).closest('[data-' + this.attr_name(true) + ']'),
+                form = $(el_patterns[0][0]).closest('[data-' + this.attr_name(true) + ']'),
                 settings = form.data(this.attr_name(true) + '-init') || {};
             while (i--) {
                 var el = el_patterns[i][0],
                     required = el_patterns[i][3],
                     value = el.value.trim(),
-                    direct_parent = this.S(el).parent(),
+                    direct_parent = $(el).parent(),
                     verifier = el.getAttribute(this.add_namespace('data-validator-verifier')),
                     is_radio = el.type === 'radio',
                     is_checkbox = el.type === 'checkbox',
-                    label = this.S('label[for="' + el.getAttribute('id') + '"]'),
+                    label = $('label[for="' + el.getAttribute('id') + '"]'),
                     valid_length = (required) ? (el.value.length > 0) : true,
                     el_validations = [];
 
@@ -242,14 +242,14 @@
                         last_valid = valid;
                     }
                     if (all_valid) {
-                        this.S(el).removeAttr(this.invalid_attr);
+                        $(el).removeAttr(this.invalid_attr);
                         parent.removeClass(this.settings.error_class);
                         if (label.length > 0 && this.settings.error_labels) {
                             label.removeClass(this.settings.error_class).removeAttr('role');
                         }
                         $(el).triggerHandler('valid');
                     } else {
-                        this.S(el).attr(this.invalid_attr, '');
+                        $(el).attr(this.invalid_attr, '');
                         parent.addClass(this.settings.error_class);
                         if (label.length > 0 && this.settings.error_labels) {
                             label.addClass(this.settings.error_class).attr('role', 'alert');
@@ -268,7 +268,7 @@
                         return valid;
                     })];
                     if (el_validations[0]) {
-                        this.S(el).removeAttr(this.invalid_attr);
+                        $(el).removeAttr(this.invalid_attr);
                         el.setAttribute('aria-invalid', 'false');
                         el.removeAttribute('aria-describedby');
                         parent.removeClass(this.settings.error_class);
@@ -277,7 +277,7 @@
                         }
                         $(el).triggerHandler('valid');
                     } else {
-                        this.S(el).attr(this.invalid_attr, '');
+                        $(el).attr(this.invalid_attr, '');
                         el.setAttribute('aria-invalid', 'true');
 
                         // Try to find the error associated with the input
@@ -318,7 +318,7 @@
         },
 
         valid_checkbox: function(el, required) {
-            var el = this.S(el),
+            var el = $(el),
                 valid = (el.is(':checked') || !required || el.get(0).getAttribute('disabled'));
 
             if (valid) {
@@ -334,7 +334,7 @@
 
         valid_radio: function(el, required) {
             var name = el.getAttribute('name'),
-                group = this.S(el).closest('[data-' + this.attr_name(true) + ']').find("[name='" + name + "']"),
+                group = $(el).closest('[data-' + this.attr_name(true) + ']').find("[name='" + name + "']"),
                 count = group.length,
                 valid = false,
                 disabled = false;
@@ -358,10 +358,10 @@
             // Has to count up to make sure the focus gets applied to the top error
             for (var i = 0; i < count; i++) {
                 if (valid) {
-                    this.S(group[i]).removeAttr(this.invalid_attr).parent().removeClass(this.settings.error_class);
+                    $(group[i]).removeAttr(this.invalid_attr).parent().removeClass(this.settings.error_class);
                     $(group[i]).triggerHandler('valid');
                 } else {
-                    this.S(group[i]).attr(this.invalid_attr, '').parent().addClass(this.settings.error_class);
+                    $(group[i]).attr(this.invalid_attr, '').parent().addClass(this.settings.error_class);
                     $(group[i]).triggerHandler('invalid');
                 }
             }
@@ -375,13 +375,13 @@
         //         valid = (from === to);
 
         //     if (valid) {
-        //         this.S(el).removeAttr(this.invalid_attr);
+        //         $(el).removeAttr(this.invalid_attr);
         //         parent.removeClass(this.settings.error_class);
         //         if (label.length > 0 && settings.error_labels) {
         //             label.removeClass(this.settings.error_class);
         //         }
         //     } else {
-        //         this.S(el).attr(this.invalid_attr, '');
+        //         $(el).attr(this.invalid_attr, '');
         //         parent.addClass(this.settings.error_class);
         //         if (label.length > 0 && settings.error_labels) {
         //             label.addClass(this.settings.error_class);
@@ -392,8 +392,8 @@
         // },
 
         valid_oneof: function(el, required, parent, doNotValidateOthers) {
-            var el = this.S(el),
-                // others = this.S('[' + this.add_namespace('data-oneof') + ']'),
+            var el = $(el),
+                // others = $('[' + this.add_namespace('data-oneof') + ']'),
                 valid = el.filter(function() {
                     return ['radio', 'checkbox'].indexOf(this.type) > -1 ? this.checked : !!this.value.trim();
                 }).length > 0;
@@ -418,8 +418,8 @@
 
         reflow: function(scope, options) {
             var self = this,
-                form = self.S('[' + this.attr_name() + ']').attr('novalidate', 'novalidate');
-            self.S(form).each(function(idx, el) {
+                form = $('[' + this.attr_name() + ']').attr('novalidate', 'novalidate');
+            $(form).each(function(idx, el) {
                 self.events(el);
             });
         }

@@ -19,7 +19,7 @@
         },
 
         events: function() {
-            this.S(window).off('.equalizer').on('resize.equalizer', function(e) {
+            $(window).off('.equalizer').on('resize.equalizer', function(e) {
                 this.reflow();
             }.bind(this));
         },
@@ -78,7 +78,7 @@
         reflow: function() {
             var self = this;
 
-            this.S('[' + this.attr_name() + ']', this.scope).each(function() {
+            $('[' + this.attr_name() + ']', this.scope).each(function() {
                 self.equalize(this);
             });
         }
