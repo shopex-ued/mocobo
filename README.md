@@ -19,7 +19,7 @@ npm install -g grunt-cli
 npm install
 grunt
 ```
-Then you can see the folders list:
+#Project Structure
 
 ```
 mocobo/
