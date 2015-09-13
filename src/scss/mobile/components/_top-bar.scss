@@ -102,13 +102,18 @@ $topbar-arrows: true !default;
 @include exports("top-bar") {
     @if $include-html-top-bar-classes {
         /* Top bar */
+        .sticky {
+            position: sticky;
+            top: 0;
+            @extend .clearfix;
+        }
         // Wrapped around .top-bar to make it fixed to the top
         .fixed {
             position: fixed;
             top: 0;
-            width: 100%;
-            z-index: 99;
             left: 0;
+            right: 0;
+            z-index: 99;
             &.bottom {
                 bottom: 0;
                 top: auto;
@@ -117,9 +122,6 @@ $topbar-arrows: true !default;
                     margin-bottom: 0;
                 }
             }
-        }
-        .absorb {
-            @extend .clearfix;
         }
         .#{$topbar-class} {
             background: $topbar-bg;
@@ -186,9 +188,11 @@ $topbar-arrows: true !default;
                 height: $topbar-input-height;
                 line-height: $topbar-input-height - to-rem(1);
                 font-size: $topbar-button-font-size;
-                // @media #{$retina} {
-                //     top: 1px;
-                // }
+            }
+            button {
+                @media #{$retina} {
+                    top: 1px;
+                }
             }
             .logo {
                 display: inline-block;

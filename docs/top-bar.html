@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="../dist/css/mobile.min.css">
 <style>
 .top-bar {margin-bottom: 10px;}
-.top-bar form{margin-left: auto; margin-right: auto;}
+.top-bar form{display:inline-block; margin-bottom: 0;}
 .top-bar input[type=text] { width: 142px; }
 .bottom .top-bar {margin-bottom: 0;}
 </style>
@@ -70,7 +70,7 @@
       <a href="" class="btn">设置</a>
     </form>
   </header>
-  <div class="absorb">
+  <div class="sticky">
     <header class="top-bar" data-topbar>
       <h1>吸附在屏幕顶部</h1>
     </header>
@@ -130,12 +130,9 @@
   <pre>
   $(document).mobile({
     topbar: {
-      index: 0,
+      sticky_class: 'sticky',
+      //will change top offset of the topbar
       start_offset: 0,
-      //Make topbar be absorbing
-      absorb_on: true,
-      //Absorbing's class
-      absorb_class: 'absorb',
       is_hover: true
     }
   });

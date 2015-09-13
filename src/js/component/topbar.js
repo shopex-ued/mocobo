@@ -5,11 +5,8 @@
         name: 'topbar',
 
         settings: {
+            sticky_class: 'sticky',
             start_offset: 0,
-            //Make topbar be absorbing
-            absorb_on: true,
-            //Absorbing's class
-            absorb_class: 'absorb',
             is_hover: true
         },
 
@@ -33,16 +30,17 @@
                     return;
                 }
 
-                if (self.absorbable(topbarContainer, settings)) {
-                    self.settings.absorb_class = settings.absorb_class;
-                    self.settings.absorb_topbar = topbar;
+                if (self.stickable(topbarContainer, settings)) {
+                    self.settings.sticky_class = settings.sticky_class;
+                    self.settings.sticky_topbar = topbar;
                     topbar.data('height', topbarContainer.outerHeight(true));
-                    topbar.data('absorbOffset', topbarContainer.offset().top);
+                    topbar.data('stickyOffset', topbarContainer.offset().top);
 
-                    if (!settings.adsorbed) {
-                        self.adsorbed(topbar);
+                    if (!settings.sticked) {
+                        settings.start_offset && topbarContainer.css('top', settings.start_offset);
+                        self.sticked(topbar);
 
-                        // Pad body when absorb (scrolled) or fixed.
+                        // Pad body when sticky (scrolled) or fixed.
                         self.add_custom_rule('.act-topbar-fixed { padding-top: ' + topbar.data('height') + 'px; }');
                     }
                 }
@@ -51,10 +49,8 @@
 
         },
 
-        absorbable: function(topbarContainer, settings) {
-            var absorb = topbarContainer.hasClass(settings.absorb_class);
-
-            return settings.absorb_on && absorb;
+        stickable: function(topbarContainer, settings) {
+            return topbarContainer.hasClass(settings.sticky_class);
         },
 
         timer: null,
@@ -108,65 +104,62 @@
                 var topbar = $(this),
                     settings = topbar.data(self.attr_name(true) + '-init');
 
-                var absorbContainer = topbar.parent('.' + self.settings.absorb_class);
-                var absorbOffset;
+                var stickyContainer = topbar.parent('.' + self.settings.sticky_class);
+                var stickyOffset;
 
-                if (self.absorbable(absorbContainer, settings)) {
-                    if (absorbContainer.hasClass('fixed')) {
+                if (self.stickable(stickyContainer, settings)) {
+                    if (stickyContainer.hasClass('fixed')) {
                         // Remove the fixed to allow for correct calculation of the offset.
-                        absorbContainer.removeClass('fixed');
+                        stickyContainer.removeClass('fixed');
 
-                        absorbOffset = absorbContainer.offset().top;
+                        stickyOffset = stickyContainer.offset().top;
                         if ($(document.body).hasClass('act-topbar-fixed')) {
-                            absorbOffset -= topbar.data('height');
+                            stickyOffset -= topbar.data('height');
                         }
 
-                        topbar.data('absorbOffset', absorbOffset);
-                        absorbContainer.addClass('fixed');
+                        topbar.data('stickyOffset', stickyOffset);
+                        stickyContainer.addClass('fixed');
                     } else {
-                        absorbOffset = absorbContainer.offset().top;
-                        topbar.data('absorbOffset', absorbOffset);
+                        stickyOffset = stickyContainer.offset().top;
+                        topbar.data('stickyOffset', stickyOffset);
                     }
                 }
 
             });
         },
 
-        adsorbed: function(topbar) {
-            // check for absorb
-            this.absorb();
+        sticked: function(topbar) {
+            // check for sticky
+            this.sticky(topbar.parent());
 
             topbar.data(this.attr_name(true), $.extend({}, topbar.data(this.attr_name(true)), {
-                adsorbed: true
+                sticked: true
             }));
         },
 
-        // height: function(ul) {
-        //     var total = 0,
-        //         self = this;
-
-        //     $('> li', ul).each(function() {
-        //         total += $(this).outerHeight(true);
-        //     });
-
-        //     return total;
-        // },
-
-        absorb: function() {
+        sticky: function(topbar) {
             var self = this;
 
-            $(window).on('scroll', function() {
-                self.update_absorb_positioning();
-            });
+            if(!this.supportSticky(topbar)) {
+                $(window).on('scroll', function() {
+                    self.update_sticky_positioning();
+                });
+            }
         },
 
-        update_absorb_positioning: function() {
-            var klass = '.' + this.settings.absorb_class,
-                $window = $(window),
-                self = this;
+        supportSticky: function(element) {
+            var dom = document.createElement('test');
+            dom.style.position = '-webkit-sticky';
+            dom.style.position = 'sticky';
+            return /sticky/.test(dom.style.position) && ['visible', ''].indexOf($(element).parent().css('overflow')) > -1;
+        },
 
-            if (self.settings.absorb_topbar && self.absorbable(this.settings.absorb_topbar.parent(), this.settings)) {
-                var distance = this.settings.absorb_topbar.data('absorbOffset') + this.settings.start_offset;
+        update_sticky_positioning: function() {
+            var klass = '.' + this.settings.sticky_class,
+                $window = $(window);
+
+            if (this.settings.sticky_topbar && this.stickable(this.settings.sticky_topbar.parent(), this.settings)) {
+                var distance = this.settings.sticky_topbar.data('stickyOffset') - this.settings.start_offset;
                 if ($window.scrollTop() > distance) {
                     if (!$(klass).hasClass('fixed')) {
                         $(klass).addClass('fixed');

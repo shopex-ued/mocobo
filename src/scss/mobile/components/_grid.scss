@@ -72,8 +72,8 @@ $last-child-float: right !default;
     @if $clearfix == true {
         @extend .clearfix;
     }
-    @else if $clearfix == hidden {
-        overflow: hidden;
+    @else if $clearfix {
+        overflow: $clearfix;
     }
 }
 
@@ -178,7 +178,7 @@ $last-child-float: right !default;
     @if $include-html-grid-classes {
         /* Grid */
         .container {
-            @include grid-row(expanded, hidden);
+            @include grid-row(expanded, true);
         }
         .#{$grid-row-class} {
             @include grid-row;
