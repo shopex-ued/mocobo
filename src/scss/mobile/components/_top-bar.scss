@@ -85,10 +85,12 @@ $topbar-arrows: true !default;
 @mixin topbar-hide-dropdown {
     display: block;
     position: absolute;
-    clip: rect(1px, 1px, 1px, 1px);
+    left: 0;
+    z-index: 99;
     height: 1px;
     width: 1px;
     min-width: 100%;
+    clip: rect(1px, 1px, 1px, 1px);
     overflow: hidden;
 }
 
@@ -251,7 +253,6 @@ $topbar-arrows: true !default;
                 padding: 0;
             }
             li {
-                background: $topbar-dropdown-bg;
                 > a {
                     color: $topbar-link-color;
                     display: block;
@@ -347,8 +348,7 @@ $topbar-arrows: true !default;
             // Styling elements inside of dropdowns
             .dropdown {
                 @include topbar-hide-dropdown;
-                left: 0;
-                z-index: 99;
+                background: $topbar-dropdown-bg;
                 // min-width: 100%;
                 li {
                     // height: auto;

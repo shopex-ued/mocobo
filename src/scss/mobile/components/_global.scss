@@ -84,8 +84,69 @@ $base-bg-color: $white !default;
 // $property - Default: all, Options: http://www.w3.org/TR/css3-transitions/#animatable-properties
 // $speed - Default: 300ms
 // $ease - Default:ease-out, Options: http://css-tricks.com/almanac/properties/t/transition-timing-function/
-@mixin single-transition($property: all, $speed: 300ms, $ease: $easeOut) {
-    transition: $property $speed $ease;
+@mixin single-transition($property: all, $speed: 300ms, $ease: ease-out) {
+    @include transition($property, $speed, $ease);
+}
+
+// @mixins
+//
+// We use this to add single or multiple transitions to elements
+// $property - Default: all, Options: http://www.w3.org/TR/css3-transitions/#animatable-properties
+// $speed - Default: 300ms
+// $ease - Default: ease-out, Options: http://css-tricks.com/almanac/properties/t/transition-timing-function/
+// $delay - Default: null (0s)
+@mixin transition($property: all, $speed: 300ms, $ease: $easeOut, $delay: null) {
+    $transition: none;
+    @if length($property) > 1 {
+        @each $transition_list in $property {
+            @for $i from 1 through length($transition_list) {
+                @if $i == 1 {
+                    $_property: nth($transition_list, $i);
+                }
+                @if length($transition_list) > 1 {
+                    @if $i == 2 {
+                        $_speed: nth($transition_list, $i);
+                    }
+                }
+                @else {
+                    $_speed: $speed;
+                }
+                @if length($transition_list) > 2 {
+                    @if $i == 3 {
+                        $_ease: nth($transition_list, $i);
+                    }
+                }
+                @else {
+                    $_ease: $ease;
+                }
+                @if length($transition_list) > 3 {
+                    @if $i == 4 {
+                        $_delay: nth($transition_list, $i);
+                    }
+                }
+                @else {
+                    $_delay: $delay;
+                }
+            }
+            @if $transition == none {
+                $transition: $_property $_speed $_ease $_delay;
+            }
+            @else {
+                $transition: $transition, $_property $_speed $_ease $_delay;
+            }
+        }
+    }
+    @else {
+        @each $prop in $property {
+            @if $transition == none {
+                $transition: $prop $speed $ease $delay;
+            }
+            @else {
+                $transition: $transition, $prop $speed $ease $delay;
+            }
+        }
+    }
+    transition: $transition;
 }
 
 // @mixins
@@ -140,7 +201,7 @@ $base-bg-color: $white !default;
         @if $border-color == true {
             border-color: $effect-color;
         }
-        @elseif $border-color {
+        @else if $border-color {
             border-color: $border-color;
         }
         box-shadow: 0 0 5px $effect-color;
@@ -233,7 +294,8 @@ $base-bg-color: $white !default;
             bottom: 0;
             height: 1px;
             @include transform(scaleY(0.5));
-        } @else {
+        }
+        @else {
             right: 0;
             top: $start;
             @if $end == true {
@@ -258,6 +320,7 @@ $base-bg-color: $white !default;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 @mixin ellipsis-lines($lines: 2) {
     display: -webkit-box;
     word-wrap: break-word;
@@ -311,11 +374,13 @@ $column-blank: to-rem(24) !default;
 // Media Query Ranges
 $small-breakpoint: to-em(640) !default;
 $medium-breakpoint: to-em(1024) !default;
+
 // $large-breakpoint: to-em(1440) !default;
 // $xlarge-breakpoint: to-em(1920) !default;
 
 $small-range: 0, $small-breakpoint !default;
 $medium-range: $small-breakpoint + to-em(1), $medium-breakpoint !default;
+
 // $large-range: $medium-breakpoint + to-em(1), $large-breakpoint !default;
 // $xlarge-range: $large-breakpoint + to-em(1), $xlarge-breakpoint !default;
 // $xxlarge-range: $xlarge-breakpoint + to-em(1), to-em(99999999) !default;
@@ -346,6 +411,7 @@ $retina3x: "#{$screen} and (min-resolution: 249dpi)", "#{$screen} and (min-resol
 // Legacy
 $small: $small-up !default;
 $medium: $medium-up !default;
+
 // $large: $large-up !default;
 
 @include exports("global") {
@@ -410,6 +476,7 @@ $medium: $medium-up !default;
             // @media #{$retina3x) {
             //   font-size: $base-font-size * 1.5;
             // }
+
         }
         // Set box-sizing globally to handle padding and border widths
         *,

@@ -6,14 +6,13 @@
     'use strict';
 
     var header_helpers = function(class_array) {
-        var i = class_array.length;
         var head = $('head');
 
-        while (i--) {
-            if (head.has('.' + class_array[i]).length === 0) {
-                head.append('<meta class="' + class_array[i] + '" />');
+        head.prepend($.map(class_array, function(class_name) {
+            if (head.has('.' + class_name).length === 0) {
+                return '<meta class="' + class_name + '" />';
             }
-        }
+        }));
     };
 
     header_helpers([
@@ -203,14 +202,24 @@
         return string;
     }
 
+    function MediaQuery(selector) {
+        this.selector = selector;
+        this.query = '';
+    }
+
+    MediaQuery.prototype.toString = function() {
+        this.query = this.query || $(this.selector).css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, '');
+        return this.query;
+    };
+
     window.Mobile = {
         name: 'Mobile',
 
         media_queries: {
-            'small': $('.mobile-mq-small').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, ''),
-            'small-only': $('.mobile-mq-small-only').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, ''),
-            'medium': $('.mobile-mq-medium').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, ''),
-            'medium-only': $('.mobile-mq-medium-only').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, '')
+            'small': new MediaQuery('.mobile-mq-small'),
+            'small-only': new MediaQuery('.mobile-mq-small-only'),
+            'medium': new MediaQuery('.mobile-mq-medium'),
+            'medium-only': new MediaQuery('.mobile-mq-medium-only')
         },
 
         stylesheet: $('<style></style>').appendTo('head')[0].sheet,
