@@ -81,7 +81,7 @@
         },
 
         init: function(scope, method, options) {
-            Mobile.inherit(this, 'throttle random_str');
+            Mobile.inherit(this, 'random_str');
 
             this.data_attr = this.set_data_attr();
             $.extend(true, this.settings, method, options);
@@ -103,13 +103,13 @@
 
             $(window)
                 .off('.responsive')
-                .on('resize.responsive', self.throttle(function() {
+                .on('resize.responsive', function() {
                     var currMediaHash = self.get_media_hash();
                     if (currMediaHash !== prevMediaHash) {
                         self.resize();
                     }
                     prevMediaHash = currMediaHash;
-                }, 50));
+                });
 
             return this;
         },

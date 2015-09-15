@@ -451,6 +451,7 @@
         },
 
         init: function(scope, method, options) {
+            Mobile.inherit(this, 'image_loaded');
             this.bindings(method, options);
         },
 

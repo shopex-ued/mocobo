@@ -16,8 +16,6 @@
         },
 
         init: function(scope, method, options) {
-            Mobile.inherit(this, 'throttle');
-
             $.extend(true, this.settings, method, options);
             this.bindings(method, options);
         },
@@ -71,9 +69,9 @@
 
             $(window)
                 .off('.dropdown')
-                .on('resize.dropdown', self.throttle(function() {
+                .on('resize.dropdown', function() {
                     self.resize.call(self);
-                }, 50));
+                });
 
             this.resize();
         },

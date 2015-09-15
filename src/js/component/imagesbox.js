@@ -37,7 +37,7 @@
 
         init: function(scope, method, options) {
             var self = this;
-            Mobile.inherit(this, 'throttle image_loaded');
+            Mobile.inherit(this, 'image_loaded');
 
             this.bindings(method, options);
 

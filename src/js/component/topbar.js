@@ -11,7 +11,7 @@
         },
 
         init: function(section, method, options) {
-            Mobile.inherit(this, 'add_custom_rule throttle');
+            Mobile.inherit(this, 'add_custom_rule');
             var self = this;
 
             this.bindings(method, options);
@@ -71,12 +71,13 @@
                     }
                 });
 
-            $(window).off('.topbar').on('resize.topbar', this.throttle(function() {
-                self.resize.call(self);
-            }, 50)).trigger('resize.topbar').load(function() {
-                // Ensure that the offset is calculated after all of the pages resources have loaded
-                $(this).trigger('resize.topbar');
-            });
+            $(window).off('.topbar')
+                .on('resize.topbar', this.resize())
+                .trigger('resize.topbar')
+                .load(function() {
+                    // Ensure that the offset is calculated after all of the pages resources have loaded
+                    $(this).trigger('resize.topbar');
+                });
 
             $('body').off('.topbar').on('click.topbar', function(e) {
                 var parent = $(e.target).closest('li').closest('li.hover');
@@ -107,7 +108,7 @@
                 var stickyContainer = topbar.parent('.' + self.settings.sticky_class);
                 var stickyOffset;
 
-                if (self.stickable(stickyContainer, settings)) {
+                if (self.stickable(stickyContainer, self.settings)) {
                     if (stickyContainer.hasClass('fixed')) {
                         // Remove the fixed to allow for correct calculation of the offset.
                         stickyContainer.removeClass('fixed');

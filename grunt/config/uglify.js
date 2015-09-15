@@ -1,6 +1,7 @@
 // https://github.com/gruntjs/grunt-contrib-uglify
 module.exports = {
     options: {
+        report: 'min',
         sourceMap: true,
         preserveComments: false
     },

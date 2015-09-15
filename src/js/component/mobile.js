@@ -319,67 +319,6 @@
         utils: {
 
             // Description:
-            //    Executes a function a max of once every n milliseconds
-            //
-            // Arguments:
-            //    Func (Function): Function to be throttled.
-            //
-            //    Delay (Integer): Function execution threshold in milliseconds.
-            //
-            // Returns:
-            //    Lazy_function (Function): Function with throttling applied.
-            throttle: function(func, delay) {
-                var timer = null;
-
-                return function() {
-                    var context = this,
-                        args = arguments;
-
-                    if (timer == null) {
-                        timer = setTimeout(function() {
-                            func.apply(context, args);
-                            timer = null;
-                        }, delay);
-                    }
-                };
-            },
-
-            // Description:
-            //    Executes a function when it stops being invoked for n seconds
-            //    Modified version of _.debounce() http://underscorejs.org
-            //
-            // Arguments:
-            //    Func (Function): Function to be debounced.
-            //
-            //    Delay (Integer): Function execution threshold in milliseconds.
-            //
-            //    Immediate (Bool): Whether the function should be called at the beginning
-            //    of the delay instead of the end. Default is false.
-            //
-            // Returns:
-            //    Lazy_function (Function): Function with debouncing applied.
-            debounce: function(func, delay, immediate) {
-                var timeout, result;
-                return function() {
-                    var context = this,
-                        args = arguments;
-                    var later = function() {
-                        timeout = null;
-                        if (!immediate) {
-                            result = func.apply(context, args);
-                        }
-                    };
-                    var callNow = immediate && !timeout;
-                    clearTimeout(timeout);
-                    timeout = setTimeout(later, delay);
-                    if (callNow) {
-                        result = func.apply(context, args);
-                    }
-                    return result;
-                };
-            },
-
-            // Description:
             //    Parses data-options attribute
             //
             // Arguments:
@@ -534,7 +473,7 @@
                 if (!this.fidx) {
                     this.fidx = 0;
                 }
-                this.prefix = this.prefix || [(this.name || 'F'), (+new Date).toString(36)].join('-');
+                this.prefix = this.prefix || [(this.name || 'M'), (+new Date).toString(36)].join('-');
 
                 return this.prefix + (this.fidx++).toString(36);
             },
