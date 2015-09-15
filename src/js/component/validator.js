@@ -7,8 +7,8 @@
         settings: {
             validate_on: 'change', // change (when input value changes), blur (when input blur), manual (when call custom events)
             focus_on_invalid: true, // automatically bring the focus to an invalid input field
-            error_labels: true, // labels with a for="inputId" will recieve an `error` class
-            error_class: 'has-error', // labels with a for="inputId" will recieve an `error` class
+            error_labels: true, // labels with a for="inputId" will receive an `error` class
+            error_class: 'has-error', // labels with a for="inputId" will receive an `error` class
             alert_element: '.alert-box',
             // the amount of time Validator will take before it validates the form (in ms).
             // smaller time will result in faster validation
@@ -41,7 +41,7 @@
 
                     return valid;
                 },
-                oneof: function (el, required, parent) {
+                oneof: function(el, required, parent) {
                     var els = document.querySelectorAll(el.getAttribute(this.add_namespace('data-oneof')));
                     return this.valid_oneof(els, required, parent);
                 }
@@ -101,11 +101,25 @@
                 .find('input, textarea, select').not(":hidden, [data-validator-ignore]")
                 .off('.validator')
                 .on('blur.validator', function(e) {
+                    var id = this.getAttribute('id'),
+                        eqTo = form.find('[data-equalto="' + id + '"]');
+                    // checks if there is an equalTo equivalent related by id
+                    if (typeof eqTo[0] !== "undefined" && eqTo.val().length) {
+                        validate(eqTo[0], e);
+                    }
+
                     if (settings.validate_on === 'blur') {
                         validate(this, e);
                     }
                 })
                 .on('change.validator', function(e) {
+                    var id = this.getAttribute('id'),
+                        eqTo = form.find('[data-equalto="' + id + '"]');
+                    // checks if there is an equalTo equivalent related by id
+                    if (typeof eqTo[0] !== "undefined" && eqTo.val().length) {
+                        validate(eqTo[0], e);
+                    }
+
                     if (settings.validate_on === 'change') {
                         validate(this, e);
                     }

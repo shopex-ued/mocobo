@@ -188,27 +188,37 @@
 
                 //lets see if the panel will be off the screen
                 //get the actual width of the page and store it
-                var actualBodyWidth = window.innerWidth;
+                var actualBodyWidth,
+                    windowWidth = window.innerWidth;
 
-                var actualMarginWidth = (window.innerWidth - actualBodyWidth) / 2;
+                if (document.querySelector('.row')) {
+                    actualBodyWidth = document.querySelector('.row').clientWidth;
+                } else {
+                    actualBodyWidth = windowWidth;
+                }
+
+                var actualMarginWidth = (windowWidth - actualBodyWidth) / 2;
                 var actualBoundary = actualBodyWidth;
 
                 if (!this.hasClass('mega') && !s.ignore_repositioning) {
+                    var outerWidth = this.outerWidth();
+                    var o_left = t.offset().left;
+
                     //miss top
                     if (t.offset().top <= this.outerHeight()) {
                         p.missTop = true;
-                        actualBoundary = window.innerWidth - actualMarginWidth;
+                        actualBoundary = windowWidth - actualMarginWidth;
                         p.leftRightFlag = true;
                     }
 
                     //miss right
-                    if (t.offset().left + this.outerWidth() > t.offset().left + actualMarginWidth && t.offset().left - actualMarginWidth > this.outerWidth()) {
+                    if (o_left + outerWidth > o_left + actualMarginWidth && o_left - actualMarginWidth > outerWidth) {
                         p.missRight = true;
                         p.missLeft = false;
                     }
 
                     //miss left
-                    if (t.offset().left - this.outerWidth() <= 0) {
+                    if (o_left - outerWidth <= 0) {
                         p.missLeft = true;
                         p.missRight = false;
                     }
