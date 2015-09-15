@@ -8,6 +8,7 @@ mocobo is a MObile front-end COdeBase for quickly develOp. You can quickly proto
 - [NodeJS 0.10+](https://nodejs.org/)
 - [Sass 3.3+](http://sass-lang.com/)
 - [FontForge](http://fontforge.github.io/en-US/)
+- [ttfautohint](http://www.freetype.org/ttfautohint/)
 - [Python 2.7+](https://www.python.org/downloads/)
 
 #Getting Started
