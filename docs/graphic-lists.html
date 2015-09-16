@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>图文列表</title>
+<meta name="viewport" content="width=device-width, target-densitydpi=device-dp, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+<style>
+.row {
+  margin-bottom: 10px;
+  box-shadow: inset 0 0 1px #d0d0d0;
+}
+.row .row {
+  border: 0 none;
+  margin-bottom: 0;
+}
+.row .columns {
+  background-color: #eee;
+  text-align: center;
+}
+.row .columns:nth-child(odd) {
+  background-color: #e3e3e3;
+}
+</style>
+</head>
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>图文列表</h1>
+</header>
+
+<div class="container">
+  <h1>图文列表(图在左)</h1>
+  <ul class="table-list has-thumb">
+    <li class="item">
+      <a href="#">
+        <img class="thumb left" src="statics/shuijiao.jpg">
+        <div class="item-body">
+          <h5>幸福</h5>
+          <p class="ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+        </div>
+      </a>
+    </li>
+    <li class="item">
+      <a href="#">
+        <img class="thumb left" src="statics/muwu.jpg">
+        <div class="item-body">
+          <h5>木屋</h5>
+          <p class="ellipsis">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+        </div>
+      </a>
+    </li>
+    <li class="item">
+      <a href="#">
+        <img class="thumb left" src="statics/cbd.jpg">
+        <div class="item-body">
+          <h5>CBD</h5>
+          <p class="ellipsis">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <h1>图文列表(图在右)</h1>
+  <ul class="table-list has-thumb">
+    <li class="item">
+      <a href="#">
+        <img class="thumb round right" src="statics/shuijiao.jpg">
+        <div class="item-body">
+          <h5>幸福</h5>
+          <p class="ellipsis text-secondary">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+        </div>
+      </a>
+    </li>
+    <li class="item">
+      <a href="#">
+        <img class="thumb round right" src="statics/muwu.jpg">
+        <div class="item-body">
+          <h5>木屋</h5>
+          <p class="ellipsis text-secondary">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+        </div>
+      </a>
+    </li>
+    <li class="item">
+      <a href="#">
+        <img class="thumb round right" src="statics/cbd.jpg">
+        <div class="item-body">
+          <h5>CBD</h5>
+          <p class="ellipsis text-secondary">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <h1>图文列表(带边框)</h1>
+  <ul class="table-list has-thumb">
+    <li class="item">
+      <a href="#">
+        <img class="thumb round bordered left" src="statics/shuijiao.jpg">
+        <div class="item-body">
+          <h5>幸福</h5>
+          <p class="ellipsis text-secondary">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+        </div>
+      </a>
+    </li>
+    <li class="item">
+      <a href="#">
+        <img class="thumb round bordered left" src="statics/muwu.jpg">
+        <div class="item-body">
+          <h5>木屋</h5>
+          <p class="ellipsis text-secondary">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+        </div>
+      </a>
+    </li>
+    <li class="item">
+      <a href="#">
+        <img class="thumb round bordered left" src="statics/cbd.jpg">
+        <div class="item-body">
+          <h5>CBD</h5>
+          <p class="ellipsis text-secondary">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <h1>图文列表（大图模式）</h1>
+  <div class="columns">
+    <ul class="block-grid-2 gallery">
+      <li>
+        <img src="statics/launch_s.jpg">
+        <h5>What's the matter with you!</h5>
+        <span class="badge radius alert">$5.65</span>
+      </li>
+      <li>
+        <img src="statics/comet_s.jpg">
+        <h5>I'm feeling lucky more and more! And you?</h5>
+        <span class="badge radius alert">$5.65</span>
+      </li>
+      <li>
+        <img src="statics/space_s.jpg">
+        <h5>Yesterday is a wonderful day! Isn't it?</h5>
+        <span class="badge radius alert">$5.65</span>
+      </li>
+      <li>
+        <img src="statics/moon_s.jpg">
+        <h5>How's she getting along these days?</h5>
+        <span class="badge radius alert">$5.65</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

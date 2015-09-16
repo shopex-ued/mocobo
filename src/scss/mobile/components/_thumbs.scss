@@ -10,7 +10,7 @@ $thumb-class: 'thumb' !default;
 $thumb-border-width: to-rem(4) !default;
 $thumb-border-style: solid !default;
 $thumb-border-color: $white !default;
-$thumb-box-margin: 1px !default;
+$thumb-margin: 1px !default;
 $thumb-box-shadow: 0 0 0 1px $gainsboro !default;
 $thumb-box-shadow-hover: 0 0 to-rem(6) 1px rgba($primary-color, 0.5) !default;
 
@@ -22,21 +22,35 @@ $thumb-transition-speed: 200ms !default;
 // @mixins
 //
 
+@mixin thumb-base($box-shadow-hover: $thumb-box-shadow-hover) {
+    display: inline-block;
+    max-width: 100%;
+    border-radius: $thumb-radius;
+    // line-height: 0;
+    @include transition(all, $thumb-transition-speed, ease-out);
+    img {
+        border-radius: $thumb-radius;
+    }
+    @if $box-shadow-hover {
+        &:hover {
+            box-shadow: $box-shadow-hover;
+        }
+    }
+}
 // We use this to create image thumbnail styles.
 //
 // $border-width - Width of border around thumbnail. Default: $thumb-border-width.
 // $box-shadow - Box shadow to apply to thumbnail. Default: $thumb-box-shadow.
-// $box-shadow-hover - Box shadow to apply on hover. Default: $thumb-box-shadow-hover.
-@mixin thumb($border-width: $thumb-border-width, $box-shadow: $thumb-box-shadow, $box-shadow-hover: $thumb-box-shadow-hover) {
-    border: $border-width $thumb-border-style $thumb-border-color;
-    box-shadow: $box-shadow;
-    margin: $thumb-box-margin;
-    display: inline-block;
-    // line-height: 0;
-    max-width: 100%;
-    &:hover,
-    &:focus {
-        box-shadow: $box-shadow-hover;
+// $margin - margin to apply to thumbnail. Default: $thumb-margin.
+@mixin thumb-style($border-width: $thumb-border-width, $box-shadow: $thumb-box-shadow, $margin: $thumb-margin) {
+    @if $margin {
+        margin: $margin;
+    }
+    @if $border-width {
+        border: $border-width $thumb-border-style $thumb-border-color;
+    }
+    @if $box-shadow {
+        box-shadow: $box-shadow;
     }
 }
 
@@ -44,9 +58,24 @@ $thumb-transition-speed: 200ms !default;
     @if $include-html-media-classes {
         /* Image Thumbnails */
         .#{$thumb-class} {
-            @include thumb;
-            border-radius: $thumb-radius;
-            @include transition(all, $thumb-transition-speed, ease-out);
+            @include thumb-base;
+            &.bordered {
+                @include thumb-style;
+                @if $thumb-box-shadow-hover {
+                    &:hover {
+                        box-shadow: $thumb-box-shadow-hover;
+                    }
+                }
+                img {
+                    border-radius: $thumb-radius - to-rem(1);
+                }
+            }
+            &.round {
+                &,
+                img {
+                    border-radius: $global-rounded;
+                }
+            }
         }
     }
 }
