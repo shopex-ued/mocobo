@@ -245,7 +245,7 @@ $topbar-arrows: true !default;
             left: 0;
             position: relative;
             width: auto;
-            // @include single-transition(left, $topbar-transition-speed);
+            // @include transition(left, $topbar-transition-speed);
             ul {
                 font-size: $rem-base;
                 height: auto;

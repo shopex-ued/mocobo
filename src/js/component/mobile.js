@@ -246,15 +246,15 @@
                 }
             }
 
-            $(window).load(function() {
-                $(window)
-                    .trigger('resize.imagesbox')
-                    .trigger('resize.dropdown')
-                    .trigger('resize.equalizer')
-                    .trigger('resize.responsive')
-                    .trigger('resize.topbar')
-                    .trigger('resize.slides');
-            });
+            // $(window).load(function() {
+            //     $(window)
+            //         .trigger('resize.imagesbox')
+            //         .trigger('resize.dropdown')
+            //         .trigger('resize.equalizer')
+            //         .trigger('resize.responsive')
+            //         .trigger('resize.topbar')
+            //         .trigger('resize.slides');
+            // });
 
             return scope;
         },

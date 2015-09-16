@@ -30,28 +30,6 @@ $base-bg-color: $white !default;
 
 // @mixins
 //
-// We use this to control border radius.
-// $radius - Default: $global-radius || 3px
-@mixin radius($radius: $global-radius) {
-    @if $radius {
-        border-radius: $radius;
-    }
-}
-
-// Transforms
-@mixin transform($transform...) {
-    // -webkit-transform: $transform;
-    transform: $transform;
-}
-
-// Transitions
-@mixin transition($transition...) {
-    // -webkit-transition: $transition;
-    transition: $transition;
-}
-
-// @mixins
-//
 // We use this to create equal side border radius on elements.
 // $side - Options: left, right, top, bottom
 @mixin side-radius($side, $radius: $global-radius) {
@@ -80,16 +58,6 @@ $base-bg-color: $white !default;
 
 // @mixins
 //
-// We use this to add transitions to elements
-// $property - Default: all, Options: http://www.w3.org/TR/css3-transitions/#animatable-properties
-// $speed - Default: 300ms
-// $ease - Default:ease-out, Options: http://css-tricks.com/almanac/properties/t/transition-timing-function/
-@mixin single-transition($property: all, $speed: 300ms, $ease: ease-out) {
-    @include transition($property, $speed, $ease);
-}
-
-// @mixins
-//
 // We use this to add single or multiple transitions to elements
 // $property - Default: all, Options: http://www.w3.org/TR/css3-transitions/#animatable-properties
 // $speed - Default: 300ms
@@ -97,13 +65,15 @@ $base-bg-color: $white !default;
 // $delay - Default: null (0s)
 @mixin transition($property: all, $speed: 300ms, $ease: $easeOut, $delay: null) {
     $transition: none;
-    @if length($property) > 1 {
+        @debug $property;
+    @if type-of($property) == list {
         @each $transition_list in $property {
-            @for $i from 1 through length($transition_list) {
+            $_len: length($transition_list);
+            @for $i from 1 through $_len {
                 @if $i == 1 {
                     $_property: nth($transition_list, $i);
                 }
-                @if length($transition_list) > 1 {
+                @if $_len > 1 {
                     @if $i == 2 {
                         $_speed: nth($transition_list, $i);
                     }
@@ -111,7 +81,7 @@ $base-bg-color: $white !default;
                 @else {
                     $_speed: $speed;
                 }
-                @if length($transition_list) > 2 {
+                @if $_len > 2 {
                     @if $i == 3 {
                         $_ease: nth($transition_list, $i);
                     }
@@ -119,7 +89,7 @@ $base-bg-color: $white !default;
                 @else {
                     $_ease: $ease;
                 }
-                @if length($transition_list) > 3 {
+                @if $_len > 3 {
                     @if $i == 4 {
                         $_delay: nth($transition_list, $i);
                     }
@@ -137,29 +107,14 @@ $base-bg-color: $white !default;
         }
     }
     @else {
-        @each $prop in $property {
-            @if $transition == none {
-                $transition: $prop $speed $ease $delay;
-            }
-            @else {
-                $transition: $transition, $prop $speed $ease $delay;
-            }
-        }
+        $transition: $property $speed $ease $delay;
     }
     transition: $transition;
 }
 
-// @mixins
-//
-// We use this to add box-sizing across browser prefixes
-@mixin box-sizing($type: border-box) {
-    box-sizing: $type;
-}
-
 // Gradients
 @mixin linear-gradient($color-from, $color-to) {
-    // background-image: -webkit-linear-gradient(top, $color-from 0%, $color-to 100%); // Chrome10+, Safari5.1+
-    background-image: linear-gradient(to bottom, $color-from 0%, $color-to 100%);
+    background-image: linear-gradient(to bottom, $color-from, $color-to);
 }
 
 // @mixins
@@ -196,7 +151,7 @@ $base-bg-color: $white !default;
 // $effect-color - Default: fade-out($primary-color, .25)
 // $border-color - Default: true
 @mixin block-glowing-effect($selector: focus, $fade-time: 250ms, $effect-color: fade-out($primary-color, 0.25), $border-color: true) {
-    transition: box-shadow $fade-time $easeInOut, border-color $fade-time $easeInOut;
+    @include transition(box-shadow border-color, $fade-time, $easeInOut);
     &:#{$selector} {
         @if $border-color == true {
             border-color: $effect-color;
@@ -263,7 +218,7 @@ $base-bg-color: $white !default;
                 }
                 top: -1px;
                 height: 1px;
-                @include transform(scaleY(0.5));
+                transform: scaleY(0.5);
             }
             @else {
                 left: 0;
@@ -275,7 +230,7 @@ $base-bg-color: $white !default;
                     bottom: $end;
                 }
                 width: 1px;
-                @include transform(scaleX(0.5));
+                transform: scaleX(0.5);
             }
         }
     }
@@ -293,7 +248,7 @@ $base-bg-color: $white !default;
             }
             bottom: 0;
             height: 1px;
-            @include transform(scaleY(0.5));
+            transform: scaleY(0.5);
         }
         @else {
             right: 0;
@@ -305,7 +260,7 @@ $base-bg-color: $white !default;
                 bottom: $end;
             }
             width: 1px;
-            @include transform(scaleX(0.5));
+            transform: scaleX(0.5);
         }
     }
 }
@@ -482,7 +437,7 @@ $medium: $medium-up !default;
         *,
         *::before,
         *::after {
-            @include box-sizing(border-box);
+            box-sizing: border-box;
         }
         // Default body styles
         body {

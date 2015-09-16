@@ -82,7 +82,7 @@ $panel-header-adjust: true !default;
         .#{$panel-class} {
             @include panel;
             &.radius {
-                @include radius($panel-border-radius);
+                border-radius: $panel-border-radius;
             }
         }
     }

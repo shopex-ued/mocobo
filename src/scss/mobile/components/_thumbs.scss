@@ -45,8 +45,8 @@ $thumb-transition-speed: 200ms !default;
         /* Image Thumbnails */
         .#{$thumb-class} {
             @include thumb;
-            @include radius($thumb-radius);
-            @include single-transition(all, $thumb-transition-speed, ease-out);
+            border-radius: $thumb-radius;
+            @include transition(all, $thumb-transition-speed, ease-out);
         }
     }
 }

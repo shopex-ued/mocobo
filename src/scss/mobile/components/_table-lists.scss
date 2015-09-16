@@ -76,7 +76,7 @@ $table-list-children-display: block !default;
             }
             list-style: none; // Remove usual bullet styles from table list
             @include hairline(double, $table-list-border-color, 0); // Double grey border.
-            &.has-icon .item {
+            &.has-#{$icons-class} .item {
                 [class^=#{$icons-class}-]::before {
                     margin-right: $table-list-item-left-icon-margin;
                     vertical-align: -2px;
@@ -84,7 +84,7 @@ $table-list-children-display: block !default;
                     font-size: $table-list-item-left-icon-size;
                 }
             }
-            &.has-badge .item {
+            &.has-#{$badge-class} .item {
                 padding-right: $table-list-item-badge-padding;
                 > a:not(.#{$buttons-class}) {
                     margin-right: - $table-list-item-badge-padding;
@@ -175,7 +175,6 @@ $table-list-children-display: block !default;
                         height: 0;
                     }
                 }
-                //列表默认为向右箭头；
                 > .nav-right::before {
                     content: $icon-arrow-forward;
                     position: absolute;
@@ -220,15 +219,14 @@ $table-list-children-display: block !default;
                     }
                 }
                 &.collapse {
-                    //二级列表默认为向下箭头；
                     > .nav-right::before {
                         content: $icon-arrow-down;
                     }
-                    .table-list {
+                    .#{$table-list-class} {
                         display: none;
                         margin: $table-list-item-padding-top $table-list-item-margin-left $table-list-item-margin-top;
                         border: 0;
-                        &.has-badge {
+                        &.has-#{$badge-class} {
                             margin-right: -65px;
                         }
                         .item {
@@ -236,7 +234,7 @@ $table-list-children-display: block !default;
                             @include hairline(single, $table-list-item-border-color, $table-list-item-border-left * 2, false);
                         }
                     }
-                    .table-list::after {
+                    .#{$table-list-class}::after {
                         left: $table-list-item-border-left;
                     }
                     > .content {
@@ -248,11 +246,10 @@ $table-list-children-display: block !default;
                         transition: height .35s ease;
                     }
                     &:hover {
-                        .table-list,
+                        .#{$table-list-class},
                         > .content {
                             display: block;
                         }
-                        //二级列表展开后，变为向上箭头；
                         > .nav-right::before {
                             content: $icon-arrow-up;
                         }

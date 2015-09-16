@@ -71,7 +71,7 @@ $tabs-bar-nav-active-bar-color: $primary-color !default;
                     line-height: 1.72;
                     font-size: $tabs-nav-font-size;
                     color: $tabs-nav-font-color;
-                    @include transition(background-color 0.1s linear);
+                    transition: background-color 0.1s linear;
                     &:hover {
                         background-color: $tabs-nav-hover-bg-color;
                     }
@@ -163,7 +163,7 @@ $tabs-bar-nav-active-bar-color: $primary-color !default;
                     display: block;
                     background-color: $tabs-segmented-nav-bg-color;
                     color: $tabs-segmented-nav-font-color;
-                    @include transition(background-color 0.1s linear);
+                    transition: background-color 0.1s linear;
                 }
                 // Selected state of segmented controller
                 &.active > a {
@@ -193,7 +193,7 @@ $tabs-bar-nav-active-bar-color: $primary-color !default;
                     &::before {
                         content: "";
                         position: absolute;
-                        @include transition(background-color 0.2s linear);
+                        transition: background-color 0.2s linear;
                     }
                 }
                 &:not(:last-child) > a {

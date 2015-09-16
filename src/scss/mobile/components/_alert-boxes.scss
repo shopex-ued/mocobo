@@ -52,7 +52,7 @@ $alert-transition-ease: $easeOut !default;
     border-style: $alert-border-width $alert-border-style;
     font-size: $alert-font-size;
     font-weight: $alert-font-weight;
-    @include single-transition(opacity, $alert-transition-speed, $alert-transition-ease);
+    @include transition(opacity, $alert-transition-speed, $alert-transition-ease);
 }
 
 // We use this mixin to add alert styles
@@ -94,7 +94,7 @@ $alert-transition-ease: $easeOut !default;
 @mixin alert($bg: $primary-color, $radius: false) {
     @include alert-base;
     @include alert-style($bg);
-    @include radius($radius);
+    border-radius: $radius;
 }
 
 @include exports("alert-box") {
@@ -106,10 +106,10 @@ $alert-transition-ease: $easeOut !default;
                 @include alert-close;
             }
             &.radius {
-                @include radius($alert-radius);
+                border-radius: $alert-radius;
             }
             &.round {
-                @include radius($global-rounded);
+                border-radius: $global-rounded;
             }
             &.success {
                 @include alert-style($success-color);

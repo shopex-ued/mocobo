@@ -218,7 +218,7 @@ $dropdown-menu-radius: $global-radius !default;
             }
             // Radius of Dropdown
             &.radius {
-                @include radius($dropdown-menu-radius);
+                border-radius: $dropdown-menu-radius;
             }
             &.mega {
                 width: 100% !important;

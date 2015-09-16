@@ -92,7 +92,6 @@ $buttons-disabled-opacity: .6 !default;
         display: $display;
     }
     @if $style {
-        // -webkit-appearance: none;
         appearance: none;
         position: relative;
         margin: 0 0 $buttons-margin-bottom;
@@ -209,7 +208,7 @@ $buttons-disabled-opacity: .6 !default;
             @include button-base;
             @include button-size;
             @include button-style;
-            @include single-transition(background-color);
+            @include transition(background-color);
             &.secondary {
                 @include button-style($bg: $secondary-buttons-bg-color, $bg-hover: $secondary-buttons-bg-hover);
                 &.outline {

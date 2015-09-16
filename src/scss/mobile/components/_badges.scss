@@ -70,10 +70,10 @@ $badge-font-color-alt: $white !default;
     }
     // We use this to control the radius on badges.
     @if $radius == true {
-        @include radius($badge-radius);
+        border-radius: $badge-radius;
     }
     @else if $radius {
-        @include radius($radius);
+        border-radius: $radius;
     }
 }
 

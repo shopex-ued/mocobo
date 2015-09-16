@@ -84,7 +84,7 @@ $slides-number-padding: to-rem(5) !default;
                 }
             }
             .#{$slides-preloader-class} {
-                @include radius($global-rounded);
+                border-radius: $global-rounded;
                 animation-duration: 1.5s;
                 animation-iteration-count: infinite;
                 animation-name: rotate;
@@ -273,7 +273,7 @@ $slides-number-padding: to-rem(5) !default;
                 height: $slides-bullet-radius;
                 margin-right: 6px;
                 width: $slides-bullet-radius;
-                @include radius($global-rounded);
+                border-radius: $global-rounded;
                 &.active {
                     background: $slides-bullet-nav-color-active;
                 }

@@ -38,7 +38,6 @@ $switch-active-color: $primary-color !default;
     outline: 0;
     padding: 0;
     position: relative;
-    // -webkit-user-select: none;
     user-select: none;
     // Default label styles for type and transition
     label {
@@ -51,7 +50,7 @@ $switch-active-color: $primary-color !default;
         width: $switch-height-medium * 2;
         height: $switch-height-medium;
         // Transition for the switch label to follow paddle
-        @include single-transition(left, $transition-speed, $transition-ease);
+        @include transition(left, $transition-speed, $transition-ease);
     }
     // So that we don't need to recreate the form with any JS, we use the
     // existing checkbox or radio button, but we cleverly position and hide it.
@@ -79,9 +78,7 @@ $switch-active-color: $primary-color !default;
         top: to-rem(2);
         box-shadow: -2px 2px 3px 1px rgba(#000, .1);
         width: $switch-height-medium - to-rem(4);
-        // -webkit-transition: left $transition-speed $transition-ease;
         transition: left $transition-speed $transition-ease;
-        // -webkit-transform: translate3d(0,0,0);
         transform: translate3d(0, 0, 0);
     }
     input:checked + label {
@@ -179,20 +176,20 @@ $switch-active-color: $primary-color !default;
             }
             // Make the switch has radius
             &.radius {
-                // @include radius($switch-radius);
+                // border-radius: $switch-radius;
                 label {
-                    @include radius($switch-radius);
+                    border-radius: $switch-radius;
                 }
                 label::after {
-                    @include radius($switch-radius - 1);
+                    border-radius: $switch-radius - 1;
                 }
             }
             // Make the switch completely round, like a pill
             &.round {
-                // @include radius($global-rounded);
+                // border-radius: $global-rounded;
                 label,
                 label::after {
-                    @include radius($global-rounded);
+                    border-radius: $global-rounded;
                 }
             }
         }

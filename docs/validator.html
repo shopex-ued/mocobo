@@ -20,13 +20,13 @@
   <h1>示例</h1>
   <form action="" method="post" data-validator>
     <div class="form-row">
-      <label>用户名 <small>*</small>
+      <label>用户名 <em>*</em>
         <input type="text" required pattern="[a-zA-Z]+">
       </label>
       <small class="alert-box error">名字必填，并且只能为字母</small>
     </div>
     <div class="form-row">
-      <label>Email <small>*</small>
+      <label>Email <em>*</em>
         <input type="email" required>
       </label>
       <small class="alert-box error">请输入正确的电子邮箱地址</small>
@@ -128,13 +128,13 @@
   <p>如果需要再次确认输入的正确性，可以使用<code>data-equalto</code>属性：</p>
   <form action="" method="post" data-validator>
     <div class="form-row">
-      <label>密码 <small>*</small>
+      <label>密码 <em>*</em>
         <input type="text" id="password" required pattern="\w+">
       </label>
       <small class="alert-box error">密码只能为字母、数字、下划线</small>
     </div>
     <div class="form-row">
-      <label>确认密码 <small>*</small>
+      <label>确认密码 <em>*</em>
         <input type="text" required data-equalto="password">
       </label>
       <small class="alert-box error">两次密码输入不符</small>

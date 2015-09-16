@@ -79,7 +79,7 @@ $pagination-link-current-active-bg: $primary-color !default;
         height: auto;
         color: $pagination-link-current-font-color;
         font-weight: $pagination-link-current-font-weight;
-        @include radius;
+        border-radius: $global-radius;
         &:hover,
         &:focus {
             background: $pagination-link-current-active-bg;
@@ -107,8 +107,8 @@ $pagination-link-current-active-bg: $primary-color !default;
                 display: block;
                 padding: $pagination-link-padding;
                 background: none;
-                @include radius;
-                @include single-transition(background-color);
+                border-radius: $global-radius;
+                @include transition(background-color);
                 line-height: inherit;
                 color: $pagination-link-font-color;
                 font-size: 1em;

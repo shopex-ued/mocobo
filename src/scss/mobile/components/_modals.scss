@@ -130,10 +130,10 @@ $modal-footer-border: 1px solid $smoke !default;
     }
     // We can control how much radius is used on the modal
     @if $radius == true {
-        @include radius($modal-radius);
+        border-radius: $modal-radius;
     }
     @else if $radius {
-        @include radius($radius);
+        border-radius: $radius;
     }
 }
 

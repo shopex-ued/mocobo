@@ -79,17 +79,17 @@ $progress-meter-shadow: inset 0 0 3px rgba($white, .2), 2px 0 1px rgba($steel, .
                 background: $warning-color;
             }
             &.radius {
-                @include radius($progress-bar-border-radius);
+                border-radius: $progress-bar-border-radius;
                 &::after,
                 .meter {
-                    @include radius(to-rem($progress-bar-border-radius) - $progress-bar-padding);
+                    border-radius: $progress-bar-border-radius - $progress-bar-padding;
                 }
             }
             &.round {
-                @include radius($global-rounded);
+                border-radius: $global-rounded;
                 &::after,
                 .meter {
-                    @include radius(to-rem($global-rounded) - $progress-bar-padding);
+                    border-radius: to-rem($global-rounded) - $progress-bar-padding;
                 }
             }
             // Stack the meters

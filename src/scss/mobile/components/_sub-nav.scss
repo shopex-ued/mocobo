@@ -77,7 +77,7 @@ $sub-nav-item-divider-margin: to-rem(12) !default;
             }
         }
         &.active a {
-            @include radius($sub-nav-border-radius);
+            border-radius: $sub-nav-border-radius;
             background: $active-bg;
             color: $sub-nav-active-color;
             font-weight: $sub-nav-active-font-weight;

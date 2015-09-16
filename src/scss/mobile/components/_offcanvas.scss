@@ -72,7 +72,7 @@ $menu-slide: transform 300ms $easeInOutQuint !default;
 // MIXINS
 // Remove transition flicker on phones
 @mixin kill-flicker {
-    // -webkit-transform: translateZ(0x);
+    // transform: translateZ(0x);
     backface-visibility: hidden;
 }
 
@@ -343,7 +343,6 @@ $menu-slide: transform 300ms $easeInOutQuint !default;
             background: $offcanvas-bg;
             box-sizing: content-box;
             -webkit-overflow-scrolling: touch;
-            // -webkit-transition: -webkit-#{$menu-slide};
             transition: $menu-slide;
             //back button style like label
             .back > a {

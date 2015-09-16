@@ -144,7 +144,7 @@ $input-transition-fade-timing-function: linear !default;
     line-height: 1.21428;
     // margin: 0 0 $form-spacing 0;
     padding: to-rem(3) $form-spacing / 2;
-    @include box-sizing(border-box);
+    box-sizing: border-box;
     font-size: $input-font-size;
     @if $input-include-glowing-effect {
         @include block-glowing-effect(focus, $input-glowing-effect-fade-time, $input-glowing-effect-color);
@@ -330,14 +330,11 @@ $input-transition-fade-timing-function: linear !default;
             appearance: none;
             border-radius: 0;
             @include form-element;
-            @if $input-include-glowing-effect == false {
-                transition: border-color $input-transition-fade-time $input-transition-fade-timing-function, background $input-transition-fade-time $input-transition-fade-timing-function;
-            }
             &.radius {
-                @include radius($input-border-radius);
+                border-radius: $input-border-radius;
             }
             &.round {
-                @include radius($global-rounded);
+                border-radius: $global-rounded;
             }
         }
         input[type="submit"] {
