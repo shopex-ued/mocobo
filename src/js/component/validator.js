@@ -135,10 +135,10 @@
 
         reset: function(form, e) {
             var self = this;
-            form.removeAttr(self.invalid_attr);
+            form.removeAttr(this.invalid_attr);
 
-            $('[' + self.invalid_attr + ']', form).removeAttr(self.invalid_attr);
-            $('.' + self.settings.error_class, form).not(this.settings.alert_element).removeClass(self.settings.error_class);
+            $('[' + this.invalid_attr + ']', form).removeAttr(this.invalid_attr);
+            $('.' + this.settings.error_class, form).not(this.settings.alert_element).removeClass(this.settings.error_class);
             $(':input', form).not(':button, :submit, :reset, :hidden, [data-validator-ignore]').val('').removeAttr(self.invalid_attr);
         },
 

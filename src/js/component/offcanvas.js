@@ -18,7 +18,7 @@
                 move_class = '',
                 right_postfix = '',
                 left_postfix = '',
-                settings = self.settings;
+                settings = this.settings;
 
             if (settings.open_method === 'move') {
                 move_class = 'move-';

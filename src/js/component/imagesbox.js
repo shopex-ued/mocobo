@@ -60,8 +60,7 @@
 
             $(this.scope)
                 .off('.imagesbox')
-                .on('click.imagesbox', 'ul[' + this.attr_name() + '] li ' + this.settings.open_selectors,
-                    function(e, current, target) {
+                .on('click.imagesbox', 'ul[' + this.attr_name() + '] li ' + this.settings.open_selectors, function(e, current, target) {
                         var current = current || $(this),
                             target = target || current,
                             next = current.next('li'),
@@ -187,8 +186,7 @@
         },
 
         open: function($image, current, target) {
-            var self = this,
-                body = $(document.body),
+            var body = $(document.body),
                 root = target.closest('.imagesbox-assembled'),
                 container = $('div', root).first(),
                 visible_image = $('.visible-img', container),
@@ -313,8 +311,7 @@
 
         // visual adjustments
         fix_height: function(target) {
-            var lis = target.parent().children(),
-                self = this;
+            var lis = target.parent().children();
 
             lis.each(function() {
                     var li = $(this),

@@ -21,13 +21,13 @@
             locked = false,
             adjust_height_after = false;
 
-        self.slides = function() {
+        this.slides = function() {
             return slides_container.children(settings.slide_selector);
         };
 
-        self.slides().first().addClass(settings.active_slide_class);
+        this.slides().first().addClass(settings.active_slide_class);
 
-        self.update_slide_number = function(index) {
+        this.update_slide_number = function(index) {
             if (settings.slide_number) {
                 number_container.find('span:first').text(parseInt(index) + 1);
                 number_container.find('span:last').text(self.slides().length);
@@ -38,13 +38,13 @@
             }
         };
 
-        self.update_active_link = function(index) {
+        this.update_active_link = function(index) {
             var link = $('[data-slides-link="' + self.slides().eq(index).attr('data-slides-preview') + '"]');
             link.siblings().removeClass(settings.bullets_active_class);
             link.addClass(settings.bullets_active_class);
         };
 
-        self.build_markup = function() {
+        this.build_markup = function() {
             slides_container.wrap('<div class="' + settings.container_class + '"></div>');
             container = slides_container.parent();
             slides_container.addClass(settings.slides_container_class);
@@ -78,7 +78,7 @@
 
         };
 
-        self._goto = function(next_idx, start_timer) {
+        this._goto = function(next_idx, start_timer) {
             // if (locked) {return false;}
             if (next_idx === idx) {
                 return false;
@@ -163,19 +163,19 @@
             }
         };
 
-        self.next = function(e) {
+        this.next = function(e) {
             e.stopImmediatePropagation();
             e.preventDefault();
             self._goto(idx + 1);
         };
 
-        self.prev = function(e) {
+        this.prev = function(e) {
             e.stopImmediatePropagation();
             e.preventDefault();
             self._goto(idx - 1);
         };
 
-        self.link_custom = function(e) {
+        this.link_custom = function(e) {
             e.preventDefault();
             var link = $(this).attr('data-slides-link');
             if ((typeof link === 'string') && (link = $.trim(link)) != '') {
@@ -186,7 +186,7 @@
             }
         };
 
-        self.link_bullet = function(e) {
+        this.link_bullet = function(e) {
             var index = $(this).attr('data-slides-preview');
             if ((typeof index === 'string') && (index = $.trim(index)) != '') {
                 if (isNaN(parseInt(index))) {
@@ -201,11 +201,11 @@
 
         }
 
-        self.timer_callback = function() {
+        this.timer_callback = function() {
             self._goto(idx + 1, true);
         }
 
-        self.compute_dimensions = function() {
+        this.compute_dimensions = function() {
             var current = $(self.slides().get(idx));
             var h = current.outerHeight();
             if (!settings.variable_height) {
@@ -218,7 +218,7 @@
             slides_container.height(h);
         };
 
-        self.create_timer = function() {
+        this.create_timer = function() {
             var t = new Timer(
                 container.find('.' + settings.timer_container_class),
                 settings,
@@ -227,13 +227,13 @@
             return t;
         };
 
-        self.stop_timer = function() {
+        this.stop_timer = function() {
             if (typeof timer === 'object') {
                 timer.stop();
             }
         };
 
-        self.init = function() {
+        this.init = function() {
             self.build_markup();
             if (settings.timer) {
                 timer = self.create_timer();
@@ -311,7 +311,7 @@
             });
         };
 
-        self.init();
+        this.init();
     };
 
     var Timer = function(el, settings, callback) {
@@ -463,13 +463,13 @@
         reflow: function() {
             var self = this;
 
-            if ($(self.scope).is('[data-slides]')) {
-                var $el = $(self.scope);
-                var instance = $el.data(self.name + '-instance');
+            if ($(this.scope).is('[data-slides]')) {
+                var $el = $(this.scope);
+                var instance = $el.data(this.name + '-instance');
                 instance.compute_dimensions();
             } else {
-                $('[data-slides]', self.scope).each(function(idx, el) {
-                    var $el = $(el);
+                $('[data-slides]', this.scope).each(function(idx) {
+                    var $el = $(this);
                     var opts = self.data_options($el);
                     var instance = $el.data(self.name + '-instance');
                     instance.compute_dimensions();

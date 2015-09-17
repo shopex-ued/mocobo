@@ -28,7 +28,7 @@
 
             // store the initial href, which is used to allow correct behaviour of the
             // browser back button when deep linking is turned on.
-            self.entry_location = window.location.href;
+            this.entry_location = window.location.href;
 
             this.bindings(method, options);
             this.handle_location_hash_change();

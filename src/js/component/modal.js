@@ -89,7 +89,7 @@
                     }
                 });
 
-            if ($('[' + self.attr_name() + ']', this.scope).length > 0) {
+            if ($('[' + this.attr_name() + ']', this.scope).length > 0) {
                 $(this.scope)
                     // .off('.modal')
                     .on('open.modal', this.settings.open)
@@ -101,12 +101,12 @@
             } else {
                 $(this.scope)
                     // .off('.modal')
-                    .on('open.modal', '[' + self.attr_name() + ']', this.settings.open)
-                    .on('opened.modal', '[' + self.attr_name() + ']', this.settings.opened)
-                    .on('opened.modal', '[' + self.attr_name() + ']', this.open_video)
-                    .on('close.modal', '[' + self.attr_name() + ']', this.settings.close)
-                    .on('closed.modal', '[' + self.attr_name() + ']', this.settings.closed)
-                    .on('closed.modal', '[' + self.attr_name() + ']', this.close_video);
+                    .on('open.modal', '[' + this.attr_name() + ']', this.settings.open)
+                    .on('opened.modal', '[' + this.attr_name() + ']', this.settings.opened)
+                    .on('opened.modal', '[' + this.attr_name() + ']', this.open_video)
+                    .on('close.modal', '[' + this.attr_name() + ']', this.settings.close)
+                    .on('closed.modal', '[' + this.attr_name() + ']', this.settings.closed)
+                    .on('closed.modal', '[' + this.attr_name() + ']', this.close_video);
             }
 
             return true;
@@ -129,16 +129,16 @@
                 modal = $(this.scope);
             }
 
-            var settings = modal.data(self.attr_name(true) + '-init');
+            var settings = modal.data(this.attr_name(true) + '-init');
             settings = settings || this.settings;
 
 
             if (modal.hasClass('open') && target !== undefined && target.attr('data-modal-id') == modal.attr('id')) {
-                return self.close(modal);
+                return this.close(modal);
             }
 
             if (!modal.hasClass('open')) {
-                var open_modal = $('[' + self.attr_name() + '].open');
+                var open_modal = $('[' + this.attr_name() + '].open');
 
                 modal.attr('tabindex', '0').attr('aria-hidden', 'false');
 
@@ -230,13 +230,13 @@
                 modal.trigger('close.modal');
 
                 if ((settings.multiple_opened && open_modals.length === 1) || !settings.multiple_opened || modal.length > 1) {
-                    self.toggle_overlay(modal, false);
-                    self.to_front(modal);
+                    this.toggle_overlay(modal, false);
+                    this.to_front(modal);
                 }
 
                 if (settings.multiple_opened) {
                     var isCurrent = modal.is(':not(.toback)');
-                    self.hide(modal, settings.css.close, settings);
+                    this.hide(modal, settings.css.close, settings);
                     if (isCurrent) {
                         // remove the last modal since it is now closed
                         openModals.pop();
@@ -254,10 +254,10 @@
                     }
                     // finally, show the next modal in the stack, if there is one
                     if (openModals.length > 0) {
-                        self.to_front(openModals[openModals.length - 1]);
+                        this.to_front(openModals[openModals.length - 1]);
                     }
                 } else {
-                    self.hide(open_modals, settings.css.close, settings);
+                    this.hide(open_modals, settings.css.close, settings);
                 }
             }
         },

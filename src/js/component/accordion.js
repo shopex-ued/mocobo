@@ -18,8 +18,7 @@
 
         events: function(instance) {
             var self = this;
-            var S = this.S;
-            self.create($(instance));
+            this.create($(instance));
 
             $(this.scope)
                 .off('.accordion')
@@ -64,11 +63,9 @@
                 });
         },
 
-        create: function($instance) {
-            var self = this,
-                accordion = $instance,
-                items = $('> .item', accordion),
-                settings = accordion.data(self.attr_name(true) + '-init') || self.settings;
+        create: function(accordion) {
+            var items = $('> .item', accordion),
+                settings = accordion.data(this.attr_name(true) + '-init') || this.settings;
 
             items
                 .children('a')
@@ -78,7 +75,7 @@
                     .attr('aria-expanded', 'true');
 
             if (settings.multi_expand) {
-                $instance.attr('aria-multiselectable', 'true');
+                accordion.attr('aria-multiselectable', 'true');
             }
         },
 

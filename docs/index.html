@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Mobile front-end codebase</title>
 <script>
-if(window.screen.width < 541) {
+if(Math.min(window.innerWidth, window.screen.width) < 541) {
     window.location.href = 'index_iframe.html';
 }
 </script>
