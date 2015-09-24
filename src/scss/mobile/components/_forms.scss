@@ -12,7 +12,7 @@ $include-html-form-classes: $include-html-classes !default;
 $form-row-class: 'form-row' !default;
 $form-inline-class: 'form-inline' !default;
 // We use this to set the base for lots of form spacing and positioning styles
-$form-spacing: $column-gutter !default;
+$form-spacing: $grid-gutter !default;
 
 // We use these to style the labels in different ways
 $form-label-pointer: pointer !default;

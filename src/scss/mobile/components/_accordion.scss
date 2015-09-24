@@ -15,7 +15,7 @@ $accordion-item-active-font-color: $jet !default;
 $accordion-item-font-color: $jet !default;
 $accordion-item-font-size: to-rem(14) !default;
 
-$accordion-content-padding: $column-gutter / 2 !default;
+$accordion-content-padding: $grid-gutter / 2 !default;
 $accordion-content-active-bg-color: $white !default;
 
 //  Mixin: accordion-container()

@@ -65,7 +65,6 @@ $base-bg-color: $white !default;
 // $delay - Default: null (0s)
 @mixin transition($property: all, $speed: 300ms, $ease: $easeOut, $delay: null) {
     $transition: none;
-        @debug $property;
     @if type-of($property) == list {
         @each $transition_list in $property {
             $_len: length($transition_list);
@@ -322,10 +321,6 @@ $include-js-meta-styles: true !default;
 // Warning! Meta styles are a dependancy of the Javascript.
 $include-html-global-classes: $include-html-classes !default;
 
-//Grids
-$column-gutter: to-rem(16) !default;
-$column-blank: to-rem(24) !default;
-
 // Media Query Ranges
 $small-breakpoint: to-em(640) !default;
 $medium-breakpoint: to-em(1024) !default;
@@ -374,9 +369,6 @@ $medium: $medium-up !default;
     // Used to provide media query values for javascript components.
     // Forward slash placed around everything to convince PhantomJS to read the value.
     @if $include-js-meta-styles {
-        // meta.mobile-version {
-        //   font-family: "/{{VERSION}}/";
-        // }
         meta.mobile-mq-small {
             font-family: "/" + unquote($small-up) + "/";
             width: lower-bound($small-range);

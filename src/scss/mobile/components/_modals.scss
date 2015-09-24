@@ -16,7 +16,7 @@ $modal-overlay-bg: rgba($black, 0.45) !default;
 // We use these to control the style of the modal itself.
 $modal-bg: $white !default;
 $modal-default-width: 90% !default;
-$modal-max-width: $row-width !default;
+$modal-max-width: $grid-row-width !default;
 $modal-padding: to-rem(15) !default;
 $modal-box-shadow: 0 0 10px rgba($black, 0.3) !default;
 

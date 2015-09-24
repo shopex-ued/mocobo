@@ -23,13 +23,13 @@ $table-list-paragraph-font-size: to-rem(12) !default;
 $table-list-border-color: $gainsboro !default;
 
 $table-list-item-padding-top: to-rem(11) !default;
-$table-list-item-padding-left: ($column-blank / 2) !default;
+$table-list-item-padding-left: ($grid-blank / 2) !default;
 $table-list-item-margin-top: - $table-list-item-padding-top !default;
 $table-list-item-margin-left: - $table-list-item-padding-left !default;
 $table-list-item-badge-padding: to-rem(65) !default;
 $table-list-item-overflow: hidden !default;
 $table-list-item-border-color: $gainsboro !default;
-$table-list-item-border-left: ($column-blank / 2) !default;
+$table-list-item-border-left: ($grid-blank / 2) !default;
 $table-list-item-font-size: to-rem(14) !default;
 
 $table-list-item-left-icon-margin: to-rem(5) !default;

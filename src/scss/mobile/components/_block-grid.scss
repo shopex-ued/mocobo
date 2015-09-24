@@ -11,7 +11,7 @@ $block-grid-media-queries: false !default;
 
 // We use this to control the maximum number of block grid elements per row
 $block-grid-elements: 12 !default;
-$block-grid-default-spacing: $column-gutter !default;
+$block-grid-default-spacing: $grid-gutter !default;
 
 $align-block-grid-to-grid: false !default;
 

@@ -9,10 +9,12 @@ $grid-row-class: 'row' !default;
 $grid-columns-class: 'columns' !default;
 $grid-media-queries: false !default;
 
-$row-width: to-rem($small-breakpoint * $rem-base) !default;
-$total-columns: 12 !default;
+$grid-gutter: to-rem(16) !default;
+$grid-blank: to-rem(24) !default;
+$grid-total-columns: 12 !default;
+$grid-row-width: to-rem($small-breakpoint * $rem-base) !default;
 
-$last-child-float: right !default;
+$grid-last-child-float: right !default;
 
 //
 // Grid Functions
@@ -37,15 +39,15 @@ $last-child-float: right !default;
 @mixin grid-row($behavior: false, $clearfix: true) {
     // use @include grid-row(nest); to include a nested row
     @if $behavior == nest {
-        margin-left: -($column-gutter / 2);
-        margin-right: -($column-gutter / 2);
+        margin-left: -($grid-gutter / 2);
+        margin-right: -($grid-gutter / 2);
         max-width: none;
         width: auto;
     }
     @else if $behavior == collapse {
         margin-left: 0;
         margin-right: 0;
-        max-width: $row-width;
+        max-width: $grid-row-width;
         width: 100%;
     }
     @else if $behavior == nest-collapse {
@@ -55,17 +57,17 @@ $last-child-float: right !default;
         width: auto;
     }
     @else if $behavior == blank {
-        margin-left: $column-blank / 2;
-        margin-right: $column-blank / 2;
+        margin-left: $grid-blank / 2;
+        margin-right: $grid-blank / 2;
     }
     @else if $behavior == expanded {
         margin: to-rem(10) auto;
-        max-width: $row-width;
+        max-width: $grid-row-width;
     }
     @else {
         margin-left: auto;
         margin-right: auto;
-        max-width: $row-width;
+        max-width: $grid-row-width;
         // width: 100%;
     }
     // Clearfix for all rows
@@ -106,12 +108,12 @@ $last-child-float: right !default;
         padding-right: 0;
     }
     @else if $collapse == false {
-        padding-left: $column-gutter / 2;
-        padding-right: $column-gutter / 2;
+        padding-left: $grid-gutter / 2;
+        padding-right: $grid-gutter / 2;
     }
     // If a column number is given, calculate width
     @if $columns {
-        width: grid-calc($columns, $total-columns);
+        width: grid-calc($columns, $grid-total-columns);
         // If last column, float naturally instead of to the right
         @if $last-column {
             float: right;
@@ -119,11 +121,11 @@ $last-child-float: right !default;
     }
     // Source Ordering, adds left/right depending on which you use.
     @if $push {
-        left: grid-calc($push, $total-columns);
+        left: grid-calc($push, $grid-total-columns);
         right: auto;
     }
     @if $pull {
-        right: grid-calc($pull, $total-columns);
+        right: grid-calc($pull, $grid-total-columns);
         left: auto;
     }
     @if $float and $last-column == false {
@@ -142,7 +144,7 @@ $last-child-float: right !default;
     }
     // If offset, calculate appropriate margins
     @if $offset {
-        margin-left: grid-calc($offset, $total-columns) !important;
+        margin-left: grid-calc($offset, $grid-total-columns) !important;
     }
 }
 
@@ -150,7 +152,7 @@ $last-child-float: right !default;
 //
 // $size - Name of class to use, i.e. "large" will generate .large-1, .large-2, etc.
 @mixin grid-html-classes($size) {
-    // @for $i from 0 through $total-columns - 1 {
+    // @for $i from 0 through $grid-total-columns - 1 {
     //   .#{$size}-push-#{$i} {
     //     @include grid-column($push:$i, $collapse:null, $float:false);
     //   }
@@ -161,12 +163,12 @@ $last-child-float: right !default;
     // .columns {
     //     @include grid-column($columns: false, $position: true);
     // }
-    @for $i from 1 through $total-columns {
+    @for $i from 1 through $grid-total-columns {
         .#{$size}-#{$i} {
             @include grid-column($columns: $i, $collapse: null, $float: false);
         }
     }
-    @for $i from 0 through $total-columns - 1 {
+    @for $i from 0 through $grid-total-columns - 1 {
         $offset: if($size == grid, offset-#{$i}, #{$size}-offset-#{$i});
         .#{$offset} {
             @include grid-column($offset: $i, $collapse: null, $float: false);
@@ -219,9 +221,9 @@ $last-child-float: right !default;
             }
         }
         .#{$grid-columns-class} {
-            @include grid-column($columns: $total-columns, $position: true);
+            @include grid-column($columns: $grid-total-columns, $position: true);
             & + &:last-child {
-                float: $last-child-float;
+                float: $grid-last-child-float;
             }
             & + &.end {
                 float: left;
