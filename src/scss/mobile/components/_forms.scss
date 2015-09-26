@@ -105,24 +105,24 @@ $input-transition-fade-timing-function: linear !default;
 
 // We use this mixin to give us form styles for rows inside of forms
 @mixin form-row-base {
-    .#{$grid-row-class} {
-        // margin: 0 (-$form-spacing / 2);
+    // .#{$grid-row-class} {
+        // margin: 0 (-$form-spacing);
         // .#{$grid-columns-class} {
-        //     padding: 0 ($form-spacing / 2);
+        //     padding: 0 ($form-spacing);
         // }
         // Use this to collapse the margins of a form row
-        &.collapse {
-            // .#{$grid-colmns-class} {
+        // &.collapse {
+            // .#{$grid-columns-class} {
             //     padding: 0;
             // }
             // input {
             //     @include side-radius(right, 0);
             // }
-        }
-    }
+        // }
+    // }
     input.#{$grid-columns-class},
     textarea.#{$grid-columns-class} {
-        padding-left: $form-spacing / 2;
+        padding-left: $form-spacing;
     }
 }
 
@@ -143,7 +143,7 @@ $input-transition-fade-timing-function: linear !default;
     height: $input-medium;
     line-height: 1.21428;
     // margin: 0 0 $form-spacing 0;
-    padding: to-rem(3) $form-spacing / 2;
+    padding: to-rem(3) $form-spacing;
     box-sizing: border-box;
     font-size: $input-font-size;
     @if $input-include-glowing-effect {
@@ -196,8 +196,8 @@ $input-transition-fade-timing-function: linear !default;
         text-align: right;
     }
     @else if $alignment == inline {
-        margin: 0 0 $form-spacing 0;
-        padding: ($form-spacing / 2 + to-rem($input-border-width)) 0;
+        margin: 0 0 $form-spacing * 2 0;
+        padding: ($form-spacing + to-rem($input-border-width)) 0;
     }
 }
 
@@ -441,7 +441,7 @@ $input-transition-fade-timing-function: linear !default;
         input[type="checkbox"] + label,
         input[type="radio"] + label {
             display: inline-block;
-            margin-left: $form-spacing * 0.5;
+            margin-left: $form-spacing;// * 0.5;
             margin-right: $form-spacing;
             // margin-bottom: 0;
             // vertical-align: baseline;
@@ -464,14 +464,14 @@ $input-transition-fade-timing-function: linear !default;
         }
         // Standard Forms
         form {
-            margin: 0 0 $form-spacing;
+            margin: 0 0 $form-spacing * 2;
             // Using forms within rows, we need to set some defaults
             .#{$grid-row-class} {
                 @include form-row-base;
             }
         }
         .#{$form-row-class} {
-            margin-bottom: $form-spacing;
+            margin-bottom: $form-spacing * 2;
         }
         .#{$form-inline-class} {
             label {

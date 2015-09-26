@@ -9,8 +9,8 @@ $grid-row-class: 'row' !default;
 $grid-columns-class: 'columns' !default;
 $grid-media-queries: false !default;
 
-$grid-gutter: to-rem(16) !default;
-$grid-blank: to-rem(24) !default;
+$grid-gutter: to-rem(6 / 2) !default;
+$grid-blank: to-rem(32 / 2) !default;
 $grid-total-columns: 12 !default;
 $grid-row-width: to-rem($small-breakpoint * $rem-base) !default;
 
@@ -20,7 +20,6 @@ $grid-last-child-float: right !default;
 // Grid Functions
 //
 
-// @FUNCTION
 // $colNumber - Found in settings file
 // $totalColumns - Found in settings file
 @function grid-calc($colNumber, $totalColumns) {
@@ -39,8 +38,8 @@ $grid-last-child-float: right !default;
 @mixin grid-row($behavior: false, $clearfix: true) {
     // use @include grid-row(nest); to include a nested row
     @if $behavior == nest {
-        margin-left: -($grid-gutter / 2);
-        margin-right: -($grid-gutter / 2);
+        margin-left: -$grid-gutter;
+        margin-right: -$grid-gutter;
         max-width: none;
         width: auto;
     }
@@ -57,8 +56,8 @@ $grid-last-child-float: right !default;
         width: auto;
     }
     @else if $behavior == blank {
-        margin-left: $grid-blank / 2;
-        margin-right: $grid-blank / 2;
+        margin-left: $grid-blank;
+        margin-right: $grid-blank;
     }
     @else if $behavior == expanded {
         margin: to-rem(10) auto;
@@ -108,8 +107,8 @@ $grid-last-child-float: right !default;
         padding-right: 0;
     }
     @else if $collapse == false {
-        padding-left: $grid-gutter / 2;
-        padding-right: $grid-gutter / 2;
+        padding-left: $grid-gutter;
+        padding-right: $grid-gutter;
     }
     // If a column number is given, calculate width
     @if $columns {

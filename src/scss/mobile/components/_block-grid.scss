@@ -11,7 +11,7 @@ $block-grid-media-queries: false !default;
 
 // We use this to control the maximum number of block grid elements per row
 $block-grid-elements: 12 !default;
-$block-grid-default-spacing: $grid-gutter !default;
+$block-grid-default-spacing: $grid-gutter * 2 !default;
 
 $align-block-grid-to-grid: false !default;
 
@@ -32,13 +32,13 @@ $align-block-grid-to-grid: false !default;
             margin: 0;
         }
         @else {
-            margin: 0 (-$spacing / 2);
+            margin: 0 to-rem(-$spacing);
         }
         @extend .clearfix;
         > li {
             float: left;
             @if $include-spacing {
-                padding: $spacing / 2;
+                padding: $spacing;
             }
             height: auto;
             list-style: none;
@@ -47,7 +47,7 @@ $align-block-grid-to-grid: false !default;
     @if $per-row {
         > li {
             @if $include-spacing {
-                padding: $spacing / 2;
+                padding: $spacing;
             }
             width: 100% / $per-row;
             // &:nth-of-type(1n) {
