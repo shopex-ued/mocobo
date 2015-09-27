@@ -27,7 +27,7 @@
     "bugs": {
         "url": "https://github.com/shopex-ued/mocobo/issues"
     },
-    "homepage": "https://github.com/shopex-ued/mocobo#readme",
+    "homepage": "http://www.mocobo.org/",
     "devDependencies": {
         "assemble": "^0.4.42",
         "autoprefixer": "^6.0.2",
