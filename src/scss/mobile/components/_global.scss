@@ -296,7 +296,7 @@ $font-weight-bold: 700 !default;
 // We use these to control various global styles
 $body-bg: $white !default;
 $body-font-color: $jet !default;
-$body-font-family: $font-family-sans-serif !default;
+$body-font-family: sans-serif !default;
 $body-font-size-px: $rem-base * 0.75 !default;
 $body-font-size-rem: to-rem($body-font-size-px) !default;
 $body-font-size: to-em($body-font-size-px) !default;
@@ -435,10 +435,7 @@ $medium: $medium-up !default;
         body {
             background: $body-bg;
             color: $body-font-color;
-            font-family: $body-font-family;
-            font-size: $body-font-size;
-            font-weight: $body-font-weight;
-            line-height: $base-line-height;
+            font: $body-font-weight #{$body-font-size}/#{$base-line-height} $body-font-family;
             // Set to $base-line-height to take on browser default of 150%
             margin: 0;
             padding: 0;

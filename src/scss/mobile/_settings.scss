@@ -17,24 +17,25 @@
 // 08. Dropdown Buttons
 // 09. Dropdown
 // 10. Forms
-// 11. Icon Bar
-// 12. Imagesbox
-// 13. Inline Lists
-// 14. Modal
-// 15. Off-canvas
-// 16. Pagination
-// 17. Panels
-// 18. Progress Bar
-// 19. Side Nav
-// 20. Slides
-// 21. Split Buttons
-// 22. Sub Nav
-// 23. Switches
-// 24. Table Lists
-// 25. Tables
-// 26. Tabs
-// 27. Thumbnails
-// 28. Top Bar
+// 11. Gallerys
+// 12. Icon Bar
+// 13. Imagesbox
+// 14. Inline Lists
+// 15. Modal
+// 16. Off-canvas
+// 17. Pagination
+// 18. Panels
+// 19. Progress Bar
+// 20. Side Nav
+// 21. Slides
+// 22. Split Buttons
+// 23. Sub Nav
+// 24. Switches
+// 25. Table Lists
+// 26. Tables
+// 27. Tabs
+// 28. Thumbnails
+// 29. Top Bar
 
 // a. Base
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -655,13 +656,13 @@
 // $form-label-font-color: scale-color($black, $lightness: 30%);
 // $form-label-bottom-margin: 0;
 
-//input height
+// input height
 // $input-tiny: to-rem(24);
 // $input-small: to-rem(34);
 // $input-medium: to-rem(44);
 // $input-large: to-rem(50);
 
-//We use this to controll the inputs style.
+// We use this to controll the inputs style.
 // $input-font-color: rgba(0,0,0,0.75);
 // $input-font-size: to-rem(14);
 // $input-bg-color: $white;
@@ -674,7 +675,7 @@
 // $input-disabled-bg: $gainsboro;
 // $input-box-shadow: inset 0 2px 3px rgba($black, 0.05);
 
-//We use this to controll the radios / checkboxes style.
+// We use this to controll the radios / checkboxes style.
 // $radio-medium: to-rem(24);
 // $radio-bg-color: $white;
 // $radio-margin: to-rem(3);
@@ -731,7 +732,20 @@
 // $input-transition-fade-time: 0.15s;
 // $input-transition-fade-timing-function: linear;
 
-// 11. Icon Bar
+// 11. Gallerys
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-gallerys-classes: $include-html-classes;
+
+// $gallerys-class: 'gallery';
+// $gallerys-spacing: $grid-gutter * 2;
+// $gallerys-item-selector: 'li';
+// $gallerys-item-background: $snowwhite;
+// $gallerys-item-border-width: 1px;
+// $gallerys-item-border-color: $gainsboro;
+// $gallerys-font-color: $body-font-color;
+
+// 12. Icon Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // We use these to style the icon-bar and items
@@ -752,7 +766,7 @@
 // We use this to set default opacity for disabled icons.
 // $icon-bar-disabled-opacity: .7;
 
-// 12. Imagesbox
+// 13. Imagesbox
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-imagesbox-classes: $include-html-classes;
@@ -783,7 +797,7 @@
 // $imagesbox-carousel-thumb-width: 120px;
 // $imagesbox-carousel-thumb-active-border: 1px solid rgb(255,255,255);
 
-// 13. Inline Lists
+// 14. Inline Lists
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-inline-list-classes: $include-html-classes;
@@ -795,7 +809,7 @@
 // We use this to control the overflow of the inline list.
 // $inline-list-overflow: hidden;
 
-// 14. Modal
+// 15. Modal
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-modal-classes: $include-html-classes;
@@ -832,7 +846,7 @@
 // Set base z-index
 // $z-index-base: 1005;
 
-//We use these to control the modal main part
+// We use these to control the modal main part
 // $modal-header-margin: to-rem(-5) (-$modal-padding) to-rem(5);
 // $modal-header-padding: 0 $modal-padding to-rem(5);
 // $modal-header-border: 1px solid $smoke;
@@ -842,7 +856,7 @@
 // $modal-footer-padding: to-rem(10) $modal-padding 0;
 // $modal-footer-border: 1px solid $smoke;
 
-// 15. Off-canvas
+// 16. Off-canvas
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // Off Canvas Tab Bar Variables
@@ -914,7 +928,7 @@
 // Transition Variables
 // $menu-slide: transform 300ms $easeInOutQuint;
 
-// 16. Pagination
+// 17. Pagination
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-pagination-classes: $include-html-classes;
@@ -946,7 +960,7 @@
 // $pagination-link-current-font-weight: $font-weight-bold;
 // $pagination-link-current-active-bg: $primary-color;
 
-// 17. Panels
+// 18. Panels
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-panel-classes: $include-html-classes;
@@ -970,7 +984,7 @@
 
 // $panel-header-adjust: true;
 
-// 18. Progress Bar
+// 19. Progress Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-progress-bar-classes: $include-html-classes;
@@ -996,7 +1010,7 @@
 // $progress-meter-success-color: $success-color;
 // $progress-meter-alert-color: $alert-color;
 
-// 19. Side Nav
+// 20. Side Nav
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-nav-classes: $include-html-classes;
@@ -1036,7 +1050,7 @@
 // $side-nav-divider-color: scale-color($white, $lightness: 10%);
 // $side-nav-divider-margin: to-rem(3 0);
 
-// 20. Slides
+// 21. Slides
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-slides-classes: $include-html-classes;
@@ -1075,7 +1089,7 @@
 // $slides-number-font-color: $white;
 // $slides-number-padding: to-rem(5);
 
-// 21. Split Buttons
+// 22. Split Buttons
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-buttons-classes: $include-html-classes;
@@ -1103,7 +1117,7 @@
 // $split-buttons-span-width-large: $buttons-font-size-large * $buttons-line-height-large + nth($buttons-large, 1) * 2;
 // $split-buttons-padding-large: $split-buttons-span-width-large + nth($buttons-large, 2);
 
-// 22. Sub Nav
+// 23. Sub Nav
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-nav-classes: $include-html-classes;
@@ -1135,7 +1149,7 @@
 // $sub-nav-item-divider: "";
 // $sub-nav-item-divider-margin: to-rem(12);
 
-// 23. Switches
+// 24. Switches
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-form-classes: $include-html-classes;
@@ -1157,7 +1171,7 @@
 // $switch-paddle-transition-ease: ease-out;
 // $switch-active-color: $primary-color;
 
-// 24. Table Lists
+// 25. Table Lists
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-table-list-classes: $include-html-classes;
@@ -1206,7 +1220,7 @@
 // We use this to control any elements within table list items
 // $table-list-children-display: block;
 
-// 25. Tables
+// 26. Tables
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-table-classes: $include-html-classes;
@@ -1251,7 +1265,7 @@
 // $table-display: table-cell;
 // $table-margin-bottom: to-rem(20);
 
-// 26. Tabs
+// 27. Tabs
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-tabs-classes: $include-html-classes;
@@ -1269,7 +1283,7 @@
 
 // $tabs-vertical-nav-padding: to-rem(10 5);
 
-//We use these to control the styles of segmented controllers
+// We use these to control the styles of segmented controllers
 // $tabs-segmented-margin: to-rem(10 12);
 // $tabs-segmented-border: 1px solid $primary-color;
 // $tabs-segmented-radius: $global-radius;
@@ -1285,7 +1299,7 @@
 
 // $tabs-segmented-scroll-wrapper-height: to-rem(38);
 
-//We use these to control the styles of bar tabs
+// We use these to control the styles of bar tabs
 // $tabs-bar-border-color: $gainsboro;
 // $tabs-bar-bg-color: $white;
 
@@ -1298,7 +1312,7 @@
 // $tabs-bar-nav-active-bar-height: 2px;
 // $tabs-bar-nav-active-bar-color: $primary-color;
 
-// 27. Thumbnails
+// 28. Thumbnails
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-media-classes: $include-html-classes;
@@ -1316,7 +1330,7 @@
 // $thumb-radius: $global-radius;
 // $thumb-transition-speed: 200ms;
 
-// 28. Top Bar
+// 29. Top Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-top-bar-classes: $include-html-classes;
