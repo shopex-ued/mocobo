@@ -28,12 +28,7 @@ $align-block-grid-to-grid: false !default;
 @mixin block-grid($per-row: false, $spacing: $block-grid-default-spacing, $include-spacing: true, $base-style: true) {
     @if $base-style {
         display: block;
-        @if $align-block-grid-to-grid {
-            margin: 0;
-        }
-        @else {
-            margin: 0 to-rem(-$spacing);
-        }
+        margin: 0;
         @extend .clearfix;
         > li {
             float: left;
@@ -104,19 +99,6 @@ $align-block-grid-to-grid: false !default;
         }
         @else {
             @include block-grid-html-classes($size: grid, $include-spacing: false);
-        }
-        .gallery {
-            display: table;
-            > li {
-                display: table-cell;
-                background-color: #f9f9f9;
-                background-clip: padding-box;
-                border: 2px solid transparent;
-                box-shadow: inset 0 0 0 1px #ddd;
-                .badge {
-                    float: right;
-                }
-            }
         }
     }
 }

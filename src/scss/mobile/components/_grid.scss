@@ -14,15 +14,13 @@ $grid-blank: to-rem(32 / 2) !default;
 $grid-total-columns: 12 !default;
 $grid-row-width: to-rem($small-breakpoint * $rem-base) !default;
 
-$grid-last-child-float: right !default;
-
 //
 // Grid Functions
 //
 
 // $colNumber - Found in settings file
 // $totalColumns - Found in settings file
-@function grid-calc($colNumber, $totalColumns) {
+@function grid-calc($colNumber, $totalColumns: $grid-total-columns) {
     $result: percentage($colNumber / $totalColumns);
     @return if($result == 0%, 0, $result);
 }
@@ -36,6 +34,7 @@ $grid-last-child-float: right !default;
 //
 // $behavior - Any special behavior for this row? Default: false. Options: nest, collapse, nest-collapse, false.
 @mixin grid-row($behavior: false, $clearfix: true) {
+    display: flex;
     // use @include grid-row(nest); to include a nested row
     @if $behavior == nest {
         margin-left: -$grid-gutter;
@@ -112,44 +111,32 @@ $grid-last-child-float: right !default;
     }
     // If a column number is given, calculate width
     @if $columns {
-        width: grid-calc($columns, $grid-total-columns);
+        width: grid-calc($columns);
         // If last column, float naturally instead of to the right
-        @if $last-column {
-            float: right;
-        }
     }
     // Source Ordering, adds left/right depending on which you use.
     @if $push {
-        left: grid-calc($push, $grid-total-columns);
+        left: grid-calc($push);
         right: auto;
     }
     @if $pull {
-        right: grid-calc($pull, $grid-total-columns);
+        right: grid-calc($pull);
         left: auto;
-    }
-    @if $float and $last-column == false {
-        @if $float {
-            float: $float;
-        }
-        @else {
-            float: none;
-        }
     }
     // If centered, get rid of float and add appropriate margins
     @if $center {
         margin-left: auto;
         margin-right: auto;
-        float: none;
     }
     // If offset, calculate appropriate margins
     @if $offset {
-        margin-left: grid-calc($offset, $grid-total-columns) !important;
+        margin-left: grid-calc($offset) !important;
     }
 }
 
 // Create presentational classes for grid
 //
-// $size - Name of class to use, i.e. "large" will generate .large-1, .large-2, etc.
+// $size - Name of class to use.
 @mixin grid-html-classes($size) {
     // @for $i from 0 through $grid-total-columns - 1 {
     //   .#{$size}-push-#{$i} {
@@ -164,7 +151,12 @@ $grid-last-child-float: right !default;
     // }
     @for $i from 1 through $grid-total-columns {
         .#{$size}-#{$i} {
-            @include grid-column($columns: $i, $collapse: null, $float: false);
+            @if $i == 1 {
+                flex: $i;
+            }
+            @else {
+                width: grid-calc($i);
+            }
         }
     }
     @for $i from 0 through $grid-total-columns - 1 {
@@ -179,7 +171,10 @@ $grid-last-child-float: right !default;
     @if $include-html-grid-classes {
         /* Grid */
         .container {
-            @include grid-row(expanded, true);
+            margin: to-rem(10) auto;
+            max-width: $grid-row-width;
+            @extend .clearfix;
+            // @include grid-row(expanded, true);
         }
         .#{$grid-row-class} {
             @include grid-row;
@@ -221,12 +216,6 @@ $grid-last-child-float: right !default;
         }
         .#{$grid-columns-class} {
             @include grid-column($columns: $grid-total-columns, $position: true);
-            & + &:last-child {
-                float: $grid-last-child-float;
-            }
-            & + &.end {
-                float: left;
-            }
         }
         .column {
             @include grid-column($collapse: true);

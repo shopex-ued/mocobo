@@ -135,7 +135,8 @@ $blockquote-cite-link-color: $blockquote-cite-font-color !default;
         ul,
         ol,
         // li,
-        p {
+        p,
+        figure {
             margin: 0;
             padding: 0;
         }
