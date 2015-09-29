@@ -1,0 +1,58 @@
+@import "global";
+
+//
+// Variables
+//
+$include-html-gallerys-classes: $include-html-classes !default;
+
+$gallerys-class: 'gallery' !default;
+$gallerys-spacing: $grid-gutter * 2 !default;
+$gallerys-item-selector: 'li' !default;
+$gallerys-item-background: $snowwhite !default;
+$gallerys-item-border-width: 1px !default;
+$gallerys-item-border-color: $gainsboro !default;
+$gallerys-font-color: $body-font-color !default;
+$gallerys-border-radius: $global-radius !default;
+
+@include exports("gallery") {
+    @if $include-html-gallerys-classes {
+        .#{$gallerys-class} {
+            > #{$gallerys-item-selector} {
+                background-color: $gallerys-item-background;
+                background-clip: padding-box;
+                border: $gallerys-spacing / 2 solid transparent;
+                box-shadow: inset 0 0 0 $gallerys-item-border-width $gallerys-item-border-color;
+                > a {
+                    color: $gallerys-font-color;
+                }
+            }
+            &.radius {
+                > #{$gallerys-item-selector} {
+                    border-radius: $gallerys-border-radius + $gallerys-spacing / 2;
+                }
+                figure {
+                    border-radius: $gallerys-border-radius $gallerys-border-radius 0 0;
+                }
+            }
+            p {
+                margin-bottom: 0;
+            }
+            .square {
+                background-repeat: no-repeat;
+                background-position: 50%;
+                background-size: cover;
+                &::before {
+                    content: '';
+                    display: block;
+                    padding-top: 100%;
+                }
+                img {
+                    display: none;
+                }
+            }
+            .holdout {
+                margin: (-$block-grid-default-spacing) (-$block-grid-default-spacing) 0;
+            }
+        }
+    }
+}

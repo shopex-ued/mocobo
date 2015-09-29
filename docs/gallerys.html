@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>栅格</title>
+<meta name="viewport" content="width=device-width, target-densitydpi=device-dp, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+<style>
+.row {
+  margin-bottom: 10px;
+  box-shadow: inset 0 0 1px #d0d0d0;
+}
+.row .row {
+  border: 0 none;
+  margin-bottom: 0;
+}
+.row .columns {
+  background-color: #eee;
+  text-align: center;
+}
+.row .columns:nth-child(odd) {
+  background-color: #e3e3e3;
+}
+</style>
+</head>
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>图片库展示</h1>
+</header>
+
+<div class="container">
+  <h1>示例</h1>
+  <ul class="gallery block-grid-2">
+    <li>
+      <figure>
+        <img src="statics/launch.jpg">
+      </figure>
+      <h5>Yesterday is a wonderful day!</h5>
+      <span class="badge radius alert">$5.65</span>
+    </li>
+    <li>
+      <figure>
+        <img src="statics/comet.jpg">
+      </figure>
+      <h5>How's she getting along these days?</h5>
+      <span class="badge radius alert">$5.65</span>
+    </li>
+    <li>
+      <figure>
+        <img src="statics/earth.jpg">
+      </figure>
+      <h5>Could you give me your phone number? </h5>
+      <span class="badge radius alert">$5.65</span>
+    </li>
+    <li>
+      <figure>
+        <img src="statics/endevour.jpg">
+      </figure>
+      <h5>How about having dinner with me?</h5>
+      <span class="badge radius alert">$5.65</span>
+    </li>
+  </ul>
+  <h1>限制图片为正方形</h1>
+  <ul class="gallery block-grid-2">
+    <li>
+      <a href="">
+        <figure class="square" style="background-image:url(statics/satelite.jpg);">
+          <img src="statics/satelite.jpg">
+        </figure>
+        <h5>What's the matter with you?!</h5>
+        <p>
+          Price:
+          <span class="badge radius alert">$5.65</span>
+        </p>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <figure class="square" style="background-image:url(statics/space.jpg);">
+          <img src="statics/space.jpg">
+        </figure>
+        <h5>I'm feeling lucky more and more!</h5>
+        <p>
+          Price:
+          <span class="badge radius alert">$5.65</span>
+        </p>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <figure class="square" style="background-image:url(statics/launch.jpg);">
+          <img src="statics/launch.jpg">
+        </figure>
+        <h5>Yesterday is a wonderful day!</h5>
+        <span class="badge radius alert">$5.65</span>
+      </a>
+    </li>
+    <li>
+      <figure class="square" style="background-image:url(statics/comet.jpg);">
+        <img src="statics/comet.jpg">
+      </figure>
+      <h5>How's she getting along these days?</h5>
+      <span class="badge radius alert">$5.65</span>
+    </li>
+  </ul>
+  <h1>图片顶边显示</h1>
+  <ul class="gallery block-grid-2">
+    <li>
+      <a href="">
+        <figure class="square holdout" style="background-image:url(statics/satelite.jpg);">
+          <img src="statics/satelite.jpg">
+        </figure>
+        <h5>What's the matter with you?!</h5>
+        <p>
+          Price:
+          <span class="badge radius alert">$5.65</span>
+        </p>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <figure class="square holdout" style="background-image:url(statics/space.jpg);">
+          <img src="statics/space.jpg">
+        </figure>
+        <h5>I'm feeling lucky more and more!</h5>
+        <p>
+          Price:
+          <span class="badge radius alert">$5.65</span>
+        </p>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <figure class="square holdout" style="background-image:url(statics/launch.jpg);">
+          <img src="statics/launch.jpg">
+        </figure>
+        <h5>Yesterday is a wonderful day!</h5>
+        <span class="badge radius alert">$5.65</span>
+      </a>
+    </li>
+    <li>
+      <figure class="square holdout" style="background-image:url(statics/comet.jpg);">
+        <img src="statics/comet.jpg">
+      </figure>
+      <h5>How's she getting along these days?</h5>
+      <span class="badge radius alert">$5.65</span>
+    </li>
+  </ul>
+  <h1>圆角显示</h1>
+  <ul class="gallery radius block-grid-2">
+    <li>
+      <a href="">
+        <figure class="square holdout" style="background-image:url(statics/satelite.jpg);">
+          <img src="statics/satelite.jpg">
+        </figure>
+        <h5>What's the matter with you?!</h5>
+        <p>
+          Price:
+          <span class="badge radius alert">$5.65</span>
+        </p>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <figure class="square holdout" style="background-image:url(statics/space.jpg);">
+          <img src="statics/space.jpg">
+        </figure>
+        <h5>I'm feeling lucky more and more!</h5>
+        <p>
+          Price:
+          <span class="badge radius alert">$5.65</span>
+        </p>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <figure class="square holdout" style="background-image:url(statics/launch.jpg);">
+          <img src="statics/launch.jpg">
+        </figure>
+        <h5>Yesterday is a wonderful day!</h5>
+        <span class="badge radius alert">$5.65</span>
+      </a>
+    </li>
+    <li>
+      <figure class="square holdout" style="background-image:url(statics/comet.jpg);">
+        <img src="statics/comet.jpg">
+      </figure>
+      <h5>How's she getting along these days?</h5>
+      <span class="badge radius alert">$5.65</span>
+    </li>
+  </ul>
+</div>
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>
