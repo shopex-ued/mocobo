@@ -18,19 +18,16 @@
 <div class="container">
   <h1>常规表单</h1>
   <form action="" method="post">
-    <div class="row form-row">
-      <div class="grid-12 columns">
+    <div class="form-row">
+      <div class="grid-12">
         <label>常规输入框
-          <input type="text" placeholder="grid-12.columns" />
+          <input type="text" placeholder="grid-12" />
         </label>
         <label>圆角输入框
           <input type="text" class="radius" placeholder=".radius" />
         </label>
         <label>圆角样式2
           <input type="text" class="round" placeholder=".round" />
-        </label>
-        <label>小输入框
-          <input type="text" class="tiny" placeholder=".tiny" />
         </label>
         <label>小输入框
           <input type="text" class="small" placeholder=".small" />
@@ -40,7 +37,7 @@
         </label>
       </div>
     </div>
-    <div class="row form-row">
+    <div class="form-row">
       <div class="grid-4 columns">
         <label>Input Label
           <input type="text" placeholder="grid-4.columns" />
@@ -52,51 +49,33 @@
         </label>
       </div>
       <div class="grid-4 columns">
-        <div class="row collapse">
-          <label>Input Label</label>
-          <div class="grid-8 columns">
-            <input type="text" placeholder="grid-8.columns" />
-          </div>
-          <div class="grid-4 columns">
-            <span class="postfix">cc</span>
-          </div>
+        <label>Input Label</label>
+        <div class="row">
+          <input type="text" class="grid-8" placeholder="grid-8" />
+          <span class="postfix grid-4">cc</span>
         </div>
       </div>
     </div>
-    <div class="row form-row">
-      <div class="grid-12 columns">
-        <label>Select Box
-          <select>
-            <option value="husker">Husker</option>
-            <option value="starbuck">Starbuck</option>
-            <option value="hotdog">Hot Dog</option>
-            <option value="apollo">Apollo</option>
-          </select>
-        </label>
-      </div>
-    </div>
-    <div class="row form-row">
-      <div class="grid-12 columns">
-        <select class="radius tiny">
+    <div class="form-row">
+      <label class="grid-12">Select Box
+        <select>
           <option value="husker">Husker</option>
           <option value="starbuck">Starbuck</option>
           <option value="hotdog">Hot Dog</option>
           <option value="apollo">Apollo</option>
         </select>
-      </div>
+      </label>
     </div>
-    <div class="row form-row">
-      <div class="grid-12 columns">
-        <select class="round small">
-          <option value="husker">Husker</option>
-          <option value="starbuck">Starbuck</option>
-          <option value="hotdog">Hot Dog</option>
-          <option value="apollo">Apollo</option>
-        </select>
-      </div>
+    <div class="form-row">
+      <select class="small round grid-12">
+        <option value="husker">Husker</option>
+        <option value="starbuck">Starbuck</option>
+        <option value="hotdog">Hot Dog</option>
+        <option value="apollo">Apollo</option>
+      </select>
     </div>
-    <div class="row form-row">
-      <div class="grid-12 columns">
+    <div class="form-row">
+      <div class="grid-12">
         <label>Choose Your Favorite</label>
         <input type="radio" name="pokemon" value="Red" id="radio1"><label for="radio1">Red</label>
         <input type="radio" name="pokemon" value="Blue" id="radio2"><label for="radio2">Blue</label>
@@ -104,8 +83,8 @@
         <input type="radio" name="pokemon" value="White" id="radio4" checked disabled><label for="radio4">White</label>
       </div>
     </div>
-    <div class="row form-row">
-      <div class="grid-12 columns">
+    <div class="form-row">
+      <div class="grid-12">
         <label>Check these out</label>
         <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
         <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
@@ -113,23 +92,17 @@
         <input id="checkbox4" type="checkbox" checked disabled><label for="checkbox4">Checkbox 4</label>
       </div>
     </div>
-    <div class="row form-row">
-      <div class="grid-12 columns">
-        <label>Textarea Label
-          <textarea placeholder="grid-12.columns"></textarea>
-        </label>
-      </div>
+    <div class="form-row">
+      <label class="grid-12">Textarea Label
+        <textarea placeholder="grid-12.columns"></textarea>
+      </label>
     </div>
   </form>
   <h1>水平排列的标签和输入框</h1>
-  <form action="" method="post">
-    <div class="row form-inline">
-      <div class="grid-2 columns">
-        <label for="right-label" class="text-right">输入</label>
-      </div>
-      <div class="grid-10 columns">
-        <input type="text" id="right-label" placeholder="Inline Text Input">
-      </div>
+  <form action="" method="post" class="form-inline">
+    <div class="form-row">
+      <label for="right-label" class="grid-2 columns text-right">输入</label>
+      <input type="text" class="grid-10 columns" id="right-label" placeholder="Inline Text Input">
     </div>
   </form>
   <h1>利用fieldset标签</h1>
@@ -143,109 +116,77 @@
   </form>
   <h1>前/后缀</h1>
   <form action="" method="post">
-    <div class="row collapse">
-      <div class="grid-3 columns">
-        <span class="prefix">http://</span>
+    <div class="form-row">
+      <label for="prefix_1" class="prefix grid-3">http://</label>
+      <input type="text" id="prefix_1" class="grid-9" placeholder="Enter your URL...">
+    </div>
+    <div class="form-row">
+      <input type="text" class="grid-10" placeholder="Hex Value">
+      <a href="#" class="postfix grid-2">Go</a>
+    </div>
+    <div class="form-row">
+      <div class="grid-6 columns row prefix-radius">
+        <span class="prefix grid-3"><i class="icon-lock"></i></span>
+        <input type="text" class="grid-9" placeholder="Value">
       </div>
-      <div class="grid-9 columns">
-        <input type="text" placeholder="Enter your URL...">
+      <div class="grid-6 columns row postfix-radius">
+        <input type="text" class="grid-9" placeholder="Value">
+        <span class="postfix grid-3"><i class="icon-user"></i></span>
       </div>
     </div>
-    <div class="row">
-      <div class="grid-12 columns">
-        <div class="row collapse">
-          <div class="grid-10 columns">
-            <input type="text" placeholder="Hex Value">
-          </div>
-          <div class="grid-2 columns">
-            <a href="#" class="btn postfix">Go</a>
-          </div>
-        </div>
+    <div class="form-row">
+      <div class="grid-6 columns row prefix-radius">
+        <a href="#" class="prefix btn info grid-3">Go</a>
+        <input type="text" class="grid-9" placeholder="Value">
+      </div>
+      <div class="grid-6 columns row postfix-radius">
+        <input type="text" class="grid-9" placeholder="Value">
+        <a href="#" class="postfix btn warning grid-3">Go</a>
       </div>
     </div>
-    <div class="row">
-      <div class="grid-6 columns">
-        <div class="row collapse prefix-radius">
-          <div class="grid-3 columns">
-            <span class="prefix"><i class="icon-lock"></i></span>
-          </div>
-          <div class="grid-9 columns">
-            <input type="text" placeholder="Value">
-          </div>
-        </div>
+    <div class="form-row">
+      <div class="grid-6 columns row prefix-round">
+        <a href="#" class="prefix btn primary grid-3">Go</a>
+        <input type="text" class="grid-9" placeholder="Value">
       </div>
-      <div class="grid-6 columns">
-        <div class="row collapse postfix-radius">
-          <div class="grid-9 columns">
-            <input type="text" placeholder="Value">
-          </div>
-          <div class="grid-3 columns">
-            <span class="postfix"><i class="icon-user"></i></span>
-          </div>
-        </div>
+      <div class="grid-6 columns row postfix-round">
+        <input type="text" class="grid-9" placeholder="Value">
+        <a href="#" class="postfix btn alert grid-3">Go</a>
       </div>
     </div>
-    <div class="row">
-      <div class="grid-6 columns">
-        <div class="row collapse prefix-radius">
-          <div class="grid-3 columns">
-            <a href="#" class="prefix btn info">Go</a>
-          </div>
-          <div class="grid-9 columns">
-            <input type="text" placeholder="Value">
-          </div>
-        </div>
+    <div class="form-row">
+      <div class="grid-6 columns row">
+        <a href="" class="prefix grid-3">+</a>
+        <input type="text" class="grid-6" placeholder="Value">
+        <a href="" class="postfix grid-3">-</a>
       </div>
-      <div class="grid-6 columns">
-        <div class="row collapse postfix-radius">
-          <div class="grid-9 columns">
-            <input type="text" placeholder="Value">
-          </div>
-          <div class="grid-3 columns">
-            <a href="#" class="postfix btn warning">Go</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="grid-6 columns">
-        <div class="row collapse prefix-round">
-          <div class="grid-3 columns">
-            <a href="#" class="prefix btn primary">Go</a>
-          </div>
-          <div class="grid-9 columns">
-            <input type="text" placeholder="Value">
-          </div>
-        </div>
-      </div>
-      <div class="grid-6 columns">
-        <div class="row collapse postfix-round">
-          <div class="grid-9 columns">
-            <input type="text" placeholder="Value">
-          </div>
-          <div class="grid-3 columns">
-            <a href="#" class="postfix btn alert">Go</a>
-          </div>
-        </div>
+      <div class="grid-6 columns row">
+        <a href="" class="prefix grid-3">+</a>
+        <input type="text" class="grid-6" placeholder="Value">
+        <a href="" class="postfix grid-3">-</a>
       </div>
     </div>
   </form>
   <h1>错误提示</h1>
   <form action="" method="post">
-    <div class="row">
-      <div class="columns form-row has-error">
+    <div class="form-row has-error">
+      <div class="grid-12">
         <label>Error
           <input type="text" name="">
         </label>
         <span class="alert-box error">Invalid entry</span>
       </div>
-      <div class="columns form-row has-error">
+    </div>
+    <div class="form-row has-error">
+      <div class="grid-12">
         <label>Another Error
           <input type="text" name="">
         </label>
         <span class="alert-box error">Invalid entry</span>
       </div>
-      <div class="columns form-row has-error">
+    </div>
+    <div class="form-row has-error">
+      <div class="grid-12">
         <label>
           <textarea placeholder="Message..."></textarea>
         </label>
@@ -253,7 +194,6 @@
       </div>
     </div>
   </form>
-
 </div>
 
 <script src="../dist/js/libs.min.js"></script>

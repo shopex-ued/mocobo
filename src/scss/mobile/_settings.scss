@@ -187,8 +187,8 @@
 
 // $row-width: to-rem($small-breakpoint * $rem-base);
 // $total-columns: 12;
-// $column-gutter: to-rem(16);
-// $column-blank: to-rem(24);
+// $grid-gutter: to-rem(16);
+// $grid-blank: to-rem(24);
 
 // d. Media Query Ranges
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -357,7 +357,7 @@
 // $accordion-item-font-color: $jet;
 // $accordion-item-font-size: to-rem(16);
 
-// $accordion-content-padding: $column-gutter / 2;
+// $accordion-content-padding: $grid-gutter / 2;
 // $accordion-content-active-bg-color: $white;
 
 // 02. Alert Boxes
@@ -430,7 +430,7 @@
 // $block-grid-default-spacing: to-rem(20);
 
 // $align-block-grid-to-grid: false;
-// @if $align-block-grid-to-grid {$block-grid-default-spacing: $column-gutter;}
+// @if $align-block-grid-to-grid {$block-grid-default-spacing: $grid-gutter;}
 
 // 05. Breadcrumbs
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -646,7 +646,9 @@
 // $form-row-class: 'form-row';
 // $form-inline-class: 'form-inline';
 // We use this to set the base for lots of form spacing and positioning styles
-// $form-spacing: $column-gutter;
+// $form-spacing: $grid-gutter * 2;
+// $form-blank: $grid-blank;
+// $form-bottom-margin: to-rem(10);
 
 // We use these to style the labels in different ways
 // $form-label-pointer: pointer;
@@ -654,7 +656,6 @@
 // $form-label-font-weight: $font-weight-normal;
 // $form-label-line-height: 1.5;
 // $form-label-font-color: scale-color($black, $lightness: 30%);
-// $form-label-bottom-margin: 0;
 
 // input height
 // $input-tiny: to-rem(24);
@@ -697,8 +698,8 @@
 // $fieldset-border-width: 1px;
 // $fieldset-border-style: solid;
 // $fieldset-border-color: $gainsboro;
-// $fieldset-padding: to-rem(20);
-// $fieldset-margin: to-rem(18 0);
+// $fieldset-padding: to-rem(10);
+// $fieldset-margin: $form-bottom-margin;
 
 // We use these to style the legends when you use them
 // $legend-bg: $white;
@@ -1189,13 +1190,13 @@
 // $table-list-border-color: $gainsboro;
 
 // $table-list-item-padding-top: to-rem(11);
-// $table-list-item-padding-left: ($column-blank / 2);
+// $table-list-item-padding-left: ($grid-blank / 2);
 // $table-list-item-margin-top: - $table-list-item-padding-top;
 // $table-list-item-margin-left: - $table-list-item-padding-left;
 // $table-list-item-badge-padding: to-rem(65);
 // $table-list-item-overflow: hidden;
 // $table-list-item-border-color: $gainsboro;
-// $table-list-item-border-left: ($column-blank / 2);
+// $table-list-item-border-left: ($grid-blank / 2);
 // $table-list-item-font-size: to-rem(14);
 
 // $table-list-item-left-icon-margin: to-rem(5);
@@ -1280,7 +1281,7 @@
 // $tabs-nav-font-size: to-rem(14);
 
 // $tabs-content-margin-bottom: to-rem(10);
-// $tabs-content-padding: $column-gutter / 2;
+// $tabs-content-padding: $grid-gutter / 2;
 
 // $tabs-vertical-nav-padding: to-rem(10 5);
 

@@ -12,7 +12,9 @@ $include-html-form-classes: $include-html-classes !default;
 $form-row-class: 'form-row' !default;
 $form-inline-class: 'form-inline' !default;
 // We use this to set the base for lots of form spacing and positioning styles
-$form-spacing: $grid-gutter !default;
+$form-spacing: $grid-gutter * 2 !default;
+$form-blank: $grid-blank !default;
+$form-bottom-margin: to-rem(10) !default;
 
 // We use these to style the labels in different ways
 $form-label-pointer: pointer !default;
@@ -20,10 +22,9 @@ $form-label-font-size: to-rem(14) !default;
 $form-label-font-weight: $font-weight-normal !default;
 $form-label-line-height: 1.5 !default;
 $form-label-font-color: scale-color($black, $lightness: 30%) !default;
-$form-label-bottom-margin: 0 !default;
 
 //input height
-$input-tiny: to-rem(24) !default;
+// $input-tiny: to-rem(24) !default;
 $input-small: to-rem(34) !default;
 $input-medium: to-rem(44) !default;
 $input-large: to-rem(50) !default;
@@ -64,13 +65,13 @@ $radio-glowing-effect-color: rgba($radio-checked-border-color, .7) !default;
 $fieldset-border-width: 1px !default;
 $fieldset-border-style: solid !default;
 $fieldset-border-color: $gainsboro !default;
-$fieldset-padding: to-rem(20) !default;
-$fieldset-margin: to-rem(18 0) !default;
+$fieldset-padding: to-rem(10) !default;
+$fieldset-margin: $form-bottom-margin !default;
 
 // We use these to style the legends when you use them
 $legend-bg: $white !default;
 $legend-font-weight: $font-weight-bold !default;
-$legend-padding: to-rem(0 3) !default;
+$legend-padding: to-rem(0 5) !default;
 
 // We use these to style the prefix and postfix input elements
 $input-prefix-class: 'prefix' !default;
@@ -120,9 +121,12 @@ $input-transition-fade-timing-function: linear !default;
             // }
         // }
     // }
-    input.#{$grid-columns-class},
-    textarea.#{$grid-columns-class} {
+    > select.#{$grid-columns-class},
+    > input.#{$grid-columns-class},
+    > textarea.#{$grid-columns-class} {
         padding-left: $form-spacing;
+        padding-right: $form-spacing;
+        margin-left: $grid-gutter;
     }
 }
 
@@ -164,9 +168,9 @@ $input-transition-fade-timing-function: linear !default;
     [disabled] & {
         background-color: $input-disabled-bg;
     }
-    &.tiny {
-        height: $input-tiny;
-    }
+    // &.tiny {
+    //     height: $input-tiny;
+    // }
     &.small {
         height: $input-small;
     }
@@ -208,7 +212,6 @@ $input-transition-fade-timing-function: linear !default;
     padding-bottom: 0;
     padding-top: 0;
     border: $input-prefix-border-size $input-prefix-border-type;
-    width: 100%;
     height: $input-medium;
     line-height: $input-medium;
     font-size: $form-label-font-size;
@@ -248,14 +251,13 @@ $input-transition-fade-timing-function: linear !default;
 // We use this mixin to style fieldsets
 @mixin fieldset {
     border: $fieldset-border-width $fieldset-border-style $fieldset-border-color;
-    margin: $fieldset-margin;
+    margin: $fieldset-margin 0;
     padding: $fieldset-padding;
     // and legend styles
     legend {
         background: $legend-bg;
         font-weight: $legend-font-weight;
-        margin: 0;
-        margin-left: to-rem(-3);
+        margin: 0 0 0 to-rem(-3);
         padding: $legend-padding;
     }
 }
@@ -310,7 +312,7 @@ $input-transition-fade-timing-function: linear !default;
     // from the right side of the element without relying on CSS3
     // We can safely use leftmost and rightmost now
     background: $input-bg-color url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMCIgeT0iMCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iM3B4IiB2aWV3Qm94PSIwIDAgMjQgMyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8cG9seWdvbiBwb2ludHM9IjguNSwwIDEyLDMgMTUuNSwwIi8+DQo8L3N2Zz4NCg==) 100% 50% no-repeat;
-    padding-right: ($form-spacing * 1.5);
+    padding-right: ($form-spacing * 3);
 }
 
 // We use this mixin to turn on/off HTML5 number spinners
@@ -401,7 +403,7 @@ $input-transition-fade-timing-function: linear !default;
                     }
                 }
             }
-            &:disabled{
+            &:disabled {
                 opacity: $radio-disabled-checkmark-opacity;
                 &::before {
                     opacity: $radio-disabled-checkmark-opacity;
@@ -458,26 +460,6 @@ $input-transition-fade-timing-function: linear !default;
                 @include html5number($input-number-spinners);
             }
         }
-        // We add basic fieldset styling
-        fieldset {
-            @include fieldset;
-        }
-        // Standard Forms
-        form {
-            margin: 0 0 $form-spacing * 2;
-            // Using forms within rows, we need to set some defaults
-            .#{$grid-row-class} {
-                @include form-row-base;
-            }
-        }
-        .#{$form-row-class} {
-            margin-bottom: $form-spacing * 2;
-        }
-        .#{$form-inline-class} {
-            label {
-                line-height: $input-medium;
-            }
-        }
         // Label Styles
         label {
             @include form-label;
@@ -490,6 +472,31 @@ $input-transition-fade-timing-function: linear !default;
             // Styles for required inputs
             small {
                 color: scale-color($form-label-font-color, $lightness: 15%);
+            }
+        }
+        // We add basic fieldset styling
+        fieldset {
+            @include fieldset;
+        }
+        // Standard Forms
+        form {
+            margin: 0 $form-blank $form-bottom-margin;
+        }
+        .#{$form-row-class} {
+            display: flex;
+            > :not(input).#{$grid-columns-class} {
+                @include grid-column($collapse: sides, $float: false);
+            }
+            margin-bottom: $form-bottom-margin;
+        }
+        // Using forms within rows, we need to set some defaults
+        form .#{$grid-row-class},
+        .#{$form-row-class} {
+            @include form-row-base;
+        }
+        .#{$form-inline-class} {
+            label {
+                line-height: $input-medium;
             }
         }
         // Attach elements to the beginning or end of an input
@@ -532,50 +539,48 @@ $input-transition-fade-timing-function: linear !default;
                 border-radius: 0 $global-rounded $global-rounded 0;
             }
         }
-        form .#{$grid-row-class} {
-            .#{$input-prefix-class}-radius.#{$grid-row-class}.collapse {
-                input,
-                textarea,
-                select,
-                button {
-                    @include side-radius(right, $input-border-radius);
-                }
-                .#{$input-prefix-class} {
-                    @include side-radius(left, $input-border-radius);
-                }
+        .#{$input-prefix-class}-radius {
+            input,
+            textarea,
+            select,
+            button {
+                @include side-radius(right, $input-border-radius);
             }
-            .#{$input-postfix-class}-radius.#{$grid-row-class}.collapse {
-                input,
-                textarea,
-                select,
-                button {
-                    @include side-radius(left, $input-border-radius);
-                }
-                .#{$input-postfix-class} {
-                    @include side-radius(right, $input-border-radius);
-                }
+            .#{$input-prefix-class} {
+                @include side-radius(left, $input-border-radius);
             }
-            .#{$input-prefix-class}-round.#{$grid-row-class}.collapse {
-                input,
-                textarea,
-                select,
-                button {
-                    @include side-radius(right, $global-rounded);
-                }
-                .#{$input-prefix-class} {
-                    @include side-radius(left, $global-rounded);
-                }
+        }
+        .#{$input-postfix-class}-radius {
+            input,
+            textarea,
+            select,
+            button {
+                @include side-radius(left, $input-border-radius);
             }
-            .#{$input-postfix-class}-round.#{$grid-row-class}.collapse {
-                input,
-                textarea,
-                select,
-                button {
-                    @include side-radius(left, $global-rounded);
-                }
-                .#{$input-postfix-class} {
-                    @include side-radius(right, $global-rounded);
-                }
+            .#{$input-postfix-class} {
+                @include side-radius(right, $input-border-radius);
+            }
+        }
+        .#{$input-prefix-class}-round {
+            input,
+            textarea,
+            select,
+            button {
+                @include side-radius(right, $global-rounded);
+            }
+            .#{$input-prefix-class} {
+                @include side-radius(left, $global-rounded);
+            }
+        }
+        .#{$input-postfix-class}-round {
+            input,
+            textarea,
+            select,
+            button {
+                @include side-radius(left, $global-rounded);
+            }
+            .#{$input-postfix-class} {
+                @include side-radius(right, $global-rounded);
             }
         }
         /* Error Handling */
