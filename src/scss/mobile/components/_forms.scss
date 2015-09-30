@@ -134,6 +134,11 @@ $input-transition-fade-timing-function: linear !default;
 //
 // We use this mixin to give all basic form elements their style
 @mixin form-element {
+    display: block;
+    // margin: 0 0 $form-spacing 0;
+    padding: to-rem(3) $form-spacing;
+    width: 100%;
+    height: $input-medium;
     @if $input-bg-color {
         background-color: $input-bg-color;
     }
@@ -141,15 +146,9 @@ $input-transition-fade-timing-function: linear !default;
     @if $input-box-shadow {
         box-shadow: $input-box-shadow;
     }
-    color: $input-font-color;
-    display: block;
-    width: 100%;
-    height: $input-medium;
     line-height: 1.21428;
-    // margin: 0 0 $form-spacing 0;
-    padding: to-rem(3) $form-spacing;
-    box-sizing: border-box;
     font-size: $input-font-size;
+    color: $input-font-color;
     @if $input-include-glowing-effect {
         @include block-glowing-effect(focus, $input-glowing-effect-fade-time, $input-glowing-effect-color);
     }
@@ -337,6 +336,10 @@ $input-transition-fade-timing-function: linear !default;
             }
             &.round {
                 border-radius: $global-rounded;
+            }
+            &.underline {
+                border-width: 0 0 1px 0;
+                box-shadow: 0 0 0 0 transparent;
             }
         }
         input[type="submit"] {
