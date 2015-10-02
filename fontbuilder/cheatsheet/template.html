@@ -6,31 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../dist/css/mobile.min.css">
 <style>
+.icons-list {
+  text-align: justify;
+  margin: 0;
+}
 .cell-icon {
-  float: left;
+  display: inline-block;
   margin-bottom: 10px;
   text-align: center;
-  width: 33%;
+  width: 90px;
 }
-@media only screen and (min-width: 331px) {
-  .cell-icon {
-    width: 25%;
-  }
-}
-@media only screen and (min-width: 414px) {
-  .cell-icon {
-    width: 20%;
-  }
-}
-@media only screen and (min-width: 501px) {
-  .cell-icon {
-    width: 16.66667%;
-  }
-}
-@media only screen and (min-width: 581px) {
-  .cell-icon {
-    width: 14.28571%;
-  }
+.cell-fix {
+  height: 0;
+  margin-bottom: 0;
+  overflow: hidden;
 }
 .preview-icon {
   display: inline-block;
@@ -60,9 +49,9 @@
 </header>
 <div class="container">
   <h1>The {{font_name}}, {{icon_count}} icons:</h1>
-  <div class="row">
+  <ul class="icons-list">
     {{content}}
-  </div>
+  </ul>
   <h1>Usage:</h1>
   <pre>
   &lt;i class="{{class}}-mail">&lt;/i></pre>
@@ -70,5 +59,28 @@
 <script src="../dist/js/libs.min.js"></script>
 <script src="../dist/js/mobile.min.js"></script>
 <script src="../dist/js/main.min.js"></script>
+<script>
+var container = $('.icons-list');
+var cw = container.width();
+var cell = container.children();
+var sw = cell.width();
+var t = cell.length;
+var n = parseInt(cw / sw, 10);
+var x = t % n;
+var i = 0;
+var j = n - x + 1;
+var fix = '<li class="cell-icon cell-fix"></li>';
+
+if(x !== 1) {
+  if(x === 0) {
+    container.append(fix);
+  }
+  else {
+    for(; i < j; i++) {
+      container.append(fix);
+    }
+  }
+}
+</script>
 </body>
 </html>
