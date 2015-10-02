@@ -5,7 +5,7 @@
 //
 $include-html-icons-classes: $include-html-classes !default;
 
-$icons-hash: "635ba5afee" !default;
+$icons-hash: "98947dc71a" !default;
 $icons-font-path: "../fonts" !default;
 $icons-font-family: "icons" !default;
 $icons-class: "icon" !default;
@@ -36,11 +36,13 @@ $icon-location: "\2817";
 $icon-lock: "\2818";
 $icon-mail: "\2819";
 $icon-menu: "\281a";
+$icon-minus: "\2831";
 $icon-mobile: "\281b";
 $icon-more: "\281c";
 $icon-order: "\281d";
 $icon-package: "\281e";
 $icon-paper: "\281f";
+$icon-plus: "\2832";
 $icon-reduce: "\2820";
 $icon-refund: "\2821";
 $icon-return: "\2822";
@@ -111,11 +113,13 @@ $icon-wallet: "\2830";
         .#{$icons-class}-lock,
         .#{$icons-class}-mail,
         .#{$icons-class}-menu,
+        .#{$icons-class}-minus,
         .#{$icons-class}-mobile,
         .#{$icons-class}-more,
         .#{$icons-class}-order,
         .#{$icons-class}-package,
         .#{$icons-class}-paper,
+        .#{$icons-class}-plus,
         .#{$icons-class}-reduce,
         .#{$icons-class}-refund,
         .#{$icons-class}-return,
@@ -159,11 +163,13 @@ $icon-wallet: "\2830";
         .#{$icons-class}-lock::before { content: $icon-lock; }
         .#{$icons-class}-mail::before { content: $icon-mail; }
         .#{$icons-class}-menu::before { content: $icon-menu; }
+        .#{$icons-class}-minus::before { content: $icon-minus; }
         .#{$icons-class}-mobile::before { content: $icon-mobile; }
         .#{$icons-class}-more::before { content: $icon-more; }
         .#{$icons-class}-order::before { content: $icon-order; }
         .#{$icons-class}-package::before { content: $icon-package; }
         .#{$icons-class}-paper::before { content: $icon-paper; }
+        .#{$icons-class}-plus::before { content: $icon-plus; }
         .#{$icons-class}-reduce::before { content: $icon-reduce; }
         .#{$icons-class}-refund::before { content: $icon-refund; }
         .#{$icons-class}-return::before { content: $icon-return; }
