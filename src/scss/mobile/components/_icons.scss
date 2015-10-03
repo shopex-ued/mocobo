@@ -5,7 +5,7 @@
 //
 $include-html-icons-classes: $include-html-classes !default;
 
-$icons-hash: "98947dc71a" !default;
+$icons-hash: "efd3b9701a" !default;
 $icons-font-path: "../fonts" !default;
 $icons-font-family: "icons" !default;
 $icons-class: "icon" !default;
@@ -14,6 +14,7 @@ $icon-arrow-back: "\2801";
 $icon-arrow-down: "\2802";
 $icon-arrow-forward: "\2803";
 $icon-arrow-up: "\2804";
+$icon-arrow-updown: "\2833";
 $icon-bag: "\2805";
 $icon-business: "\2806";
 $icon-card: "\2807";
@@ -91,6 +92,7 @@ $icon-wallet: "\2830";
         .#{$icons-class}-arrow-down,
         .#{$icons-class}-arrow-forward,
         .#{$icons-class}-arrow-up,
+        .#{$icons-class}-arrow-updown,
         .#{$icons-class}-bag,
         .#{$icons-class}-business,
         .#{$icons-class}-card,
@@ -141,6 +143,7 @@ $icon-wallet: "\2830";
         .#{$icons-class}-arrow-down::before { content: $icon-arrow-down; }
         .#{$icons-class}-arrow-forward::before { content: $icon-arrow-forward; }
         .#{$icons-class}-arrow-up::before { content: $icon-arrow-up; }
+        .#{$icons-class}-arrow-updown::before { content: $icon-arrow-updown; }
         .#{$icons-class}-bag::before { content: $icon-bag; }
         .#{$icons-class}-business::before { content: $icon-business; }
         .#{$icons-class}-card::before { content: $icon-card; }
