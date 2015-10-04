@@ -1,0 +1,58 @@
+@import "global";
+
+//
+// @variables
+//
+$include-html-spinner-classes: $include-html-classes !default;
+
+$spinner-class: 'number-spinner' !default;
+$spinner-height: $input-medium !default;
+$spinner-font-size: to-rem(16) !default;
+$spinner-radius: $global-radius !default;
+
+@include exports("number-spinner") {
+    @if $include-html-spinner-classes {
+        /* The Number Spinner */
+        .#{$spinner-class} {
+            // Version .1
+            // position: relative;
+            // input {
+            //     margin-left: $spinner-height;
+            //     margin-right: $spinner-height;
+            //     font-size: $spinner-font-size;
+            //     text-align: center;
+            // }
+            // .prefix,
+            // .postfix {
+            //     position: absolute;
+            //     // top: 0;
+            //     width: $spinner-height;
+            //     font-size: $spinner-font-size;
+            // }
+            // .postfix {
+            //     right: 0;
+            // }
+            // Version .2
+            display: flex;
+            input {
+                flex: 1;
+                font-size: $spinner-font-size;
+                text-align: center;
+            }
+            .prefix,
+            .postfix {
+                width: $spinner-height;
+                font-size: $spinner-font-size;
+            }
+            &.radius {
+                border-radius: $spinner-radius;
+                .prefix {
+                    border-radius: $spinner-radius 0 0 $spinner-radius;
+                }
+                .postfix {
+                    border-radius: 0 $spinner-radius $spinner-radius 0;
+                }
+            }
+        }
+    }
+}

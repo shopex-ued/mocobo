@@ -22,20 +22,21 @@
 // 13. Imagesbox
 // 14. Inline Lists
 // 15. Modal
-// 16. Off-canvas
-// 17. Pagination
-// 18. Panels
-// 19. Progress Bar
-// 20. Side Nav
-// 21. Slides
-// 22. Split Buttons
-// 23. Sub Nav
-// 24. Switches
-// 25. Table Lists
-// 26. Tables
-// 27. Tabs
-// 28. Thumbnails
-// 29. Top Bar
+// 16. Number Spinner
+// 17. Off-canvas
+// 18. Pagination
+// 19. Panels
+// 20. Progress Bar
+// 21. Side Nav
+// 22. Slides
+// 23. Split Buttons
+// 24. Sub Nav
+// 25. Switches
+// 26. Table Lists
+// 27. Tables
+// 28. Tabs
+// 29. Thumbnails
+// 30. Top Bar
 
 // a. Base
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -666,6 +667,7 @@
 // We use this to controll the inputs style.
 // $input-font-color: rgba(0,0,0,0.75);
 // $input-font-size: to-rem(14);
+// $input-placeholder-font-color: $aluminum;
 // $input-bg-color: $white;
 // $input-focus-bg-color: $input-bg-color;
 // $input-border-width: 1px;
@@ -716,9 +718,6 @@
 // $input-prefix-font-color: $oil;
 // $input-prefix-font-color-alt: $white;
 // $input-prefix-icon-size: to-rem(24);
-
-// We use this setting to turn on/off HTML5 number spinners (the up/down arrows)
-// $input-number-spinners: false;
 
 // We use these to style the error states for inputs and labels
 // $input-error-message-padding: to-rem(6 9 9);
@@ -858,7 +857,16 @@
 // $modal-footer-padding: to-rem(10) $modal-padding 0;
 // $modal-footer-border: 1px solid $smoke;
 
-// 16. Off-canvas
+// 16. Number Spinner
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+// $include-html-spinner-classes: $include-html-classes;
+
+// $spinner-class: 'number-spinner';
+// $spinner-height: $input-medium;
+// $spinner-font-size: to-rem(16);
+// $spinner-radius: $global-radius;
+
+// 17. Off-canvas
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // Off Canvas Tab Bar Variables
@@ -930,7 +938,7 @@
 // Transition Variables
 // $menu-slide: transform 300ms $easeInOutQuint;
 
-// 17. Pagination
+// 18. Pagination
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-pagination-classes: $include-html-classes;
@@ -962,7 +970,7 @@
 // $pagination-link-current-font-weight: $font-weight-bold;
 // $pagination-link-current-active-bg: $primary-color;
 
-// 18. Panels
+// 19. Panels
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-panel-classes: $include-html-classes;
@@ -986,7 +994,7 @@
 
 // $panel-header-adjust: true;
 
-// 19. Progress Bar
+// 20. Progress Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-progress-bar-classes: $include-html-classes;
@@ -1012,7 +1020,7 @@
 // $progress-meter-success-color: $success-color;
 // $progress-meter-alert-color: $alert-color;
 
-// 20. Side Nav
+// 21. Side Nav
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-nav-classes: $include-html-classes;
@@ -1052,7 +1060,7 @@
 // $side-nav-divider-color: scale-color($white, $lightness: 10%);
 // $side-nav-divider-margin: to-rem(3 0);
 
-// 21. Slides
+// 22. Slides
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-slides-classes: $include-html-classes;
@@ -1091,7 +1099,7 @@
 // $slides-number-font-color: $white;
 // $slides-number-padding: to-rem(5);
 
-// 22. Split Buttons
+// 23. Split Buttons
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-buttons-classes: $include-html-classes;
@@ -1119,7 +1127,7 @@
 // $split-buttons-span-width-large: $buttons-font-size-large * $buttons-line-height-large + nth($buttons-large, 1) * 2;
 // $split-buttons-padding-large: $split-buttons-span-width-large + nth($buttons-large, 2);
 
-// 23. Sub Nav
+// 24. Sub Nav
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-nav-classes: $include-html-classes;
@@ -1151,7 +1159,7 @@
 // $sub-nav-item-divider: "";
 // $sub-nav-item-divider-margin: to-rem(12);
 
-// 24. Switches
+// 25. Switches
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-form-classes: $include-html-classes;
@@ -1173,7 +1181,7 @@
 // $switch-paddle-transition-ease: ease-out;
 // $switch-active-color: $primary-color;
 
-// 25. Table Lists
+// 26. Table Lists
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-table-list-classes: $include-html-classes;
@@ -1222,7 +1230,7 @@
 // We use this to control any elements within table list items
 // $table-list-children-display: block;
 
-// 26. Tables
+// 27. Tables
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-table-classes: $include-html-classes;
@@ -1267,7 +1275,7 @@
 // $table-display: table-cell;
 // $table-margin-bottom: to-rem(20);
 
-// 27. Tabs
+// 28. Tabs
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-tabs-classes: $include-html-classes;
@@ -1314,7 +1322,7 @@
 // $tabs-bar-nav-active-bar-height: 2px;
 // $tabs-bar-nav-active-bar-color: $primary-color;
 
-// 28. Thumbnails
+// 29. Thumbnails
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-media-classes: $include-html-classes;
@@ -1332,7 +1340,7 @@
 // $thumb-radius: $global-radius;
 // $thumb-transition-speed: 200ms;
 
-// 29. Top Bar
+// 30. Top Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-top-bar-classes: $include-html-classes;

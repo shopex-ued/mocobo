@@ -1,8 +1,4 @@
 @import "global";
-@import "alert-boxes";
-@import "buttons";
-@import "grid";
-@import "icons";
 
 //
 // @variables
@@ -31,8 +27,8 @@ $input-large: to-rem(50) !default;
 
 //We use this to controll the inputs style.
 $input-font-color: rgba(0, 0, 0, 0.75) !default;
-$input-placeholder-font-color: $steel !default;
 $input-font-size: to-rem(14) !default;
+$input-placeholder-font-color: $aluminum !default;
 $input-bg-color: $white !default;
 $input-focus-bg-color: $input-bg-color !default;
 $input-border-width: 1px !default;
@@ -83,9 +79,6 @@ $input-prefix-border-type: solid !default;
 $input-prefix-font-color: $oil !default;
 $input-prefix-font-color-alt: $white !default;
 $input-prefix-icon-size: to-rem(24) !default;
-
-// We use this setting to turn on/off HTML5 number spinners (the up/down arrows)
-$input-number-spinners: false !default;
 
 // We use these to style the error states for inputs and labels
 $input-error-message-padding: to-rem(6 9 9) !default;
@@ -314,14 +307,6 @@ $input-transition-fade-timing-function: linear !default;
     padding-right: ($form-spacing * 3);
 }
 
-// We use this mixin to turn on/off HTML5 number spinners
-@mixin html5number($on: true) {
-    @if $on == false {
-        appearance: none;
-        margin: 0;
-    }
-}
-
 @include exports("form") {
     @if $include-html-form-classes {
         // We use this to get basic styling on all basic form elements
@@ -457,10 +442,10 @@ $input-transition-fade-timing-function: linear !default;
         }
         // HTML5 Number spinners settings
         input[type=number] {
-            &
             &::-webkit-inner-spin-button,
             &::-webkit-outer-spin-button {
-                @include html5number($input-number-spinners);
+                appearance: none;
+                margin: 0;
             }
         }
         // Label Styles

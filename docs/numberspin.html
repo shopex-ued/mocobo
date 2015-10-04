@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>数字拨盘</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>数字拨盘</h1>
+</header>
+
+<div class="container">
+  <h1>示例</h1>
+  <div class="number-spinner grid-5" data-numberspin>
+    <a href="javascript:void(0);" class="prefix icon-minus"></a>
+    <input type="number" min="1" max="999" step="1" value="">
+    <a href="javascript:void(0);" class="postfix icon-plus"></a>
+  </div>
+  <h1>带圆角</h1>
+  <div class="number-spinner grid-6 radius" data-numberspin>
+    <a href="javascript:void(0);" class="prefix icon-minus"></a>
+    <input type="text" min="1" max="999" step="1" value="">
+    <a href="javascript:void(0);" class="postfix icon-plus"></a>
+  </div>
+  <h1>用于表单中</h1>
+  <form action="" method="post">
+    <div class="form-row">
+      <div class="grid-5 columns">
+        <div class="number-spinner" data-numberspin>
+          <a href="javascript:void(0);" class="prefix icon-minus"></a>
+          <input type="number" min="1" max="999" step="1" value="" required>
+          <a href="javascript:void(0);" class="postfix icon-plus"></a>
+        </div>
+      </div>
+      <div class="grid-3 columns">
+        <button type="submit">提交</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>
