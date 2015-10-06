@@ -45,19 +45,6 @@ $base-bg-color: $white !default;
 
 // @mixins
 //
-// We can control whether or not we have inset shadows edges.
-// $active - Default: true, Options: false
-@mixin inset-shadow($active: true) {
-    box-shadow: $shiny-edge-size $shiny-edge-color inset;
-    @if $active {
-        &:active {
-            box-shadow: $shiny-edge-size $shiny-edge-active-color inset;
-        }
-    }
-}
-
-// @mixins
-//
 // We use this to add single or multiple transitions to elements
 // $property - Default: all, Options: http://www.w3.org/TR/css3-transitions/#animatable-properties
 // $speed - Default: 300ms
@@ -129,6 +116,16 @@ $base-bg-color: $white !default;
     width: 0;
     border: $triangle-size solid transparent;
     border-#{$triangle-direction}-color: $triangle-color;
+}
+
+// @mixins
+//
+// We use this to absolutely centered element(s)
+@mixin centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 // @mixins

@@ -63,13 +63,10 @@ $split-buttons-padding-large: $split-buttons-span-width-large + nth($buttons-lar
             &::after {
                 content: "";
                 display: block;
-                position: absolute;
-                top: 50%;
-                left: 50%;
+                @include centered;
                 width: 0;
                 height: 0;
                 border-style: solid inset inset;
-                transform: translate(-50%, -50%);
                 margin-top: $split-buttons-pip-size-medium / 2;
             }
             &:active {
@@ -171,10 +168,7 @@ $split-buttons-padding-large: $split-buttons-span-width-large + nth($buttons-lar
                     border-style: none;
                 }
                 span > [class^=#{$icons-class}-] {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
+                    @include centered;
                 }
             }
         }

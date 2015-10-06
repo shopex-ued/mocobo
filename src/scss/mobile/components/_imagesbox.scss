@@ -86,10 +86,7 @@ $imagesbox-carousel-thumb-active-border: 1px solid rgb(255, 255, 255) !default;
             position: relative;
             height: 95%;
             img {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
+                @include centered;
                 max-height: 100%;
                 max-width: 100%;
             }
