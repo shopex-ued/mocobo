@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>消息提示</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../dist/css/mobile.min.css">
+</head>
+
+<body>
+<header class="top-bar" data-topbar>
+  <div class="pos-left">
+    <a href="javascript:history.back();" class="icon-arrow-back"></a>
+  </div>
+  <h1>消息提示</h1>
+</header>
+
+<div class="container">
+  <h1>顶部滑入</h1>
+  <button type="button" data-tips data-tips-content="温馨地提醒您：请先登录！">显示</button>
+  <h1>屏幕居中显现</h1>
+  <button type="button" data-tips="msg" data-tips-content="温馨地提醒您：请先登录！">显示</button>
+  <h1>JS 调用</h1>
+  <pre>
+    $(document).mobile('tips', 'show', '您的消息');
+  </pre>
+
+  <h1>回调</h1>
+  <pre>
+  $('#mytips').on('show.tips', function (event) {
+    ...
+  });
+
+  $('#mytips').on('hide.tips', function (event) {
+    ...
+  });
+  </pre>
+
+  <h1>可选项</h1>
+  <pre>
+  $(document).mobile({
+    tips: {
+      // to display the massage text and so on
+      content: '',
+      // disappear after how many milliseconds.
+      delay: 3000,
+      // controll the tips' style.
+      type: 'pop',
+      // relative positioning of element.
+      relativeTo: '.container'
+    }
+  });
+  </pre>
+
+  <h1>当添加了新的​选项卡</h1>
+  <pre>
+  $(document).mobile('tips', 'reflow');
+  </pre>
+</div>
+
+<script src="../dist/js/libs.min.js"></script>
+<script src="../dist/js/mobile.min.js"></script>
+<script src="../dist/js/main.min.js"></script>
+</body>
+</html>

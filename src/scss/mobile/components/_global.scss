@@ -121,11 +121,21 @@ $base-bg-color: $white !default;
 // @mixins
 //
 // We use this to absolutely centered element(s)
-@mixin centered {
-    position: absolute;
+@mixin centered($position: absolute) {
+    position: $position;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+// @mixins
+//
+// We use this to controll text nowrap.
+@mixin nowrap {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 // @mixins

@@ -1,0 +1,233 @@
+@charset "UTF-8";
+
+//
+// Variable
+//
+
+$include-html-animate-classes: $include-html-classes !default;
+
+$animate-duration-faster:  .2s !default;
+$animate-duration-fast:    .3s !default;
+$animate-duration-normal:  .5s !default;
+$animate-duration-slow:    1s !default;
+$animate-duration-slower:  1.5s !default;
+
+//
+// Mixins
+//
+@mixin animated($duration: $animate-duration-normal) {
+    .animated {
+        animation-duration: $duration;
+        animation-fill-mode: both;
+        &.infinite {
+            animation-iteration-count: infinite;
+        }
+    }
+}
+
+@mixin fadeIn {
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .fadeIn {
+        animation-name: fadeIn;
+    }
+}
+
+@mixin fadeInDown {
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translate3d(0, -100%, 0);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    .fadeInDown {
+        animation-name: fadeInDown;
+    }
+}
+
+@mixin fadeInUp {
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translate3d(0, 100%, 0);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    .fadeInUp {
+        animation-name: fadeInUp;
+    }
+}
+
+@mixin fadeOut {
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+
+    .fadeOut {
+        animation-name: fadeOut;
+    }
+}
+
+@mixin fadeOutDown {
+    @keyframes fadeOutDown {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+            transform: translate3d(0, 100%, 0);
+        }
+    }
+
+    .fadeOutDown {
+        animation-name: fadeOutDown;
+    }
+}
+
+@mixin fadeOutUp {
+    @keyframes fadeOutUp {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+            transform: translate3d(0, -100%, 0);
+        }
+    }
+
+    .fadeOutUp {
+        animation-name: fadeOutUp;
+    }
+}
+
+@mixin zoomIn {
+    @keyframes zoomIn {
+        from {
+            opacity: 0;
+            transform: scale3d(0.3, 0.3, 0.3);
+        }
+        50% {
+            opacity: 1;
+        }
+    }
+
+    .zoomIn {
+        animation-name: zoomIn;
+    }
+}
+
+@mixin zoomOut {
+    @keyframes zoomOut {
+        from {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+            transform: scale3d(0.3, 0.3, 0.3);
+        }
+        to {
+            opacity: 0;
+        }
+    }
+
+    .zoomOut {
+        animation-name: zoomOut;
+    }
+}
+
+@mixin slideInDown {
+    @keyframes slideInDown {
+        from {
+            transform: translate3d(0, -100%, 0);
+            visibility: visible;
+        }
+        to {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .slideInDown {
+        animation-name: slideInDown;
+    }
+}
+
+@mixin slideInUp {
+    @keyframes slideInUp {
+        from {
+            transform: translate3d(0, 100%, 0);
+            visibility: visible;
+        }
+        to {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .slideInUp {
+        animation-name: slideInUp;
+    }
+}
+
+@mixin slideOutDown {
+    @keyframes slideOutDown {
+        from {
+            transform: translate3d(0, 0, 0);
+        }
+        to {
+            visibility: hidden;
+            transform: translate3d(0, 100%, 0);
+        }
+    }
+
+    .slideOutDown {
+        animation-name: slideOutDown;
+    }
+}
+
+@mixin slideOutUp {
+    @keyframes slideOutUp {
+        from {
+            transform: translate3d(0, 0, 0);
+        }
+        to {
+            visibility: hidden;
+            transform: translate3d(0, -100%, 0);
+        }
+    }
+
+    .slideOutUp {
+        animation-name: slideOutUp;
+    }
+}
+
+
+@include exports("animate") {
+    @if $include-html-animate-classes {
+        // Included, add as needed.
+        @include animated;
+        @include slideInDown;
+        @include slideOutUp;
+        @include fadeIn;
+        @include fadeOut;
+    }
+}

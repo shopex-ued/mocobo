@@ -1,0 +1,69 @@
+@import "global";
+
+//
+// @variables
+//
+$include-html-tips-classes: $include-html-classes !default;
+
+$poptip-class: 'poptip' !default;
+$poptip-z-index: 1000 !default;
+$poptip-blank: null !default;
+$poptip-bg: rgba($black, .65) !default;
+$poptip-height: to-rem(40) !default;
+$poptip-border-radius: null !default;
+$poptip-font-color: $white !default;
+$poptip-font-size: to-rem(16) !default;
+
+$msgtip-class: 'msgtip' !default;
+$msgtip-z-index: 1000 !default;
+$msgtip-padding: to-rem(5 20) !default;
+$msgtip-bg: rgba($black, .6) !default;
+$msgtip-height: to-rem(40) !default;
+$msgtip-border-radius: $global-radius !default;
+$msgtip-font-color: $white !default;
+$msgtip-font-size: to-rem(16) !default;
+
+@include exports("tips") {
+    @if $include-html-tips-classes {
+        /* Pop tip */
+        .#{$poptip-class} {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: $poptip-z-index;
+            @if $poptip-blank {
+                padding-left: $poptip-blank;
+                padding-right: $poptip-blank;
+            }
+            width: 100%;
+            overflow: hidden;
+            .content {
+                background-color: $poptip-bg;
+                @if $poptip-border-radius {
+                    border-radius: 0 0 $poptip-border-radius $poptip-border-radius;
+                }
+                @include nowrap;
+                line-height: $poptip-height;
+                color: $poptip-font-color;
+                font-size: $poptip-font-size;
+                text-align: center;
+            }
+        }
+
+        /*Message tip*/
+        .#{$msgtip-class} {
+            @include centered(fixed);
+            z-index: $poptip-z-index;
+            .content {
+                padding: $msgtip-padding;
+                background-color: $msgtip-bg;
+                border-radius: $msgtip-border-radius;
+                @include nowrap;
+                line-height: $msgtip-height;
+                color: $msgtip-font-color;
+                font-size: $msgtip-font-size;
+                text-align: center;
+            }
+        }
+    }
+}

@@ -7,6 +7,7 @@
 // d. Media Query Ranges
 // e. Typography
 // f. Icons
+// g. Animate
 // 01. Accordion
 // 02. Alert Boxes
 // 03. Badges
@@ -36,7 +37,8 @@
 // 27. Tables
 // 28. Tabs
 // 29. Thumbnails
-// 30. Top Bar
+// 30. Tips
+// 31. Top Bar
 
 // a. Base
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -119,14 +121,14 @@
 //
 // Easing Timing Functions
 //
-//basic
+// basic
 // $linear: linear;
 // $ease: ease;
 // $easeIn: ease-in;
 // $easeOut: ease-out;
 // $easeInOut: ease-in-out;
 
-//extended ease in
+// extended ease in
 // $easeInQuad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
 // $easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
 // $easeInQuart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
@@ -136,7 +138,7 @@
 // $easeInCirc: cubic-bezier(0.6, 0.04, 0.98, 0.335);
 // $easeInBack: cubic-bezier(0.6, -0.28, 0.735, 0.045);
 
-//extended ease out
+// extended ease out
 // $easeOutQuad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 // $easeOutCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
 // $easeOutQuart: cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -343,6 +345,18 @@
 // $icons-font-path: "../fonts";
 // $icons-font-family: "icons";
 // $icons-class: "icon";
+
+// g. Animate
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+// $include-html-animate-classes: $include-html-classes;
+
+// $animate-duration-faster:  .2s;
+// $animate-duration-fast:    .3s;
+// $animate-duration-normal:  .5s;
+// $animate-duration-slow:    1s;
+// $animate-duration-slower:  1.5s;
 
 // 01. According
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1341,7 +1355,30 @@
 // $thumb-radius: $global-radius;
 // $thumb-transition-speed: 200ms;
 
-// 30. Top Bar
+// 30. Tips
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-tips-classes: $include-html-classes;
+
+// $poptip-class: 'poptip';
+// $poptip-z-index: 1000;
+// $poptip-blank: null;
+// $poptip-bg: rgba($black, .65);
+// $poptip-height: to-rem(40);
+// $poptip-border-radius: null;
+// $poptip-font-color: $white;
+// $poptip-font-size: to-rem(16);
+
+// $msgtip-class: 'msgtip';
+// $msgtip-z-index: 1000;
+// $msgtip-padding: to-rem(5 20);
+// $msgtip-bg: rgba($black, .6);
+// $msgtip-height: to-rem(40);
+// $msgtip-border-radius: $global-radius;
+// $msgtip-font-color: $white;
+// $msgtip-font-size: to-rem(16);
+
+// 31. Top Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-top-bar-classes: $include-html-classes;
