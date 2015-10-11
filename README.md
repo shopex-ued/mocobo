@@ -47,3 +47,10 @@ Enjoy!
 #License
 
 mocobo is licensed under the [MIT license](LICENSE).
+
+#Standing On the Shoulder Of Giants
+
+- Foundation
+- mui
+- Frozen UI
+- animate.css
