@@ -1,9 +1,4 @@
 @import "global";
-@import "grid";
-@import "icons";
-@import "buttons";
-@import "forms";
-@import "type";
 
 //
 // Top Bar Variables
@@ -173,11 +168,14 @@ $topbar-arrows: true !default;
             // select {
             //     margin-bottom: 0;
             // }
+            form {
+                margin: 0;
+            }
             input,
             select {
                 display: inline-block;
                 position: relative;
-                width: auto;
+                // width: auto;
                 height: $topbar-input-height;
                 padding-bottom: to-rem(2);
                 padding-top: to-rem(2);

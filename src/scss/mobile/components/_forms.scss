@@ -441,7 +441,7 @@ $input-transition-fade-timing-function: linear !default;
             width: 100%;
         }
         // HTML5 Number spinners settings
-        input[type=number] {
+        input[type="number"] {
             &::-webkit-inner-spin-button,
             &::-webkit-outer-spin-button {
                 appearance: none;

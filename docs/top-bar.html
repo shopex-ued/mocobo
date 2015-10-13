@@ -7,8 +7,6 @@
 <link rel="stylesheet" href="../dist/css/mobile.min.css">
 <style>
 .top-bar {margin-bottom: 10px;}
-.top-bar form{display:inline-block; margin-bottom: 0;}
-.top-bar input[type=text] { width: 142px; }
 .bottom .top-bar {margin-bottom: 0;}
 </style>
 </head>
@@ -92,17 +90,29 @@
       </ul>
     </section>
   </nav>
-  <header class="top-bar">
-    <div class="logo">
+  <header class="top-bar row">
+    <div class="logo grid-1">
       <a href=""><img src="statics/placeholder.png" alt=""></a>
     </div>
-    <form action="" method="post">
-      <input type="text" name="" id="">
-      <select name="" id="">
+    <form action="" method="post" class="grid-11">
+      <input type="text" name="" id="" class="grid-5">
+      <select name="" id="" class="grid-3">
         <option value="">2342341</option>
       </select>
       <button type="submit" class="alert">搜索</button>
       <a href="" class="btn">设置</a>
+    </form>
+  </header>
+  <header class="top-bar reverse">
+    <form action="" method="post">
+      <div class="row">
+        <div class="grid-10 columns">
+          <input type="search" class="radius" name="" id="">
+        </div>
+        <div class="grid-2 columns">
+          <button type="submit">搜索</button>
+        </div>
+      </div>
     </form>
   </header>
   <div class="sticky">
