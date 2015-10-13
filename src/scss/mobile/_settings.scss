@@ -352,11 +352,12 @@
 
 // $include-html-animate-classes: $include-html-classes;
 
+// $animate-duration-none:     0s;
 // $animate-duration-faster:  .2s;
 // $animate-duration-fast:    .3s;
 // $animate-duration-normal:  .5s;
-// $animate-duration-slow:    1s;
-// $animate-duration-slower:  1.5s;
+// $animate-duration-slow:     1s;
+// $animate-duration-slower: 1.5s;
 
 // 01. According
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1363,7 +1364,15 @@
 // $poptip-class: 'poptip';
 // $poptip-z-index: 1000;
 // $poptip-blank: null;
+
 // $poptip-bg: rgba($black, .65);
+// $poptip-bg-primary: rgba($primary-color, .7);
+// $poptip-bg-secondary: rgba($secondary-color, .75);
+// $poptip-bg-alert: rgba($alert-color, .75);
+// $poptip-bg-success: rgba($success-color, .75);
+// $poptip-bg-warning: rgba($warning-color, .85);
+// $poptip-bg-info: rgba($info-color, .85);
+
 // $poptip-height: to-rem(40);
 // $poptip-border-radius: null;
 // $poptip-font-color: $white;
@@ -1372,7 +1381,7 @@
 // $msgtip-class: 'msgtip';
 // $msgtip-z-index: 1000;
 // $msgtip-padding: to-rem(5 20);
-// $msgtip-bg: rgba($black, .6);
+// $msgtip-bg: $poptip-bg;
 // $msgtip-height: to-rem(40);
 // $msgtip-border-radius: $global-radius;
 // $msgtip-font-color: $white;
@@ -1387,6 +1396,7 @@
 // Background color for the top bar
 // $topbar-bg-color: $oil;
 // $topbar-bg: $topbar-bg-color;
+// $topbar-bg-reverse: invert($topbar-bg-color);
 // $topbar-font-color: $white;
 
 // Height and margin
@@ -1405,8 +1415,8 @@
 // $topbar-link-weight: $font-weight-normal;
 // $topbar-link-font-size: $h5-font-size;
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
-// $topbar-link-bg: $topbar-bg;
-// $topbar-link-bg-hover: $jet;
+// $topbar-link-bg-hover: darken($topbar-bg, 6%);
+// $topbar-link-bg-hover-reverse: darken($topbar-bg-reverse, 6%);
 // $topbar-link-bg-color-hover: $charcoal;
 // $topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
@@ -1417,7 +1427,6 @@
 // $topbar-button-top: 7px;
 
 // Style the top bar dropdown elements
-// $topbar-dropdown-bg: $oil;
 // $topbar-dropdown-link-color: $white;
 // $topbar-dropdown-link-color-hover: $topbar-link-color-hover;
 // $topbar-dropdown-link-bg-hover: $jet;
@@ -1448,6 +1457,8 @@
 
 // Divider Styles
 // $topbar-divider-border: solid 1px scale-color($topbar-bg-color, $lightness: 13%);
+// $topbar-divider-border-reverse: 1px solid scale-color($topbar-bg-reverse, $lightness: 13%);
+// $topbar-dropdown-divider-border: 1px solid scale-color($topbar-bg-color, $lightness: -50%);
+// $topbar-dropdown-divider-border-reverse: 1px solid scale-color($topbar-bg-reverse, $lightness: 17%);
 
 // $topbar-arrows: true; //Set false to remove the triangle icon from the menu item
-// $topbar-dropdown-arrows: true; //Set false to remove the \00bb >> text from dropdown subnavigation li//

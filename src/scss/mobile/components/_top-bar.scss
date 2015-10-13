@@ -14,6 +14,7 @@ $topbar-class: 'top-bar' !default;
 // Background color for the top bar
 $topbar-bg-color: $oil !default;
 $topbar-bg: $topbar-bg-color !default;
+$topbar-bg-reverse: invert($topbar-bg-color) !default;
 $topbar-font-color: $white !default;
 
 // Height and margin
@@ -34,8 +35,8 @@ $topbar-link-font-size: $h5-font-size !default;
 $topbar-link-hover-lightness: -10% !default;
 
 // Darken by 10%
-$topbar-link-bg: $topbar-bg !default;
-$topbar-link-bg-hover: $jet !default;
+$topbar-link-bg-hover: darken($topbar-bg, 6%) !default;
+$topbar-link-bg-hover-reverse: darken($topbar-bg-reverse, 6%) !default;
 // $topbar-link-bg-active: $primary-color !default;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%) !default;
 $topbar-link-padding: $topbar-height / 3 !default;
@@ -45,8 +46,6 @@ $topbar-button-font-size: $h6-font-size !default;
 $topbar-button-top: 7px !default;
 
 // Style the top bar dropdown elements
-$topbar-dropdown-bg: $oil !default;
-$topbar-dropdown-bg-hover: $jet !default;
 $topbar-dropdown-link-color: $white !default;
 $topbar-dropdown-link-color-hover: $topbar-link-color-hover !default;
 // $topbar-dropdown-link-weight: $font-weight-normal !default;
@@ -77,7 +76,9 @@ $topbar-input-height: to-rem(28) !default;
 
 // Divider Styles
 $topbar-divider-border: 1px solid scale-color($topbar-bg-color, $lightness: 13%) !default;
+$topbar-divider-border-reverse: 1px solid scale-color($topbar-bg-reverse, $lightness: 13%) !default;
 $topbar-dropdown-divider-border: 1px solid scale-color($topbar-bg-color, $lightness: -50%) !default;
+$topbar-dropdown-divider-border-reverse: 1px solid scale-color($topbar-bg-reverse, $lightness: 17%) !default;
 
 $topbar-arrows: true !default;
 
@@ -267,8 +268,7 @@ $topbar-arrows: true !default;
                     color: $topbar-link-color-hover;
                     background: $topbar-link-bg-hover;
                 }
-                a:not(.#{buttons-class}) {
-                    background: $topbar-link-bg;
+                a:not(.#{$buttons-class}) {
                     line-height: $topbar-height;
                     &:hover {
                         background: $topbar-link-bg-hover;
@@ -348,7 +348,7 @@ $topbar-arrows: true !default;
             // Styling elements inside of dropdowns
             .dropdown {
                 @include topbar-hide-dropdown;
-                background: $topbar-dropdown-bg;
+                background: $topbar-bg;
                 // min-width: 100%;
                 li {
                     // height: auto;
@@ -387,6 +387,38 @@ $topbar-arrows: true !default;
                 li .dropdown {
                     right: auto;
                     left: 0;
+                }
+            }
+        }
+        .#{$topbar-class}.reverse {
+            background: $topbar-bg-reverse;
+            h1, a {
+                color: invert($topbar-link-color);
+            }
+            .#{$topbar-class}-section {
+                li:hover > a {
+                    background-color: $topbar-link-bg-hover-reverse;
+                    color: invert($topbar-link-color-hover);
+                }
+                li a:hover {
+                    background: $topbar-link-bg-hover-reverse;
+                }
+                > ul {
+                    &.left > li:not(.no-divide) {
+                        border-right: $topbar-divider-border-reverse;
+                    }
+                    &.right > li:not(.no-divide) {
+                        border-left: $topbar-divider-border-reverse;
+                    }
+                }
+                .dropdown {
+                    background: $topbar-bg-reverse;
+                    .divider {
+                        border-bottom: $topbar-dropdown-divider-border-reverse;
+                    }
+                    label {
+                        color: invert($topbar-dropdown-label-color);
+                    }
                 }
             }
         }
