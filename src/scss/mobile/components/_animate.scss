@@ -6,11 +6,12 @@
 
 $include-html-animate-classes: $include-html-classes !default;
 
+$animate-duration-none:     0s !default;
 $animate-duration-faster:  .2s !default;
 $animate-duration-fast:    .3s !default;
 $animate-duration-normal:  .5s !default;
-$animate-duration-slow:    1s !default;
-$animate-duration-slower:  1.5s !default;
+$animate-duration-slow:     1s !default;
+$animate-duration-slower: 1.5s !default;
 
 //
 // Mixins
@@ -19,6 +20,7 @@ $animate-duration-slower:  1.5s !default;
     .animated {
         animation-duration: $duration;
         animation-fill-mode: both;
+
         &.infinite {
             animation-iteration-count: infinite;
         }
@@ -35,7 +37,7 @@ $animate-duration-slower:  1.5s !default;
         }
     }
 
-    .fadeIn {
+    .fade-in {
         animation-name: fadeIn;
     }
 }
@@ -52,7 +54,7 @@ $animate-duration-slower:  1.5s !default;
         }
     }
 
-    .fadeInDown {
+    .fade-in-down {
         animation-name: fadeInDown;
     }
 }
@@ -69,7 +71,7 @@ $animate-duration-slower:  1.5s !default;
         }
     }
 
-    .fadeInUp {
+    .fade-in-up {
         animation-name: fadeInUp;
     }
 }
@@ -84,7 +86,7 @@ $animate-duration-slower:  1.5s !default;
         }
     }
 
-    .fadeOut {
+    .fade-out {
         animation-name: fadeOut;
     }
 }
@@ -100,7 +102,7 @@ $animate-duration-slower:  1.5s !default;
         }
     }
 
-    .fadeOutDown {
+    .fade-out-down {
         animation-name: fadeOutDown;
     }
 }
@@ -116,7 +118,7 @@ $animate-duration-slower:  1.5s !default;
         }
     }
 
-    .fadeOutUp {
+    .fade-out-up {
         animation-name: fadeOutUp;
     }
 }
@@ -132,7 +134,7 @@ $animate-duration-slower:  1.5s !default;
         }
     }
 
-    .zoomIn {
+    .zoom-in {
         animation-name: zoomIn;
     }
 }
@@ -151,7 +153,7 @@ $animate-duration-slower:  1.5s !default;
         }
     }
 
-    .zoomOut {
+    .zoom-out {
         animation-name: zoomOut;
     }
 }
@@ -167,7 +169,7 @@ $animate-duration-slower:  1.5s !default;
         }
     }
 
-    .slideInDown {
+    .slide-in-down {
         animation-name: slideInDown;
     }
 }
@@ -183,7 +185,7 @@ $animate-duration-slower:  1.5s !default;
         }
     }
 
-    .slideInUp {
+    .slide-in-up {
         animation-name: slideInUp;
     }
 }
@@ -199,7 +201,7 @@ $animate-duration-slower:  1.5s !default;
         }
     }
 
-    .slideOutDown {
+    .slide-out-down {
         animation-name: slideOutDown;
     }
 }
@@ -215,7 +217,7 @@ $animate-duration-slower:  1.5s !default;
         }
     }
 
-    .slideOutUp {
+    .slide-out-up {
         animation-name: slideOutUp;
     }
 }
