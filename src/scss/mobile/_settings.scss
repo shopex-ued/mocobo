@@ -23,22 +23,23 @@
 // 13. Imagesbox
 // 14. Inline Lists
 // 15. Modal
-// 16. Number Spinner
-// 17. Off-canvas
-// 18. Pagination
-// 19. Panels
-// 20. Progress Bar
-// 21. Side Nav
-// 22. Slides
-// 23. Split Buttons
-// 24. Sub Nav
-// 25. Switches
-// 26. Table Lists
-// 27. Tables
-// 28. Tabs
-// 29. Thumbnails
-// 30. Tips
-// 31. Top Bar
+// 16. Notice
+// 17. Number Spinner
+// 18. Off-canvas
+// 19. Pagination
+// 20. Panels
+// 21. Progress Bar
+// 22. Side Nav
+// 23. Slides
+// 24. Split Buttons
+// 25. Sub Nav
+// 26. Switches
+// 27. Table Lists
+// 28. Tables
+// 29. Tabs
+// 30. Thumbnails
+// 31. Tips
+// 32. Top Bar
 
 // a. Base
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -873,7 +874,23 @@
 // $modal-footer-padding: to-rem(10) $modal-padding 0;
 // $modal-footer-border: 1px solid $smoke;
 
-// 16. Number Spinner
+// 16. Notice
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-notice-classes: $include-html-classes;
+
+// $notice-class: 'notice';
+// $notice-margin: 10% 5%;
+// $notice-icon-size: to-rem(120);
+// $notice-icon-color: $silver;
+// $notice-font-size: to-rem(14);
+// $notice-font-color: $steel;
+// $notice-line-height: 1.2;
+// $notice-font-margin-top: 5%;
+
+// $notice-actions-margin: to-rem(20) 10% 0;
+
+// 17. Number Spinner
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 // $include-html-spinner-classes: $include-html-classes;
 
@@ -882,7 +899,7 @@
 // $spinner-font-size: to-rem(16);
 // $spinner-radius: $global-radius;
 
-// 17. Off-canvas
+// 18. Off-canvas
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // Off Canvas Tab Bar Variables
@@ -954,7 +971,7 @@
 // Transition Variables
 // $menu-slide: transform 300ms $easeInOutQuint;
 
-// 18. Pagination
+// 19. Pagination
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-pagination-classes: $include-html-classes;
@@ -986,7 +1003,7 @@
 // $pagination-link-current-font-weight: $font-weight-bold;
 // $pagination-link-current-active-bg: $primary-color;
 
-// 19. Panels
+// 20. Panels
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-panel-classes: $include-html-classes;
@@ -1010,7 +1027,7 @@
 
 // $panel-header-adjust: true;
 
-// 20. Progress Bar
+// 21. Progress Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-progress-bar-classes: $include-html-classes;
@@ -1036,7 +1053,7 @@
 // $progress-meter-success-color: $success-color;
 // $progress-meter-alert-color: $alert-color;
 
-// 21. Side Nav
+// 22. Side Nav
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-nav-classes: $include-html-classes;
@@ -1076,7 +1093,7 @@
 // $side-nav-divider-color: scale-color($white, $lightness: 10%);
 // $side-nav-divider-margin: to-rem(3 0);
 
-// 22. Slides
+// 23. Slides
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-slides-classes: $include-html-classes;
@@ -1115,7 +1132,7 @@
 // $slides-number-font-color: $white;
 // $slides-number-padding: to-rem(5);
 
-// 23. Split Buttons
+// 24. Split Buttons
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-buttons-classes: $include-html-classes;
@@ -1143,7 +1160,7 @@
 // $split-buttons-span-width-large: $buttons-font-size-large * $buttons-line-height-large + nth($buttons-large, 1) * 2;
 // $split-buttons-padding-large: $split-buttons-span-width-large + nth($buttons-large, 2);
 
-// 24. Sub Nav
+// 25. Sub Nav
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-nav-classes: $include-html-classes;
@@ -1175,7 +1192,7 @@
 // $sub-nav-item-divider: "";
 // $sub-nav-item-divider-margin: to-rem(12);
 
-// 25. Switches
+// 26. Switches
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-form-classes: $include-html-classes;
@@ -1197,7 +1214,7 @@
 // $switch-paddle-transition-ease: ease-out;
 // $switch-active-color: $primary-color;
 
-// 26. Table Lists
+// 27. Table Lists
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-table-list-classes: $include-html-classes;
@@ -1246,7 +1263,7 @@
 // We use this to control any elements within table list items
 // $table-list-children-display: block;
 
-// 27. Tables
+// 28. Tables
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-table-classes: $include-html-classes;
@@ -1291,7 +1308,7 @@
 // $table-display: table-cell;
 // $table-margin-bottom: to-rem(20);
 
-// 28. Tabs
+// 29. Tabs
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-tabs-classes: $include-html-classes;
@@ -1338,7 +1355,7 @@
 // $tabs-bar-nav-active-bar-height: 2px;
 // $tabs-bar-nav-active-bar-color: $primary-color;
 
-// 29. Thumbnails
+// 30. Thumbnails
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-media-classes: $include-html-classes;
@@ -1356,7 +1373,7 @@
 // $thumb-radius: $global-radius;
 // $thumb-transition-speed: 200ms;
 
-// 30. Tips
+// 31. Tips
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-tips-classes: $include-html-classes;
@@ -1387,7 +1404,7 @@
 // $msgtip-font-color: $white;
 // $msgtip-font-size: to-rem(16);
 
-// 31. Top Bar
+// 32. Top Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-top-bar-classes: $include-html-classes;

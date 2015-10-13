@@ -1,0 +1,42 @@
+@import "global";
+
+//
+// @variables
+//
+$include-html-notice-classes: $include-html-classes !default;
+
+$notice-class: 'notice' !default;
+$notice-margin: 10% 5% !default;
+$notice-icon-size: to-rem(120) !default;
+$notice-icon-color: $silver !default;
+$notice-font-size: to-rem(14) !default;
+$notice-font-color: $steel !default;
+$notice-line-height: 1.2 !default;
+$notice-font-margin-top: 5% !default;
+
+$notice-actions-margin: to-rem(20) 10% 0 !default;
+
+@include exports("notice") {
+    @if $include-html-notice-classes {
+        /* Notice */
+        .#{$notice-class} {
+            margin: $notice-margin;
+            figure {
+                text-align: center;
+                font-size: $notice-font-size;
+                line-height: $notice-line-height;
+                color: $notice-font-color;
+            }
+            [class^=icon-] {
+                font-size: $notice-icon-size;
+                color: $notice-icon-color;
+            }
+            p {
+                margin-top: $notice-font-margin-top;
+            }
+            .actions {
+                margin: $notice-actions-margin;
+            }
+        }
+    }
+}
