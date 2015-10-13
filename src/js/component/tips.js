@@ -11,18 +11,20 @@
             delay: 3000,
             // controll the tips' style.
             type: 'pop',
+            // extra class
+            class: '',
             // relative positioning of element.
             relativeTo: document.body
         },
 
         effect: {
             pop: {
-                in: 'slideInDown',
-                out: 'slideOutUp'
+                in: 'slide-in-down',
+                out: 'slide-out-up'
             },
             msg: {
-                in: 'fadeIn',
-                out: 'fadeOut'
+                in: 'fade-in',
+                out: 'fade-out'
             }
         },
 
@@ -46,7 +48,7 @@
         },
 
         create: function(content, type) {
-            var tipTpl = '<div class="' + type + 'tip">' +
+            var tipTpl = '<div class="' + type + 'tip ' + this.settings.class + '">' +
                 '<div class="content animated">' +
                 content +
                 '</div>' +
