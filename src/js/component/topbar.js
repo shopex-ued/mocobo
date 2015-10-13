@@ -20,12 +20,13 @@
                 var topbar = $(this),
                     settings = topbar.data(self.attr_name(true) + '-init');
                 var topbarContainer = topbar.parent();
+                var maxHeight = Math.max(topbarContainer.outerHeight(), topbar.outerHeight());
                 if (topbarContainer.hasClass('fixed')) {
                     if (topbarContainer.hasClass('bottom')) {
-                        $('body').css('padding-bottom', topbar.outerHeight());
+                        $('body').css('padding-bottom', maxHeight);
                     }
                     else {
-                        $('body').css('padding-top', topbar.outerHeight());
+                        $('body').css('padding-top', maxHeight);
                     }
                     return;
                 }
