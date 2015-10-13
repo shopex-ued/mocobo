@@ -122,11 +122,11 @@ $topbar-arrows: true !default;
             }
         }
         .#{$topbar-class} {
+            position: relative;
+            margin-bottom: $topbar-margin-bottom;
             background: $topbar-bg;
             height: $topbar-height;
             line-height: $topbar-height;
-            margin-bottom: $topbar-margin-bottom;
-            position: relative;
             .title-area,
             h1 {
                 margin: 0;
@@ -137,7 +137,7 @@ $topbar-arrows: true !default;
             }
             a:not(.#{$buttons-class}) {
                 color: $topbar-link-color;
-                display: block;
+                display: inilne-block;
             }
             %pos {
                 position: absolute;
