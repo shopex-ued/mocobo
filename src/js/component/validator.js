@@ -6,6 +6,8 @@
 
         settings: {
             validate_on: 'change', // change (when input value changes), blur (when input blur), manual (when call custom events)
+            // ignore validate with 'exception' setting
+            exception: ':hidden, [data-validator-ignore]',
             focus_on_invalid: true, // automatically bring the focus to an invalid input field
             error_labels: true, // labels with a for="inputId" will receive an `error` class
             error_class: 'has-error', // labels with a for="inputId" will receive an `error` class
@@ -88,7 +90,7 @@
                 .off('.validator')
                 .on('submit.validator', function(e) {
                     var is_ajax = $(this).attr(self.attr_name()) === 'ajax';
-                    return self.validate($(this).find('input, textarea, select, [data-validator-verifier]').not(":hidden, [data-validator-ignore]").get(), e, is_ajax);
+                    return self.validate($(this).find('input, textarea, select, [data-validator-verifier]').not(self.settings.exception).get(), e, is_ajax);
                 })
                 .on('validate.validator', function(e) {
                     if (settings.validate_on === 'manual') {
@@ -98,7 +100,7 @@
                 .on('reset', function(e) {
                     return self.reset($(this), e);
                 })
-                .find('input, textarea, select').not(":hidden, [data-validator-ignore]")
+                .find('input, textarea, select').not(self.settings.exception)
                 .off('.validator')
                 .on('blur.validator', function(e) {
                     var id = this.getAttribute('id'),
@@ -134,12 +136,11 @@
         },
 
         reset: function(form, e) {
-            var self = this;
             form.removeAttr(this.invalid_attr);
 
             $('[' + this.invalid_attr + ']', form).removeAttr(this.invalid_attr);
             $('.' + this.settings.error_class, form).not(this.settings.alert_element).removeClass(this.settings.error_class);
-            $(':input', form).not(':button, :submit, :reset, :hidden, [data-validator-ignore]').val('').removeAttr(self.invalid_attr);
+            $(':input', form).not(':button, :submit, :reset,' + this.settings.exception).val('').removeAttr(this.invalid_attr);
         },
 
         validate: function(els, e, is_ajax) {

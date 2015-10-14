@@ -134,16 +134,20 @@
   <p>如果需要再次确认输入的正确性，可以使用<code>data-equalto</code>属性：</p>
   <form action="" method="post" data-validator>
     <div class="form-row">
-      <label>密码 <em>*</em>
-        <input type="text" id="password" required pattern="\w+">
-      </label>
-      <small class="alert-box error">密码只能为字母、数字、下划线</small>
+      <div class="grid-12">
+        <label>密码 <em>*</em>
+          <input type="text" id="password" required pattern="\w+">
+        </label>
+        <small class="alert-box error">密码只能为字母、数字、下划线</small>
+      </div>
     </div>
     <div class="form-row">
-      <label>确认密码 <em>*</em>
-        <input type="text" required data-equalto="password">
-      </label>
-      <small class="alert-box error">两次密码输入不符</small>
+      <div class="grid-12">
+        <label>确认密码 <em>*</em>
+          <input type="text" required data-equalto="password">
+        </label>
+        <small class="alert-box error">两次密码输入不符</small>
+      </div>
     </div>
     <button type="submit">提交</button>
   </form>
@@ -177,6 +181,8 @@
     validate: {
       // change (when input value changes), blur (when input blur), manual (when call custom events)
       validate_on: 'change',
+      // ignore validate with 'excption' setting
+      exception: ':hidden, data-validator-ignore',
       // automatically bring the focus to an invalid input field
       focus_on_invalid: true,
       // labels with a for="inputId" will recieve an `error` class
