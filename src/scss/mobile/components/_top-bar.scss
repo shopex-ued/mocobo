@@ -10,6 +10,7 @@ $topbar-class: 'top-bar' !default;
 $topbar-bg-color: $oil !default;
 $topbar-bg: $topbar-bg-color !default;
 $topbar-bg-reverse: invert($topbar-bg-color) !default;
+$topbar-border-bottom: transparent !default;
 $topbar-font-color: $white !default;
 
 // Height and margin
@@ -127,6 +128,7 @@ $topbar-arrows: true !default;
             background: $topbar-bg;
             height: $topbar-height;
             line-height: $topbar-height;
+            @include hairline(false, $topbar-border-bottom);
             .title-area,
             h1 {
                 margin: 0;
