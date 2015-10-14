@@ -348,6 +348,9 @@ $blockquote-cite-link-color: $blockquote-cite-font-color !default;
                 color: $text-reserve-color;
             }
         }
+        .nowrap {
+            @include nowrap;
+        }
         .ellipsis {
             @include ellipsis;
             &.line-2 {
