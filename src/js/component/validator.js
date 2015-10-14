@@ -76,6 +76,7 @@
                 form = $(scope).attr('novalidate', 'novalidate'),
                 settings = form.data(this.attr_name(true) + '-init') || {};
 
+console.log(settings);
             this.invalid_attr = this.add_namespace('data-invalid');
 
             function validate(originalSelf, e) {
@@ -90,7 +91,7 @@
                 .off('.validator')
                 .on('submit.validator', function(e) {
                     var is_ajax = $(this).attr(self.attr_name()) === 'ajax';
-                    return self.validate($(this).find('input, textarea, select, [data-validator-verifier]').not(self.settings.exception).get(), e, is_ajax);
+                    return self.validate($(this).find('input, textarea, select, [data-validator-verifier]').not(settings.exception).get(), e, is_ajax);
                 })
                 .on('validate.validator', function(e) {
                     if (settings.validate_on === 'manual') {
@@ -100,7 +101,7 @@
                 .on('reset', function(e) {
                     return self.reset($(this), e);
                 })
-                .find('input, textarea, select').not(self.settings.exception)
+                .find('input, textarea, select').not(settings.exception)
                 .off('.validator')
                 .on('blur.validator', function(e) {
                     var id = this.getAttribute('id'),
@@ -137,10 +138,11 @@
 
         reset: function(form, e) {
             form.removeAttr(this.invalid_attr);
+            var settings = form.data(this.attr_name(true) + '-init') || {};
 
             $('[' + this.invalid_attr + ']', form).removeAttr(this.invalid_attr);
-            $('.' + this.settings.error_class, form).not(this.settings.alert_element).removeClass(this.settings.error_class);
-            $(':input', form).not(':button, :submit, :reset,' + this.settings.exception).val('').removeAttr(this.invalid_attr);
+            $('.' + settings.error_class, form).not(settings.alert_element).removeClass(settings.error_class);
+            $(':input', form).not(':button, :submit, :reset,' + settings.exception).val('').removeAttr(this.invalid_attr);
         },
 
         validate: function(els, e, is_ajax) {
