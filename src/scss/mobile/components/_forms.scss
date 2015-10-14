@@ -469,6 +469,9 @@ $input-transition-fade-timing-function: linear !default;
         // Standard Forms
         form {
             margin: 0 $form-blank $form-bottom-margin;
+            &.collapse {
+                margin: 0;
+            }
         }
         .#{$form-row-class} {
             display: flex;
