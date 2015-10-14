@@ -37,16 +37,69 @@
           <input type="number" min="1" max="999" step="1" value="" required>
           <a href="javascript:void(0);" class="postfix icon-plus"></a>
         </div>
+        <div class="alert-box error" style="display:none;"></div>
       </div>
       <div class="grid-3 columns">
         <button type="submit">提交</button>
       </div>
     </div>
   </form>
+  <h1>回调</h1>
+  <pre>
+  $('#myInput').on('change.numberspin', function (event) {
+    ...
+  });
+
+  $('#myInput').on('min.numberspin', function (event) {
+    ...
+  });
+
+  $('#myInput').on('max.numberspin', function (event) {
+    ...
+  });
+
+  $('#myInput').on('notnumber.numberspin', function (event) {
+    ...
+  });
+  </pre>
+  <h1>可选项</h1>
+  <pre>
+  $(document).mobile({
+      numberspin: {
+          min: 0, // Minimum value.
+          max: Number.MAX_VALUE, // Maximum value.
+          step: 1, // Incremental/decremental step on up/down change.
+          // defaultValue: null, // Applied when no correct value is set on the input with value attribute.
+          autoInit: true, // Auto fill the input value with settings' 'defaultValue' or 'min'.
+          // Execute this function before the input value change with return true or false.
+          // beforeValid: $.noop,
+          // show message when validate is error
+          validMessage: {
+              target: null,
+              min: '不能小于{min}',
+              max: '不能大于{max}',
+              notnumber: '只能输入数字'
+          },
+          // Execute after validate is error
+          validError: null,
+          // Execute after validate is success
+          validSuccess: null
+      }
+  });
+  </pre>
 </div>
 
 <script src="../dist/js/libs.min.js"></script>
 <script src="../dist/js/mobile.min.js"></script>
 <script src="../dist/js/main.min.js"></script>
+<script>
+$(document).mobile({
+  numberspin: {
+    validMessage: {
+      target: '.alert-box.error'
+    }
+  }
+});
+</script>
 </body>
 </html>

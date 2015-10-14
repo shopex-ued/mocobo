@@ -14,14 +14,15 @@
             // beforeValid: $.noop,
             // show message when validate is error
             validMessage: {
+                target: null,
                 min: '不能小于{min}',
                 max: '不能大于{max}',
                 notnumber: '只能输入数字'
             },
             // Execute after validate is error
-            // validError: $.noop,
+            validError: null,
             // Execute after validate is success
-            validSuccess: $.noop
+            validSuccess: null
         },
 
         init: function(scope, method, options) {
@@ -83,12 +84,16 @@
 
         setValue: function(input, value) {
             this.settings.defaultValue = value;
-            input.val(value).trigger('change');
+            input.val(value).trigger('change.numberspin');
         },
 
         validate: function(input, value, settings) {
             var msg = '';
             var result = false;
+            var element = $(this.scope).find('[' + this.attr_name() + ']');
+            var target = element.siblings(settings.validMessage.target);
+            target = target.length ? target : $(settings.validMessage.target);
+
             if (value < settings.min) {
                 value = settings.min;
                 input.trigger('min.numberspin');
@@ -103,10 +108,12 @@
                 msg = settings.validMessage.notnumber;
             }
             if (msg) {
-                if (typeof validError === 'function') settings.validError(input, msg);
+                if (typeof settings.validError === 'function') settings.validError(element, input, msg);
+                else if(target.length) target.show().html(msg);
                 else alert(msg);
             } else {
-                settings.validSuccess(input);
+                if (typeof settings.validSuccess === 'function') settings.validSuccess(element, input);
+                else if(target.length) target.hide();
                 result = true;
             }
             this.setValue(input, value);
