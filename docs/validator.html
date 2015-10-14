@@ -20,22 +20,28 @@
   <h1>示例</h1>
   <form action="" method="post" data-validator>
     <div class="form-row">
-      <label>用户名 <em>*</em>
-        <input type="text" required pattern="[a-zA-Z]+">
-      </label>
-      <small class="alert-box error">名字必填，并且只能为字母</small>
+      <div class="grid-12">
+        <label>用户名 <em class="text-alert">*</em>
+          <input type="text" required pattern="[a-zA-Z]+">
+        </label>
+        <small class="alert-box error">名字必填，并且只能为字母</small>
+      </div>
     </div>
     <div class="form-row">
-      <label>Email <em>*</em>
-        <input type="email" required>
-      </label>
-      <small class="alert-box error">请输入正确的电子邮箱地址</small>
+      <div class="grid-12">
+        <label>Email <em class="text-alert">*</em>
+          <input type="email" required>
+        </label>
+        <small class="alert-box error">请输入正确的电子邮箱地址</small>
+      </div>
     </div>
     <div class="form-row">
-      <label>个人主页
-        <input type="text" pattern="url" placeholder="http://">
-      </label>
-      <small class="alert-box error">请输入正确的URL地址</small>
+      <div class="grid-12">
+        <label>个人主页
+          <input type="text" pattern="url" placeholder="http://">
+        </label>
+        <small class="alert-box error">请输入正确的URL地址</small>
+      </div>
     </div>
     <div class="form-row">
       <button type="submit">提交</button>
