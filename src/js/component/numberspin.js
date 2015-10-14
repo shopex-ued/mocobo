@@ -33,6 +33,8 @@
             $(this.scope)
                 .off('.numberspin')
                 .on('touchstart.numberspin', '[' + this.attr_name() + '] > a', function(e) {
+                    e.preventDefault();
+
                     var target = $(this).closest('[' + self.attr_name() + ']');
                     var input = target.find('input');
                     var value = +input.val();

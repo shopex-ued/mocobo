@@ -7,6 +7,8 @@ $include-html-spinner-classes: $include-html-classes !default;
 
 $spinner-class: 'number-spinner' !default;
 $spinner-height: $input-medium !default;
+$spinner-bg: $input-prefix-bg !default;
+$spinner-bg-hover: scale-color($input-prefix-bg, $lightness: -6%) !default;
 $spinner-font-size: to-rem(16) !default;
 $spinner-radius: $global-radius !default;
 
@@ -42,7 +44,11 @@ $spinner-radius: $global-radius !default;
             .prefix,
             .postfix {
                 width: $spinner-height;
+                background-color: $spinner-bg;
                 font-size: $spinner-font-size;
+                &:hover {
+                    background-color: $spinner-bg-hover;
+                }
             }
             &.radius {
                 border-radius: $spinner-radius;
