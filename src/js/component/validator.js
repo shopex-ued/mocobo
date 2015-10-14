@@ -76,7 +76,6 @@
                 form = $(scope).attr('novalidate', 'novalidate'),
                 settings = form.data(this.attr_name(true) + '-init') || {};
 
-console.log(settings);
             this.invalid_attr = this.add_namespace('data-invalid');
 
             function validate(originalSelf, e) {
