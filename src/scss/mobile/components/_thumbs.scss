@@ -70,6 +70,12 @@ $thumb-transition-speed: 200ms !default;
                     border-radius: $thumb-radius - to-rem(1);
                 }
             }
+            &.flat {
+                &,
+                img {
+                    border-radius: 0;
+                }
+            }
             &.round {
                 &,
                 img {
