@@ -299,11 +299,13 @@
                         // Try to find the error associated with the input
                         var errorElem = parent.find(this.settings.alert_element);
                         var type = this.settings.alerts[el_patterns[i][1]];
-                        var msg;
-                        if (type) {
-                            msg = type.replace('{placeholder}', label.text() || el_patterns[i][0].placeholder || '有一项');
-                        } else {
-                            msg = '输入不符合要求，请检查！';
+                        var msg = el_patterns[i][0].dataset.alerts;
+                        if(!msg) {
+                            if (type) {
+                                msg = type.replace('{placeholder}', label.text() || el_patterns[i][0].placeholder || '有一项');
+                            } else {
+                                msg = '输入不符合要求，请检查！';
+                            }
                         }
 
                         if (!errorElem.length) {
