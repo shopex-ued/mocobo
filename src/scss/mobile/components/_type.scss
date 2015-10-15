@@ -30,6 +30,7 @@ $subheader-top-margin: to-rem(3) !default;
 $subheader-bottom-margin: to-rem(8) !default;
 
 // More text colors
+$text-primary-color: $primary-color !default;
 $text-alert-color: $alert-color !default;
 $text-success-color: $success-color !default;
 $text-warning-color: $warning-color !default;
@@ -329,6 +330,9 @@ $blockquote-cite-link-color: $blockquote-cite-font-color !default;
             color: $blockquote-font-color;
         }
         .text {
+            &-primary {
+                color: $text-primary-color;
+            }
             &-success {
                 color: $text-success-color;
             }
