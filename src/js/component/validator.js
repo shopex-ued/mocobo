@@ -169,6 +169,9 @@
             form.removeAttr(this.invalid_attr);
 
             if (is_ajax) {
+                $[form.attr('method')](form.attr('action'), form.serialize(), function(rs) {
+                    form.trigger('complete.validator', [rs]);
+                });
                 return false;
             }
 

@@ -69,6 +69,27 @@
     </div>
   </form>
 
+  <h1>Ajax 方式异步提交</h1>
+  <form action="" method="post" data-validator="ajax">
+    <div class="form-row">
+      <div class="grid-12">
+        <label>用户名 <em class="text-alert">*</em>
+          <input type="text" required pattern="[a-zA-Z]+" data-alerts="名字必填，并且只能为字母">
+        </label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="grid-12">
+        <label>Email <em class="text-alert">*</em>
+          <input type="email" required data-alerts="请输入正确的电子邮箱地址">
+        </label>
+      </div>
+    </div>
+    <div class="form-row">
+      <button type="submit">提交</button>
+    </div>
+  </form>
+
   <h1>预定义的验证模式</h1>
   <table>
     <thead>
