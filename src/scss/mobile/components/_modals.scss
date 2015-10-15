@@ -7,7 +7,7 @@
 $include-html-modal-classes: $include-html-classes !default;
 
 $modal-class: "modal" !default;
-$modal-overlay-class: "modal-bg" !default;
+$modal-overlay-class: "overlay" !default;
 $close-modal-class: "close-modal" !default;
 
 // We use these to control the style of the modal overlay.
@@ -52,8 +52,8 @@ $modal-footer-border: 1px solid $smoke !default;
 // @mixins
 //
 
-// We use this to create the modal background overlay styles
-@mixin modal-bg($include-z-index-value: true) {
+// We use this to create the background overlay styles
+@mixin overlay($include-z-index-value: true) {
     // Autoprefixer should be used to avoid such variables needed when Mobile for Sites can do so in the near future.
     display: none;
     position: fixed;
@@ -154,7 +154,7 @@ $modal-footer-border: 1px solid $smoke !default;
     @if $include-html-modal-classes {
         /* Reveal Modals */
         .#{$modal-overlay-class} {
-            @include modal-bg;
+            @include overlay;
         }
         .#{$modal-class} {
             @include modal-base;

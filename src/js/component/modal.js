@@ -15,7 +15,7 @@
             close_on_esc: true,
             close_modal_class: 'close-modal',
             multiple_opened: false,
-            overlay_class: 'modal-bg',
+            overlay_class: 'overlay',
             root_element: 'body',
             open: function() {},
             opened: function() {},
