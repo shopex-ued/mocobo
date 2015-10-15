@@ -81,6 +81,7 @@ $slidetip-class: 'slidetip' !default;
         }
 
         .#{$poptip-class},
+        .#{$slidetip-class},
         .#{$msgtip-class} {
             &.primary .content {
                 background-color: $poptip-bg-primary;
