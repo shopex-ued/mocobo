@@ -283,6 +283,17 @@ $buttons-disabled-opacity: .6 !default;
                 @include button-style($bg: $info-buttons-bg-color, $disabled: true, $bg-hover: $info-buttons-bg-hover);
             }
         }
+        button,
+        .#{$buttons-class} {
+            &.link {
+                background: transparent;
+                border: 0 none;
+                color: inherit;
+                &:hover {
+                    background: transparent;
+                }
+            }
+        }
         a.#{$buttons-class} {
             text-decoration: none;
         }
