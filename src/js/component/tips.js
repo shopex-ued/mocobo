@@ -11,6 +11,8 @@
             delay: 3000,
             // controll the tips' style.
             type: 'pop',
+            // show on init
+            show: false,
             // extra class
             class: '',
             // relative positioning of element.
@@ -41,7 +43,7 @@
 
         init: function(scope, method, options) {
             this.bindings(method, options);
-            // this.show();
+            this.settings.show && this.show();
         },
 
         events: function() {
