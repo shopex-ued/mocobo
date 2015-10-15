@@ -141,7 +141,7 @@ $topbar-arrows: true !default;
             }
             a:not(.#{$buttons-class}) {
                 color: $topbar-link-color;
-                display: inilne-block;
+                display: inline-block;
             }
             %pos {
                 position: absolute;
