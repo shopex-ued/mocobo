@@ -14,7 +14,10 @@
             // extra class
             class: '',
             // relative positioning of element.
-            relativeTo: document.body
+            relativeTo: document.body,
+            // background overlay element.
+            has_overlay: false,
+            overlay_class: 'overlay'
         },
 
         effect: {
@@ -23,6 +26,14 @@
                 out: 'slide-out-up'
             },
             msg: {
+                in: 'fade-in',
+                out: 'fade-out'
+            },
+            slide: {
+                in: 'slide-in-up',
+                out: 'slide-out-down'
+            },
+            overlay: {
                 in: 'fade-in',
                 out: 'fade-out'
             }
@@ -54,6 +65,11 @@
                 '</div>' +
             '</div>';
             this.element = $(tipTpl).appendTo(document.body);
+
+            if(this.settings.has_overlay) {
+                var overlayTpl = '<div class="' + this.settings.overlay_class + ' animated"></div>';
+                this.overlay = $(overlayTpl).appendTo(document.body);
+            }
         },
 
         show: function(content, type) {
@@ -62,24 +78,34 @@
 
             clearTimeout(this.timer);
             if(!this.element) this.create(content, type);
-            else this.element
-                .off('animationend webkitAnimationEnd')
-                .find('.content')
-                    .html(content);
+            else {
+                this.element
+                    .off('animationend webkitAnimationEnd')
+                    .find('.content')
+                        .html(content);
+
+                if(this.overlay) this.overlay.off('animationend webkitAnimationEnd');
+            }
 
             if(type === 'pop' && this.settings.relativeTo) {
                 this.element.css('top', $(this.settings.relativeTo).offset().top);
             }
-            else {
-                this.element.css('top', '');
-            }
 
             type = this.effect[type];
             this.element
+                .show()
                 .trigger('show.tips')
                 .find('.content')
                     .removeClass(type.out)
                     .addClass(type.in);
+
+            if(this.overlay) {
+                this.overlay
+                    .show()
+                    .trigger('show.overlay')
+                    .removeClass(this.effect.overlay.out)
+                    .addClass(this.effect.overlay.in)
+            }
 
             if (this.settings.delay) {
                 this.timer = setTimeout($.proxy(function() {
@@ -101,6 +127,16 @@
                         $(this).parent().remove();
                         self.element = null;
                     });
+            if(this.overlay) {
+                this.overlay
+                    .trigger('hide.overlay')
+                    .removeClass(this.effect.overlay.in)
+                    .addClass(this.effect.overlay.out)
+                    .one('animationend webkitAnimationEnd', function() {
+                        $(this).remove();
+                        self.overlay = null;
+                    });
+            }
         },
 
         reflow: function() {}

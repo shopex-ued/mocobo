@@ -1381,10 +1381,10 @@
 // $include-html-tips-classes: $include-html-classes;
 
 // $poptip-class: 'poptip';
-// $poptip-z-index: 1000;
+// $poptip-z-index: 1010;
 // $poptip-blank: null;
 
-// $poptip-bg: rgba($black, .65);
+// $poptip-bg: rgba($black, .7);
 // $poptip-bg-primary: rgba($primary-color, .7);
 // $poptip-bg-secondary: rgba($secondary-color, .75);
 // $poptip-bg-alert: rgba($alert-color, .75);
@@ -1398,13 +1398,15 @@
 // $poptip-font-size: to-rem(16);
 
 // $msgtip-class: 'msgtip';
-// $msgtip-z-index: 1000;
+// $msgtip-z-index: 1010;
 // $msgtip-padding: to-rem(5 20);
 // $msgtip-bg: $poptip-bg;
 // $msgtip-height: to-rem(40);
 // $msgtip-border-radius: $global-radius;
 // $msgtip-font-color: $white;
 // $msgtip-font-size: to-rem(16);
+
+// $slidetip-class: 'slidetip';
 
 // 32. Top Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -

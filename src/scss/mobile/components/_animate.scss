@@ -222,6 +222,23 @@ $animate-duration-slower: 1.5s !default;
     }
 }
 
+@mixin circle {
+    @keyframes rotateIn {
+        from {
+            transform-origin: center;
+            transform: rotate3d(0, 0, 1, -360deg);
+        }
+        to {
+            transform-origin: center;
+            transform: none;
+        }
+    }
+}
+
+.circle {
+    animation-name: circle;
+    animation-iteration-count: infinite;
+}
 
 @include exports("animate") {
     @if $include-html-animate-classes {
@@ -229,7 +246,10 @@ $animate-duration-slower: 1.5s !default;
         @include animated;
         @include slideInDown;
         @include slideOutUp;
+        @include slideInUp;
+        @include slideOutDown;
         @include fadeIn;
         @include fadeOut;
+        @include circle;
     }
 }

@@ -6,10 +6,10 @@
 $include-html-tips-classes: $include-html-classes !default;
 
 $poptip-class: 'poptip' !default;
-$poptip-z-index: 1000 !default;
+$poptip-z-index: 1010 !default;
 $poptip-blank: null !default;
 
-$poptip-bg: rgba($black, .65) !default;
+$poptip-bg: rgba($black, .7) !default;
 $poptip-bg-primary: rgba($primary-color, .7) !default;
 $poptip-bg-secondary: rgba($secondary-color, .75) !default;
 $poptip-bg-alert: rgba($alert-color, .75) !default;
@@ -24,7 +24,7 @@ $poptip-font-color-reverse: $jet !default;
 $poptip-font-size: to-rem(16) !default;
 
 $msgtip-class: 'msgtip' !default;
-$msgtip-z-index: 1000 !default;
+$msgtip-z-index: 1010 !default;
 $msgtip-padding: to-rem(5 20) !default;
 $msgtip-bg: $poptip-bg !default;
 $msgtip-height: to-rem(40) !default;
@@ -32,12 +32,14 @@ $msgtip-border-radius: $global-radius !default;
 $msgtip-font-color: $poptip-font-color !default;
 $msgtip-font-size: to-rem(16) !default;
 
+$slidetip-class: 'slidetip' !default;
+
 @include exports("tips") {
     @if $include-html-tips-classes {
         /* Pop tip */
-        .#{$poptip-class} {
+        .#{$poptip-class},
+        .#{$slidetip-class} {
             position: fixed;
-            top: 0;
             left: 0;
             z-index: $poptip-z-index;
             @if $poptip-blank {
@@ -57,6 +59,9 @@ $msgtip-font-size: to-rem(16) !default;
                 font-size: $poptip-font-size;
                 text-align: center;
             }
+        }
+        .#{$slidetip-class} {
+            bottom: 0;
         }
 
         /*Message tip*/

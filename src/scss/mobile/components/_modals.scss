@@ -202,7 +202,7 @@ $modal-footer-border: 1px solid $smoke !default;
                 padding: $modal-footer-padding;
                 border-top: $modal-footer-border;
                 text-align: right;
-                .btn {
+                .#{$buttons-class} {
                     margin-bottom: 0;
                 }
             }
