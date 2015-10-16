@@ -9,6 +9,7 @@
             // ignore validate with 'exception' setting
             exception: ':hidden, [data-validator-ignore]',
             focus_on_invalid: true, // automatically bring the focus to an invalid input field
+            has_hint: true, // popup a alert window if invalid
             error_labels: true, // labels with a for="inputId" will receive an `error` class
             error_class: 'has-error', // labels with a for="inputId" will receive an `error` class
             alert_element: '.alert-box',
@@ -36,6 +37,10 @@
                 mobile: /^0?1[3-8]\d{9}$/
             },
             verifiers: {
+                requiredone: function(el, required, parent) {
+                    var el = $(el);
+                    return el.closest('[data-' + this.attr_name(true) + ']').find('input:checked[type="' + el[0].type + '"][name="' + el[0].name + '"]:not(:disabled)').length;
+                },
                 equalto: function(el, required, parent) {
                     var from = document.getElementById(el.getAttribute(this.add_namespace('data-equalto'))).value,
                         to = el.value,
@@ -85,7 +90,6 @@
                 }.bind(originalSelf), settings.timeout);
             }
 
-
             form
                 .off('.validator')
                 .on('submit.validator', function(e) {
@@ -126,7 +130,7 @@
                         validate(this, e);
                     }
                 })
-                .on('focus', function(e) {
+                .on('focus.validator', function(e) {
                     if (navigator.userAgent.match(/iPad|iPhone|Android|BlackBerry|Windows Phone|webOS/i)) {
                         $('html, body').animate({
                             scrollTop: $(e.target).offset().top
@@ -220,16 +224,20 @@
                 var el = el_patterns[i][0],
                     required = el_patterns[i][3],
                     value = el.value.trim(),
-                    direct_parent = $(el).parent(),
-                    verifier = el.getAttribute(this.add_namespace('data-validator-verifier')),
                     is_radio = el.type === 'radio',
                     is_checkbox = el.type === 'checkbox',
+                    direct_parent = $(el).parent(),
+                    verifier = el.getAttribute(this.add_namespace('data-validator-verifier')),
                     label = $('label[for="' + el.getAttribute('id') + '"]'),
                     valid_length = (required) ? (el.value.length > 0) : true,
                     el_validations = [];
 
                 var parent, valid;
 
+                if ((is_radio || is_checkbox) && required) {
+                    el.removeAttribute('required');
+                    el.setAttribute('data-validator-verifier', 'requiredone');
+                }
                 // support old way to do equalTo validations
                 if (el.getAttribute(this.add_namespace('data-equalto'))) {
                     verifier = 'equalto';
@@ -244,12 +252,12 @@
                     parent = direct_parent.parent();
                 }
 
-                if (is_radio && required) {
-                    el_validations.push(this.valid_radio(el, required));
-                } else if (is_checkbox && required) {
-                    el_validations.push(this.valid_checkbox(el, required));
-
-                } else if (verifier) {
+                // if (is_radio && required) {
+                //     el_validations.push(this.valid_radio(el, required));
+                // } else if (is_checkbox && required) {
+                //     el_validations.push(this.valid_checkbox(el, required));
+                // }
+                if (verifier) {
                     // Validate using each of the specified (space-delimited) verifiers.
                     var verifiers = verifier.split(' ');
                     var last_valid = true,
@@ -261,19 +269,10 @@
                         last_valid = valid;
                     }
                     if (all_valid) {
-                        $(el).removeAttr(this.invalid_attr);
-                        parent.removeClass(this.settings.error_class);
-                        if (label.length > 0 && this.settings.error_labels) {
-                            label.removeClass(this.settings.error_class).removeAttr('role');
-                        }
-                        $(el).triggerHandler('valid');
+                        this.validSuccess(el, parent, label);
                     } else {
-                        $(el).attr(this.invalid_attr, '');
-                        parent.addClass(this.settings.error_class);
-                        if (label.length > 0 && this.settings.error_labels) {
-                            label.addClass(this.settings.error_class).attr('role', 'alert');
-                        }
-                        $(el).triggerHandler('invalid');
+                        validations = this.validError(el, parent, label, i, el_patterns, el_validations);
+                        if(validations.length) break;
                     }
                 } else {
                     if (el_patterns[i][2].test(value) && valid_length ||
@@ -287,49 +286,10 @@
                         return valid;
                     })];
                     if (el_validations[0]) {
-                        $(el).removeAttr(this.invalid_attr);
-                        el.setAttribute('aria-invalid', 'false');
-                        el.removeAttribute('aria-describedby');
-                        parent.removeClass(this.settings.error_class);
-                        if (label.length > 0 && this.settings.error_labels) {
-                            label.removeClass(this.settings.error_class).removeAttr('role');
-                        }
-                        $(el).triggerHandler('valid');
+                        this.validSuccess(el, parent, label);
                     } else {
-                        $(el).attr(this.invalid_attr, '');
-                        el.setAttribute('aria-invalid', 'true');
-
-                        // Try to find the error associated with the input
-                        var errorElem = parent.find(this.settings.alert_element);
-                        var type = this.settings.alerts[el_patterns[i][1]];
-                        var msg = el_patterns[i][0].dataset.alerts;
-                        if(!msg) {
-                            if (type) {
-                                msg = type.replace('{placeholder}', label.text() || el_patterns[i][0].placeholder || '有一项');
-                            } else {
-                                msg = '输入不符合要求，请检查！';
-                            }
-                        }
-
-                        if (!errorElem.length) {
-                            alert(msg);
-                            $(el).triggerHandler('invalid');
-                            validations = validations.concat(el_validations);
-                            break;
-                        } else {
-                            // errorElem.html(msg);
-                            var errorID = errorElem[0].id || '';
-                            if (errorID.length > 0) {
-                                el.setAttribute('aria-describedby', errorID);
-                            }
-                        }
-
-                        // el.setAttribute('aria-describedby', $(el).find('.error')[0].id);
-                        parent.addClass(this.settings.error_class);
-                        if (label.length > 0 && this.settings.error_labels) {
-                            label.addClass(this.settings.error_class).attr('role', 'alert');
-                        }
-                        $(el).triggerHandler('invalid');
+                        validations = this.validError(el, parent, label, i, el_patterns, el_validations);
+                        if(validations.length) break;
                     }
                 }
                 validations = validations.concat(el_validations);
@@ -338,57 +298,109 @@
             return validations;
         },
 
-        valid_checkbox: function(el, required) {
-            var el = $(el),
-                valid = (el.is(':checked') || !required || el.get(0).getAttribute('disabled'));
+        validSuccess: function(el, parent, label) {
+            $(el).removeAttr(this.invalid_attr);
+            el.setAttribute('aria-invalid', 'false');
+            el.removeAttribute('aria-describedby');
+            parent.removeClass(this.settings.error_class);
+            if (label.length > 0 && this.settings.error_labels) {
+                label.removeClass(this.settings.error_class).removeAttr('role');
+            }
+            $(el).triggerHandler('valid');
+        },
 
-            if (valid) {
-                el.removeAttr(this.invalid_attr).parent().removeClass(this.settings.error_class);
-                $(el).triggerHandler('valid');
+        validError: function(el, parent, label, i, el_patterns, el_validations) {
+            var validations = [];
+            $(el).attr(this.invalid_attr, '');
+            el.setAttribute('aria-invalid', 'true');
+
+            // Try to find the error associated with the input
+            var errorElem = parent.find(this.settings.alert_element);
+            var type = this.settings.alerts[el_patterns[i][1]];
+            var msg = el_patterns[i][0].dataset.alerts;
+            if(!msg) {
+                if (type) {
+                    msg = type.replace('{placeholder}', label.text() || el_patterns[i][0].placeholder || '有一项');
+                } else {
+                    msg = '输入不符合要求，请检查！';
+                }
+            }
+
+            if (!errorElem.length) {
+                if(this.settings.has_hint) {
+                    alert(msg);
+                    $(el).triggerHandler('invalid');
+                    return validations.concat(el_validations);
+                }
             } else {
-                el.attr(this.invalid_attr, '').parent().addClass(this.settings.error_class);
-                $(el).triggerHandler('invalid');
-            }
-
-            return valid;
-        },
-
-        valid_radio: function(el, required) {
-            var name = el.getAttribute('name'),
-                group = $(el).closest('[data-' + this.attr_name(true) + ']').find("[name='" + name + "']"),
-                count = group.length,
-                valid = false,
-                disabled = false;
-
-            // Has to count up to make sure the focus gets applied to the top error
-            for (var i = 0; i < count; i++) {
-                if (group[i].getAttribute('disabled')) {
-                    disabled = true;
-                    valid = true;
-                } else {
-                    if (group[i].checked) {
-                        valid = true;
-                    } else {
-                        if (disabled) {
-                            valid = false;
-                        }
-                    }
+                // errorElem.html(msg);
+                var errorID = errorElem[0].id || '';
+                if (errorID.length > 0) {
+                    el.setAttribute('aria-describedby', errorID);
                 }
             }
 
-            // Has to count up to make sure the focus gets applied to the top error
-            for (var i = 0; i < count; i++) {
-                if (valid) {
-                    $(group[i]).removeAttr(this.invalid_attr).parent().removeClass(this.settings.error_class);
-                    $(group[i]).triggerHandler('valid');
-                } else {
-                    $(group[i]).attr(this.invalid_attr, '').parent().addClass(this.settings.error_class);
-                    $(group[i]).triggerHandler('invalid');
-                }
+            // el.setAttribute('aria-describedby', $(el).find('.error')[0].id);
+            parent.addClass(this.settings.error_class);
+            if (label.length > 0 && this.settings.error_labels) {
+                label.addClass(this.settings.error_class).attr('role', 'alert');
             }
+            $(el).triggerHandler('invalid');
 
-            return valid;
+            return validations;
         },
+
+        // valid_checkbox: function(el, required) {
+        //     var el = $(el),
+        //         valid = (el.is(':checked') || !required || el.get(0).getAttribute('disabled'));
+
+        //     if (valid) {
+        //         el.removeAttr(this.invalid_attr).parent().removeClass(this.settings.error_class);
+        //         $(el).triggerHandler('valid');
+        //     } else {
+        //         el.attr(this.invalid_attr, '').parent().addClass(this.settings.error_class);
+        //         $(el).triggerHandler('invalid');
+        //     }
+
+        //     return valid;
+        // },
+
+        // valid_radio: function(el, required) {
+        //     var name = el.getAttribute('name'),
+        //         group = $(el).closest('[data-' + this.attr_name(true) + ']').find("[name='" + name + "']"),
+        //         count = group.length,
+        //         valid = false,
+        //         disabled = false;
+
+        //     // Has to count up to make sure the focus gets applied to the top error
+        //     for (var i = 0; i < count; i++) {
+        //         if (group[i].getAttribute('disabled')) {
+        //             disabled = true;
+        //             valid = true;
+        //         } else {
+        //             if (group[i].checked) {
+        //                 valid = true;
+        //             } else {
+        //                 if (disabled) {
+        //                     valid = false;
+        //                 }
+        //             }
+        //         }
+        //     }
+
+        //     // Has to count up to make sure the focus gets applied to the top error
+        //     for (var i = 0; i < count; i++) {
+        //         if (valid) {
+        //             $(group[i]).removeAttr(this.invalid_attr).parent().removeClass(this.settings.error_class);
+        //             $(group[i]).triggerHandler('valid');
+        //         } else {
+        //             $(group[i]).attr(this.invalid_attr, '').parent().addClass(this.settings.error_class);
+        //             $(group[i]).triggerHandler('invalid');
+        //         }
+        //     }
+
+        //     return valid;
+        // },
 
         // valid_equal: function(el, required, parent) {
         //     var from = document.getElementById(el.getAttribute(this.add_namespace('data-equalto'))).value,
