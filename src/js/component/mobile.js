@@ -73,10 +73,11 @@
 
     var bindings = function(method, options) {
         var self = this,
+            config = ($.isArray(options) ? options[0] : options) || method,
             bind = function() {
                 var $this = $(this),
                     should_bind_events = !$(self).data(self.attr_name(true) + '-init');
-                $this.data(self.attr_name(true) + '-init', $.extend(true, {}, self.settings, (options || method), self.data_options($this)));
+                $this.data(self.attr_name(true) + '-init', $.extend(true, {}, self.settings, config, self.data_options($this)));
 
                 if (should_bind_events) {
                     self.events(this);
@@ -90,7 +91,8 @@
         }
         // # Patch to fix #5043 to move this *after* the if/else clause in order for Backbone and similar frameworks to have improved control over event binding and data-options updating.
         if (typeof method === 'string') {
-            return this[method].call(this, options);
+            if($.isArray(options)) return this[method].apply(this, options);
+            else return this[method].call(this, options);
         }
 
     };

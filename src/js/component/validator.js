@@ -72,8 +72,8 @@
 
         timer: null,
 
-        init: function(scope, method, options) {
-            this.bindings(method, options);
+        init: function(scope, method) {
+            this.bindings(method, Array.prototype.slice.call(arguments, 2));
         },
 
         events: function(scope) {
