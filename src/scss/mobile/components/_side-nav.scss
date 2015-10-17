@@ -89,7 +89,7 @@ $side-nav-divider-margin: to-rem(3 0) !default;
             margin: $side-nav-button-margin;
         }
         &.active > a:not(.#{$buttons-class}) {
-            color: $side-nav-link-color-active;
+            color: $link-color-active;
             font-weight: $side-nav-font-weight-active;
         }
         &.divider {

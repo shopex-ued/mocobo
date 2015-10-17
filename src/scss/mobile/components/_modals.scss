@@ -26,6 +26,8 @@ $modal-close-top: to-rem(5) !default;
 $modal-close-padding: to-rem(0 4) !default;
 $modal-close-side: to-rem(10) !default;
 $modal-close-color: $base !default;
+$modal-close-bg-color: transparent !default;
+$modal-close-border: none !default;
 
 // We use this to set the default radius used throughout the core.
 $modal-radius: $global-radius !default;
@@ -128,6 +130,9 @@ $modal-footer-border: 1px solid $smoke !default;
     @if $box-shadow {
         box-shadow: $modal-box-shadow;
     }
+    @else{
+        box-shadow: none;
+    }
     // We can control how much radius is used on the modal
     @if $radius == true {
         border-radius: $modal-radius;
@@ -145,6 +150,8 @@ $modal-footer-border: 1px solid $smoke !default;
     top: $modal-close-top;
     right: $modal-close-side;
     padding: $modal-close-padding;
+    background-color: $modal-close-bg-color;
+    border: $modal-close-border;
     line-height: 1;
     font-size: $modal-close-font-size;
     color: $color;

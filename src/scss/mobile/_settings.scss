@@ -65,6 +65,9 @@
 // $base-line-height is 1.5 times of $base-font-size
 // $base-line-height: 1.5;
 
+// base background
+// $base-bg-color: $white;
+
 // We use this to control whether or not CSS classes come through in the gem files.
 // $include-html-classes: true;
 // $include-js-meta-styles: true;
@@ -852,6 +855,8 @@
 // $modal-close-side: to-rem(10);
 // $modal-close-padding: to-rem(0 4);
 // $modal-close-color: $base;
+// $modal-close-bg-color: transparent;
+// $modal-close-border: none;
 
 // We use this to set the default radius used throughout the core.
 // $modal-radius: $global-radius;

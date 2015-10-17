@@ -1,8 +1,6 @@
 (function($, window, document, undefined) {
     'use strict';
 
-    var noop = function() {};
-
     var Slides = function(el, settings) {
         // Don't reinitialize plugin
         if (el.hasClass(settings.slides_container_class)) {
@@ -446,8 +444,8 @@
             timer: true,
             variable_height: false,
             swipe: true,
-            before_slide_change: noop,
-            after_slide_change: noop
+            before_slide_change: $.noop,
+            after_slide_change: $.noop
         },
 
         init: function(scope, method, options) {

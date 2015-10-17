@@ -252,7 +252,7 @@ $buttons-disabled-opacity: .6 !default;
                 @include button-size($padding: $buttons-tiny);
             }
             &.expand {
-                @include button-size($padding: false, $full-width: true);
+                @include button-size($padding: null, $full-width: true);
             }
             &.flat {
                 border-radius: 0;

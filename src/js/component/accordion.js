@@ -28,7 +28,9 @@
                     var accordion = $(this).closest('[' + self.attr_name() + ']'),
                         groupSelector = self.attr_name() + '=' + accordion.attr(self.attr_name()),
                         settings = accordion.data(self.attr_name(true) + '-init') || self.settings,
-                        target = $('#' + this.href.split('#')[1]).parent(),
+                        // target = $('#' + this.href.split('#')[1]).parent(),
+                        contentAttr = $(this).context.attributes['data-content'],
+                        target = $('#' + (contentAttr ? contentAttr.value : this.href.split('#')[1])).parent(),
                         items = $('> .item', accordion),
                         active_item;
 

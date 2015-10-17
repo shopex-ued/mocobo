@@ -17,10 +17,11 @@
             multiple_opened: false,
             overlay_class: 'overlay',
             root_element: 'body',
-            open: function() {},
-            opened: function() {},
-            close: function() {},
-            closed: function() {},
+            no_scroll: true,
+            open: $.noop,
+            opened: $.noop,
+            close: $.noop,
+            closed: $.noop,
             on_ajax_error: $.noop,
             css: {
                 open: {
@@ -142,9 +143,17 @@
 
                 modal.attr('tabindex', '0').attr('aria-hidden', 'false');
 
+                // prevents annoying scroll positioning bug with position: absolute;
+                if (settings.no_scroll) {
+                    var $body = $('body');
+                    $body.one('open.modal', function() {
+                        $(this).css('overflow', 'hidden');
+                    });
+                }
+
                 // Prevent namespace event from triggering twice
                 modal.on('open.modal', function(e) {
-                    if (e.namespace !== 'fndtn.modal') return;
+                    if (e.namespace !== 'modal') return;
                 });
 
                 modal.on('open.modal').trigger('open.modal');
@@ -224,6 +233,14 @@
             if (open_modals.length > 0) {
 
                 modal.removeAttr('tabindex', '0').attr('aria-hidden', 'true');
+
+                // prevents annoying scroll positioning bug with position: absolute;
+                if (settings.no_scroll) {
+                    var $body = $('body');
+                    $body.one('close.modal', function() {
+                        $(this).css('overflow', 'auto');
+                    });
+                }
 
                 this.locked = true;
 

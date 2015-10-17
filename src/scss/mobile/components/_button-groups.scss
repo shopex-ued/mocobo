@@ -59,6 +59,7 @@ $button-group-border-style: solid !default;
     }
     @else {
         $button-group-display: inline-block;
+        float: left;
         $button-group-margin: 0 -2px;
     }
     @if $orientation == vertical {

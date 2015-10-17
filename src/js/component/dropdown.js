@@ -11,6 +11,7 @@
             align: 'bottom',
             is_hover: false,
             hover_timeout: 150,
+            no_pip: false,
             opened: function() {},
             closed: function() {}
         },
@@ -242,7 +243,7 @@
                     p.left = p.left - this.outerWidth() + t.outerWidth();
                 }
 
-                if (t.outerWidth() < this.outerWidth() || this.hasClass(s.mega_menu)) {
+                if (!self.settings.no_pip && t.outerWidth() < this.outerWidth() || this.hasClass(s.mega_menu)) {
                     self.adjust_pip(this, t, s, p);
                 }
 
@@ -319,6 +320,7 @@
             var sheet = Mobile.stylesheet,
                 pip_offset_base = 8;
 
+            if (settings.no_pip ===  true) return;
             if (dropdown.hasClass(settings.mega_class)) {
                 pip_offset_base = position.left + (target.outerWidth() / 2) - 8;
             }
