@@ -320,7 +320,7 @@
             var sheet = Mobile.stylesheet,
                 pip_offset_base = 8;
 
-            if (settings.no_pip ===  true) return;
+            if (settings.no_pip === true) return;
             if (dropdown.hasClass(settings.mega_class)) {
                 pip_offset_base = position.left + (target.outerWidth() / 2) - 8;
             }
