@@ -211,7 +211,8 @@ $table-list-children-display: block !default;
                     transform: translateY(-50%);
                 }
                 .nav-right {
-                    // If the cell has a badge, give some more room.
+                    // give right element some more room.
+                    > .right,
                     > .#{$buttons-class},
                     > .#{$badge-class},
                     > .#{$switch-class} {
