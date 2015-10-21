@@ -19,7 +19,7 @@
 
   <h1>示例</h1>
   <a href="#" data-modal-id="myModal">Click Me For A Modal</a>
-  <div id="myModal" class="modal" data-modal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <div id="myModal" class="modal center" data-modal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <a class="close-modal" aria-label="Close">&#215;</a>
     <header>
       Awesome. I have it.
@@ -39,7 +39,7 @@
   <a href="#" data-modal-id="smallModal" class="btn">Small Modal&hellip;</a>
   <a href="#" data-modal-id="fullModal" class="btn">Full Modal&hellip;</a>
   <!-- Modals begin -->
-  <div id="firstModal" class="modal" data-modal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
+  <div id="firstModal" class="modal center" data-modal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
     <h2 id="firstModalTitle">This is a modal.</h2>
     <p>Modal makes these very easy to summon and dismiss. The close button is simply an anchor with a unicode character icon and a class of <code>close-modal</code>. Clicking anywhere outside the modal will also dismiss it.</p>
     <p>Finally, if your modal summons another modal, the plugin will handle that for you gracefully.</p>
@@ -47,13 +47,13 @@
     <a class="close-modal" aria-label="Close">&#215;</a>
   </div>
 
-  <div id="secondModal" class="modal" data-modal aria-labelledby="secondModalTitle" aria-hidden="true" role="dialog">
+  <div id="secondModal" class="modal center" data-modal aria-labelledby="secondModalTitle" aria-hidden="true" role="dialog">
     <h2 id="secondModalTitle">This is a second modal.</h2>
     <p>See? It just slides into place after the other first modal. Very handy when you need subsequent dialogs, or when a modal option impacts or requires another decision.</p>
     <a class="close-modal" aria-label="Close">&#215;</a>
   </div>
 
-  <div id="videoModal" class="modal large" data-modal aria-labelledby="videoModalTitle" aria-hidden="true" role="dialog">
+  <div id="videoModal" class="modal center large" data-modal aria-labelledby="videoModalTitle" aria-hidden="true" role="dialog">
     <h2 id="videoModalTitle">This modal has video</h2>
     <div class="flex-video widescreen">
       <iframe width="100%" src="//www.youtube-nocookie.com/embed/wnXCopXXblE?rel=0" frameborder="0" allowfullscreen></iframe>
@@ -61,7 +61,7 @@
     <a class="close-modal" aria-label="Close">&#215;</a>
   </div>
 
-  <div id="smallModal" class="modal small" data-modal aria-labelledby="smallModalTitle" aria-hidden="true" role="dialog">
+  <div id="smallModal" class="modal center small" data-modal aria-labelledby="smallModalTitle" aria-hidden="true" role="dialog">
     <h2 id="smallModalTitle">This is a small modal.</h2>
     <p>See? It just slides into place after the other first modal.</p>
     <a class="close-modal" aria-label="Close">&#215;</a>
@@ -154,6 +154,7 @@
   {
     animation: 'fade',
     animation_speed: 250,
+    location: 'center',
     close_on_overlay_click: true,
     close_on_esc: true,
     close_modal_class: 'close-modal',

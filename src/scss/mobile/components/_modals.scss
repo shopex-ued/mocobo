@@ -76,7 +76,6 @@ $modal-footer-border: 1px solid $smoke !default;
     @if $base-style {
         display: none;
         position: fixed;
-        top: 50%;
         z-index: $z-index-base;
         @if not $width {
             left: 0;
@@ -84,7 +83,6 @@ $modal-footer-border: 1px solid $smoke !default;
         }
         border-radius: $border-radius;
         visibility: hidden;
-        transform: translateY(-50%);
         // Make sure rows don't have a min-width on them
         .#{$grid-columns-class} {
             min-width: 0;
@@ -169,6 +167,21 @@ $modal-footer-border: 1px solid $smoke !default;
             // &.radius {
             //     @include modal-style($radius: true);
             // }
+            &.open {
+                display: block;
+            }
+            &.top {
+                top: 0;
+                bottom: auto;
+            }
+            &.bottom {
+                top: auto;
+                bottom: 0;
+            }
+            &.center {
+                top: 50%;
+                transform: translateY(-50%);
+            }
             &.collapse {
                 @include modal-style($padding: 0);
             }
@@ -188,7 +201,6 @@ $modal-footer-border: 1px solid $smoke !default;
                 height: 100%;
                 height: 100vh;
                 min-height: 100vh;
-                transform: translateY(0);
             }
             // Modals pushed to back
             &.toback {

@@ -26,13 +26,11 @@
             css: {
                 open: {
                     'opacity': 0,
-                    'visibility': 'visible',
-                    'display': 'block'
+                    'visibility': 'visible'
                 },
                 close: {
                     'opacity': 1,
-                    'visibility': 'hidden',
-                    'display': 'none'
+                    'visibility': 'hidden'
                 }
             }
         },
@@ -132,7 +130,6 @@
 
             var settings = modal.data(this.attr_name(true) + '-init');
             settings = settings || this.settings;
-
 
             if (modal.hasClass('open') && target !== undefined && target.attr('data-modal-id') == modal.attr('id')) {
                 return this.close(modal);
