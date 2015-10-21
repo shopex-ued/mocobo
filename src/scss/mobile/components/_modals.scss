@@ -173,10 +173,14 @@ $modal-footer-border: 1px solid $smoke !default;
             &.top {
                 top: 0;
                 bottom: auto;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
             }
             &.bottom {
                 top: auto;
                 bottom: 0;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
             }
             &.center {
                 top: 50%;

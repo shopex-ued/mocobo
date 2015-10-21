@@ -166,9 +166,9 @@ $table-list-children-display: block !default;
                         display: block;
                     }
                 }
-                &:hover {
-                    background-color: $table-list-item-active-bg-color;
-                }
+                // &:hover {
+                //     background-color: $table-list-item-active-bg-color;
+                // }
                 // Remove the border from the last table list item
                 &:last-child {
                     &::before, &::after {
