@@ -449,6 +449,7 @@ $medium: $medium-up !default;
             position: relative;
             // Make webkit browser scrolling smoothly
             -webkit-overflow-scrolling: touch;
+            -webkit-tap-highlight-color: rgba($black, 0);
         }
         // Grid Defaults to get images and embeds to work properly
         img {
