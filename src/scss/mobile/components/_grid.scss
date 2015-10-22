@@ -197,6 +197,11 @@ $grid-row-width: to-rem($small-breakpoint * $rem-base) !default;
                     @include grid-row(nest-collapse, false);
                 }
             }
+            // For Android, must be a block element.
+            [class^="col-"],
+            [class*=" col-"] {
+                display: block;
+            }
         }
         .#{$grid-columns-class} {
             @include grid-column($columns: $grid-total-columns, $position: true);
