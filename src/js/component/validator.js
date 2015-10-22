@@ -129,14 +129,15 @@
                     if (settings.validate_on === 'change') {
                         validate(this, e);
                     }
-                })
-                .on('focus.validator', function(e) {
-                    if (navigator.userAgent.match(/iPad|iPhone|Android|BlackBerry|Windows Phone|webOS/i)) {
-                        $('html, body').animate({
-                            scrollTop: $(e.target).offset().top
-                        }, 100);
-                    }
                 });
+                // Not compatible, so commet it for a while
+                // .on('focus.validator', function(e) {
+                //     if (navigator.userAgent.match(/iPad|iPhone|Android|BlackBerry|Windows Phone|webOS/i)) {
+                //         $('html, body').animate({
+                //             scrollTop: $(e.target).offset().top
+                //         }, 100);
+                //     }
+                // });
         },
 
         reset: function(form, e) {
