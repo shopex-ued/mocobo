@@ -96,9 +96,10 @@ $modal-footer-border: 1px solid $smoke !default;
         // }
     }
     @if $width {
-        left: 0;
-        right: 0;
-        margin: 0 auto;
+        // For android, some compatibility reason.
+        left: 50%;
+        right: auto;
+        margin-left: - $width / 2;
         width: $width;
         max-width: $max-width;
     }
