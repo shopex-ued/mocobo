@@ -169,6 +169,13 @@ $grid-row-width: to-rem($small-breakpoint * $rem-base) !default;
             }
         }
     }
+    // For Android, must be a block element.
+    .#{$grid-row-class} {
+        [class^="#{$size}-"],
+        [class*=" #{$size}-"] {
+            display: block;
+        }
+    }
     @for $i from 0 through $grid-total-columns - 1 {
         $offset: if($size == grid, offset-#{$i}, #{$size}-offset-#{$i});
         .#{$offset} {
@@ -196,11 +203,6 @@ $grid-row-width: to-rem($small-breakpoint * $rem-base) !default;
                 &.collapse {
                     @include grid-row(nest-collapse, false);
                 }
-            }
-            // For Android, must be a block element.
-            [class^="col-"],
-            [class*=" col-"] {
-                display: block;
             }
         }
         .#{$grid-columns-class} {
