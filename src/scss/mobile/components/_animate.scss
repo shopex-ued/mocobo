@@ -6,7 +6,6 @@
 
 $include-html-animate-classes: $include-html-classes !default;
 
-$animate-duration-none:     0s !default;
 $animate-duration-faster:  .2s !default;
 $animate-duration-fast:    .3s !default;
 $animate-duration-normal:  .5s !default;
@@ -16,13 +15,25 @@ $animate-duration-slower: 1.5s !default;
 //
 // Mixins
 //
-@mixin animated($duration: $animate-duration-normal) {
+@mixin animated {
     .animated {
-        animation-duration: $duration;
+        animation-duration: $animate-duration-normal;
         animation-fill-mode: both;
 
         &.infinite {
             animation-iteration-count: infinite;
+        }
+        &.faster {
+            animation-duration: $animate-duration-faster;
+        }
+        &.fast {
+            animation-duration: $animate-duration-fast;
+        }
+        &.slow {
+            animation-duration: $animate-duration-faster;
+        }
+        &.slower {
+            animation-duration: $animate-duration-faster;
         }
     }
 }
