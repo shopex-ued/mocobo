@@ -194,16 +194,21 @@ $modal-footer-border: 1px solid $smoke !default;
                 @include modal-style($padding: 0);
             }
             &.tiny {
+                margin-left: -20%;
                 width: 40%;
             }
             &.small {
+                margin-left: -30%;
                 width: 60%;
             }
             &.large {
+                margin-left: -47.5%;
                 width: 95%;
             }
             &.full {
                 top: 0;
+                left: 0;
+                margin-left: 0;
                 width: 100%;
                 max-width: none;
                 height: 100vh;
