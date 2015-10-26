@@ -291,6 +291,35 @@ $base-bg-color: $white !default;
     // flex-direction: column;
 }
 
+@mixin thin-border($color, $direct: top) {
+    $direction: (
+        top: 0 0,
+        bottom: 0 100%,
+        left: 0 0,
+        right: 100% 0
+    );
+    background-repeat: no-repeat;
+    @if type-of($direct) == string {
+        @if $direct == all {
+            $direct: top right bottom left;
+        }
+        @else {
+            $image: url(thin-border($color, $direct));
+            $position: map-get($direction, $direct);
+        }
+    }
+    @if type-of($direct) == list {
+        $image: ();
+        $position: ();
+        @each $v in $direct {
+            $image: append($image, url(thin-border($color, $v)), comma);
+            $position: append($position, map-get($direction, $v), comma);
+        }
+    }
+    background-image: $image;
+    background-position: $position;
+}
+
 // We use these to define default font stacks
 $font-family-sans-serif: STXiHei, STHeiTi, Helvetica Neue, Helvetica, Droid Sans Fallback, Roboto, Arial, sans-serif !default;
 $font-family-serif: Georgia, Cambria, Times New Roman, Times, serif !default;
