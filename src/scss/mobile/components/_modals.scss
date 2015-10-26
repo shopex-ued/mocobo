@@ -207,8 +207,7 @@ $modal-footer-border: 1px solid $smoke !default;
             }
             &.full {
                 top: 0;
-                left: 0;
-                margin-left: 0;
+                margin-left: -50%;
                 width: 100%;
                 max-width: none;
                 height: 100vh;
