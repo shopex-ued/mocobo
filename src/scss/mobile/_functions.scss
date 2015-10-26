@@ -135,7 +135,7 @@ $modules: () !default;
     @return $emValues;
 }
 
-@function thin-border($color, $direct) {
+@function thin-line($color, $direct) {
     @if $direct == left {
         $svg: 'data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1" height="100%"><rect fill="#{$color}" x="0" y="0" width="0.5" height="100%"/></svg>'
     }

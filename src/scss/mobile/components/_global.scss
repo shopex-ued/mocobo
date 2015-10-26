@@ -304,7 +304,7 @@ $base-bg-color: $white !default;
             $direct: top right bottom left;
         }
         @else {
-            $image: url(thin-border($color, $direct));
+            $image: url(thin-line($color, $direct));
             $position: map-get($direction, $direct);
         }
     }
@@ -312,7 +312,7 @@ $base-bg-color: $white !default;
         $image: ();
         $position: ();
         @each $v in $direct {
-            $image: append($image, url(thin-border($color, $v)), comma);
+            $image: append($image, url(thin-line($color, $v)), comma);
             $position: append($position, map-get($direction, $v), comma);
         }
     }
