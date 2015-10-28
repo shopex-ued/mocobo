@@ -137,7 +137,7 @@
 
         var animating,
             lastTime = 0,
-            vendors = ['webkit', 'moz'],
+            vendors = ['webkit'],
             requestAnimationFrame = window.requestAnimationFrame,
             cancelAnimationFrame = window.cancelAnimationFrame,
             jqueryFxAvailable = 'undefined' !== typeof jQuery.fx;

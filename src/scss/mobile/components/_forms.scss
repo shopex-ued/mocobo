@@ -407,7 +407,7 @@ $input-transition-fade-timing-function: linear !default;
                 padding: to-rem(5);
                 background-clip: content-box;
                 background-color: $radio-checked-border-color;
-                border-radius: $global-rounded;
+                border-radius: $radio-border-radius;
             }
             &:disabled {
                 border-color: $radio-border-color;
