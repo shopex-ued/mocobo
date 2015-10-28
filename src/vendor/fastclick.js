@@ -106,18 +106,10 @@
             return;
         }
 
-        // Some old versions of Android don't have Function.prototype.bind
-        function bind(method, context) {
-            return function() {
-                return method.apply(context, arguments);
-            };
-        }
-
-
         var methods = ['onMouse', 'onClick', 'onTouchStart', 'onTouchMove', 'onTouchEnd', 'onTouchCancel'];
         var context = this;
         for (var i = 0, l = methods.length; i < l; i++) {
-            context[methods[i]] = bind(context[methods[i]], context);
+            context[methods[i]] = context[methods[i]].bind(context);
         }
 
         // Set up event handlers as required
