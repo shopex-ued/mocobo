@@ -126,8 +126,8 @@
                 if (cache.hasOwnProperty(uuid)) {
                     var passed = this.results(uuid, cache[uuid]);
                     if (passed) {
-                        this.settings.directives[passed
-                            .scenario[1]].call(this, passed.el, passed.scenario[0], (function(passed) {
+                        this.settings.directives[passed.scenario[1]]
+                        .call(this, passed.el, passed.scenario[0], (function(passed) {
                             if (arguments[0] instanceof Array) {
                                 var args = arguments[0];
                             } else {
@@ -264,7 +264,7 @@
                 // of URLs. For now we'll continue to match these scenarios, but we may consider having these scenarios
                 // as nested objects or arrays in F6.
                 // regex: match everything before close parenthesis for mq
-                media_query = scenario[1].match(/(.*)\)/);
+                media_query = scenario[1].match(/\((.*)\)/);
 
             if (directive_match) {
                 var path = directive_match[1],
@@ -288,12 +288,13 @@
                 while (i--) {
                     // split array between comma delimited content and mq
                     // regex: comma, optional space, open parenthesis
-                    var scenario = raw_arr[i].split(/,\s?\(/);
+                    var scenario = raw_arr[i].split(/,\s*/);
 
-                    if (scenario.length > 1) {
-                        var params = this.parse_scenario(scenario);
-                        scenarios.push(params);
+                    if (scenario.length <= 1) {
+                        scenario.push('(default)');
                     }
+                    var params = this.parse_scenario(scenario);
+                    scenarios.push(params);
                 }
             }
 

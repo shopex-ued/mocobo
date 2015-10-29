@@ -165,6 +165,17 @@ $modal-footer-border: 1px solid $smoke !default;
         .#{$modal-overlay-class} {
             @include overlay;
         }
+        .#{$modal-class}-open {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            -webkit-overflow-scrolling: auto;
+            body {
+                height: 100%;
+                overflow: hidden;
+                -webkit-overflow-scrolling: auto;
+            }
+        }
         .#{$modal-class} {
             @include modal-base;
             @include modal-style($bg: $modal-bg, $padding: $modal-padding, $border: true, $box-shadow: true, $radius: false);

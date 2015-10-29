@@ -252,6 +252,7 @@ $buttons-disabled-opacity: .6 !default;
                 @include button-size($padding: $buttons-tiny);
             }
             &.expand {
+                display: block;
                 @include button-size($padding: null, $full-width: true);
             }
             &.flat {

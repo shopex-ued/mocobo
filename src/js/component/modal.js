@@ -142,9 +142,11 @@
 
                 // prevents annoying scroll positioning bug with position: absolute;
                 if (settings.no_scroll) {
-                    var $body = $('body');
-                    $body.one('open.modal', function() {
-                        $(this).css('overflow', 'hidden');
+                    var $doc = $('html');
+                    $doc.one('open.modal', function() {
+                        $(this).addClass('modal-open');
+                    }).on('touchmove', function(e) {
+                        e.preventDefault();
                     });
                 }
 
@@ -233,10 +235,11 @@
 
                 // prevents annoying scroll positioning bug with position: absolute;
                 if (settings.no_scroll) {
-                    var $body = $('body');
-                    $body.one('close.modal', function() {
-                        $(this).css('overflow', 'auto');
-                    });
+                    var $doc = $('html');
+                    $doc.one('close.modal', function() {
+                        $(this).removeClass('modal-open');
+                    })
+                    .off('touchmove');
                 }
 
                 this.locked = true;
@@ -340,20 +343,12 @@
                                 el.trigger('opened.modal');
                             })
                             .addClass('open')
-                            .on('touchmove', function(e) {
-                                e.preventDefault();
-                            });
+                            .trigger('opened.modal');
                     });
                 }
 
-                return el.css(css).show()
-                    .css({
-                        opacity: 1
-                    })
+                return el.css(css)
                     .addClass('open')
-                    .on('touchmove', function(e) {
-                        e.preventDefault();
-                    })
                     .trigger('opened.modal');
             }
 
@@ -361,7 +356,7 @@
 
             // should we animate the background?
             if (getAnimationData(settings.animation).fade) {
-                return el.fadeIn(settings.animation_speed / 2);
+                return el.fadeIn(settings.animation_speed);
             }
 
             this.locked = false;
@@ -400,19 +395,18 @@
                                 context.locked = false;
                                 el.css(css).trigger('closed.modal');
                             })
-                            .removeClass('open')
-                            .off('touchmove');
+                            .removeClass('open');
                     });
                 }
 
-                return el.hide().css(css).removeClass('open').off('touchmove').trigger('closed.modal');
+                return el.css(css).removeClass('open').trigger('closed.modal');
             }
 
             var settings = this.settings;
 
             // should we animate the background?
             if (getAnimationData(settings.animation).fade) {
-                return el.fadeOut(settings.animation_speed / 2);
+                return el.fadeOut(settings.animation_speed);
             }
 
             return el.hide();

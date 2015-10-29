@@ -48,7 +48,7 @@ $radio-border-style: $input-border-style !default;
 $radio-border-color: $input-border-color !default;
 $radio-checked-border-color: $primary-color !default;
 $radio-border-radius: $global-rounded !default;
-$checkbox-checkmark-medium: $radio-medium - to-rem(10) !default;
+$radio-checkmark-medium: $radio-medium - to-rem(10) !default;
 $radio-disabled-checkmark-opacity: .5 !default;
 
 // We use this to style the glowing effect of inputs when focused
@@ -400,12 +400,10 @@ $input-transition-fade-timing-function: linear !default;
         }
         input[type="radio"] {
             &:checked::before {
-                top: -1px;
-                left: -1px;
-                width: $radio-medium;
-                height: $radio-medium;
-                padding: to-rem(5);
-                background-clip: content-box;
+                top: to-rem(4);
+                left: to-rem(4);
+                width: $radio-checkmark-medium;
+                height: $radio-checkmark-medium;
                 background-color: $radio-checked-border-color;
                 border-radius: $radio-border-radius;
             }
@@ -419,8 +417,8 @@ $input-transition-fade-timing-function: linear !default;
                 &::before {
                     top: to-rem(6);
                     left: to-rem(4);
-                    width: $checkbox-checkmark-medium;
-                    height: $checkbox-checkmark-medium / 2;
+                    width: $radio-checkmark-medium;
+                    height: $radio-checkmark-medium / 2;
                     border-left: to-rem(2) solid $white;
                     border-bottom: to-rem(2) solid $white;
                     transform: rotate(-45deg);
