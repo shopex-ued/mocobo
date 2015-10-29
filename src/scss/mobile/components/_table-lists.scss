@@ -175,15 +175,6 @@ $table-list-children-display: block !default;
                         height: 0;
                     }
                 }
-                > .nav-right::before {
-                    content: $icon-arrow-forward;
-                    position: absolute;
-                    top: 50%;
-                    right: $table-list-nav-distance;
-                    transform: translateY(-50%);
-                    font-size: $table-list-nav-icon-size;
-                    color: $table-list-nav-icon-color;
-                }
                 // If it's a table list of links, make sure the child <a> takes up full table list item tap area (want to avoid selecting child buttons though)
                 > a:not(.#{$buttons-class}) {
                     position: relative;
@@ -210,7 +201,16 @@ $table-list-children-display: block !default;
                     right: $table-list-item-border-left;
                     transform: translateY(-50%);
                 }
-                .nav-right {
+                > .nav-right {
+                    &::before {
+                        content: $icon-arrow-forward;
+                        position: absolute;
+                        top: 50%;
+                        right: $table-list-nav-distance;
+                        transform: translateY(-50%);
+                        font-size: $table-list-nav-icon-size;
+                        color: $table-list-nav-icon-color;
+                    }
                     // give right element some more room.
                     > .right {
                         margin-right: $table-list-nav-distance + $table-list-nav-icon-size;
@@ -221,42 +221,46 @@ $table-list-children-display: block !default;
                         right: $table-list-nav-distance + $table-list-nav-icon-size + to-rem(4);
                     }
                 }
+                > .#{$table-list-class} {
+                    margin: $table-list-item-padding-top $table-list-item-margin-left $table-list-item-margin-top;
+                    border: 0 none;
+                    &::after {
+                        left: $table-list-item-border-left;
+                    }
+                    &.has-#{$badge-class} {
+                        margin-right: -65px;
+                    }
+                    .item {
+                        padding-left: $table-list-item-border-left * 2;
+                        @include hairline(single, $table-list-item-border-color, $table-list-item-border-left * 2, false);
+                    }
+                }
+                > .content {
+                    padding: 8px $table-list-item-padding-left;
+                    margin: $table-list-item-padding-top $table-list-item-margin-left $table-list-item-margin-top;
+                    background: white;
+                    overflow: hidden;
+                    transition: height .35s ease;
+                }
                 &.collapse {
                     > .nav-right::before {
                         content: $icon-arrow-down;
                     }
-                    .#{$table-list-class} {
+                    > .#{$table-list-class} {
                         display: none;
-                        margin: $table-list-item-padding-top $table-list-item-margin-left $table-list-item-margin-top;
-                        border: 0;
-                        &.has-#{$badge-class} {
-                            margin-right: -65px;
-                        }
-                        .item {
-                            padding-left: $table-list-item-border-left * 2;
-                            @include hairline(single, $table-list-item-border-color, $table-list-item-border-left * 2, false);
-                        }
-                    }
-                    .#{$table-list-class}::after {
-                        left: $table-list-item-border-left;
                     }
                     > .content {
                         display: none;
-                        padding: 8px $table-list-item-padding-left;
-                        margin: $table-list-item-padding-top $table-list-item-margin-left $table-list-item-margin-top;
-                        background: white;
-                        overflow: hidden;
-                        transition: height .35s ease;
                     }
-                    &:hover {
-                        .#{$table-list-class},
-                        > .content {
-                            display: block;
-                        }
-                        > .nav-right::before {
-                            content: $icon-arrow-up;
-                        }
-                    }
+                    // &:hover {
+                    //     .#{$table-list-class},
+                    //     > .content {
+                    //         display: block;
+                    //     }
+                    //     > .nav-right::before {
+                    //         content: $icon-arrow-up;
+                    //     }
+                    // }
                 }
             }
             // Pad each table list item and add dividers
