@@ -12,6 +12,9 @@ $animate-duration-normal:  .5s !default;
 $animate-duration-slow:     1s !default;
 $animate-duration-slower: 1.5s !default;
 
+// Included, add as needed.
+$animate-include: (slideInUp slideInDown slideOutUp slideOutDown fadeIn fadeOut circle) !default;
+
 //
 // Mixins
 //
@@ -19,7 +22,6 @@ $animate-duration-slower: 1.5s !default;
     .animated {
         animation-duration: $animate-duration-normal;
         animation-fill-mode: both;
-
         &.infinite {
             animation-iteration-count: infinite;
         }
@@ -35,6 +37,26 @@ $animate-duration-slower: 1.5s !default;
         &.slower {
             animation-duration: $animate-duration-faster;
         }
+    }
+}
+
+@mixin circle {
+    @keyframes circle {
+        from {
+            transform-origin: center;
+            transform: rotate3d(0, 0, 1, -360deg);
+        }
+        to {
+            transform-origin: center;
+            transform: none;
+        }
+    }
+
+    .circle {
+        animation-duration: $animate-duration-slow;
+        animation-name: circle;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
     }
 }
 
@@ -131,41 +153,6 @@ $animate-duration-slower: 1.5s !default;
 
     .fade-out-up {
         animation-name: fadeOutUp;
-    }
-}
-
-@mixin zoomIn {
-    @keyframes zoomIn {
-        from {
-            opacity: 0;
-            transform: scale3d(0.3, 0.3, 0.3);
-        }
-        50% {
-            opacity: 1;
-        }
-    }
-
-    .zoom-in {
-        animation-name: zoomIn;
-    }
-}
-
-@mixin zoomOut {
-    @keyframes zoomOut {
-        from {
-            opacity: 1;
-        }
-        50% {
-            opacity: 0;
-            transform: scale3d(0.3, 0.3, 0.3);
-        }
-        to {
-            opacity: 0;
-        }
-    }
-
-    .zoom-out {
-        animation-name: zoomOut;
     }
 }
 
@@ -297,37 +284,96 @@ $animate-duration-slower: 1.5s !default;
     }
 }
 
-@mixin circle {
-    @keyframes circle {
+@mixin zoomIn {
+    @keyframes zoomIn {
         from {
-            transform-origin: center;
-            transform: rotate3d(0, 0, 1, -360deg);
+            opacity: 0;
+            transform: scale3d(0.3, 0.3, 0.3);
         }
-        to {
-            transform-origin: center;
-            transform: none;
+        50% {
+            opacity: 1;
         }
     }
 
-    .circle {
-        animation-duration: $animate-duration-slow;
-        animation-name: circle;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
+    .zoom-in {
+        animation-name: zoomIn;
     }
 }
 
+@mixin zoomOut {
+    @keyframes zoomOut {
+        from {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+            transform: scale3d(0.3, 0.3, 0.3);
+        }
+        to {
+            opacity: 0;
+        }
+    }
+
+    .zoom-out {
+        animation-name: zoomOut;
+    }
+}
 
 @include exports("animate") {
     @if $include-html-animate-classes {
-        // Included, add as needed.
         @include animated;
-        @include slideInUp;
-        @include slideInDown;
-        @include slideOutUp;
-        @include slideOutDown;
-        @include fadeIn;
-        @include fadeOut;
-        @include circle;
+        @each $v in $animate-include {
+            @if $v == circle {
+                @include circle;
+            }
+            @else if $v == fadeIn {
+                @include fadeIn;
+            }
+            @else if $v == fadeInUp {
+                @include fadeInUp;
+            }
+            @else if $v == fadeInDown {
+                @include fadeInDown;
+            }
+            @else if $v == fadeOut {
+                @include fadeOut;
+            }
+            @else if $v == fadeOutUp {
+                @include fadeOutUp;
+            }
+            @else if $v == fadeOutDown {
+                @include fadeOutDown;
+            }
+            @else if $v == slideInUp {
+                @include slideInUp;
+            }
+            @else if $v == slideInDown {
+                @include slideInDown;
+            }
+            @else if $v == slideInLeft {
+                @include slideInLeft;
+            }
+            @else if $v == slideInRight {
+                @include slideInRight;
+            }
+            @else if $v == slideOutUp {
+                @include slideOutUp;
+            }
+            @else if $v == slideOutDown {
+                @include slideOutDown;
+            }
+            @else if $v == slideOutLeft {
+                @include slideOutLeft;
+            }
+            @else if $v == slideOutRight {
+                @include slideOutRight;
+            }
+            @else if $v == zoomIn {
+                @include zoomIn;
+            }
+            @else if $v == zoomOut {
+                @include zoomOut;
+            }
+        }
     }
 }
