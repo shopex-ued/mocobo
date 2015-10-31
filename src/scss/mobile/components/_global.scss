@@ -202,10 +202,11 @@ $medium: $medium-up !default;
         }
         // Hide visually and from screen readers
         .hide {
-            display: none;
+            display: none !important;
         }
         // Hide visually and from screen readers, but maintain layout
         .invisible {
+            opacity: 0;
             visibility: hidden;
         }
         // Font smoothing

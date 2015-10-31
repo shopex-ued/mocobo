@@ -201,6 +201,38 @@ $animate-duration-slower: 1.5s !default;
     }
 }
 
+@mixin slideInLeft {
+    @keyframes slideInLeft {
+        from {
+            transform: translate3d(100%, 0, 0);
+            visibility: visible;
+        }
+        to {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .slide-in-left {
+        animation-name: slideInLeft;
+    }
+}
+
+@mixin slideInRight {
+    @keyframes slideInRight {
+        from {
+            transform: translate3d(0, 0, 0);
+            visibility: visible;
+        }
+        to {
+            transform: translate3d(100%, 0, 0);
+        }
+    }
+
+    .slide-in-right {
+        animation-name: slideInRight;
+    }
+}
+
 @mixin slideOutDown {
     @keyframes slideOutDown {
         from {
@@ -233,6 +265,38 @@ $animate-duration-slower: 1.5s !default;
     }
 }
 
+@mixin slideOutLeft {
+    @keyframes slideOutLeft {
+        from {
+            transform: translate3d(0, 0, 0);
+        }
+        to {
+            visibility: hidden;
+            transform: translate3d(-100%, 0, 0);
+        }
+    }
+
+    .slide-out-left {
+        animation-name: slideOutLeft;
+    }
+}
+
+@mixin slideOutRight {
+    @keyframes slideOutRight {
+        from {
+            transform: translate3d(0, 0, 0);
+        }
+        to {
+            visibility: hidden;
+            transform: translate3d(100%, 0, 0);
+        }
+    }
+
+    .slide-out-right {
+        animation-name: slideOutRight;
+    }
+}
+
 @mixin circle {
     @keyframes circle {
         from {
@@ -258,9 +322,9 @@ $animate-duration-slower: 1.5s !default;
     @if $include-html-animate-classes {
         // Included, add as needed.
         @include animated;
+        @include slideInUp;
         @include slideInDown;
         @include slideOutUp;
-        @include slideInUp;
         @include slideOutDown;
         @include fadeIn;
         @include fadeOut;
