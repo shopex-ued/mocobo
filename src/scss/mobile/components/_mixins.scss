@@ -29,6 +29,10 @@
     @if type-of($property) == list {
         @each $transition_list in $property {
             $_len: length($transition_list);
+            $_property: null;
+            $_speed: null;
+            $_ease: null;
+            $_delay: null;
             @for $i from 1 through $_len {
                 @if $i == 1 {
                     $_property: nth($transition_list, $i);
