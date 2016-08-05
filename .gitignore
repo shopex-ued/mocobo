@@ -9,6 +9,7 @@
 *.sublime-*
 *.swp
 *.swo
+*.zip
 
 .bundle
 dist
