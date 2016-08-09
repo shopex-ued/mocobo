@@ -35,7 +35,7 @@ $font-weight-normal: 400 !default;
 $font-weight-bold: 700 !default;
 
 // We use these to control various global styles
-$body-bg: $white !default;
+$body-bg: false !default;
 $body-font-color: $jet !default;
 $body-font-family: sans-serif !default;
 $body-font-size-px: $rem-base * 0.75 !default;
@@ -174,7 +174,9 @@ $medium: $medium-up !default;
         }
         // Default body styles
         body {
-            background: $body-bg;
+            @if $body-bg {
+                background: $body-bg;
+            }
             color: $body-font-color;
             font: $body-font-weight #{$body-font-size}/#{$base-line-height} $body-font-family;
             // Set to $base-line-height to take on browser default of 150%
@@ -189,25 +191,6 @@ $medium: $medium-up !default;
         img {
             max-width: 100%;
             height: auto;
-        }
-        // Miscellaneous useful HTML classes
-        .left {
-            float: left;
-        }
-        .right {
-            float: right;
-        }
-        .clearfix {
-            @include clearfix;
-        }
-        // Hide visually and from screen readers
-        .hide {
-            display: none !important;
-        }
-        // Hide visually and from screen readers, but maintain layout
-        .invisible {
-            opacity: 0;
-            visibility: hidden;
         }
         // Font smoothing
         // Antialiased font smoothing works best for light text on a dark background.
@@ -230,6 +213,26 @@ $medium: $medium-up !default;
         // Make select elements 100% width by default
         select {
             width: 100%;
+        }
+
+        // Miscellaneous useful HTML classes
+        .left {
+            float: left;
+        }
+        .right {
+            float: right;
+        }
+        .clearfix {
+            @include clearfix;
+        }
+        // Hide visually and from screen readers
+        .hide {
+            display: none !important;
+        }
+        // Hide visually and from screen readers, but maintain layout
+        .invisible {
+            opacity: 0;
+            visibility: hidden;
         }
     }
 }
