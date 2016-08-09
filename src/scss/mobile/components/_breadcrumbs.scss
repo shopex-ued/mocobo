@@ -3,7 +3,7 @@
 //
 // Breadcrumb Variables
 //
-$include-html-nav-classes: $include-html-classes !default;
+$include-html-crumb-classes: $include-html-classes !default;
 
 $crumb-class: 'breadcrumbs' !default;
 // We use this to set the background color for the breadcrumb container.
@@ -88,7 +88,7 @@ $crumb-slash: "/" !default;
 }
 
 @include exports("breadcrumbs") {
-    @if $include-html-nav-classes {
+    @if $include-html-crumb-classes {
         .#{$crumb-class} {
             @include crumb-container;
             border-radius: $crumb-radius;
