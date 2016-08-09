@@ -192,6 +192,10 @@ $grid-row-width: to-rem($small-breakpoint * $rem-base) !default;
             max-width: $grid-row-width;
             @extend .clearfix;
             // @include grid-row(expanded, true);
+            &.no-margin {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
         }
         .#{$grid-row-class} {
             @include grid-row;
