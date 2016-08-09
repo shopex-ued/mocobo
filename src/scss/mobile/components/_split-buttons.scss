@@ -7,7 +7,7 @@
 // @variables
 //
 
-$include-html-buttons-classes: $include-html-classes !default;
+$include-html-split-buttons-classes: $include-html-buttons-classes !default;
 
 $split-buttons-class: 'split' !default;
 // We use these to control different shared styles for Split Buttons
@@ -129,7 +129,7 @@ $split-buttons-padding-large: $split-buttons-span-width-large + nth($buttons-lar
 }
 
 @include exports("split-button") {
-    @if $include-html-buttons-classes {
+    @if $include-html-split-buttons-classes {
         .#{$split-buttons-class}.#{$buttons-class} {
             @include split-button;
             &.secondary {
