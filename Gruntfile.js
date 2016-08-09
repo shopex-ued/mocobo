@@ -28,8 +28,8 @@ module.exports = function(grunt) {
             project.paths.vendor + '*.js'
         ],
         js: [
-            project.paths.js + 'component/mobile.js',
-            project.paths.js + 'component/*.js'
+            project.paths.js + 'mobile.js',
+            project.paths.js + 'components/*.js'
         ],
         scss: [
             project.paths.scss + 'mobile.scss'

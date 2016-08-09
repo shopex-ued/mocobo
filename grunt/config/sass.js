@@ -11,7 +11,8 @@ module.exports = {
             bundleExec: true
         },
         files: {
-            '<%= paths.dist %>css/mobile.css': '<%= files.scss %>'
+            '<%= paths.dist %>css/mobile.css': '<%= files.scss %>',
+            '<%= paths.dist %>css/project.css': '<%= paths.scss %>project.scss'
         }
     }
 };

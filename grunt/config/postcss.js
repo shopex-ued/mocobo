@@ -15,7 +15,8 @@ module.exports = {
             ]
         },
         src: [
-            '<%= paths.dist %>css/mobile.css'
+            '<%= paths.dist %>css/mobile.css',
+            '<%= paths.dist %>css/project.css'
         ]
     }
 }

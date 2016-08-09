@@ -6,7 +6,7 @@ import json
 BUILDER_PATH = os.path.dirname(os.path.abspath(__file__))
 ROOT_PATH = os.path.join(BUILDER_PATH, '..', '..')
 FONTS_FOLDER_PATH = os.path.join(BUILDER_PATH, '..', 'dist', 'fonts')
-SCSS_FOLDER_PATH = os.path.join(BUILDER_PATH, '..', 'src', 'scss', 'mobile', 'components')
+SCSS_FOLDER_PATH = os.path.join(BUILDER_PATH, '..', 'src', 'scss', 'components')
 
 
 def main():
