@@ -12,7 +12,7 @@ module.exports = {
         },
         files: {
             '<%= paths.dist %>css/mobile.css': '<%= files.scss %>',
-            '<%= paths.dist %>css/project.css': '<%= paths.scss %>project.scss'
+            '<%= paths.dist %>css/main.css': '<%= paths.scss %>main.scss'
         }
     }
 };
