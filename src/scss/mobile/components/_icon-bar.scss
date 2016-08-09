@@ -8,13 +8,15 @@ $include-html-icon-bar-classes: $include-html-classes !default;
 // We use these to style the icon-bar and items
 $icon-bar-class: 'icon-bar' !default;
 $icon-bar-bg: $oil !default;
+$icon-bar-shadow: false !default;
 $icon-bar-font-color: $white !default;
 $icon-bar-font-color-hover: $icon-bar-font-color !default;
 $icon-bar-font-size: to-rem(12) !default;
-$icon-bar-hover-color: $primary-color !default;
+$icon-bar-bg-hover: $primary-color !default;
 $icon-bar-icon-color: $white !default;
 $icon-bar-icon-color-hover: $icon-bar-icon-color !default;
 $icon-bar-icon-size: $icon-bar-font-size * 2 !default;
+$icon-bar-icon-line-height: 1.33333 !default;
 $icon-bar-image-width: $icon-bar-icon-size !default;
 $icon-bar-image-height: $icon-bar-icon-size !default;
 $icon-bar-item-padding: to-rem(5 2) !default;
@@ -59,8 +61,11 @@ $icon-bar-disabled-opacity: 0.7 !default;
 }
 
 // We use this mixin to create the other styles for icon bars.
-@mixin icon-bar-style($bg: $icon-bar-bg, $font-size: $icon-bar-font-size, $color: $icon-bar-font-color, $color-hover: $icon-bar-font-color-hover, $hover-bg: $icon-bar-hover-color, $icon-size: $icon-bar-icon-size, $icon-color: $icon-bar-icon-color, $icon-color-hover: $icon-bar-icon-color-hover, $image-width: $icon-bar-image-width, $image-height: $icon-bar-image-height, $disabled: true) {
+@mixin icon-bar-style($bg: $icon-bar-bg, $shadow: $icon-bar-shadow, $font-size: $icon-bar-font-size, $color: $icon-bar-font-color, $color-hover: $icon-bar-font-color-hover, $bg-hover: $icon-bar-bg-hover, $icon-size: $icon-bar-icon-size, $icon-color: $icon-bar-icon-color, $icon-color-hover: $icon-bar-icon-color-hover, $icon-line-height: $icon-bar-icon-line-height, $image-width: $icon-bar-image-width, $image-height: $icon-bar-image-height, $disabled: true) {
     background: $bg;
+    @if $shadow {
+        box-shadow: $shadow;
+    }
     > .item {
         label {
             font-size: $font-size;
@@ -69,7 +74,7 @@ $icon-bar-disabled-opacity: 0.7 !default;
         i {
             vertical-align: middle;
             font-size: $icon-size;
-            line-height: 1.33333;
+            line-height: $icon-line-height;
             color: $icon-color;
         }
         img {
@@ -78,7 +83,12 @@ $icon-bar-disabled-opacity: 0.7 !default;
         }
         &:hover,
         &.active {
-            background: $hover-bg;
+            @if $bg-hover {
+                background: $bg-hover;
+            }
+            @if $color-hover {
+                color: $color-hover;
+            }
             label {
                 color: $color-hover;
             }
