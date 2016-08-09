@@ -34,7 +34,7 @@ $table-list-item-font-size: to-rem(14) !default;
 
 $table-list-item-left-icon-margin: to-rem(5) !default;
 $table-list-item-left-icon-size: to-rem(20) !default;
-// $table-list-item-left-icon-color: $steel !default;
+$table-list-item-left-icon-color: $steel !default;
 $table-list-item-active-bg-color: $whitesmoke !default;
 
 $table-list-divider-padding-top: to-rem(6) !default;
@@ -80,7 +80,9 @@ $table-list-children-display: block !default;
                 [class^=#{$icons-class}-]::before {
                     margin-right: $table-list-item-left-icon-margin;
                     vertical-align: -2px;
-                    // color: $table-list-item-left-icon-color;
+                    @if $table-list-item-left-icon-color {
+                        color: $table-list-item-left-icon-color;
+                    }
                     font-size: $table-list-item-left-icon-size;
                 }
             }
