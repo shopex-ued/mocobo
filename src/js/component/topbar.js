@@ -18,9 +18,9 @@
 
             $('[' + this.attr_name() + ']', this.scope).each(function() {
                 var topbar = $(this),
+                    topbarContainer = topbar.parent(),
+                    maxHeight = Math.max(topbarContainer.outerHeight(), topbar.outerHeight()),
                     settings = topbar.data(self.attr_name(true) + '-init');
-                var topbarContainer = topbar.parent();
-                var maxHeight = Math.max(topbarContainer.outerHeight(), topbar.outerHeight());
                 if (topbarContainer.hasClass('fixed')) {
                     if (topbarContainer.hasClass('bottom')) {
                         $('body').css('padding-bottom', maxHeight);
@@ -139,14 +139,33 @@
             }));
         },
 
-        sticky: function(topbar) {
+        sticky: function(element) {
             var self = this;
 
-            if(!this.supportSticky(topbar)) {
-                $(window).on('scroll', function() {
+            $(window).on('scroll', function() {
+                if(!self.supportSticky(element)) {
                     self.update_sticky_positioning();
-                });
+                }
+                self.changeStatus(element, 'sticking');
+            });
+        },
+
+        changeStatus: function(element, className) {
+            var stickier = this.settings.sticky_topbar;
+            if(stickier) {
+                if (this.isSticky(stickier)) {
+                    element.addClass(className);
+                }
+                else {
+                    element.removeClass(className);
+                }
             }
+        },
+
+        isSticky: function(element) {
+            var $window = $(window),
+                distance = element.data('stickyOffset') - this.settings.start_offset;
+            return $window.scrollTop() > distance;
         },
 
         supportSticky: function(element) {
@@ -158,16 +177,15 @@
 
         update_sticky_positioning: function() {
             var klass = '.' + this.settings.sticky_class,
-                $window = $(window);
+                stickier = this.settings.sticky_topbar;
 
-            if (this.settings.sticky_topbar && this.stickable(this.settings.sticky_topbar.parent(), this.settings)) {
-                var distance = this.settings.sticky_topbar.data('stickyOffset') - this.settings.start_offset;
-                if ($window.scrollTop() > distance) {
+            if (stickier && this.stickable(stickier.parent(), this.settings)) {
+                if (this.isSticky(stickier)) {
                     if (!$(klass).hasClass('fixed')) {
                         $(klass).addClass('fixed');
                         $('body').addClass('act-topbar-fixed');
                     }
-                } else if ($window.scrollTop() <= distance) {
+                } else {
                     if ($(klass).hasClass('fixed')) {
                         $(klass).removeClass('fixed');
                         $('body').removeClass('act-topbar-fixed');

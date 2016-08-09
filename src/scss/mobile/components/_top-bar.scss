@@ -6,6 +6,7 @@
 $include-html-top-bar-classes: $include-html-classes !default;
 
 $fixed-z-index: 1009 !default;
+$sticky-z-index: $fixed-z-index !default;
 
 $topbar-class: 'top-bar' !default;
 // Background color for the top bar
@@ -106,7 +107,11 @@ $topbar-arrows: true !default;
         .sticky {
             position: sticky;
             top: 0;
+            z-index: $sticky-z-index;
             @extend .clearfix;
+            &.sticking {
+                box-shadow: 0 0 1px 1px rgba($black, .05);
+            }
         }
         // Wrapped around .top-bar to make it fixed to the top
         .fixed {
