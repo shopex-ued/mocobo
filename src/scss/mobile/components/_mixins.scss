@@ -185,6 +185,7 @@
 }
 
 //@mixins
+//
 // Add top/bottom or left/right hairline.
 @mixin hairline($type, $color, $start: 0, $end: true, $direct: horizontal) {
     @if $type == double {
@@ -250,7 +251,8 @@
 }
 
 //@mixins
-// Add top/bottom or left/right hairline.
+//
+// Add ellipsis when text overflow.
 @mixin ellipsis($width: false) {
     @if $width {
         width: $width;
