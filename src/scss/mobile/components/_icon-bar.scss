@@ -13,7 +13,7 @@ $icon-bar-font-color: $white !default;
 $icon-bar-font-color-hover: $icon-bar-font-color !default;
 $icon-bar-font-size: to-rem(12) !default;
 $icon-bar-bg-hover: $primary-color !default;
-$icon-bar-icon-color: $white !default;
+$icon-bar-icon-color: $icon-bar-font-color !default;
 $icon-bar-icon-color-hover: $icon-bar-icon-color !default;
 $icon-bar-icon-size: $icon-bar-font-size * 2 !default;
 $icon-bar-icon-line-height: 1.33333 !default;

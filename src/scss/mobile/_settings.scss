@@ -49,6 +49,9 @@
 
 // Allows the use of to-rem() or lower-bound() in your settings
 @import "functions";
+// Colors
+@import "components/colors";
+
 
 // Data attribute namespace
 // styles get applied to [data-mysite-plugin], etc
@@ -86,41 +89,6 @@
 // We use these to define default font weights
 // $font-weight-normal: 400;
 // $font-weight-bold: 700;
-
-// Colors
-//
-// $white       : #FFFFFF;
-// $ghost       : #FAFAFA;
-// $snowwhite   : #F9F9F9;
-// $vapor       : #F6F6F6;
-// $whitesmoke 	: #F5F5F5;
-// $silver      : #EFEFEF;
-// $smoke       : #EEEEEE;
-// $gainsboro   : #DCDCDC;
-// $lightgrey	: #D3D3D3;
-// $iron        : #CCCCCC;
-// $silver		: #C0C0C0;
-// $base        : #AAAAAA;
-// $darkgrey	: #A9A9A9;
-// $aluminum    : #999999;
-// $jumbo       : #888888;
-// $grey		: #808080;
-// $monsoon     : #777777;
-// $dimgrey		: #696969;
-// $steel       : #666666;
-// $charcoal    : #555555;
-// $tuatara     : #444444;
-// $oil         : #333333;
-// $jet         : #222222;
-// $black       : #000000;
-
-// We use these as default colors throughout
-// $primary-color: #008CBA;
-// $secondary-color: #e7e7e7;
-// $alert-color: #f04124;
-// $success-color: #43AC6A;
-// $warning-color: #f08a24;
-// $info-color: #a0d3e8;
 
 //
 // Easing Timing Functions
@@ -163,7 +131,7 @@
 // $easeInOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
 // We use these to control various global styles
-// $body-bg: $white;
+// $body-bg: false;
 // $body-font-color: $jet;
 // $body-font-family: $font-family-sans-serif;
 // $body-font-size-px: $rem-base * 0.75;
@@ -179,7 +147,6 @@
 
 // We use these to make sure border radius matches unless we want it different.
 // $global-radius: to-rem(3);
-
 // $global-rounded: 1000px;
 
 // We use these to control inset shadow shiny edges and depressions.
@@ -437,6 +404,7 @@
 // $badge-font-weight: $font-weight-normal;
 // $badge-font-color: $oil;
 // $badge-font-color-alt: $white;
+// $badge-font-color-reserve: $steel;
 
 // 04. Block Grid
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -457,7 +425,7 @@
 // 05. Breadcrumbs
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// $include-html-nav-classes: $include-html-classes;
+// $include-html-crumb-classes: $include-html-classes;
 
 // $crumb-class: 'breadcrumbs';
 // We use this to set the background color for the breadcrumb container.
@@ -774,17 +742,19 @@
 // We use these to style the icon-bar and items
 // $icon-bar-class: 'icon-bar';
 // $icon-bar-bg: $oil;
+// $icon-bar-shadow: false;
 // $icon-bar-font-color: $white;
 // $icon-bar-font-color-hover: $icon-bar-font-color;
 // $icon-bar-font-size: 1rem;
-// $icon-bar-hover-color: $primary-color;
-// $icon-bar-icon-color: $white;
+// $icon-bar-bg-hover: $$primary-color;
+// $icon-bar-icon-color: $icon-bar-font-color;
 // $icon-bar-icon-color-hover: $icon-bar-icon-color;
 // $icon-bar-icon-size: 1.875rem;
+// $icon-bar-icon-line-height: 1.33333;
 // $icon-bar-image-width: 1.875rem;
 // $icon-bar-image-height: 1.875rem;
-// $icon-bar-active-color: $primary-color;
 // $icon-bar-item-padding: 1.25rem;
+// $icon-bar-item-padding-vertical: to-rem(2 5) !default;
 
 // We use this to set default opacity for disabled icons.
 // $icon-bar-disabled-opacity: .7;
@@ -1146,7 +1116,7 @@
 // 24. Split Buttons
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// $include-html-buttons-classes: $include-html-classes;
+// $include-html-split-buttons-classes: $include-html-buttons-classes;
 
 // $split-buttons-class: 'split';
 // We use these to control different shared styles for Split Buttons
@@ -1358,8 +1328,8 @@
 // $tabs-bar-bg-color: $white;
 
 // $tabs-bar-nav-height: to-rem(22);
-// $tabs-bar-nav-padding: to-rem(11);
-// $tabs-bar-nav-divider-color:$gainsboro;
+// $tabs-bar-nav-padding: to-rem(11) 0;
+// $tabs-bar-nav-divider-color: $gainsboro;
 // $tabs-bar-nav-font-size: to-rem(14);
 // $tabs-bar-nav-font-color: $aluminum;
 // $tabs-bar-nav-active-font-color: $oil;
@@ -1424,6 +1394,7 @@
 // $include-html-top-bar-classes: $include-html-classes;
 
 // $fixed-z-index: 1009;
+// $sticky-z-index: $fixed-z-index;
 
 // $topbar-class: 'top-bar';
 // Background color for the top bar
