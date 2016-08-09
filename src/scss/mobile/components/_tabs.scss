@@ -43,7 +43,7 @@ $tabs-bar-border-color: $gainsboro !default;
 $tabs-bar-bg-color: $white !default;
 
 $tabs-bar-nav-height: to-rem(22) !default;
-$tabs-bar-nav-padding: to-rem(11) !default;
+$tabs-bar-nav-padding: to-rem(11) 0 !default;
 $tabs-bar-nav-divider-color:$gainsboro !default;
 $tabs-bar-nav-font-size: to-rem(14) !default;
 $tabs-bar-nav-font-color: $aluminum !default;
@@ -180,15 +180,18 @@ $tabs-bar-nav-active-bar-color: $primary-color !default;
             margin-left: 0;
             list-style: none;
             text-align: center;
-            @include hairline(false, $tabs-bar-border-color);
+            @if $tabs-bar-border-color {
+                @include hairline(false, $tabs-bar-border-color);
+            }
             .controller {
                 flex: 1;
                 line-height: $tabs-bar-nav-height;
                 font-size: $tabs-bar-nav-font-size;
+                white-space: nowrap;
                 > a {
                     display: block;
                     position: relative;
-                    padding: $tabs-bar-nav-padding 0;
+                    padding: $tabs-bar-nav-padding;
                     color: $tabs-bar-nav-font-color;
                     &::before {
                         content: "";
@@ -197,10 +200,14 @@ $tabs-bar-nav-active-bar-color: $primary-color !default;
                     }
                 }
                 &:not(:last-child) > a {
-                    @include hairline(false, $tabs-bar-nav-divider-color, $direct: vertical);
+                    @if $tabs-bar-nav-divider-color {
+                        @include hairline(false, $tabs-bar-nav-divider-color, $direct: vertical);
+                    }
                 }
                 &.active > a {
-                    color: $tabs-bar-nav-active-font-color;
+                    @if $tabs-bar-nav-active-font-color {
+                        color: $tabs-bar-nav-active-font-color;
+                    }
                     &::before {
                         left: 0;
                         bottom: 0;
