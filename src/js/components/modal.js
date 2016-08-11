@@ -11,13 +11,15 @@
         settings: {
             animation: 'fade',
             animation_speed: 250,
-            close_on_overlay_click: true,
+            close_on_backdrop_click: true,
             close_on_esc: true,
             close_modal_class: 'close-modal',
             multiple_opened: false,
-            overlay_class: 'overlay',
+            backdrop: true,
+            backdrop_class: 'backdrop',
             root_element: 'body',
             no_scroll: true,
+            preventTargetDefault: true,
             open: $.noop,
             opened: $.noop,
             close: $.noop,
@@ -46,7 +48,7 @@
             $(this.scope)
                 .off('.modal')
                 .on('click.modal', '[' + this.add_namespace('data-modal-id') + ']:not([disabled])', function(e) {
-                    e.preventDefault();
+                    if(self.settings.preventTargetDefault) e.preventDefault();
 
                     if (!self.locked) {
                         var element = $(this),
@@ -70,13 +72,13 @@
 
             $(document)
                 .on('click.modal', this.close_targets(), function(e) {
-                    e.preventDefault();
+                    if (self.settings.preventTargetDefault) e.preventDefault();
                     if (!self.locked) {
                         var settings = $('[' + self.attr_name() + '].open').data(self.attr_name(true) + '-init') || self.settings,
-                            overlay_clicked = $(e.target)[0] === $('.' + settings.overlay_class)[0];
+                            backdrop_clicked = settings.backdrop && ($(e.target)[0] === $('.' + settings.backdrop_class)[0]);
 
-                        if (overlay_clicked) {
-                            if (settings.close_on_overlay_click) {
+                        if (backdrop_clicked) {
+                            if (settings.close_on_backdrop_click) {
                                 e.stopPropagation();
                             } else {
                                 return;
@@ -84,7 +86,7 @@
                         }
 
                         self.locked = true;
-                        self.close.call(self, overlay_clicked ? $('[' + self.attr_name() + '].open:not(.toback)') : $(this).closest('[' + self.attr_name() + ']'));
+                        self.close.call(self, backdrop_clicked ? $('[' + self.attr_name() + '].open:not(.toback)') : $(this).closest('[' + self.attr_name() + ']'));
                     }
                 });
 
@@ -158,7 +160,7 @@
                 modal.on('open.modal').trigger('open.modal');
 
                 if (open_modal.length < 1) {
-                    this.toggle_overlay(modal, true);
+                    this.toggle_backdrop(modal, true);
                 }
 
                 if (typeof ajax_settings === 'string') {
@@ -247,7 +249,7 @@
                 modal.trigger('close.modal');
 
                 if ((settings.multiple_opened && open_modals.length === 1) || !settings.multiple_opened || modal.length > 1) {
-                    this.toggle_overlay(modal, false);
+                    this.toggle_backdrop(modal, false);
                     this.to_front(modal);
                 }
 
@@ -282,27 +284,28 @@
         close_targets: function() {
             var base = '.' + this.settings.close_modal_class;
 
-            if (this.settings.close_on_overlay_click) {
-                return base + ', .' + this.settings.overlay_class;
+            if (this.settings.backdrop && this.settings.close_on_backdrop_click) {
+                return base + ', .' + this.settings.backdrop_class;
             }
 
             return base;
         },
 
-        toggle_overlay: function(modal, state) {
-            if ($('.' + this.settings.overlay_class).length === 0) {
-                this.settings.overlay = $('<div />', {
-                        'class': this.settings.overlay_class
+        toggle_backdrop: function(modal, state) {
+            if (!this.settings.backdrop) return;
+            if ($('.' + this.settings.backdrop_class).length === 0) {
+                this.settings.backdrop = $('<div />', {
+                        'class': this.settings.backdrop_class
                     })
                     .appendTo('body').hide();
             }
 
-            var visible = this.settings.overlay.filter(':visible').length > 0;
+            var visible = this.settings.backdrop.filter(':visible').length > 0;
             if (state != visible) {
                 if (state == undefined ? visible : !state) {
-                    this.hide(this.settings.overlay);
+                    this.hide(this.settings.backdrop);
                 } else {
-                    this.show(this.settings.overlay);
+                    this.show(this.settings.backdrop);
                 }
             }
         },
@@ -343,7 +346,7 @@
                                 el.trigger('opened.modal');
                             })
                             .addClass('open')
-                            .trigger('opened.modal');
+                            .trigger('open.modal');
                     });
                 }
 

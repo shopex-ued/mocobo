@@ -7,11 +7,11 @@
 $include-html-modal-classes: $include-html-classes !default;
 
 $modal-class: "modal" !default;
-$modal-overlay-class: "overlay" !default;
+$modal-backdrop-class: "backdrop" !default;
 $close-modal-class: "close-modal" !default;
 
-// We use these to control the style of the modal overlay.
-$modal-overlay-bg: rgba($black, 0.45) !default;
+// We use these to control the style of the modal backdrop.
+$modal-backdrop-bg: rgba($black, 0.45) !default;
 
 // We use these to control the style of the modal itself.
 $modal-bg: $white !default;
@@ -56,8 +56,8 @@ $modal-footer-border: 1px solid $smoke !default;
 // @mixins
 //
 
-// We use this to create the background overlay styles
-@mixin overlay($include-z-index-value: true) {
+// We use this to create the background backdrop styles
+@mixin backdrop($include-z-index-value: true) {
     // Autoprefixer should be used to avoid such variables needed when Mobile for Sites can do so in the near future.
     display: none;
     position: fixed;
@@ -66,7 +66,7 @@ $modal-footer-border: 1px solid $smoke !default;
     right: 0;
     bottom: 0;
     z-index: if($include-z-index-value, $z-index-base - 1, auto);
-    background: $modal-overlay-bg;
+    background: $modal-backdrop-bg;
 }
 
 // We use this mixin to create the structure of a modal modal
@@ -103,7 +103,7 @@ $modal-footer-border: 1px solid $smoke !default;
         right: auto;
         margin-left: - $width / 2;
         width: $width;
-        max-width: $max-width;
+        // max-width: $max-width;
     }
 }
 
@@ -162,8 +162,8 @@ $modal-footer-border: 1px solid $smoke !default;
 @include exports("modal") {
     @if $include-html-modal-classes {
         /* Reveal Modals */
-        .#{$modal-overlay-class} {
-            @include overlay;
+        .#{$modal-backdrop-class} {
+            @include backdrop;
         }
         .#{$modal-class}-open {
             position: relative;
@@ -214,13 +214,22 @@ $modal-footer-border: 1px solid $smoke !default;
                 margin-left: -47.5%;
                 width: 95%;
             }
-            &.full {
+            &.fullwidth {
+                margin-left: -50%;
+                width: 100%;
+                max-width: none;
+                border-radius: 0;
+                border-width: $modal-border-width 0 0 0;
+            }
+            &.fullscreen {
                 top: 0;
                 margin-left: -50%;
                 width: 100%;
                 max-width: none;
-                height: 100vh;
                 height: 100%;
+                height: 100vh;
+                border-radius: 0;
+                border: 0 none;
             }
             // Modals pushed to back
             &.toback {
