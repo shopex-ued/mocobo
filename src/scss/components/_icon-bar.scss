@@ -114,6 +114,9 @@ $icon-bar-disabled-opacity: 0.7 !default;
             @include icon-bar-base;
             @include icon-bar-style;
             // Counts
+            &.two-up > .item {
+                width: percentage(1 / 2);
+            }
             &.three-up > .item {
                 width: percentage(1 / 3);
             }
