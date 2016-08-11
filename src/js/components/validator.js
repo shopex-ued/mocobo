@@ -11,6 +11,7 @@
             focus_on_invalid: true, // automatically bring the focus to an invalid input field
             has_hint: true, // popup a alert window if invalid
             error_labels: true, // labels with a for="inputId" will receive an `error` class
+            isAjax: false,
             error_class: 'has-error', // labels with a for="inputId" will receive an `error` class
             alert_element: '.alert-box',
             // the amount of time Validator will take before it validates the form (in ms).
@@ -34,7 +35,8 @@
                 time: /^(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}$/,
                 // #FFF or #FFFFFF
                 color: /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/,
-                mobile: /^0?1[3-8]\d{9}$/
+                mobile: /^0?1(?:[38]\d)|(?:4[579])|(?:[57][0-35-9])\d{8}$/,
+                zip: /^\d{6}$/
             },
             verifiers: {
                 requiredone: function(el, required, parent) {
@@ -66,7 +68,8 @@
                 date: '请填写正确的日期！',
                 time: '请填写正确的时间！',
                 color: '请填写正确的颜色格式！',
-                mobile: '手机号码格式错误，请重新填写！'
+                mobile: '手机号码格式错误，请重新填写！',
+                zip: '邮政编码格式有误，请重新填写！'
             }
         },
 
@@ -93,7 +96,7 @@
             form
                 .off('.validator')
                 .on('submit.validator', function(e) {
-                    var is_ajax = $(this).attr(self.attr_name()) === 'ajax';
+                    var is_ajax = $(this).attr(self.attr_name()) === 'ajax' || self.settings.isAjax;
                     return self.validate($(this).find('input, textarea, select, [data-validator-verifier]').not(settings.exception).get(), e, is_ajax);
                 })
                 .on('validate.validator', function(e) {
@@ -146,7 +149,8 @@
 
             $('[' + this.invalid_attr + ']', form).removeAttr(this.invalid_attr);
             $('.' + settings.error_class, form).not(settings.alert_element).removeClass(settings.error_class);
-            $(':input', form).not(':button, :submit, :reset,' + settings.exception).val('').removeAttr(this.invalid_attr);
+            $(':input', form).not(':radio, :checkbox, :button, :submit, :reset,' + settings.exception).val('').removeAttr(this.invalid_attr);
+            $('input:radio, input:checkbox', form).prop('checked', false).removeAttr('this.invalid_attr');
         },
 
         validate: function(els, e, is_ajax) {
@@ -237,8 +241,9 @@
                 var parent, valid;
 
                 if ((is_radio || is_checkbox) && required) {
-                    el.removeAttribute('required');
-                    el.setAttribute('data-validator-verifier', 'requiredone');
+                    // el.removeAttribute('required');
+                    // el.setAttribute('data-validator-verifier', 'requiredone');
+                    verifier = 'requiredone';
                 }
                 // support old way to do equalTo validations
                 if (el.getAttribute(this.add_namespace('data-equalto'))) {
@@ -453,8 +458,8 @@
 
         reflow: function(scope, options) {
             var self = this,
-                form = $('[' + this.attr_name() + ']').attr('novalidate', 'novalidate');
-            $(form).each(function(idx, el) {
+                form = $('[' + this.attr_name() + ']'); //.attr('novalidate', 'novalidate');
+            form.each(function(idx, el) {
                 self.events(el);
             });
         }
