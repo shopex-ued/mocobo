@@ -11,6 +11,7 @@ $animate-duration-fast:    .3s !default;
 $animate-duration-normal:  .5s !default;
 $animate-duration-slow:     1s !default;
 $animate-duration-slower: 1.5s !default;
+$animate-duration: $animate-duration-normal !default;
 
 // Included, add as needed.
 $animate-include: (slideInUp slideInDown slideOutUp slideOutDown fadeIn fadeOut circle) !default;
@@ -20,7 +21,7 @@ $animate-include: (slideInUp slideInDown slideOutUp slideOutDown fadeIn fadeOut 
 //
 @mixin animated {
     .animated {
-        animation-duration: $animate-duration-normal;
+        animation-duration: $animate-duration;
         animation-fill-mode: both;
         &.infinite {
             animation-iteration-count: infinite;
