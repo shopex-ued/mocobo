@@ -91,7 +91,7 @@
             var msg = '';
             var result = false;
             var element = $(this.scope).find('[' + this.attr_name() + ']');
-            var target = element.siblings(settings.validMessage.target);
+            var target = element.next(settings.validMessage.target);
             target = target.length ? target : $(settings.validMessage.target);
 
             if (value < settings.min) {
