@@ -12,7 +12,7 @@
             slides_container = el,
             number_container,
             bullets_container,
-            timer_container,
+            process_container,
             idx = 0,
             animate,
             timer,
@@ -52,10 +52,10 @@
                 container.append($('<a href="#"><span></span></a>').addClass(settings.next_class));
             }
 
-            if (settings.timer) {
-                timer_container = $('<div>').addClass(settings.timer_container_class);
-                timer_container.addClass(settings.timer_paused_class);
-                container.append(timer_container);
+            if (settings.hasProcess) {
+                process_container = $('<div>').addClass(settings.process_container_class);
+                process_container.addClass(settings.process_paused_class);
+                container.append(process_container);
             }
 
             if (settings.slide_number) {
@@ -218,7 +218,7 @@
 
         this.create_timer = function() {
             var t = new Timer(
-                container.find('.' + settings.timer_container_class),
+                container.find('.' + settings.process_container_class),
                 settings,
                 self.timer_callback
             );
@@ -233,7 +233,7 @@
 
         this.init = function() {
             self.build_markup();
-            if (settings.timer) {
+            if (settings.autoplay) {
                 timer = self.create_timer();
                 Mobile.utils.image_loaded(this.slides().children('img'), timer.start);
             }
@@ -321,34 +321,34 @@
 
         this.restart = function() {
             clearTimeout(timeout);
-            el.addClass(settings.timer_paused_class);
+            if(settings.hasProcess) el.addClass(settings.process_paused_class);
             left = -1;
         };
 
         this.start = function() {
-            if (!el.hasClass(settings.timer_paused_class)) {
+            if (settings.hasProcess && !el.hasClass(settings.process_paused_class)) {
                 return true;
             }
             left = (left === -1) ? duration : left;
-            el.removeClass(settings.timer_paused_class);
+            if(settings.hasProcess) el.removeClass(settings.process_paused_class);
             start = new Date().getTime();
             timeout = setTimeout(function() {
                 self.restart();
                 callback();
             }, left);
-            el.trigger('timer-started.slides')
+            if(settings.hasProcess) el.trigger('timer-started.slides');
         };
 
         this.stop = function() {
-            if (el.hasClass(settings.timer_paused_class)) {
+            if (settings.hasProcess && el.hasClass(settings.process_paused_class)) {
                 return true;
             }
             clearTimeout(timeout);
-            el.addClass(settings.timer_paused_class);
+            if(settings.hasProcess) el.addClass(settings.process_paused_class);
             var end = new Date().getTime();
             left = left - (end - start);
-            var w = 100 - ((left / duration) * 100);
-            el.trigger('timer-stopped.slides');
+            // var w = 100 - ((left / duration) * 100);
+            if(settings.hasProcess) el.trigger('timer-stopped.slides');
         };
     };
 
@@ -422,13 +422,13 @@
             next_on_click: true,
             animation_speed: 500,
             navigation_arrows: false,
-            slide_number: true,
+            slide_number: false,
             slide_number_text: '/',
             container_class: 'slide-container',
             next_class: 'slide-next',
             prev_class: 'slide-prev',
-            timer_container_class: 'slide-timer',
-            timer_paused_class: 'paused',
+            process_container_class: 'slide-timer',
+            process_paused_class: 'paused',
             // timer_progress_class : 'slide-progress',
             slides_container_class: 'previews',
             preloader_class: 'preloader',
@@ -441,7 +441,8 @@
             slides_transition_class: 'slide-transitioning',
             bullets: true,
             circular: true,
-            timer: true,
+            autoplay: true,
+            hasProcess: false,
             variable_height: false,
             swipe: true,
             before_slide_change: $.noop,
