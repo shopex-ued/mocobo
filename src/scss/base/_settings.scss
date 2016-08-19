@@ -500,12 +500,12 @@
 // $buttons-outline-function-factor: 0;
 
 // We use these to control button border styles.
-// $buttons-border-width: 0;
+// $buttons-border-width: 1px;
 // $buttons-border-style: solid;
+// $buttons-border-color: rgba($steel, .2);
 // $buttons-bg-color: $primary-color;
 // $buttons-bg-hover: scale-color($buttons-bg-color, $lightness: $buttons-function-factor);
 // $buttons-outline-bg-hover: transparentize($buttons-bg-color, $buttons-outline-function-factor);
-// $buttons-border-color: $buttons-bg-hover;
 
 // $secondary-buttons-bg-color: $secondary-color;
 // $secondary-buttons-bg-hover: scale-color($secondary-buttons-bg-color, $lightness: $buttons-function-factor);
@@ -745,16 +745,16 @@
 // $icon-bar-shadow: false;
 // $icon-bar-font-color: $white;
 // $icon-bar-font-color-hover: $icon-bar-font-color;
-// $icon-bar-font-size: 1rem;
+// $icon-bar-font-size: to-rem(12);
 // $icon-bar-bg-hover: $$primary-color;
 // $icon-bar-icon-color: $icon-bar-font-color;
 // $icon-bar-icon-color-hover: $icon-bar-icon-color;
-// $icon-bar-icon-size: 1.875rem;
+// $icon-bar-icon-size: $icon-bar-font-size * 2;
 // $icon-bar-icon-line-height: 1.33333;
-// $icon-bar-image-width: 1.875rem;
-// $icon-bar-image-height: 1.875rem;
-// $icon-bar-item-padding: 1.25rem;
-// $icon-bar-item-padding-vertical: to-rem(2 5) !default;
+// $icon-bar-image-width: $icon-bar-icon-size;
+// $icon-bar-image-height: $icon-bar-icon-size;
+// $icon-bar-item-padding: to-rem(5 2);
+// $icon-bar-vertical-item-padding: to-rem(2 5);
 
 // We use this to set default opacity for disabled icons.
 // $icon-bar-disabled-opacity: .7;

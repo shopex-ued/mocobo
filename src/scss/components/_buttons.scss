@@ -42,10 +42,10 @@ $buttons-outline-function-factor: 0 !default;
 // We use these to control buttons border styles.
 $buttons-border-width: 1px !default;
 $buttons-border-style: solid !default;
+$buttons-border-color: rgba($steel, .2) !default;
 $buttons-bg-color: $primary-color !default;
 $buttons-bg-hover: scale-color($buttons-bg-color, $lightness: $buttons-function-factor) !default;
 $buttons-outline-bg-hover: transparentize($buttons-bg-color, $buttons-outline-function-factor) !default;
-$buttons-border-color: rgba($steel, .2) !default;
 
 $secondary-buttons-bg-color: $secondary-color !default;
 $secondary-buttons-bg-hover: scale-color($secondary-buttons-bg-color, $lightness: $buttons-function-factor) !default;
