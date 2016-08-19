@@ -15,7 +15,7 @@ $badge-font-size: to-rem(12) !default;
 $badge-font-weight: $font-weight-normal !default;
 $badge-font-color: $oil !default;
 $badge-font-color-alt: $white !default;
-$badge-font-color-reserve: $steel !default;
+$badge-font-color-reverse: $steel !default;
 // $badge-font-family: $body-font-family !default;
 
 //
@@ -116,8 +116,8 @@ $badge-font-color-reserve: $steel !default;
             &.secondary {
                 @include badge-style($secondary-color);
             }
-            &.reserve {
-                @include badge-style(transparent, $color: $badge-font-color-reserve);
+            &.reverse {
+                @include badge-style(transparent, $color: $badge-font-color-reverse);
             }
         }
     }

@@ -36,7 +36,7 @@ $text-success-color: $success-color !default;
 $text-warning-color: $warning-color !default;
 $text-info-color: $info-color !default;
 $text-secondary-color: $secondary-color !default;
-$text-reserve-color: $aluminum !default;
+$text-reverse-color: $aluminum !default;
 
 // A general <small> styling
 $small-font-size: 83.33333% !default;
@@ -348,8 +348,8 @@ $blockquote-cite-link-color: $blockquote-cite-font-color !default;
             &-secondary {
                 color: $text-secondary-color;
             }
-            &-reserve {
-                color: $text-reserve-color;
+            &-reverse {
+                color: $text-reverse-color;
             }
         }
         .nowrap {
