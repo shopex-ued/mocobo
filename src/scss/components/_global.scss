@@ -155,7 +155,7 @@ $medium: $medium-up !default;
         // Must be 100% for off canvas to work
         html,
         body {
-            min-height: 100%;
+            min-height: 100vh;
             background-color: $base-bg-color;
             text-size-adjust: 100%;
         }

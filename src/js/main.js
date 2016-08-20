@@ -3,6 +3,5 @@ $(document).mobile();
 
 if ((/MicroMessenger/i).test(window.navigator.userAgent)) {
     document.querySelector('[data-topbar]').style.display = 'none';
-    document.body.style.minHeight = window.innerHeight + 'px';
 }
 
