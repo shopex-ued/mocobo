@@ -33,7 +33,7 @@ $grid-row-width: to-rem($small-breakpoint * $rem-base) !default;
 //
 //
 // $behavior - Any special behavior for this row? Default: false. Options: nest, collapse, nest-collapse, false.
-@mixin grid-row($behavior: false, $clearfix: true) {
+@mixin grid-row($behavior: false, $clearfix: false) {
     // use @include grid-row(nest); to include a nested row
     @if $behavior == nest {
         margin-left: -$grid-gutter;
