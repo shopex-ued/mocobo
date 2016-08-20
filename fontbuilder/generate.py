@@ -140,6 +140,7 @@ def generate_cheatsheet(data):
   template_html = template_html.replace('{{icon_count}}', str(len(data['icons'])) )
   template_html = template_html.replace('{{class}}', data['class_name'])
   template_html = template_html.replace('{{content}}', '\n'.join(content) )
+  template_html = template_html.replace('{{a_name}}', data['icons'][0]['name'])
 
   f = open(cheatsheet_file_path, 'w')
   f.write(template_html)

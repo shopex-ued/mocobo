@@ -14,11 +14,11 @@
   border: 0 none;
   margin-bottom: 0;
 }
-.row .columns {
+.row > div {
   background-color: #eee;
   text-align: center;
 }
-.row .columns:nth-child(odd) {
+.row > div:nth-child(odd) {
   background-color: #e3e3e3;
 }
 </style>
@@ -92,6 +92,11 @@
     <div class="grid-1 columns">1/2</div>
     <div class="grid-1 columns">1/2</div>
   </div>
+  <div class="row blank">
+    <div class="grid-1">1/2</div>
+    <div class="grid-1">1/2</div>
+  </div>
+  <h1>去除两侧内边距</h1>
   <div class="row blank sides-collapse">
     <div class="grid-6 columns">1/2</div>
     <div class="grid-1 columns">1/4</div>

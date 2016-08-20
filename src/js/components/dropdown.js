@@ -9,8 +9,6 @@
             disabled_class: 'disabled',
             mega_class: 'mega',
             align: 'bottom',
-            is_hover: false,
-            hover_timeout: 150,
             no_pip: false,
             opened: function() {},
             closed: function() {}
@@ -28,7 +26,7 @@
                 .off('.dropdown')
                 .on('click.dropdown', '[' + this.attr_name() + ']', function(e) {
                     var settings = $(this).data(self.attr_name(true) + '-init') || self.settings;
-                    if (!settings.is_hover || 'ontouchstart' in document) {
+                    if ('ontouchstart' in document) {
                         e.preventDefault();
                         if ($(this).parent('[data-modal-id]').length) {
                             e.stopPropagation();

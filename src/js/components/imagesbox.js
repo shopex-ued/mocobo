@@ -7,14 +7,14 @@
         settings: {
             templates: {
                 viewing: [
-                    '<a href="#" class="imagesbox-close">&times;</a>',
+                    '<a href="javascript:void(0);" class="imagesbox-close">&times;</a>',
                     '<div class="visible-img" style="display: none">',
                     '<div class="imagesbox-touch-label"></div>',
-                    '<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="" />',
+                    '<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="">',
                     '<p class="imagesbox-caption"></p>',
                     '</div>',
-                    '<img class="imagesbox-preload-next" style="display: none" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="" />',
-                    '<img class="imagesbox-preload-prev" style="display: none" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="" />'
+                    '<img class="imagesbox-preload-next" style="display: none;" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="next image">',
+                    '<img class="imagesbox-preload-prev" style="display: none;" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="previous image">'
                 ].join('')
             },
 

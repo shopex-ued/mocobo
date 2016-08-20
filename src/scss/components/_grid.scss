@@ -171,8 +171,8 @@ $grid-row-width: to-rem($small-breakpoint * $rem-base) !default;
     }
     // For Android, must be a block element.
     .#{$grid-row-class} {
-        [class^="#{$size}-"],
-        [class*=" #{$size}-"] {
+        > [class^="#{$size}-"],
+        > [class*=" #{$size}-"] {
             display: block;
         }
     }

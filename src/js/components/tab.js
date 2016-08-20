@@ -10,8 +10,7 @@
             panel_class: 'content',
             callback: function() {},
             deep_linking: false,
-            scroll_to_content: true,
-            is_hover: false
+            scroll_to_content: true
         },
 
         default_tab_hashes: [],
@@ -39,7 +38,7 @@
 
             var usual_tab_behavior = function(e, target) {
                 var settings = $(target).closest('[' + self.attr_name() + ']').data(self.attr_name(true) + '-init');
-                if (!settings.is_hover || 'ontouchstart' in document) {
+                if ('ontouchstart' in document) {
                     e.preventDefault();
                     e.stopPropagation();
                     self.toggle_active_tab($(target).parent());

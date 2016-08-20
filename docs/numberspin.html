@@ -17,18 +17,25 @@
 
 <div class="container">
   <h1>示例</h1>
-  <div class="number-spinner grid-5" data-numberspin>
-    <a href="javascript:void(0);" class="prefix icon-minus"></a>
-    <input type="number" min="1" max="999" step="1" value="">
-    <a href="javascript:void(0);" class="postfix icon-plus"></a>
+  <p>设最小值为1</p>
+  <div class="grid-5">
+    <div class="number-spinner" data-numberspin>
+      <a href="javascript:void(0);" class="prefix icon-minus"></a>
+      <input type="number" min="1" value="1">
+      <a href="javascript:void(0);" class="postfix icon-plus"></a>
+    </div>
   </div>
   <h1>带圆角</h1>
-  <div class="number-spinner grid-6 radius" data-numberspin>
-    <a href="javascript:void(0);" class="prefix icon-minus"></a>
-    <input type="text" min="1" max="999" step="1" value="">
-    <a href="javascript:void(0);" class="postfix icon-plus"></a>
+  <p>设最大值为999，步进为5</p>
+  <div class="grid-6">
+    <div class="number-spinner radius" data-numberspin>
+      <a href="javascript:void(0);" class="prefix icon-minus"></a>
+      <input type="text" max="999" step="5" value="">
+      <a href="javascript:void(0);" class="postfix icon-plus"></a>
+    </div>
   </div>
   <h1>用于表单中</h1>
+  <p>最小为1，最大为999，步进为1</p>
   <form action="" method="post">
     <div class="form-row">
       <div class="grid-5 columns">
@@ -39,7 +46,7 @@
         </div>
         <div class="alert-box error" style="display:none;"></div>
       </div>
-      <div class="grid-3 columns">
+      <div class="grid-1 columns">
         <button type="submit">提交</button>
       </div>
     </div>
@@ -93,10 +100,10 @@
 <script src="../dist/js/mobile.min.js"></script>
 <script src="../dist/js/main.min.js"></script>
 <script>
-$(document).mobile({
+$('form [data-numberspin]').mobile({
   numberspin: {
     validMessage: {
-      target: '.alert-box.error'
+      target: '.alert-box'
     }
   }
 });

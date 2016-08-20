@@ -36,14 +36,14 @@
                 .on('touchstart.numberspin', '[' + this.attr_name() + '] > a', function(e) {
                     e.preventDefault();
 
-                    var target = $(this).closest('[' + self.attr_name() + ']');
+                    var target = $(this).parent('[' + self.attr_name() + ']');
                     var input = target.find('input');
                     var value = +input.val();
                     var settings = self.getSettings(input, target, value);
 
                     if (typeof settings.beforeValidate !== 'function' || settings.beforeValidate(input)) {
                         value += $(this).hasClass('prefix') ? -settings.step : settings.step;
-                        self.setNumber(input, value, settings);
+                        self.setNumber(target, input, value, settings);
                     }
                 })
                 .on('focus.numberspin', '[' + this.attr_name() + '] > input', function(e) {
@@ -52,10 +52,10 @@
                 })
                 .on('input.numberspin', '[' + this.attr_name() + '] > input', function(e) {
                     var input = $(this);
-                    var target = input.closest('[' + self.attr_name() + ']');
+                    var target = input.parent('[' + self.attr_name() + ']');
                     var settings = self.getSettings(input, target, self.settings.defaultValue);
                     if (typeof settings.beforeValidate !== 'function' || settings.beforeValidate($(this))) {
-                        self.setNumber($(this), +input.val(), settings);
+                        self.setNumber(target, $(this), +input.val(), settings);
                     }
                 });
             if (this.settings.autoInit) {
@@ -78,8 +78,8 @@
             });
         },
 
-        setNumber: function(input, value, settings) {
-            this.validate(input, value, settings);
+        setNumber: function(target, input, value, settings) {
+            this.validate(target, input, value, settings);
         },
 
         setValue: function(input, value) {
@@ -87,12 +87,11 @@
             input.val(value).trigger('change.numberspin');
         },
 
-        validate: function(input, value, settings) {
+        validate: function(element, input, value, settings) {
             var msg = '';
             var result = false;
-            var element = $(this.scope).find('[' + this.attr_name() + ']');
-            var target = element.next(settings.validMessage.target);
-            target = target.length ? target : $(settings.validMessage.target);
+            var alertBox = element.next(settings.validMessage.target);
+            alertBox = alertBox.length ? alertBox : $(settings.validMessage.target);
 
             if (value < settings.min) {
                 value = settings.min;
@@ -109,11 +108,11 @@
             }
             if (msg) {
                 if (typeof settings.validError === 'function') settings.validError(element, input, msg);
-                else if(target.length) target.show().html(msg);
+                else if(alertBox.length) alertBox.show().html(msg);
                 else alert(msg);
             } else {
                 if (typeof settings.validSuccess === 'function') settings.validSuccess(element, input);
-                else if(target.length) target.hide();
+                else if(alertBox.length) alertBox.hide();
                 result = true;
             }
             this.setValue(input, value);

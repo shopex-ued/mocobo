@@ -35,9 +35,20 @@
 
   <!-- Triggers the modals -->
   <a href="#" data-modal-id="firstModal" class="btn">Modal in a modal&hellip;</a>
-  <a href="#" data-modal-id="videoModal" class="btn">Example Modal with Video&hellip;</a>
+  <a href="#" data-modal-id="videoModal" class="btn">Modal with Video&hellip;</a>
+  <a href="#" data-modal-id="iframeModal" class="btn">Modal with Iframe&hellip;</a>
   <a href="#" data-modal-id="smallModal" class="btn">Small Modal&hellip;</a>
-  <a href="#" data-modal-id="fullModal" class="btn">Full Modal&hellip;</a>
+  <a href="#" data-modal-id="fullwidthModal" class="btn">Full width Modal&hellip;</a>
+  <a href="#" data-modal-id="fullscreenModal" class="btn">Full Screen Modal&hellip;</a>
+
+  <h1>弹出位置</h1>
+  <a href="#" data-modal-id="topModal" class="btn">Top Modal&hellip;</a>
+  <a href="#" data-modal-id="bottomModal" class="btn">Bottom Modal&hellip;</a>
+
+  <h1>结合动效(配合animate css，更多请查看_animate.scss)</h1>
+  <a href="#" data-modal-id="topSlideModal" class="btn">Top Slide Modal&hellip;</a>
+  <a href="#" data-modal-id="bottomSlideModal" class="btn">Bottom Slide Modal&hellip;</a>
+
   <!-- Modals begin -->
   <div id="firstModal" class="modal center" data-modal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
     <h2 id="firstModalTitle">This is a modal.</h2>
@@ -56,7 +67,15 @@
   <div id="videoModal" class="modal center large" data-modal aria-labelledby="videoModalTitle" aria-hidden="true" role="dialog">
     <h2 id="videoModalTitle">This modal has video</h2>
     <div class="flex-video widescreen">
-      <iframe width="100%" src="//v.youku.com/v_show/id_XMTM2NzMxODMwOA==.html" frameborder="0" allowfullscreen></iframe>
+      <video src="http://ask.ivideo.sina.com.cn/v_play_ipad.php?vid=140666500" width="100%" height="100%" controls preload="auto" poster="http://p.ivideo.sina.com.cn/video/250/720/109/250720109.jpg"></video>
+    </div>
+    <a class="close-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div id="iframeModal" class="modal center large" data-modal aria-labelledby="iframeModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="iframeModalTitle">This modal has iframe</h2>
+    <div class="widescreen">
+      <iframe width="100%" src="http://m.baidu.com" frameborder="0" allowfullscreen></iframe>
     </div>
     <a class="close-modal" aria-label="Close">&#215;</a>
   </div>
@@ -67,9 +86,43 @@
     <a class="close-modal" aria-label="Close">&#215;</a>
   </div>
 
-  <div id="fullModal" class="modal full" data-modal aria-labelledby="fullModalTitle" aria-hidden="true" role="dialog">
-    <h2 id="fullModalTitle">This is a small modal.</h2>
+  <div id="fullwidthModal" class="modal center fullwidth" data-modal aria-labelledby="fullwidthModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="fullwidthModalTitle">This is a full width modal.</h2>
     <p>See? It just slides into place after the other first modal.</p>
+    <a class="close-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div id="fullscreenModal" class="modal fullscreen" data-modal aria-labelledby="fullscreenModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="fullscreenModalTitle">This is a fullscreen modal.</h2>
+    <p>See? It just slides into place after the other first modal.</p>
+    <a class="close-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div id="topModal" class="modal top" data-modal aria-labelledby="topModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="topModalTitle">This is a modal.</h2>
+    <p>Modal makes these very easy to summon and dismiss. The close button is simply an anchor with a unicode character icon and a class of <code>close-modal</code>. Clicking anywhere outside the modal will also dismiss it.</p>
+    <p>Finally, if your modal summons another modal, the plugin will handle that for you gracefully.</p>
+    <a class="close-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div id="bottomModal" class="modal bottom" data-modal aria-labelledby="bottomModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="bottomModalTitle">This is a modal.</h2>
+    <p>Modal makes these very easy to summon and dismiss. The close button is simply an anchor with a unicode character icon and a class of <code>close-modal</code>. Clicking anywhere outside the modal will also dismiss it.</p>
+    <p>Finally, if your modal summons another modal, the plugin will handle that for you gracefully.</p>
+    <a class="close-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div id="topSlideModal" class="modal top animated slide-in-down" data-modal aria-labelledby="topSlideModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="topSlideModalTitle">This is a modal.</h2>
+    <p>Modal makes these very easy to summon and dismiss. The close button is simply an anchor with a unicode character icon and a class of <code>close-modal</code>. Clicking anywhere outside the modal will also dismiss it.</p>
+    <p>Finally, if your modal summons another modal, the plugin will handle that for you gracefully.</p>
+    <a class="close-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div id="bottomSlideModal" class="modal bottom animated fast slide-in-up" data-modal aria-labelledby="bottomSlideModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="bottomSlideModalTitle">This is a modal.</h2>
+    <p>Modal makes these very easy to summon and dismiss. The close button is simply an anchor with a unicode character icon and a class of <code>close-modal</code>. Clicking anywhere outside the modal will also dismiss it.</p>
+    <p>Finally, if your modal summons another modal, the plugin will handle that for you gracefully.</p>
     <a class="close-modal" aria-label="Close">&#215;</a>
   </div>
   <!-- Modals end -->
@@ -176,7 +229,7 @@
   }
   </pre>
 
-  <h1>当添加了新的​模态框</h1>
+  <h1>当添加了新的模态框</h1>
   <pre>
   $(document).mobile('modal', 'reflow');
   </pre>

@@ -188,12 +188,14 @@ $modal-footer-border: 1px solid $smoke !default;
                 bottom: auto;
                 border-top-left-radius: 0;
                 border-top-right-radius: 0;
+                border-top-width: 0;
             }
             &.bottom {
                 top: auto;
                 bottom: 0;
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
+                border-bottom-width: 0;
             }
             &.center {
                 top: 50%;
@@ -219,7 +221,8 @@ $modal-footer-border: 1px solid $smoke !default;
                 width: 100%;
                 max-width: none;
                 border-radius: 0;
-                border-width: $modal-border-width 0 0 0;
+                border-left-width: 0;
+                border-right-width: 0;
             }
             &.fullscreen {
                 top: 0;

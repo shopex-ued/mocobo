@@ -321,11 +321,18 @@ $input-transition-fade-timing-function: linear !default;
             }
             &.round {
                 border-radius: $global-rounded;
+                padding-left: $form-spacing * 2;
             }
             &.underline {
                 border-width: 0 0 1px 0;
                 box-shadow: 0 0 0 0 transparent;
             }
+        }
+        input,
+        textarea {
+          &.round {
+            padding-right: $form-spacing * 2;
+          }
         }
         input[type="submit"] {
             appearance: none;
