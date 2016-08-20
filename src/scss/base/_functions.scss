@@ -135,7 +135,8 @@ $modules: () !default;
     @return $emValues;
 }
 
-@function thin-line($color, $direct) {
+@function thin-line($direct:null, $color:#000) {
+    $svg: null;
     @if $direct == left {
         $svg: 'data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1" height="100%"><rect fill="#{$color}" x="0" y="0" width="0.5" height="100%"/></svg>'
     }
@@ -148,5 +149,5 @@ $modules: () !default;
     @else if $direct == bottom {
         $svg: 'data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="1"><rect fill="#{$color}" x="0" y="0.5" width="100%" height="0.5"/></svg>'
     }
-  @return $svg;
+    @return $svg;
 }

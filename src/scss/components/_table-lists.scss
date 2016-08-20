@@ -135,7 +135,7 @@ $table-list-children-display: block !default;
             //     color: #fff;
             //     @include hairline(double, #222, 0); // Double grey border.
             //     .item{
-            //         @include hairline(single, #222, 12px); // Single grey border start with 12px.
+            //         @include hairline(bottom, #222, 12px); // Single grey border at bottom start with 12px.
             //         &:hover {
             //             background-color: #242424;
             //         }
@@ -149,11 +149,13 @@ $table-list-children-display: block !default;
             .item {
                 position: relative;
                 background-color: inherit;
-                padding: $table-list-item-padding-top $table-list-item-padding-left;
+                padding: $table-list-item-padding-top $table-list-item-padding-left $table-list-item-padding-top;
                 overflow: $table-list-item-overflow;
                 font-size: $table-list-item-font-size;
                 -webkit-touch-callout: none;
-                @include hairline(single, $table-list-item-border-color, $table-list-item-border-left); // Single grey border start with 12px.
+                @include hairline(bottom, $table-list-item-border-color, $table-list-item-border-left); // Single grey border at bottom start with 12px.
+                //@include svg-hairline(bottom, $table-list-item-border-color, $table-list-item-border-left);
+                //@include thin-border(bottom, $table-list-item-border-color, $table-list-item-border-left);
                 // &.radio input[type=radio],
                 // &.checkbox input[type=checkbox]{
                 //     top:8px;
@@ -234,7 +236,7 @@ $table-list-children-display: block !default;
                     }
                     .item {
                         padding-left: $table-list-item-border-left * 2;
-                        @include hairline(single, $table-list-item-border-color, $table-list-item-border-left * 2, false);
+                        @include hairline(bottom, $table-list-item-border-color, $table-list-item-border-left * 2, false);
                     }
                 }
                 > .content {

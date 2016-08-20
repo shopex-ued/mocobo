@@ -186,9 +186,30 @@
 
 //@mixins
 //
+// Add ellipsis when text overflow.
+@mixin ellipsis($width: false) {
+    @if $width {
+        width: $width;
+    }
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin ellipsis-lines($lines: 2) {
+    display: -webkit-box;
+    word-wrap: break-word;
+    white-space: normal;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    // flex-direction: column;
+}
+
+//@mixins
+//
 // Add top/bottom or left/right hairline.
 @mixin hairline($type, $color, $start: 0, $end: true, $direct: horizontal) {
-    @if $type == double {
+    @if $type == double or $type == top {
         &::before {
             content: "";
             position: absolute;
@@ -219,83 +240,101 @@
             }
         }
     }
-    &::after {
-        content: "";
+    @if $type != top {
+        &::after {
+            content: "";
+            position: absolute;
+            background-color: $color;
+            @if $direct == horizontal {
+                left: $start;
+                @if $end == true {
+                    right: $start;
+                }
+                @else if $end != false {
+                    right: $end;
+                }
+                bottom: 0;
+                height: 1px;
+                transform: scaleY(0.5);
+            }
+            @else {
+                right: 0;
+                top: $start;
+                @if $end == true {
+                    bottom: $start;
+                }
+                @else if $end != false {
+                    bottom: $end;
+                }
+                width: 1px;
+                transform: scaleX(0.5);
+            }
+        }
+    }
+}
+
+@mixin svg-hairline($direct, $color, $start: 0, $end: true) {
+    &::before {
+        content: '';
         position: absolute;
-        background-color: $color;
-        @if $direct == horizontal {
-            left: $start;
-            @if $end == true {
-                right: $start;
-            }
-            @else if $end != false {
-                right: $end;
-            }
-            bottom: 0;
-            height: 1px;
-            transform: scaleY(0.5);
-        }
-        @else {
-            right: 0;
-            top: $start;
-            @if $end == true {
-                bottom: $start;
-            }
-            @else if $end != false {
-                bottom: $end;
-            }
-            width: 1px;
-            transform: scaleX(0.5);
-        }
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 0;
+        @include thin-border($direct, $color, $start, $end);
     }
 }
 
-//@mixins
-//
-// Add ellipsis when text overflow.
-@mixin ellipsis($width: false) {
-    @if $width {
-        width: $width;
+@mixin thin-border($direct: top, $color: null, $start: 0, $end: true) {
+    @if $end == true {
+        $end: $start;
     }
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-@mixin ellipsis-lines($lines: 2) {
-    display: -webkit-box;
-    word-wrap: break-word;
-    white-space: normal;
-    -webkit-line-clamp: $lines;
-    -webkit-box-orient: vertical;
-    // flex-direction: column;
-}
-
-@mixin thin-border($color, $direct: top) {
     $direction: (
-        top: 0 0,
-        bottom: 0 100%,
-        left: 0 0,
-        right: 100% 0
+        top: $start 0,
+        bottom: $start 100%,
+        left: 0 $start,
+        right: 100% $start
     );
-    background-repeat: no-repeat;
+    $asize: calc(100% - #{$start} - #{$end});
+
+    $image: null;
+    $position: null;
+    $size: null;
+
     @if type-of($direct) == string {
         @if $direct == all {
             $direct: top right bottom left;
         }
         @else {
-            $image: url(thin-line($color, $direct));
+            $image: url(thin-line($direct, $color));
             $position: map-get($direction, $direct);
+            @if $direct == left or $direct == right {
+                $size: auto $asize;
+            }
+            @else {
+                $size: $asize;
+            }
         }
     }
+
     @if type-of($direct) == list {
         $image: ();
         $position: ();
+        $size: ();
         @each $v in $direct {
-            $image: append($image, url(thin-line($color, $v)), comma);
+            $image: append($image, url(thin-line($v, $color)), comma);
             $position: append($position, map-get($direction, $v), comma);
+            @if $v == left or $v == right {
+                $size: append($size, auto $asize, comma);
+            }
+            @else {
+                $size: append($size, $asize, comma);
+            }
         }
     }
+    background-repeat: no-repeat;
     background-image: $image;
     background-position: $position;
+    background-size: $size;
 }
