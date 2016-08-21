@@ -81,7 +81,7 @@ $input-prefix-font-color-alt: $white !default;
 $input-prefix-icon-size: to-rem(24) !default;
 
 // We use these to style the error states for inputs and labels
-$input-error-message-padding: to-rem(6 9 9) !default;
+$input-error-message-padding: to-rem(6 9) !default;
 $input-error-message-top: -1px !default;
 $input-error-message-font-size: to-rem(12) !default;
 $input-error-message-font-weight: $font-weight-normal !default;
@@ -319,7 +319,7 @@ $input-transition-fade-timing-function: linear !default;
             &.radius {
                 border-radius: $input-border-radius;
             }
-            &.round {
+            &.rounded {
                 border-radius: $global-rounded;
                 padding-left: $form-spacing * 2;
             }
@@ -330,7 +330,7 @@ $input-transition-fade-timing-function: linear !default;
         }
         input,
         textarea {
-          &.round {
+          &.rounded {
             padding-right: $form-spacing * 2;
           }
         }
@@ -522,7 +522,7 @@ $input-transition-fade-timing-function: linear !default;
             // &.#{$buttons-class} {
             //     @include side-radius(right, 0);
             // }
-            &.#{$buttons-class}.round {
+            &.#{$buttons-class}.rounded {
                 border-radius: $global-rounded 0 0 $global-rounded;
             }
         }
@@ -531,7 +531,7 @@ $input-transition-fade-timing-function: linear !default;
             // &.#{$buttons-class} {
             //     @include side-radius(left, 0);
             // }
-            &.#{$buttons-class}.round {
+            &.#{$buttons-class}.rounded {
                 border-radius: 0 $global-rounded $global-rounded 0;
             }
         }
