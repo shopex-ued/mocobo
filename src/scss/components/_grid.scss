@@ -196,6 +196,9 @@ $grid-row-width: to-rem($small-breakpoint * $rem-base) !default;
                 margin-top: 0;
                 margin-bottom: 0;
             }
+            &.blank {
+                @include grid-row(blank, false);
+            }
         }
         .#{$grid-row-class} {
             @include grid-row;
