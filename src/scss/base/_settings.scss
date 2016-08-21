@@ -444,9 +444,9 @@
 // $buttons-margin-bottom: to-rem(15);
 
 // We use these to control button text styles.
-// $buttons-font-color: $white;
-// $buttons-font-color-alt: $oil;
-// $buttons-font-weight: $font-weight-bold;
+// $buttons-font-color: $body-font-color;
+// $buttons-font-color-alt: $white;
+// $buttons-font-weight: $font-weight-normal;
 // $buttons-font-align: center;
 
 // $buttons-font-size-tiny: to-rem(12);
@@ -463,39 +463,44 @@
 
 // We use these to control various hover effects.
 // $buttons-function-factor: -20%;
-// $buttons-outline-function-factor: 0;
+// $buttons-function-factor-outline: 0;
 
 // We use these to control button border styles.
 // $buttons-border-width: 1px;
 // $buttons-border-style: solid;
 // $buttons-border-color: rgba($steel, .2);
-// $buttons-bg-color: $primary-color;
+// $buttons-bg-color: $ghost;
 // $buttons-bg-hover: scale-color($buttons-bg-color, $lightness: $buttons-function-factor);
-// $buttons-outline-bg-hover: transparentize($buttons-bg-color, $buttons-outline-function-factor);
+// $buttons-bg-hover-outline: transparentize($buttons-bg-color, $buttons-function-factor-outline);
+
+// $primary-buttons-bg-color: $primary-color;
+// $primary-buttons-bg-hover: scale-color($primary-buttons-bg-color, $lightness: $buttons-function-factor);
+// $primary-buttons-bg-hover-outline: transparentize($primary-buttons-bg-color, $buttons-function-factor-outline);
+// $primary-buttons-border-color: $primary-buttons-bg-hover;
 
 // $secondary-buttons-bg-color: $secondary-color;
 // $secondary-buttons-bg-hover: scale-color($secondary-buttons-bg-color, $lightness: $buttons-function-factor);
-// $secondary-outline-buttons-bg-hover: transparentize($secondary-buttons-bg-color, $buttons-outline-function-factor);
+// $secondary-buttons-bg-hover-outline: transparentize($secondary-buttons-bg-color, $buttons-function-factor-outline);
 // $secondary-buttons-border-color: $secondary-buttons-bg-hover;
 
 // $success-buttons-bg-color: $success-color;
 // $success-buttons-bg-hover: scale-color($success-buttons-bg-color, $lightness: $buttons-function-factor);
-// $success-outline-buttons-bg-hover: transparentize($success-buttons-bg-color, $buttons-outline-function-factor);
+// $success-buttons-bg-hover-outline: transparentize($success-buttons-bg-color, $buttons-function-factor-outline);
 // $success-buttons-border-color: $success-buttons-bg-hover;
 
 // $alert-buttons-bg-color: $alert-color;
 // $alert-buttons-bg-hover: scale-color($alert-buttons-bg-color, $lightness: $buttons-function-factor);
-// $alert-outline-buttons-bg-hover: transparentize($alert-buttons-bg-color, $buttons-outline-function-factor);
+// $alert-buttons-bg-hover-outline: transparentize($alert-buttons-bg-color, $buttons-function-factor-outline);
 // $alert-buttons-border-color: $alert-buttons-bg-hover;
 
 // $warning-buttons-bg-color: $warning-color;
 // $warning-buttons-bg-hover: scale-color($warning-buttons-bg-color, $lightness: $buttons-function-factor);
-// $warning-outline-buttons-bg-hover: transparentize($warning-buttons-bg-color, $buttons-outline-function-factor);
+// $warning-buttons-bg-hover-outline: transparentize($warning-buttons-bg-color, $buttons-function-factor-outline);
 // $warning-buttons-border-color: $warning-buttons-bg-hover;
 
 // $info-buttons-bg-color: $info-color;
 // $info-buttons-bg-hover: scale-color($info-buttons-bg-color, $lightness: $buttons-function-factor);
-// $info-outline-buttons-bg-hover: transparentize($info-buttons-bg-color, $buttons-outline-function-factor);
+// $info-buttons-bg-hover-outline: transparentize($info-buttons-bg-color, $buttons-function-factor-outline);
 // $info-buttons-border-color: $info-buttons-bg-hover;
 
 // We use this to set the default radius used throughout the core.
@@ -504,6 +509,7 @@
 
 // We use this to set default opacity for disabled buttons.
 // $buttons-disabled-opacity: .6;
+// $buttons-disabled-bg: false;
 
 // 08. Dropdown Buttons
 // - - - - - - - - - - - - - - - - - - - - - - - - -

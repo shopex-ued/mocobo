@@ -28,26 +28,43 @@ p {margin-bottom: 0;}
 
   <h1>更加圆润的按钮</h1>
   <p>
-    <a href="" class="btn small round">圆角按钮</a>
-    <a href="" class="btn round">圆角按钮</a>
-    <a href="" class="btn large round">圆角按钮</a>
+    <a href="" class="btn small rounded">圆角</a>
+    <a href="" class="btn rounded">圆角</a>
+    <a href="" class="btn rounded disabled">圆角</a>
+    <a href="" class="btn large rounded">圆角</a>
+  </p>
+
+  <h1>更加扁平的按钮</h1>
+  <p>
+    <a href="" class="btn small flat">扁平</a>
+    <a href="" class="btn flat">扁平</a>
+    <a href="" class="btn flat disabled">扁平</a>
+    <a href="" class="btn large flat">扁平</a>
+  </p>
+
+  <h1>文字按钮</h1>
+  <p>
+    <a href="" class="btn small link">小按钮</a>
+    <a href="" class="btn link">默认按钮</a>
+    <a href="" class="btn large link">大按钮</a>
+    <a href="" class="btn disabled link">被禁用的链接</a>
+    <button type="button" disabled class="link">被禁用的按钮</button>
   </p>
 
   <h1>通栏按钮</h1>
   <p><button type="button" class="small expand">小按钮</button></p>
   <p><button type="button" class="expand">默认按钮</button></p>
   <p><button type="button" class="large expand">大按钮</button></p>
-  <div><button type="button" class="expand flat">更扁平化的按钮</button></div>
 
   <h1>一栏两个</h1>
   <div class="row">
-    <div class="grid-6 columns"><button type="submit" class="expand">提交</button></div>
     <div class="grid-6 columns"><button type="button" class="secondary expand">取消</button></div>
+    <div class="grid-6 columns"><button type="submit" class="primary expand">提交</button></div>
   </div>
-  <div class="fixed bottom"><button type="button" class="expand flat">提交订单</button></div>
 
   <h1>各种色彩</h1>
   <p>
+    <a href="" class="btn primary">主要</a>
     <a href="" class="btn alert">提醒</a>
     <a href="" class="btn success">成功</a>
     <a href="" class="btn warning">警示</a>
@@ -55,33 +72,42 @@ p {margin-bottom: 0;}
     <a href="" class="btn secondary">次要</a>
   </p>
 
+  <h1>各种色彩的禁用状态</h1>
+  <p>
+    <a href="" class="btn primary disabled">主要</a>
+    <a href="" class="btn alert disabled">提醒</a>
+    <a href="" class="btn success disabled">成功</a>
+    <a href="" class="btn warning disabled">警示</a>
+    <a href="" class="btn info disabled">信息</a>
+    <a href="" class="btn secondary disabled">次要</a>
+  </p>
+
   <h1>轮廓按钮</h1>
   <p>
-    <a href="" class="btn outline round">确认</a>
+    <a href="" class="btn outline">重来</a>
+    <a href="" class="btn outline primary">确认</a>
     <a href="" class="btn outline alert">提醒</a>
     <a href="" class="btn outline success">成功</a>
     <a href="" class="btn outline warning">警示</a>
-    <a href="" class="btn outline info icon-mail">信息</a>
-    <a href="" class="btn outline secondary small flat">次要</a>
+    <a href="" class="btn outline info">信息</a>
+    <a href="" class="btn outline secondary">次要</a>
   </p>
-  <h1>文字按钮</h1>
-  <p>
-    <a href="" class="btn small link">小按钮</a>
-    <a href="" class="btn link">默认按钮</a>
-    <a href="" class="btn large link">大按钮</a>
-    <a href="" class="btn disabled link">被禁用的按钮</a>
-  </p>
-
   <h1>带图标的按钮</h1>
   <p>
     <a href="" class="btn icon-search">搜索</a>
     <a href="" class="btn icon-arrow-back">返回</a>
     <a href="" class="btn">下一步 <i class="icon-arrow-forward"></i></a>
+    <a href="" class="btn link icon-search">查看详情</a>
   </p>
+
+  <h1>常驻底部的按钮</h1>
   <p>
     <br>
     <br>
   </p>
+  <div class="fixed bottom">
+    <button type="button" class="expand flat">常驻底部</button>
+  </div>
 </div>
 <script src="../dist/js/libs.min.js"></script>
 <script src="../dist/js/mobile.min.js"></script>
