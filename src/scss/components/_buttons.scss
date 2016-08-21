@@ -264,7 +264,7 @@ $buttons-disabled-bg: false !default;
             &.outline {
                 $outline-color: $buttons-bg-color;
                 @if lightness($outline-color) > 85% {
-                    $outline-color: hsl(hue($outline-color), saturation($outline-color), 85%);
+                    $outline-color: change-color($outline-color, $lightness: 85%);
                 }
                 @include button-style($bg: $white, $bg-hover: $buttons-bg-hover-outline, $border-color: $outline-color, $color: $outline-color);
             }
