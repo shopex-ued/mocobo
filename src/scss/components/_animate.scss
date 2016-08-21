@@ -32,11 +32,14 @@ $animate-include: (slideInUp slideInDown slideOutUp slideOutDown fadeIn fadeOut 
         &.fast {
             animation-duration: $animate-duration-fast;
         }
+        &.normal {
+            animation-duration: $animate-duration-normal;
+        }
         &.slow {
-            animation-duration: $animate-duration-faster;
+            animation-duration: $animate-duration-slow;
         }
         &.slower {
-            animation-duration: $animate-duration-faster;
+            animation-duration: $animate-duration-slower;
         }
     }
 }
