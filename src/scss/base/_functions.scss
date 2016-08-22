@@ -36,12 +36,6 @@ $modules: () !default;
     @return nth($range, 2);
 }
 
-// STRIP UNIT
-// It strips the unit of measure and returns it
-@function strip-unit($num) {
-    @return $num / ($num * 0 + 1);
-}
-
 // TEXT INPUT TYPES
 
 @function text-inputs($types: all, $selector: input) {
@@ -66,9 +60,22 @@ $modules: () !default;
     @return $return;
 }
 
+@function data($attr) {
+    @if $namespace {
+        @return "[data-" + $namespace + "-" + $attr + "]";
+    }
+    @return "[data-" + $attr + "]";
+}
+
+// STRIP UNIT
+// It strips the unit of measure and returns it
+@function strip-unit($num) {
+    @return $num / ($num * 0 + 1);
+}
+
 // CONVERT TO REM
 @function convert2rem($value, $base-value: $rem-base) {
-    @if unitless($value / 1rem) {
+    @if typeof($value) != number or unitless($value / 1rem) {
         @return $value;
     }
     $value: strip-unit($value);
@@ -83,13 +90,6 @@ $modules: () !default;
     @else {
         @return $value / $base-value * 1rem;
     }
-}
-
-@function data($attr) {
-    @if $namespace {
-        @return "[data-" + $namespace + "-" + $attr + "]";
-    }
-    @return "[data-" + $attr + "]";
 }
 
 // Convert px to rem
@@ -111,6 +111,9 @@ $modules: () !default;
 //   to-rem((16px, 32px, 48), 8px);
 
 @function to-rem($value, $base-value: $rem-base) {
+    @if typeof($value) != number {
+        @return $value;
+    }
     $max: length($value);
     @if $max == 1 {
         @return convert2rem($value, $base-value);
@@ -119,10 +122,13 @@ $modules: () !default;
     @for $i from 1 through $max {
         $remValues: append($remValues, convert2rem(nth($value, $i), $base-value));
     }
-    @return $remValues
+    @return $remValues;
 }
 
 @function to-em($values, $base-value: $rem-base) {
+    @if typeof($value) != number {
+        @return $value;
+    }
     $remValues: to-rem($values, $base-value: $rem-base);
     $max: length($remValues);
     @if $max == 1 {
