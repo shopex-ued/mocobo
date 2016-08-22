@@ -11,6 +11,7 @@ $notice-icon-size: to-rem(120) !default;
 $notice-icon-color: $silver !default;
 $notice-font-size: to-rem(14) !default;
 $notice-font-color: $steel !default;
+$notice-message-color: $aluminum !default;
 $notice-line-height: 1.2 !default;
 $notice-font-margin-top: 5% !default;
 
@@ -33,6 +34,9 @@ $notice-actions-margin: to-rem(20) 10% 0 !default;
             }
             p {
                 margin-top: $notice-font-margin-top;
+            }
+            .message {
+                color: $notice-message-color;
             }
             .actions {
                 margin: $notice-actions-margin;
