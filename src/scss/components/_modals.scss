@@ -87,7 +87,7 @@ $modal-footer-border: 1px solid $smoke !default;
         visibility: hidden;
         // Make sure rows don't have a min-width on them
         .#{$grid-columns-class} {
-            min-width: 0;
+            min-width: auto;
         }
         // Get rid of margin from first and last element inside modal
         // > :first-child {
