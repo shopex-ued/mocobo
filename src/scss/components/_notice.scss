@@ -15,7 +15,7 @@ $notice-message-color: $aluminum !default;
 $notice-line-height: 1.2 !default;
 $notice-font-margin-top: 5% !default;
 
-$notice-actions-margin: to-rem(20) 10% 0 !default;
+$notice-actions-margin: to-rem(20) auto 0 !default;
 
 @include exports("notice") {
     @if $include-html-notice-classes {
