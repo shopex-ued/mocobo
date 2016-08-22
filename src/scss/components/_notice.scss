@@ -26,11 +26,15 @@ $notice-actions-margin: to-rem(20) 10% 0 !default;
                 text-align: center;
                 font-size: $notice-font-size;
                 line-height: $notice-line-height;
-                color: $notice-font-color;
+                @if $notice-font-color {
+                    color: $notice-font-color;
+                }
             }
-            [class^=icon-] {
+            .#{$notice-class}-icon {
                 font-size: $notice-icon-size;
-                color: $notice-icon-color;
+                @if $notice-icon-color {
+                    color: $notice-icon-color;
+                }
             }
             p {
                 margin-top: $notice-font-margin-top;
