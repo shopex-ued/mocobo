@@ -166,10 +166,10 @@ $modal-footer-border: 1px solid $smoke !default;
             @include backdrop;
         }
         .#{$modal-class}-open {
-            position: relative;
+            // position: relative;
             &,
             body {
-                height: 100%;
+                // height: 100%;
                 overflow: hidden;
                 -webkit-overflow-scrolling: auto;
             }
