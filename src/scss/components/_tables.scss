@@ -118,5 +118,37 @@ $table-margin-bottom: to-rem(20) !default;
         table {
             @include table;
         }
+        .table {
+            display: table;
+            table-layout: auto;
+            // > .thead {
+            //     display: table-header-group;
+            // }
+            // > .tbody {
+            //     display: table-row-group;
+            // }
+            // > .tfoot {
+            //     display: table-footer-group;
+            // }
+            // > .colgroup {
+            //     display: table-column-group;
+            // }
+            .tr {
+                display: table-row;
+                // &.even,
+                // &:nth-of-type(even) {
+                //     background: $table-even-row-bg;
+                // }
+            }
+            .td {
+                display: table-cell;
+            }
+            .caption {
+                display: table-caption;
+            }
+            .col {
+                display: table-column;
+            }
+        }
     }
 }
