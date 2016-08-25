@@ -75,7 +75,7 @@ $modules: () !default;
 
 // CONVERT TO REM
 @function convert2rem($value, $base-value: $rem-base) {
-    @if typeof($value) != number or unitless($value / 1rem) {
+    @if type-of($value) != number or unitless($value / 1rem) {
         @return $value;
     }
     $value: strip-unit($value);
@@ -110,24 +110,24 @@ $modules: () !default;
 //
 //   to-rem((16px, 32px, 48), 8px);
 
-@function to-rem($value, $base-value: $rem-base) {
-    @if typeof($value) != number {
-        @return $value;
+@function to-rem($values, $base-value: $rem-base) {
+    @if type-of($values) != number and type-of($values) != list {
+        @return $values;
     }
-    $max: length($value);
+    $max: length($values);
     @if $max == 1 {
-        @return convert2rem($value, $base-value);
+        @return convert2rem($values, $base-value);
     }
     $remValues: ();
     @for $i from 1 through $max {
-        $remValues: append($remValues, convert2rem(nth($value, $i), $base-value));
+        $remValues: append($remValues, convert2rem(nth($values, $i), $base-value));
     }
     @return $remValues;
 }
 
 @function to-em($values, $base-value: $rem-base) {
-    @if typeof($value) != number {
-        @return $value;
+    @if type-of($values) != number and type-of($values) != list {
+        @return $values;
     }
     $remValues: to-rem($values, $base-value: $rem-base);
     $max: length($remValues);
