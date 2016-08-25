@@ -15,9 +15,8 @@ $slides-container-bg: none !default;
 $slides-caption-bg: rgba(51, 51, 51, 0.8) !default;
 $slides-caption-font-color: $white !default;
 $slides-caption-font-size: to-rem(14) !default;
-$slides-caption-position: "bottom" !default;
-
-// Supported values: "bottom", "under"
+// Supported values: "bottom", "under", "top"
+$slides-caption-position: top !default;
 $slides-caption-padding: to-rem(10 14) !default;
 $slides-caption-height: auto !default;
 
@@ -27,14 +26,11 @@ $slides-nav-bg-hover: rgba(0, 0, 0, 0.3) !default;
 $slides-nav-arrow-color: $white !default;
 $slides-nav-arrow-color-hover: $white !default;
 
-// We use these to control the timer styles
-$slides-timer-bg: rgba(255, 255, 255, 0.3) !default;
-$slides-timer-show-progress-bar: true !default;
-
 // We use these to control the bullet nav styles
 $slides-bullet-nav-color: $iron !default;
 $slides-bullet-nav-color-active: $aluminum !default;
 $slides-bullet-radius: to-rem(9) !default;
+$slides-bullet-bg-color: rgba($white, .5) !default;
 
 // We use these to controls the style of slide numbers
 $slides-number-bg: rgba(0, 0, 0, 0) !default;
@@ -62,7 +58,7 @@ $slides-number-padding: to-rem(5) !default;
                 margin: 0;
                 // Hide all list items
                 li,
-                li .slide-caption {
+                li .#{$slides-class}-caption {
                     display: none;
                 }
                 // ...except for the first one
@@ -75,11 +71,11 @@ $slides-number-padding: to-rem(5) !default;
                 // Show images when .slide-container is loaded
                 li {
                     display: block;
-                    .slide-caption {
+                    .#{$slides-class}-caption {
                         display: block;
                     }
                 }
-                .slide-bullets li {
+                .#{$slides-class}-bullets > li {
                     display: inline-block;
                 }
             }
@@ -115,6 +111,7 @@ $slides-number-padding: to-rem(5) !default;
                 transform: translateZ(0);
                 img {
                     display: block;
+                    margin: 0 auto;
                     max-width: 100%;
                 }
                 > * {
@@ -126,18 +123,24 @@ $slides-number-padding: to-rem(5) !default;
                         margin-left: 0;
                     }
                     .#{$slides-class}-caption {
-                        @if $slides-caption-position == "bottom" {
-                            bottom: 0;
+                        @if $slides-caption-position == "top" {
                             position: absolute;
+                            top: 0;
+                            width: 100%;
+                        }
+                        @else if $slides-caption-position == "bottom" {
+                            position: absolute;
+                            bottom: 0;
+                            width: 100%;
                         }
                         @else if $slides-caption-position == "under" {
                             position: relative;
                         }
+                        margin: 0;
+                        padding: $slides-caption-padding;
                         background-color: $slides-caption-bg;
                         color: $slides-caption-font-color;
                         font-size: $slides-caption-font-size;
-                        padding: $slides-caption-padding;
-                        width: 100%;
                     }
                 }
             }
@@ -154,69 +157,19 @@ $slides-number-padding: to-rem(5) !default;
                 top: 10px;
                 z-index: 10;
             }
-            .#{$slides-class}-timer {
-                position: absolute;
-                top: 12px;
-                right: 10px;
-                height: 6px;
-                width: 100px;
-                z-index: 10;
-                .#{$slides-class}-progress {
-                    @if $slides-timer-show-progress-bar {
-                        height: 3px;
-                        background-color: $slides-timer-bg;
-                        display: block;
-                        width: 0;
-                        position: relative;
-                        right: 20px;
-                        top: 5px;
-                    }
-                }
-                // Play button
-                & > span {
-                    border: solid 4px $white;
-                    border-bottom: none;
-                    border-top: none;
-                    display: none;
-                    height: 14px;
-                    position: absolute;
-                    top: 0;
-                    width: 11px;
-                    right: 0;
-                }
-                // Pause button
-                &.paused {
-                    & > span {
-                        top: 0;
-                        width: 11px;
-                        height: 14px;
-                        border: inset 8px;
-                        border-left-style: solid;
-                        border-color: transparent;
-                        border-left-color: $white;
-                        right: -4px;
-                        &.dark {
-                            border-left-color: $oil;
-                        }
-                    }
-                }
-            }
-            &:hover .#{$slides-class}-timer > span {
-                display: block;
-            }
             // Let's get those controls to be right in the center on each side
             .#{$slides-class}-prev,
             .#{$slides-class}-next {
-                background-color: $slides-nav-bg;
-                color: white;
-                height: 60px;
-                line-height: 50px;
-                margin-top: -25px;
                 position: absolute;
-                text-indent: -9999px !important;
                 top: 45%;
-                width: 36px;
                 z-index: 10;
+                margin-top: -25px;
+                width: 36px;
+                height: 60px;
+                background-color: $slides-nav-bg;
+                line-height: 50px;
+                text-indent: -9999px !important;
+                color: white;
                 &:hover {
                     background-color: $slides-nav-bg-hover;
                 }
@@ -230,49 +183,28 @@ $slides-number-padding: to-rem(5) !default;
                     width: 0;
                 }
             }
-            .#{$slides-class}-prev {
-                left: 0;
-                & > span {
-                    border-right-style: solid;
-                    border-color: transparent;
-                    border-right-color: $slides-nav-arrow-color;
-                }
-                &:hover > span {
-                    border-right-color: $slides-nav-arrow-color-hover;
-                }
-            }
-            .#{$slides-class}-next {
-                right: 0;
-                & > span {
-                    border-color: transparent;
-                    border-left-style: solid;
-                    border-left-color: $slides-nav-arrow-color;
-                    left: 50%;
-                    margin-left: -4px;
-                }
-                &:hover > span {
-                    border-left-color: $slides-nav-arrow-color-hover;
-                }
-            }
         }
         .#{$slides-class}-bullets-container {
             text-align: center;
+            @if $slides-bullet-bg-color {
+                background-color: $slides-bullet-bg-color;
+            }
         }
         .#{$slides-class}-bullets {
             display: block;
             float: none;
-            overflow: hidden;
             position: relative;
+            margin: 0;
+            overflow: hidden;
             text-align: center;
-            top: 10px;
-            li {
-                background: $slides-bullet-nav-color;
+            > li {
                 display: inline-block;
                 // float: left;
                 float: none;
-                height: $slides-bullet-radius;
                 margin-right: 6px;
                 width: $slides-bullet-radius;
+                height: $slides-bullet-radius;
+                background: $slides-bullet-nav-color;
                 border-radius: $global-rounded;
                 &.active {
                     background: $slides-bullet-nav-color-active;
@@ -280,17 +212,6 @@ $slides-number-padding: to-rem(5) !default;
                 &:last-child {
                     margin-right: 0;
                 }
-            }
-        }
-        .touch {
-            .#{$slides-class}-container {
-                .#{$slides-class}-prev,
-                .#{$slides-class}-next {
-                    display: none;
-                }
-            }
-            .#{$slides-class}-bullets {
-                display: none;
             }
         }
     }

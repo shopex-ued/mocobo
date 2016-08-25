@@ -10,9 +10,7 @@
         var self = this,
             container,
             slides_container = el,
-            number_container,
             bullets_container,
-            process_container,
             idx = 0,
             animate,
             timer,
@@ -23,23 +21,24 @@
             return slides_container.children(settings.slide_selector);
         };
 
-        this.slides().first().addClass(settings.active_slide_class);
+        this.slides().first().addClass(settings.slide_active_class);
 
-        this.update_slide_number = function(index) {
-            if (settings.slide_number) {
-                number_container.find('span:first').text(parseInt(index) + 1);
-                number_container.find('span:last').text(self.slides().length);
-            }
+        this.update_slide_bullets = function(index) {
             if (settings.bullets) {
-                bullets_container.children().removeClass(settings.bullets_active_class);
-                $(bullets_container.children().get(index)).addClass(settings.bullets_active_class);
+                bullets_container
+                    .children().eq(index)
+                        .addClass(settings.bullets_active_class)
+                    .siblings('.' + settings.bullets_active_class)
+                        .removeClass(settings.bullets_active_class)
             }
         };
 
         this.update_active_link = function(index) {
             var link = $('[data-slides-link="' + self.slides().eq(index).attr('data-slides-preview') + '"]');
-            link.siblings().removeClass(settings.bullets_active_class);
-            link.addClass(settings.bullets_active_class);
+            link
+                .addClass(settings.bullets_active_class)
+            .siblings('.' + settings.bullets_active_class)
+                .removeClass(settings.bullets_active_class);
         };
 
         this.build_markup = function() {
@@ -47,29 +46,12 @@
             container = slides_container.parent();
             slides_container.addClass(settings.slides_container_class);
 
-            if (settings.navigation_arrows) {
-                container.append($('<a href="#"><span></span></a>').addClass(settings.prev_class));
-                container.append($('<a href="#"><span></span></a>').addClass(settings.next_class));
-            }
-
-            if (settings.hasProcess) {
-                process_container = $('<div>').addClass(settings.process_container_class);
-                process_container.addClass(settings.process_paused_class);
-                container.append(process_container);
-            }
-
-            if (settings.slide_number) {
-                number_container = $('<div>').addClass(settings.slide_number_class);
-                number_container.append('<span></span>' + settings.slide_number_text + '<span></span>');
-                container.append(number_container);
-            }
-
             if (settings.bullets) {
                 bullets_container = $('<ol>').addClass(settings.bullets_container_class);
                 container.append(bullets_container);
                 bullets_container.wrap('<div class="slide-bullets-container"></div>');
                 self.slides().each(function(idx, el) {
-                    var bullet = $('<li>').attr('data-slides-preview', idx).on('click', self.link_bullet);;
+                    var bullet = $('<li>').attr('data-slides-preview', idx);
                     bullets_container.append(bullet);
                 });
             }
@@ -107,8 +89,8 @@
             var next = $(slides.get(next_idx));
 
             current.css('zIndex', 2);
-            current.removeClass(settings.active_slide_class);
-            next.css('zIndex', 4).addClass(settings.active_slide_class);
+            current.removeClass(settings.slide_active_class);
+            next.css('zIndex', 4).addClass(settings.slide_active_class);
 
             slides_container.trigger('before-slide-change.slides');
             settings.before_slide_change();
@@ -122,9 +104,8 @@
                         timer = self.create_timer();
                         timer.start();
                     }
-                    self.update_slide_number(idx);
+                    self.update_slide_bullets(idx);
                     slides_container.trigger('after-slide-change.slides', [{
-                        slide_number: idx,
                         total_slides: slides.length
                     }]);
                     settings.after_slide_change(idx, slides.length);
@@ -161,18 +142,6 @@
             }
         };
 
-        this.next = function(e) {
-            e.stopImmediatePropagation();
-            e.preventDefault();
-            self._goto(idx + 1);
-        };
-
-        this.prev = function(e) {
-            e.stopImmediatePropagation();
-            e.preventDefault();
-            self._goto(idx - 1);
-        };
-
         this.link_custom = function(e) {
             e.preventDefault();
             var link = $(this).attr('data-slides-link');
@@ -183,21 +152,6 @@
                 }
             }
         };
-
-        this.link_bullet = function(e) {
-            var index = $(this).attr('data-slides-preview');
-            if ((typeof index === 'string') && (index = $.trim(index)) != '') {
-                if (isNaN(parseInt(index))) {
-                    var slide = container.find('[data-slides-preview=' + index + ']');
-                    if (slide.index() != -1) {
-                        self._goto(slide.index() + 1);
-                    }
-                } else {
-                    self._goto(parseInt(index));
-                }
-            }
-
-        }
 
         this.timer_callback = function() {
             self._goto(idx + 1, true);
@@ -217,11 +171,7 @@
         };
 
         this.create_timer = function() {
-            var t = new Timer(
-                container.find('.' + settings.process_container_class),
-                settings,
-                self.timer_callback
-            );
+            var t = new Timer(settings, self.timer_callback);
             return t;
         };
 
@@ -242,14 +192,6 @@
                 animate = new SlideAnimation(settings, slides_container);
             }
 
-            container.on('click', '.' + settings.next_class, self.next);
-            container.on('click', '.' + settings.prev_class, self.prev);
-
-            if (settings.next_on_click) {
-                container.on('click', '.' + settings.slides_container_class + ' [data-slides-preview]', self.link_bullet);
-            }
-
-            // container.on('click', self.toggle_timer);
             if (settings.swipe) {
                 container.on('touchstart.slides', function(e) {
                         if (!e.touches) {
@@ -303,7 +245,7 @@
             Mobile.utils.image_loaded(this.slides().children('img'), self.compute_dimensions);
             Mobile.utils.image_loaded(this.slides().children('img'), function() {
                 container.prev('.' + settings.preloader_class).css('display', 'none');
-                self.update_slide_number(0);
+                self.update_slide_bullets(0);
                 self.update_active_link(0);
                 slides_container.trigger('ready.slides');
             });
@@ -312,7 +254,7 @@
         this.init();
     };
 
-    var Timer = function(el, settings, callback) {
+    var Timer = function(settings, callback) {
         var self = this,
             duration = settings.timer_speed,
             start,
@@ -321,34 +263,22 @@
 
         this.restart = function() {
             clearTimeout(timeout);
-            if(settings.hasProcess) el.addClass(settings.process_paused_class);
             left = -1;
         };
 
         this.start = function() {
-            if (settings.hasProcess && !el.hasClass(settings.process_paused_class)) {
-                return true;
-            }
             left = (left === -1) ? duration : left;
-            if(settings.hasProcess) el.removeClass(settings.process_paused_class);
             start = new Date().getTime();
             timeout = setTimeout(function() {
                 self.restart();
                 callback();
             }, left);
-            if(settings.hasProcess) el.trigger('timer-started.slides');
         };
 
         this.stop = function() {
-            if (settings.hasProcess && el.hasClass(settings.process_paused_class)) {
-                return true;
-            }
             clearTimeout(timeout);
-            if(settings.hasProcess) el.addClass(settings.process_paused_class);
             var end = new Date().getTime();
             left = left - (end - start);
-            // var w = 100 - ((left / duration) * 100);
-            if(settings.hasProcess) el.trigger('timer-stopped.slides');
         };
     };
 
@@ -419,30 +349,17 @@
         settings: {
             animation: 'slide',
             timer_speed: 5000,
-            next_on_click: true,
             animation_speed: 500,
-            navigation_arrows: false,
-            slide_number: false,
-            slide_number_text: '/',
             container_class: 'slide-container',
-            next_class: 'slide-next',
-            prev_class: 'slide-prev',
-            process_container_class: 'slide-timer',
-            process_paused_class: 'paused',
-            // timer_progress_class : 'slide-progress',
             slides_container_class: 'previews',
             preloader_class: 'preloader',
             slide_selector: '*',
             bullets_container_class: 'slide-bullets',
             bullets_active_class: 'active',
-            slide_number_class: 'slide-number',
-            caption_class: 'slide-caption',
-            active_slide_class: 'active',
-            slides_transition_class: 'slide-transitioning',
+            slide_active_class: 'active',
             bullets: true,
             circular: true,
             autoplay: true,
-            hasProcess: false,
             variable_height: false,
             swipe: true,
             before_slide_change: $.noop,
@@ -478,3 +395,4 @@
     };
 
 }(jQuery, window, window.document));
+
