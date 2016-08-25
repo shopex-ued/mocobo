@@ -80,6 +80,8 @@ $list-side-margin: to-rem(18) !default;
 $list-ordered-side-margin: to-rem(22) !default;
 $list-side-margin-no-bullet: 0 !default;
 $list-nested-margin: to-rem(20) !default;
+$list-divider-color: $silver !default;
+$list-divider-margin: to-rem(10 0) !default;
 $definition-list-header-weight: $font-weight-bold !default;
 $definition-list-header-margin-bottom: to-rem(5) !default;
 $definition-list-margin-bottom: to-rem(12) !default;
@@ -294,6 +296,12 @@ $blockquote-cite-link-color: $blockquote-cite-font-color !default;
                     margin-bottom: 0;
                     list-style: none;
                 }
+            }
+            .divider {
+                height: 1px;
+                background-color: $list-divider-color;
+                overflow: hidden;
+                margin: $list-divider-margin;
             }
         }
         /* Definition Lists */
