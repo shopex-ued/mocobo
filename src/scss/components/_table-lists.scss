@@ -29,7 +29,7 @@ $table-list-item-margin-left: - $table-list-item-padding-left !default;
 $table-list-item-badge-padding: to-rem(65) !default;
 $table-list-item-overflow: hidden !default;
 $table-list-item-border-color: $gainsboro !default;
-$table-list-item-border-left: ($grid-blank / 2) !default;
+$table-list-item-border-start: $table-list-item-padding-left !default;
 $table-list-item-font-size: to-rem(14) !default;
 
 $table-list-item-left-icon-margin: to-rem(5) !default;
@@ -76,7 +76,7 @@ $table-list-children-display: block !default;
             }
             list-style: none; // Remove usual bullet styles from table list
             @include hairline(double, $table-list-border-color, 0); // Double grey border.
-            &.has-#{$icons-class} .item {
+            &.has-#{$icons-class} {
                 [class^=#{$icons-class}-]::before {
                     margin-right: $table-list-item-left-icon-margin;
                     vertical-align: -2px;
@@ -85,6 +85,9 @@ $table-list-children-display: block !default;
                     }
                     font-size: $table-list-item-left-icon-size;
                 }
+                .item-body {
+                    overflow: hidden;
+                }
             }
             &.has-#{$badge-class} .item {
                 padding-right: $table-list-item-badge-padding;
@@ -92,7 +95,7 @@ $table-list-children-display: block !default;
                     margin-right: - $table-list-item-badge-padding;
                 }
             }
-            &.has-#{$thumb-class} .item {
+            &.has-#{$thumb-class} {
                 .#{$thumb-class} {
                     width: $table-list-thumb-width;
                     height: $table-list-thumb-width;
@@ -146,16 +149,16 @@ $table-list-children-display: block !default;
             //         }
             //     }
             // }
-            .item {
+            > .item {
                 position: relative;
                 background-color: inherit;
                 padding: $table-list-item-padding-top $table-list-item-padding-left $table-list-item-padding-top;
                 overflow: $table-list-item-overflow;
                 font-size: $table-list-item-font-size;
                 -webkit-touch-callout: none;
-                @include hairline(bottom, $table-list-item-border-color, $table-list-item-border-left); // Single grey border at bottom start with 12px.
-                //@include svg-hairline(bottom, $table-list-item-border-color, $table-list-item-border-left);
-                //@include thin-border(bottom, $table-list-item-border-color, $table-list-item-border-left);
+                @include hairline(bottom, $table-list-item-border-color, $table-list-item-border-start); // Single grey border at bottom start with 12px.
+                //@include svg-hairline(bottom, $table-list-item-border-color, $table-list-item-border-start);
+                //@include thin-border(bottom, $table-list-item-border-color, $table-list-item-border-start);
                 // &.radio input[type=radio],
                 // &.checkbox input[type=checkbox]{
                 //     top:8px;
@@ -202,7 +205,7 @@ $table-list-children-display: block !default;
                 .#{$switch-class} {
                     position: absolute;
                     top: 50%;
-                    right: $table-list-item-border-left;
+                    right: $table-list-item-border-start;
                     transform: translateY(-50%);
                 }
                 > .nav-right {
@@ -226,17 +229,19 @@ $table-list-children-display: block !default;
                     }
                 }
                 > .#{$table-list-class} {
-                    margin: $table-list-item-padding-top $table-list-item-margin-left $table-list-item-margin-top;
+                    margin: $table-list-item-padding-top $table-list-item-margin-left $table-list-item-margin-top $table-list-item-margin-left * 2;
                     border: 0 none;
                     &::after {
-                        left: $table-list-item-border-left;
+                        left: $table-list-item-border-start;
                     }
                     &.has-#{$badge-class} {
                         margin-right: -65px;
                     }
-                    .item {
-                        padding-left: $table-list-item-border-left * 2;
-                        @include hairline(bottom, $table-list-item-border-color, $table-list-item-border-left * 2, false);
+                    > .item {
+                        padding-left: $table-list-item-border-start * 2;
+                        &::after {
+                            left: $table-list-item-border-start * 2;
+                        }
                     }
                 }
                 > .content {
@@ -268,7 +273,7 @@ $table-list-children-display: block !default;
                 }
             }
             // Pad each table list item and add dividers
-            .divider {
+            > .divider {
                 position: relative;
                 padding: $table-list-divider-padding-top $table-list-divider-padding-left;
                 // Hides the border of the previous list item
