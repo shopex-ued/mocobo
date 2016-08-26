@@ -5,10 +5,10 @@
         name: 'validator',
 
         settings: {
-            validate_on: 'change', // change (when input value changes), blur (when input blur), manual (when call custom events)
+            validate_on: 'manual', // change (when input value changes), blur (when input blur), manual (when call custom events)
             // ignore validate with 'exception' setting
             exception: ':hidden, [data-validator-ignore]',
-            focus_on_invalid: true, // automatically bring the focus to an invalid input field
+            focus_on_invalid: false, // automatically bring the focus to an invalid input field
             has_hint: true, // popup a alert window if invalid
             error_labels: true, // labels with a for="inputId" will receive an `error` class
             isAjax: false,
@@ -35,7 +35,7 @@
                 time: /^(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}$/,
                 // #FFF or #FFFFFF
                 color: /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/,
-                mobile: /^0?1(?:[38]\d)|(?:4[579])|(?:[57][0-35-9])\d{8}$/,
+                mobile: /^0?(?:1(?:[38]\d)|(?:4[579])|(?:[57][0-35-9]))\d{8}$/,
                 zip: /^\d{6}$/
             },
             verifiers: {
@@ -200,21 +200,21 @@
 
         pattern: function(el) {
             var type = el.getAttribute('type'),
-                required = typeof el.getAttribute('required') === 'string';
+                required = el.hasAttribute('required');
 
             var pattern = el.getAttribute('pattern') || '';
 
             if (this.settings.patterns.hasOwnProperty(pattern) && pattern.length > 0) {
                 return [el, pattern, this.settings.patterns[pattern], required];
             } else if (pattern.length > 0) {
-                return [el, null, new RegExp(pattern), required];
+                return [el, null, new RegExp('^' + pattern + '$'), required];
             }
 
             if (this.settings.patterns.hasOwnProperty(type)) {
                 return [el, type, this.settings.patterns[type], required];
             }
 
-            pattern = /.*/;
+            pattern = /^[\s\S]*$/;
 
             return [el, 'required', pattern, required];
         },
