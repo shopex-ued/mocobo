@@ -20,9 +20,9 @@
                 notnumber: '只能输入数字'
             },
             // Execute after validate is error
-            validError: null,
+            // validError: null,
             // Execute after validate is success
-            validSuccess: null
+            // validSuccess: null
         },
 
         init: function(scope, method, options) {
@@ -33,17 +33,17 @@
             var self = this;
             $(this.scope)
                 .off('.numberspin')
-                .on('touchstart.numberspin', '[' + this.attr_name() + '] > a', function(e) {
+                .on('touchstart.numberspin', '[' + this.attr_name() + '] > button:not(:disabled)', function(e) {
                     e.preventDefault();
 
                     var target = $(this).parent('[' + self.attr_name() + ']');
-                    var input = target.find('input');
+                    var input = target.find('input[type=text], input[type=number]');
                     var value = +input.val();
                     var settings = self.getSettings(input, target, value);
 
                     if (typeof settings.beforeValidate !== 'function' || settings.beforeValidate(input)) {
                         value += $(this).hasClass('prefix') ? -settings.step : settings.step;
-                        self.setNumber(target, input, value, settings);
+                        self.setNumber(input, value, settings);
                     }
                 })
                 .on('focus.numberspin', '[' + this.attr_name() + '] > input', function(e) {
@@ -55,7 +55,7 @@
                     var target = input.parent('[' + self.attr_name() + ']');
                     var settings = self.getSettings(input, target, self.settings.defaultValue);
                     if (typeof settings.beforeValidate !== 'function' || settings.beforeValidate($(this))) {
-                        self.setNumber(target, $(this), +input.val(), settings);
+                        self.setNumber($(this), +input.val(), settings);
                     }
                 });
             if (this.settings.autoInit) {
@@ -64,6 +64,7 @@
                     var input = target.find('input');
                     var settings = self.getSettings(input, target, input.val());
                     input.val(settings.defaultValue);
+                    target.trigger('init.numberspin', [input]);
                 });
             }
         },
@@ -78,32 +79,35 @@
             });
         },
 
-        setNumber: function(target, input, value, settings) {
-            this.validate(target, input, value, settings);
+        setNumber: function(input, value, settings) {
+            this.validate(input, value, settings);
         },
 
         setValue: function(input, value) {
             this.settings.defaultValue = value;
-            input.val(value).trigger('change.numberspin');
+            input.val(value).closest('[' + this.attr_name() + ']').trigger('change.numberspin', [input]);
         },
 
-        validate: function(element, input, value, settings) {
+        validate: function(input, value, settings) {
             var msg = '';
             var result = false;
+            var element = input.closest('[' + this.attr_name() + ']');
             var alertBox = element.next(settings.validMessage.target);
             alertBox = alertBox.length ? alertBox : $(settings.validMessage.target);
 
-            if (value < settings.min) {
+            if (value == settings.min) {
+                element.trigger('min.numberspin', [input]);
+            } else if (value < settings.min) {
                 value = settings.min;
-                input.trigger('min.numberspin');
                 msg = settings.validMessage.min.replace('{min}', settings.min);
+            } else if (value == settings.max) {
+                element.trigger('max.numberspin', [input]);
             } else if (value > settings.max) {
                 value = settings.max;
-                input.trigger('max.numberspin');
                 msg = settings.validMessage.max.replace('{max}', settings.max);
-            } else if (isNaN(value)) {
+            } else if (!/^\d*$/.test(value)) {
                 value = settings.defaultValue;
-                input.trigger('notnumber.numberspin');
+                element.trigger('notnumber.numberspin', [input]);
                 msg = settings.validMessage.notnumber;
             }
             if (msg) {
