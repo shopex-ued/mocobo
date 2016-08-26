@@ -47,7 +47,7 @@
 
             $(this.scope)
                 .off('.modal')
-                .on('click.modal', '[' + this.add_namespace('data-modal-id') + ']:not([disabled])', function(e) {
+                .on('click.modal', '[' + this.add_namespace('data-modal-id') + ']:not(:disabled):not(.disabled)', function(e) {
                     if(self.settings.preventTargetDefault) e.preventDefault();
 
                     if (!self.locked) {
