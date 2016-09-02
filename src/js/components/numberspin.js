@@ -17,7 +17,13 @@
                 target: null,
                 min: '不能小于{min}',
                 max: '不能大于{max}',
-                notnumber: '只能输入数字'
+                notnumber: '只能输入数字',
+                show: {
+                    display: 'block'
+                },
+                hide: {
+                    display: 'none'
+                }
             },
             // Execute after validate is error
             // validError: null,
@@ -112,11 +118,11 @@
             }
             if (msg) {
                 if (typeof settings.validError === 'function') settings.validError(element, input, msg);
-                else if(alertBox.length) alertBox.show().html(msg);
+                else if(alertBox.length) alertBox.css(settings.validMessage.show).html(msg);
                 else alert(msg);
             } else {
                 if (typeof settings.validSuccess === 'function') settings.validSuccess(element, input);
-                else if(alertBox.length) alertBox.hide();
+                else if(alertBox.length) alertBox.css(setttings.validMessage.hide);
                 result = true;
             }
             this.setValue(input, value);
