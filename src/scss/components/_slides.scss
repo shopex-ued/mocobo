@@ -27,10 +27,11 @@ $slides-nav-arrow-color: $white !default;
 $slides-nav-arrow-color-hover: $white !default;
 
 // We use these to control the bullet nav styles
+$slides-bullet-position: bottom !default;
+$slides-bullet-bg-color: false !default;
 $slides-bullet-nav-color: $iron !default;
 $slides-bullet-nav-color-active: $aluminum !default;
 $slides-bullet-radius: to-rem(9) !default;
-$slides-bullet-bg-color: rgba($white, .5) !default;
 
 // We use these to controls the style of slide numbers
 $slides-number-bg: rgba(0, 0, 0, 0) !default;
@@ -123,17 +124,17 @@ $slides-number-padding: to-rem(5) !default;
                         margin-left: 0;
                     }
                     .#{$slides-class}-caption {
-                        @if $slides-caption-position == "top" {
+                        @if $slides-caption-position == top {
                             position: absolute;
                             top: 0;
                             width: 100%;
                         }
-                        @else if $slides-caption-position == "bottom" {
+                        @else if $slides-caption-position == bottom {
                             position: absolute;
                             bottom: 0;
                             width: 100%;
                         }
-                        @else if $slides-caption-position == "under" {
+                        @else if $slides-caption-position == under {
                             position: relative;
                         }
                         margin: 0;
@@ -185,6 +186,18 @@ $slides-number-padding: to-rem(5) !default;
             }
         }
         .#{$slides-class}-bullets-container {
+            @if $slides-bullet-position == top {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+            }
+            @else if $slides-bullet-position == bottom {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
             text-align: center;
             @if $slides-bullet-bg-color {
                 background-color: $slides-bullet-bg-color;
