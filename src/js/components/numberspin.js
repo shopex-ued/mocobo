@@ -56,7 +56,7 @@
                     // Make default value as a Number.
                     self.settings.defaultValue = +this.value;
                 })
-                .on('input.numberspin', '[' + this.attr_name() + '] > input', function(e) {
+                .on('change.numberspin', '[' + this.attr_name() + '] > input', function(e) {
                     var input = $(this);
                     var target = input.parent('[' + self.attr_name() + ']');
                     var settings = self.getSettings(input, target, self.settings.defaultValue);
@@ -91,7 +91,7 @@
 
         setValue: function(input, value) {
             this.settings.defaultValue = value;
-            input.val(value).closest('[' + this.attr_name() + ']').trigger('change.numberspin', [input]);
+            input.val(value).closest('[' + this.attr_name() + ']').trigger('valuechange.numberspin', [input]);
         },
 
         validate: function(input, value, settings) {
@@ -111,7 +111,7 @@
             } else if (value > settings.max) {
                 value = settings.max;
                 msg = settings.validMessage.max.replace('{max}', settings.max);
-            } else if (!/^\d*$/.test(value)) {
+            } else if (!/^-?\d*$/.test(value)) {
                 value = settings.defaultValue;
                 element.trigger('notnumber.numberspin', [input]);
                 msg = settings.validMessage.notnumber;

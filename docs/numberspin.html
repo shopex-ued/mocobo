@@ -57,7 +57,7 @@
     ...
   });
 
-  $('#myInput').on('change.numberspin', function (event) {
+  $('#myInput').on('valuechange.numberspin', function (event) {
     ...
   });
 
@@ -125,7 +125,7 @@ $('form [data-numberspin]').mobile({
     $(this).find('.prefix').prop('disabled', false);
     $(this).find('.postfix').prop('disabled', true);
   })
-  .on('change.numberspin', function(e, input) {
+  .on('valuechange.numberspin', function(e, input) {
     var val = input.val();
     var min = +input.attr('min');
     var max = +input.attr('max');
