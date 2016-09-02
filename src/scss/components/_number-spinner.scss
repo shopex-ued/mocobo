@@ -6,9 +6,10 @@
 $include-html-spinner-classes: $include-html-classes !default;
 
 $spinner-class: 'number-spinner' !default;
-$spinner-height: $input-medium !default;
+$spinner-width: $input-medium !default;
+$spinner-height: false !default;
 $spinner-bg: $input-prefix-bg !default;
-$spinner-bg-hover: scale-color($input-prefix-bg, $lightness: -6%) !default;
+$spinner-bg-hover: scale-color($spinner-bg, $lightness: -6%) !default;
 $spinner-font-size: to-rem(16) !default;
 $spinner-radius: $global-radius !default;
 
@@ -21,6 +22,7 @@ $spinner-radius: $global-radius !default;
             // input {
             //     margin-left: $spinner-height;
             //     margin-right: $spinner-height;
+            //     height: $spinner-height;
             //     font-size: $spinner-font-size;
             //     text-align: center;
             // }
@@ -28,7 +30,8 @@ $spinner-radius: $global-radius !default;
             // .postfix {
             //     position: absolute;
             //     // top: 0;
-            //     width: $spinner-height;
+            //     width: $spinner-width;
+            //     height: $spinner-height;
             //     font-size: $spinner-font-size;
             // }
             // .postfix {
@@ -38,13 +41,23 @@ $spinner-radius: $global-radius !default;
             display: flex;
             input {
                 flex: 1;
+                @if $spinner-height {
+                    height: $spinner-height;
+                }
                 font-size: $spinner-font-size;
                 text-align: center;
             }
             .prefix,
             .postfix {
-                width: $spinner-height;
+                margin: 0;
+                padding: 0;
+                width: $spinner-width;
+                @if $spinner-height {
+                    height: $spinner-height;
+                    line-height: $spinner-height;
+                }
                 background-color: $spinner-bg;
+                border-radius: 0;
                 font-size: $spinner-font-size;
                 &:hover {
                     background-color: $spinner-bg-hover;

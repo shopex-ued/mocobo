@@ -122,7 +122,7 @@
                 else alert(msg);
             } else {
                 if (typeof settings.validSuccess === 'function') settings.validSuccess(element, input);
-                else if(alertBox.length) alertBox.css(setttings.validMessage.hide);
+                else if(alertBox.length) alertBox.css(settings.validMessage.hide);
                 result = true;
             }
             this.setValue(input, value);

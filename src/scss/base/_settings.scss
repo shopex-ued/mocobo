@@ -839,9 +839,10 @@
 // $include-html-spinner-classes: $include-html-classes;
 
 // $spinner-class: 'number-spinner';
-// $spinner-height: $input-medium;
+// $spinner-width: $input-medium;
+// $spinner-height: false;
 // $spinner-bg: $input-prefix-bg;
-// $spinner-bg-hover: scale-color($input-prefix-bg, $lightness: -6%);
+// $spinner-bg-hover: scale-color($spinner-bg, $lightness: -6%);
 // $spinner-font-size: to-rem(16);
 // $spinner-radius: $global-radius;
 

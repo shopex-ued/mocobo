@@ -20,29 +20,29 @@
   <p>设最小值为1</p>
   <div class="grid-5">
     <div class="number-spinner" data-numberspin>
-      <a href="javascript:void(0);" class="prefix icon-minus"></a>
+      <button type="button" class="prefix"><i class="icon-minus"></i></button>
       <input type="number" min="1" value="1">
-      <a href="javascript:void(0);" class="postfix icon-plus"></a>
+      <button type="button" class="postfix"><i class="icon-plus"></i></button>
     </div>
   </div>
   <h1>带圆角</h1>
   <p>设最大值为999，步进为5</p>
   <div class="grid-6">
     <div class="number-spinner radius" data-numberspin>
-      <a href="javascript:void(0);" class="prefix icon-minus"></a>
+      <button type="button" class="prefix"><i class="icon-minus"></i></button>
       <input type="text" max="999" step="5" value="">
-      <a href="javascript:void(0);" class="postfix icon-plus"></a>
+      <button type="button" class="postfix"><i class="icon-plus"></i></button>
     </div>
   </div>
   <h1>用于表单中</h1>
-  <p>最小为1，最大为999，步进为1</p>
+  <p>最小为1，最大为10，步进为1，并且用自定义事件触发处于不同情况下spinner的状态</p>
   <form action="" method="post">
     <div class="form-row">
       <div class="grid-5 columns">
         <div class="number-spinner" data-numberspin>
-          <a href="javascript:void(0);" class="prefix icon-minus"></a>
-          <input type="number" min="1" max="999" step="1" value="" required>
-          <a href="javascript:void(0);" class="postfix icon-plus"></a>
+          <button type="button" class="prefix"><i class="icon-minus"></i></button>
+          <input type="number" min="1" max="10" step="1" value="" required>
+          <button type="button" class="postfix"><i class="icon-plus"></i></button>
         </div>
         <div class="alert-box error" style="display:none;"></div>
       </div>
@@ -53,6 +53,10 @@
   </form>
   <h1>回调</h1>
   <pre>
+  $('#myInput').on('init.numberspin', function (event) {
+    ...
+  });
+
   $('#myInput').on('change.numberspin', function (event) {
     ...
   });
@@ -85,7 +89,13 @@
               target: null,
               min: '不能小于{min}',
               max: '不能大于{max}',
-              notnumber: '只能输入数字'
+              notnumber: '只能输入数字',
+              show: {
+                display: 'block'
+              },
+              hide {
+                display: 'none'
+              }
           },
           // Execute after validate is error
           validError: null,
@@ -101,12 +111,36 @@
 <script src="../dist/js/main.min.js"></script>
 <script>
 $('form [data-numberspin]').mobile({
-  numberspin: {
-    validMessage: {
-      target: '.alert-box'
+    numberspin: {
+      validMessage: {
+        target: '.alert-box'
+      }
     }
-  }
-});
+  })
+  .on('min.numberspin', function(e, input) {
+    $(this).find('.prefix').prop('disabled', true);
+    $(this).find('.postfix').prop('disabled', false);
+  })
+  .on('max.numberspin', function(e, input) {
+    $(this).find('.prefix').prop('disabled', false);
+    $(this).find('.postfix').prop('disabled', true);
+  })
+  .on('change.numberspin', function(e, input) {
+    var val = input.val();
+    var min = +input.attr('min');
+    var max = +input.attr('max');
+    if(val == min) {
+      $(this).find('.prefix').prop('disabled', true);
+    }
+    else if(val > min && val < max) {
+      $(this).find('.prefix').prop('disabled', false);
+      $(this).find('.postfix').prop('disabled', false);
+    }
+    else if(val == max) {
+      $(this).find('.postfix').prop('disabled', true);
+    }
+  });
+;
 </script>
 </body>
 </html>
