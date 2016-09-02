@@ -205,25 +205,21 @@ $slides-number-padding: to-rem(5) !default;
         }
         .#{$slides-class}-bullets {
             display: block;
-            float: none;
-            position: relative;
+            //float: none;
+            //position: relative;
             margin: 0;
             overflow: hidden;
             text-align: center;
             > li {
                 display: inline-block;
-                // float: left;
-                float: none;
-                margin-right: 6px;
+                //float: none;
+                margin: 0 to-rem(3);
                 width: $slides-bullet-radius;
                 height: $slides-bullet-radius;
                 background: $slides-bullet-nav-color;
                 border-radius: $global-rounded;
                 &.active {
                     background: $slides-bullet-nav-color-active;
-                }
-                &:last-child {
-                    margin-right: 0;
                 }
             }
         }
