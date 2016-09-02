@@ -40,6 +40,7 @@
 // 30. Thumbnails
 // 31. Tips
 // 32. Top Bar
+// 33. Validator
 
 // a. Base
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -679,15 +680,6 @@
 // $input-prefix-font-color: $oil;
 // $input-prefix-font-color-alt: $white;
 // $input-prefix-icon-size: to-rem(24);
-
-// We use these to style the error states for inputs and labels
-// $input-error-message-padding: to-rem(6 9);
-// $input-error-message-top: -1px;
-// $input-error-message-font-size: to-rem(12);
-// $input-error-message-font-weight: $font-weight-normal;
-// $input-error-message-font-color: $white;
-// $input-error-message-bg-color: $alert-color;
-// $input-error-message-font-color-alt: $oil;
 
 // We use this to style the transition when inputs are focused and when the glowing effect is disabled.
 // $input-transition-fade-time: 0.15s;
@@ -1437,3 +1429,21 @@
 // $topbar-dropdown-divider-border-reverse: 1px solid scale-color($topbar-bg-reverse, $lightness: 17%);
 
 // $topbar-arrows: true; //Set false to remove the triangle icon from the menu item
+
+// 33. Validator
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+//$include-html-validator-classes: $include-html-classes;
+
+// $validator-error-class: has-error;
+// We use these to style the error states for inputs and labels
+// $validator-error-color: $alert-color;
+// $validator-error-message-top: -1px;
+// $validator-error-message-padding: to-rem(6 9);
+// $validator-error-message-bg-color: $alert-color;
+// $validator-error-message-border-color: darken($alert-color, 10%);
+// $validator-error-message-font-size: to-rem(12);
+// $validator-error-message-font-weight: $font-weight-normal;
+// $validator-error-message-font-color: $white;
+// $validator-error-message-font-color-alt: $oil;
+

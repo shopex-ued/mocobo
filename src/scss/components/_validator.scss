@@ -1,0 +1,102 @@
+@import "global";
+@import "forms";
+
+//
+// @variables
+//
+$include-html-validator-classes: $include-html-classes !default;
+
+$validator-error-class: has-error !default;
+// We use these to style the error states for inputs and labels
+$validator-error-color: $alert-color !default;
+$validator-error-message-top: -1px !default;
+$validator-error-message-padding: to-rem(6 9) !default;
+$validator-error-message-bg-color: $alert-color !default;
+$validator-error-message-border-color: darken($alert-color, 10%) !default;
+$validator-error-message-font-size: to-rem(12) !default;
+// $validator-error-message-font-weight: $font-weight-normal !default;
+$validator-error-message-font-color: $white !default;
+$validator-error-message-font-color-alt: $oil !default;
+
+// @MIXIN
+//
+// We use this mixin to control border and background color of error inputs
+@mixin form-error-colors($color: $validator-error-color) {
+    background-color: rgba($color, .1);
+    border-color: $color;
+    // Go back to normal on focus
+    &:focus {
+        background: $input-focus-bg-color;
+        border-color: $input-focus-border-color;
+    }
+}
+
+// @MIXIN
+//
+// We use this simple mixin to style labels for error inputs
+@mixin form-error-font-color($color: $validator-error-color) {
+    color: $color;
+}
+
+// @MIXIN
+//
+// We use this mixin to create error message styles
+@mixin form-error-message($bg: $validator-error-message-bg-color, $border-color:$validator-error-message-border-color, $color: $validator-error-message-font-color) {
+    // display: block;
+    margin-top: $validator-error-message-top;
+    margin-bottom: 0;
+    padding: $validator-error-message-padding;
+    // font-weight: $validator-error-message-font-weight;
+    // We can control the text color based on the brightness of the background.
+    @if $bg {
+        background: $bg;
+    }
+    @if $border-color {
+        border-color: $border-color;
+    }
+    @if $color {
+        color: $color;
+    }
+    font-size: $validator-error-message-font-size;
+}
+
+@include exports("validator") {
+    @if $include-html-validator-classes {
+        /* Error Handling */
+        #{data("validator")} {
+            .#{$alert-class} {
+                display: none;
+            }
+        }
+
+        .has-error {
+            label {
+                @include form-error-font-color;
+            }
+
+            > label > .#{$alert-class} {
+                display: inline;
+                margin: 0;
+                padding: 0;
+                background: transparent;
+                color: currentColor;
+            }
+
+            input,
+            textarea,
+            select {
+                @include form-error-colors;
+            }
+
+            .#{$alert-class} {
+                display: block;
+                @include form-error-message;
+            }
+        }
+
+        label.error {
+            @include form-error-font-color;
+        }
+    }
+}
+

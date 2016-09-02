@@ -80,15 +80,6 @@ $input-prefix-font-color: $oil !default;
 $input-prefix-font-color-alt: $white !default;
 $input-prefix-icon-size: to-rem(24) !default;
 
-// We use these to style the error states for inputs and labels
-$input-error-message-padding: to-rem(6 9) !default;
-$input-error-message-top: -1px !default;
-$input-error-message-font-size: to-rem(12) !default;
-$input-error-message-font-weight: $font-weight-normal !default;
-$input-error-message-font-color: $white !default;
-$input-error-message-bg-color: $alert-color !default;
-$input-error-message-font-color-alt: $oil !default;
-
 // We use this to style the transition when inputs are focused and when the glowing effect is disabled.
 $input-transition-fade-time: 0.15s !default;
 $input-transition-fade-timing-function: linear !default;
@@ -254,50 +245,6 @@ $input-transition-fade-timing-function: linear !default;
     }
 }
 
-// @MIXIN
-//
-// We use this mixin to control border and background color of error inputs
-// $color - Default: $alert-color (found in settings file)
-@mixin form-error-color($color: $alert-color) {
-    background-color: rgba($color, 0.1);
-    border-color: $color;
-    // Go back to normal on focus
-    &:focus {
-        background: $input-focus-bg-color;
-        border-color: $input-focus-border-color;
-    }
-}
-
-// @MIXIN
-//
-// We use this simple mixin to style labels for error inputs
-// $color - Default:$alert-color. Found in settings file
-@mixin form-label-error-color($color: $alert-color) {
-    color: $color;
-}
-
-// @MIXIN
-//
-// We use this mixin to create error message styles
-// $bg - Default: $alert-color (Found in settings file)
-@mixin form-error-message($bg: $input-error-message-bg-color) {
-    // display: block;
-    margin-top: $input-error-message-top;
-    margin-bottom: 0;
-    padding: $input-error-message-padding;
-    font-size: $input-error-message-font-size;
-    // font-weight: $input-error-message-font-weight;
-    // We can control the text color based on the brightness of the background.
-    $bg-lightness: lightness($bg);
-    // background: $bg;
-    // @if $bg-lightness < 70% or $bg == yellow {
-    //     color: $input-error-message-font-color;
-    // }
-    // @else {
-    //     color: $input-error-message-font-color-alt;
-    // }
-}
-
 // We use this mixin to style select elements
 @mixin form-select {
     // The custom arrow has some fake horizontal padding so we can align it
@@ -334,10 +281,6 @@ $input-transition-fade-timing-function: linear !default;
             padding-right: $form-spacing * 2;
           }
         }
-        input[type="submit"] {
-            appearance: none;
-            border-radius: 0;
-        }
         // Not allow resize out of parent
         textarea {
             max-width: 100%;
@@ -365,6 +308,13 @@ $input-transition-fade-timing-function: linear !default;
         // select {
         //     margin: 0 0 $form-spacing 0;
         // }
+        input[type="submit"] {
+            appearance: none;
+            border-radius: 0;
+        }
+        .input-group {
+            line-height: $input-medium;
+        }
         // Radio and Checkbox's Style
         input[type="radio"],
         input[type="checkbox"] {
@@ -433,8 +383,8 @@ $input-transition-fade-timing-function: linear !default;
             }
         }
         // /a.s.o.
-        input[type="checkbox"] + label,
-        input[type="radio"] + label {
+        input[type="radio"] + label,
+        input[type="checkbox"] + label {
             display: inline-block;
             margin-left: $form-spacing;// * 0.5;
             margin-right: $form-spacing;
@@ -578,41 +528,6 @@ $input-transition-fade-timing-function: linear !default;
             .#{$input-postfix-class} {
                 @include side-radius(right, $global-rounded);
             }
-        }
-        /* Error Handling */
-        #{data("validator")} {
-            .#{$alert-class}.error {
-                display: none;
-            }
-            .has-error .#{$alert-class} {
-                display: block;
-            }
-        }
-        .#{$alert-class}.error {
-            @include form-error-message;
-        }
-        .has-error {
-            label {
-                @include form-label-error-color;
-            }
-            input,
-            textarea,
-            select {
-                border-color: $alert-color;
-            }
-            > label {
-                > .#{$alert-class} {
-                    background: transparent;
-                    color: scale-color($form-label-font-color, $lightness: 15%);
-                    display: inline !important;
-                    font-size: 60%;
-                    margin: 0;
-                    padding: 0;
-                }
-            }
-        }
-        label.error {
-            @include form-label-error-color;
         }
     }
 }
