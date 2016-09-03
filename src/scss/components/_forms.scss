@@ -458,8 +458,7 @@ $input-transition-fade-timing-function: linear !default;
                 border-radius: 0;
                 margin-bottom: 0;
                 &.primary {
-                    background-color: $buttons-bg-color;
-                    color: $buttons-font-color;
+                    background-color: $primary-buttons-bg-color;
                 }
             }
             [class^=#{$icons-class}-] {
@@ -507,7 +506,7 @@ $input-transition-fade-timing-function: linear !default;
                 @include side-radius(right, $input-border-radius);
             }
         }
-        .#{$input-prefix-class}-round {
+        .#{$input-prefix-class}-rounded {
             input,
             textarea,
             select,
@@ -518,7 +517,7 @@ $input-transition-fade-timing-function: linear !default;
                 @include side-radius(left, $global-rounded);
             }
         }
-        .#{$input-postfix-class}-round {
+        .#{$input-postfix-class}-rounded {
             input,
             textarea,
             select,

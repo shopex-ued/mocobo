@@ -156,7 +156,7 @@ $buttons-disabled-bg: false !default;
 // $disabled - We can set $disabled:true to create a disabled transparent buttons. Default: false
 // $bg-hover - Button hover background color.
 // $color - Button font color.
-@mixin button-style($bg: $buttons-bg-color, $bg-hover: null, $border-color: null, $color: null, $disabled: false, $disabled-bg: false) {
+@mixin button-style($bg: $buttons-bg-color, $bg-hover: null, $border-color: null, $color: null, $disabled: false, $disabled-bg: $buttons-disabled-bg) {
     // We control which background styles are used,
     // these can be removed by setting $bg:false
     $bg-lightness: 100%;
@@ -179,7 +179,7 @@ $buttons-disabled-bg: false !default;
     @if $color {
         color: $color;
     }
-    @elseif $color != false {
+    @else if $color != false {
         // We control the text color for you based on the background color.
         color: if($bg-lightness > 70%, $buttons-font-color, $buttons-font-color-alt);
     }
