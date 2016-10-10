@@ -18,6 +18,7 @@ $modal-bg: $white !default;
 $modal-default-width: 90% !default;
 $modal-max-width: $grid-row-width !default;
 $modal-padding: to-rem(15) !default;
+$modal-font-size: false !default;
 $modal-box-shadow: 0 0 10px rgba($black, 0.3) !default;
 
 // We use these to style the modal close button
@@ -26,7 +27,7 @@ $modal-close-top: to-rem(0) !default;
 $modal-close-padding: to-rem(0 4) !default;
 $modal-close-width: to-rem(40) !default;
 $modal-close-height: to-rem(40) !default;
-$modal-close-side: to-rem(5) !default;
+$modal-close-side: to-rem(0) !default;
 $modal-close-color: $base !default;
 $modal-close-bg-color: transparent !default;
 $modal-close-border: none !default;
@@ -43,14 +44,17 @@ $modal-border-color: $silver !default;
 $z-index-base: 1005 !default;
 
 //We use these to control the modal main part
-$modal-header-margin: to-rem(-5) (-$modal-padding) to-rem(5) !default;
-$modal-header-padding: 0 $modal-padding to-rem(5) !default;
+$modal-header-margin: (-$modal-padding) (-$modal-padding) to-rem(5) !default;
+$modal-header-padding: ($modal-padding - to-rem(5)) $modal-padding to-rem(5) !default;
 $modal-header-border: 1px solid $smoke !default;
 $modal-header-font-size: to-rem($rem-base) !default;
 $modal-header-height: to-rem(24) !default;
-$modal-footer-margin: to-rem(5) (-$modal-padding) to-rem(-5) !default;
-$modal-footer-padding: to-rem(10) $modal-padding 0 !default;
+$modal-footer-margin: to-rem(5) (-$modal-padding) (-$modal-padding) !default;
+$modal-footer-padding: to-rem(10) $modal-padding !default;
 $modal-footer-border: 1px solid $smoke !default;
+$modal-footer-font-size: to-rem(12) !default;
+$modal-button-font-color: false !default;
+$modal-button-font-color-active: false !default;
 
 //
 // @mixins
@@ -83,7 +87,6 @@ $modal-footer-border: 1px solid $smoke !default;
             left: 0;
             width: 100%;
         }
-        border-radius: $border-radius;
         visibility: hidden;
         // Make sure rows don't have a min-width on them
         .#{$grid-columns-class} {
@@ -105,6 +108,9 @@ $modal-footer-border: 1px solid $smoke !default;
         width: $width;
         // max-width: $max-width;
     }
+    @if $border-radius {
+        border-radius: $border-radius;
+    }
 }
 
 // We use this to style the modal modal defaults
@@ -117,7 +123,7 @@ $modal-footer-border: 1px solid $smoke !default;
 // $border-color - Color of border. Default: $modal-border-color.
 // $box-shadow - Choose whether or not to include the default box-shadow. Default: true, Options: false
 // $radius - If true, set to modal radius which is $global-radius || explicitly set radius amount in px (ex. $radius:10px). Default: false
-@mixin modal-style($bg: false, $padding: false, $border: false, $border-style: $modal-border-style, $border-width: $modal-border-width, $border-color: $modal-border-color, $box-shadow: false, $radius: false) {
+@mixin modal-style($bg: false, $padding: false, $border: false, $border-style: $modal-border-style, $border-width: $modal-border-width, $border-color: $modal-border-color, $box-shadow: false, $radius: false, $font-size: false) {
     @if $bg {
         background-color: $bg;
     }
@@ -140,6 +146,10 @@ $modal-footer-border: 1px solid $smoke !default;
     }
     @else if $radius {
         border-radius: $radius;
+    }
+
+    @if $font-size {
+        font-size: $font-size;
     }
 }
 
@@ -176,7 +186,7 @@ $modal-footer-border: 1px solid $smoke !default;
         }
         .#{$modal-class} {
             @include modal-base;
-            @include modal-style($bg: $modal-bg, $padding: $modal-padding, $border: true, $box-shadow: true, $radius: false);
+            @include modal-style($bg: $modal-bg, $padding: $modal-padding, $border: true, $box-shadow: true, $radius: false, $font-size: $modal-font-size);
             // &.radius {
             //     @include modal-style($radius: true);
             // }
@@ -252,9 +262,18 @@ $modal-footer-border: 1px solid $smoke !default;
                 margin: $modal-footer-margin;
                 padding: $modal-footer-padding;
                 border-top: $modal-footer-border;
+                font-size: $modal-footer-font-size;
                 text-align: right;
                 .#{$buttons-class} {
                     margin-bottom: 0;
+                    @if $modal-button-font-color {
+                        color: $modal-button-font-color;
+                    }
+                    @if $modal-button-font-color-active {
+                        &:active {
+                            color: $modal-button-font-color-active;
+                        }
+                    }
                 }
             }
         }

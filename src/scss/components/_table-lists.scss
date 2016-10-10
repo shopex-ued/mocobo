@@ -21,6 +21,7 @@ $table-list-padding-left: 0 !default;
 $table-list-paragraph-font-size: to-rem(12) !default;
 
 $table-list-border-color: $gainsboro !default;
+$table-list-bg-color: false !default;
 
 $table-list-item-padding-top: to-rem(11) !default;
 $table-list-item-padding-left: ($grid-blank / 2) !default;
@@ -76,6 +77,9 @@ $table-list-children-display: block !default;
             }
             list-style: none; // Remove usual bullet styles from table list
             @include hairline(double, $table-list-border-color, 0); // Double grey border.
+            @if $table-list-bg-color {
+                background-color: $table-list-bg-color;
+            }
             &.has-#{$icons-class} {
                 [class^=#{$icons-class}-]::before {
                     margin-right: $table-list-item-left-icon-margin;
