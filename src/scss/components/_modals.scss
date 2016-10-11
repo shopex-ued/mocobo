@@ -23,11 +23,11 @@ $modal-box-shadow: 0 0 10px rgba($black, 0.3) !default;
 
 // We use these to style the modal close button
 $modal-close-font-size: to-rem(30) !default;
-$modal-close-top: to-rem(0) !default;
+$modal-close-top: 0 !default;
+$modal-close-side: to-rem(5) !default;
 $modal-close-padding: to-rem(0 4) !default;
 $modal-close-width: to-rem(40) !default;
 $modal-close-height: to-rem(40) !default;
-$modal-close-side: to-rem(0) !default;
 $modal-close-color: $base !default;
 $modal-close-bg-color: transparent !default;
 $modal-close-border: none !default;
