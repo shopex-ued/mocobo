@@ -9,7 +9,7 @@ $include-html-form-classes: $include-html-classes !default;
 $switch-class: 'switch' !default;
 // Controlling background color for the switch container
 $switch-bg: $white !default;
-$switch-border-width: 1px !default;
+$switch-border-width: to-rem(1) !default;
 $switch-border-style: solid !default;
 $switch-border-color: $gainsboro !default;
 $switch-radius: $global-radius !default;
@@ -74,17 +74,17 @@ $switch-active-border-color: $primary-color !default;
         content: "";
         display: block;
         position: absolute;
-        left: to-rem(0);
-        top: to-rem(0);
-        width: $switch-height-medium - to-rem(2);
-        height: $switch-height-medium - to-rem(2);
+        left: 0;
+        top: 0;
+        width: $switch-height-medium - $switch-border-width * 2;
+        height: $switch-height-medium - $switch-border-width * 2;
         background-color: $switch-paddle-bg;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         transition: left $transition-speed $transition-ease;
         transform: translate3d(0, 0, 0);
     }
     input:checked + label::before {
-        left: $switch-height-medium + to-rem(0);
+        left: $switch-height-medium;
     }
 }
 
@@ -99,11 +99,11 @@ $switch-active-border-color: $primary-color !default;
         width: $height * 2;
     }
     label::before {
-        height: $height - to-rem(2);
-        width: $height - to-rem(2);
+        height: $height - $switch-border-width * 2;
+        width: $height - $switch-border-width * 2;
     }
     input:checked + label::before {
-        left: $height + to-rem(0);
+        left: $height;
     }
 }
 
@@ -180,7 +180,7 @@ $switch-active-border-color: $primary-color !default;
                 label {
                     border-radius: $switch-radius;
                     &::before {
-                        border-radius: $switch-radius - to-rem(1);
+                        border-radius: $switch-radius - $switch-border-width;
                     }
                 }
             }
