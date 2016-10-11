@@ -1147,7 +1147,10 @@
 
 // $switch-class: 'switch';
 // Controlling background color for the switch container
-// $switch-bg: $gainsboro;
+// $switch-bg: $white;
+// $switch-border-width: 1px;
+// $switch-border-style: solid;
+// $switch-border-color: $gainsboro;
 // $switch-radius: $global-radius;
 
 // We use these to control the switch heights for our default classes
@@ -1161,6 +1164,7 @@
 // $switch-paddle-transition-speed: .15s;
 // $switch-paddle-transition-ease: ease-out;
 // $switch-active-color: $primary-color;
+// $switch-active-border-color: $primary-color;
 
 // 27. Table Lists
 // - - - - - - - - - - - - - - - - - - - - - - - - -

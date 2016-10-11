@@ -8,7 +8,10 @@ $include-html-form-classes: $include-html-classes !default;
 
 $switch-class: 'switch' !default;
 // Controlling background color for the switch container
-$switch-bg: $gainsboro !default;
+$switch-bg: $white !default;
+$switch-border-width: 1px !default;
+$switch-border-style: solid !default;
+$switch-border-color: $gainsboro !default;
 $switch-radius: $global-radius !default;
 
 // We use these to control the switch heights for our default classes
@@ -23,6 +26,7 @@ $switch-paddle-bg: $white !default;
 $switch-paddle-transition-speed: 0.15s !default;
 $switch-paddle-transition-ease: ease-out !default;
 $switch-active-color: $primary-color !default;
+$switch-active-border-color: $primary-color !default;
 
 //
 // @mixins
@@ -41,51 +45,46 @@ $switch-active-color: $primary-color !default;
     user-select: none;
     // Default label styles for type and transition
     label {
-        background: $switch-bg;
-        color: transparent;
         display: block;
-        // margin-bottom: $switch-height-medium / 2;
         position: relative;
-        text-indent: 100%;
+        // margin-bottom: $switch-height-medium / 2;
         width: $switch-height-medium * 2;
         height: $switch-height-medium;
+        background-color: $switch-bg;
+        border: $switch-border-width $switch-border-style $switch-border-color;
+        color: transparent;
+        text-indent: 100%;
         // Transition for the switch label to follow paddle
-        @include transition(left, $transition-speed, $transition-ease);
+        @include transition(left background border, $transition-speed, $transition-ease);
     }
     // So that we don't need to recreate the form with any JS, we use the
     // existing checkbox or radio button, but we cleverly position and hide it.
     input {
-        left: to-rem(10);
-        opacity: 0;
-        padding: 0;
         position: absolute;
-        top: to-rem(9);
+        opacity: 0;
         & + label {
             margin-left: 0;
             margin-right: 0;
         }
     }
-    // The paddle for the switch is created from an after psuedoclass
+    // The paddle for the switch is created from an before psuedoclass
     // content element. This is sized and positioned, and reacts to
     // the state of the input.
-    label::after {
-        background: $switch-paddle-bg;
+    label::before {
         content: "";
         display: block;
-        height: $switch-height-medium - to-rem(4);
-        left: to-rem(2);
         position: absolute;
-        top: to-rem(2);
-        box-shadow: -2px 2px 3px 1px rgba(#000, .1);
-        width: $switch-height-medium - to-rem(4);
+        left: to-rem(0);
+        top: to-rem(0);
+        width: $switch-height-medium - to-rem(2);
+        height: $switch-height-medium - to-rem(2);
+        background-color: $switch-paddle-bg;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         transition: left $transition-speed $transition-ease;
         transform: translate3d(0, 0, 0);
     }
-    input:checked + label {
-        background: $switch-active-color;
-    }
-    input:checked + label::after {
-        left: $switch-height-medium + to-rem(2);
+    input:checked + label::before {
+        left: $switch-height-medium + to-rem(0);
     }
 }
 
@@ -99,12 +98,12 @@ $switch-active-color: $primary-color !default;
         height: $height;
         width: $height * 2;
     }
-    label::after {
-        height: $height - to-rem(4);
-        width: $height - to-rem(4);
+    label::before {
+        height: $height - to-rem(2);
+        width: $height - to-rem(2);
     }
-    input:checked + label::after {
-        left: $height + to-rem(2);
+    input:checked + label::before {
+        left: $height + to-rem(0);
     }
 }
 
@@ -115,30 +114,31 @@ $switch-active-color: $primary-color !default;
 // $negative-color - Background color of negative side of switch. Default: $switch-negative-color.
 // $radius - Radius to apply to switch. Default: false.
 // $base-style - Apply base styles? Default: true.
-@mixin switch-style($paddle-bg: $switch-paddle-bg, $active-color: $switch-active-color, $radius: false, $base-style: true) {
+@mixin switch-style($paddle-bg: $switch-paddle-bg, $active-color: $switch-active-color, $active-border: $switch-active-border-color, $radius: false, $base-style: true) {
     // Setting up the radius for switches
     @if $radius == true {
         label,
-        label::after {
+        label::before {
             border-radius: $global-rounded;
         }
     }
     @else if $radius {
         label,
-        label::after {
+        label::before {
             border-radius: $radius;
         }
     }
     @if $base-style {
         label {
-            background: $switch-bg;
+            background-color: $switch-bg;
             color: transparent;
         }
-        label::after {
-            background: $paddle-bg;
+        label::before {
+            background-color: $paddle-bg;
         }
         input:checked + label {
-            background: $active-color;
+            background-color: $active-color;
+            border-color: $active-border;
         }
     }
 }
@@ -152,10 +152,10 @@ $switch-active-color: $primary-color !default;
 // $active-color - Background color of an active switch. Default: $switch-active-color.
 // $radius - Radius to apply to switch. Default: false.
 // $base-style - Apply base styles? Default: true.
-@mixin switch($transition-speed: $switch-paddle-transition-speed, $transition-ease: $switch-paddle-transition-ease, $height: $switch-height-medium, $paddle-bg: $switch-paddle-bg, $active-color: $switch-active-color, $radius: false, $base-style: true) {
+@mixin switch($transition-speed: $switch-paddle-transition-speed, $transition-ease: $switch-paddle-transition-ease, $height: $switch-height-medium, $paddle-bg: $switch-paddle-bg, $active-color: $switch-active-color, $active-border: $switch-active-border-color, $radius: false, $base-style: true) {
     @include switch-base($transition-speed, $transition-ease);
     @include switch-size($height);
-    @include switch-style($paddle-bg, $active-color, $radius, $base-style);
+    @include switch-style($paddle-bg, $active-color, $active-border, $radius, $base-style);
 }
 
 @include exports("switch") {
@@ -179,17 +179,19 @@ $switch-active-color: $primary-color !default;
                 // border-radius: $switch-radius;
                 label {
                     border-radius: $switch-radius;
-                }
-                label::after {
-                    border-radius: $switch-radius - 1;
+                    &::before {
+                        border-radius: $switch-radius - to-rem(1);
+                    }
                 }
             }
             // Make the switch completely round, like a pill
             &.round {
                 // border-radius: $global-rounded;
-                label,
-                label::after {
-                    border-radius: $global-rounded;
+                label {
+                    &,
+                    &::before {
+                        border-radius: $global-rounded;
+                    }
                 }
             }
         }
