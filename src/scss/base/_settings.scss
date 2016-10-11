@@ -787,12 +787,12 @@
 // $modal-box-shadow: 0 0 10px rgba($black, 0.3);
 
 // We use these to style the modal close button
-// $modal-close-font-size: to-rem(30);
 // $modal-close-top: 0;
 // $modal-close-side: to-rem(5);
 // $modal-close-padding: to-rem(0 4);
 // $modal-close-width: to-rem(40);
 // $modal-close-height: to-rem(40);
+// $modal-close-font-size: to-rem(30);
 // $modal-close-color: $base;
 // $modal-close-bg-color: transparent;
 // $modal-close-border: none;
@@ -814,12 +814,14 @@
 // $modal-header-border: 1px solid $smoke;
 // $modal-header-font-size: to-rem($rem-base);
 // $modal-header-height: to-rem(24);
+// $modal-header-align: false;
 // $modal-footer-margin: to-rem(5) (-$modal-padding) (-$modal-padding);
 // $modal-footer-padding: to-rem(10) $modal-padding;
 // $modal-footer-border: 1px solid $smoke;
+// $modal-footer-align: right;
 // $modal-footer-font-size: to-rem(12);
 // $modal-button-font-color: false;
-// $modal-button-font-color-active: false;
+// $modal-button-bg-color-active: false;
 
 // 16. Notice
 // - - - - - - - - - - - - - - - - - - - - - - - - -
