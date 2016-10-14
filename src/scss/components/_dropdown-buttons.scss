@@ -7,8 +7,8 @@ $include-html-buttons-classes: $include-html-classes !default;
 
 $dropdown-buttons-class: 'dropdown-btn' !default;
 // We use these to set the color of the pip in dropdown buttons
-$dropdown-buttons-pip-color: $white !default;
-$dropdown-buttons-pip-color-alt: $oil !default;
+$dropdown-buttons-pip-color: $body-font-color !default;
+$dropdown-buttons-pip-color-alt: $white !default;
 
 // We use these to set the size of the pip in dropdown buttons
 $buttons-pip-tiny: to-rem(3) !default;
@@ -121,8 +121,14 @@ $dropdown-buttons-pip-right-large: nth($buttons-large, 2) !default;
             &.large {
                 @include dropdown-button(large, $base-style: false);
             }
-            &.secondary::after {
-                border-top-color: $dropdown-buttons-pip-color-alt;
+            &.primary,
+            &.alert,
+            &.success,
+            &.warning,
+            &.info {
+                &::after {
+                    border-top-color: $dropdown-buttons-pip-color-alt;
+                }
             }
         }
     }
