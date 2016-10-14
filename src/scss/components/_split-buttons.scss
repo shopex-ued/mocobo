@@ -12,10 +12,10 @@ $include-html-split-buttons-classes: $include-html-buttons-classes !default;
 $split-buttons-class: 'split' !default;
 // We use these to control different shared styles for Split Buttons
 $split-buttons-function-factor: 10% !default;
-$split-buttons-pip-color: $white !default;
-$split-buttons-pip-color-alt: $oil !default;
+$split-buttons-pip-color: $buttons-font-color !default;
+$split-buttons-pip-color-alt: $buttons-font-color-alt !default;
 $split-buttons-active-bg-tint: rgba(0, 0, 0, 0.1) !default;
-$split-buttons-span-border-color: rgba(255, 255, 255, 0.5) !default;
+$split-buttons-span-border-color: $buttons-border-color !default;
 
 // We use these to control tiny split buttons
 $split-buttons-pip-size-tiny: $buttons-pip-tiny !default;
@@ -132,15 +132,6 @@ $split-buttons-padding-large: $split-buttons-span-width-large + nth($buttons-lar
     @if $include-html-split-buttons-classes {
         .#{$split-buttons-class}.#{$buttons-class} {
             @include split-button;
-            &.secondary {
-                @include split-button(false, $split-buttons-pip-color, $split-buttons-span-border-color, false);
-            }
-            &.alert {
-                @include split-button(false, false, $split-buttons-span-border-color, false);
-            }
-            &.success {
-                @include split-button(false, false, $split-buttons-span-border-color, false);
-            }
             &.tiny {
                 @include split-button(tiny, false, false, false);
             }
@@ -150,11 +141,15 @@ $split-buttons-padding-large: $split-buttons-span-width-large + nth($buttons-lar
             &.large {
                 @include split-button(large, false, false, false);
             }
+            &.primary,
+            &.alert,
+            &.success,
+            &.warning,
+            &.info {
+                @include split-button(false, $split-buttons-pip-color-alt, false, false);
+            }
             &.expand {
                 padding-left: to-rem(32);
-            }
-            &.secondary {
-                @include split-button(false, $split-buttons-pip-color-alt, false, false);
             }
             &.radius span {
                 @include side-radius(right, $global-radius);

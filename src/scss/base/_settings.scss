@@ -519,8 +519,8 @@
 
 // $dropdown-buttons-class: 'dropdown-btn';
 // We use these to set the color of the pip in dropdown buttons
-// $dropdown-buttons-pip-color: $body-font-color;
-// $dropdown-buttons-pip-color-alt: $white;
+// $dropdown-buttons-pip-color: $buttons-font-color;
+// $dropdown-buttons-pip-color-alt: $buttons-font-color-alt;
 
 // We use these to set the size of the pip in dropdown buttons
 // $buttons-pip-tiny: to-rem(3);
@@ -1090,9 +1090,9 @@
 // $split-buttons-class: 'split';
 // We use these to control different shared styles for Split Buttons
 // $split-buttons-function-factor: 10%;
-// $split-buttons-pip-color: $white;
-// $split-buttons-span-border-color: rgba(255,255,255,0.5);
-// $split-buttons-pip-color-alt: $oil;
+// $split-buttons-pip-color: $buttons-font-color;
+// $split-buttons-pip-color-alt: $buttons-font-color-alt;
+// $split-buttons-span-border-color: $buttons-border-color;
 // $split-buttons-active-bg-tint: rgba(0,0,0,0.1);
 
 // We use these to control tiny split buttons
