@@ -13,8 +13,8 @@
 // 03. Badges
 // 04. Block Grid
 // 05. Breadcrumbs
-// 06. Button Groups
-// 07. Buttons
+// 06. Buttons
+// 07. Button Groups
 // 08. Dropdown Buttons
 // 09. Dropdown
 // 10. Forms
@@ -299,7 +299,7 @@
 // Included, add as needed.
 // $animate-include: (slideInUp slideInDown slideOutUp slideOutDown fadeIn fadeOut circle);
 
-// 01. According
+// 01. Accordion
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-accordion-classes: $include-html-classes;
@@ -418,18 +418,7 @@
 // $crumb-slash-color: $base;
 // $crumb-slash: "/";
 
-// 06. Button Groups
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-
-// $include-html-buttons-classes: $include-html-classes;
-
-// $button-group-class: 'btn-group';
-// Sets the margin and border.
-// $button-bar-margin-right: to-rem(10);
-// $button-group-border-width: 1px;
-// $button-group-border-style: solid;
-
-// 07. Buttons
+// 06. Buttons
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // $include-html-buttons-classes: $include-html-classes;
@@ -512,10 +501,21 @@
 // $buttons-disabled-opacity: .6;
 // $buttons-disabled-bg: false;
 
+// 07. Button Groups
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-button-group-classes: $include-html-buttons-classes;
+
+// $button-group-class: 'btn-group';
+// Sets the margin and border.
+// $button-bar-margin-right: to-rem(10);
+// $button-group-border-width: 1px;
+// $button-group-border-style: solid;
+
 // 08. Dropdown Buttons
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// $include-html-buttons-classes: $include-html-classes;
+// $include-html-dropdown-buttons-classes: $include-html-buttons-classes;
 
 // $dropdown-buttons-class: 'dropdown-btn';
 // We use these to set the color of the pip in dropdown buttons

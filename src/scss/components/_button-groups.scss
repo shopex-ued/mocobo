@@ -4,7 +4,7 @@
 //
 // Button Group Variables
 //
-$include-html-buttons-classes: $include-html-classes !default;
+$include-html-button-group-classes: $include-html-buttons-classes !default;
 
 $button-group-class: 'btn-group' !default;
 // Sets the margin and border.
@@ -152,7 +152,7 @@ $button-group-border-style: solid !default;
 }
 
 @include exports("button-group") {
-    @if $include-html-buttons-classes {
+    @if $include-html-button-group-classes {
         /* Button groups */
         .#{$button-group-class} {
             @include button-group-container;
