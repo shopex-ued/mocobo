@@ -9,13 +9,10 @@ import subprocess
 import tempfile
 import json
 import copy
+import sys
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), ".."))
+import path
 
-SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-BUILDER_PATH = os.path.join(SCRIPT_PATH, '..')
-INPUT_SVG_DIR = os.path.join(BUILDER_PATH, 'icons')
-OUTPUT_FONT_DIR = os.path.join(BUILDER_PATH, '..', 'dist', 'fonts')
-MANIFEST_PATH = os.path.join(BUILDER_PATH, 'manifest.json')
-BUILD_DATA_PATH = os.path.join(BUILDER_PATH, 'build_data.json')
 AUTO_WIDTH = False
 KERNING = 15
 
@@ -29,16 +26,16 @@ f.em = 512
 f.ascent = 448
 f.descent = 64
 
-manifest_file = open(MANIFEST_PATH, 'r')
+manifest_file = open(path.MANIFEST_PATH, 'r')
 manifest_data = json.loads(manifest_file.read())
-if os.path.isfile(BUILD_DATA_PATH):
-  build_data_file = open(BUILD_DATA_PATH, 'r')
+if os.path.isfile(path.BUILD_DATA_PATH):
+  build_data_file = open(path.BUILD_DATA_PATH, 'r')
   build_data_old = json.loads(build_data_file.read())
 else:
   build_data_old = {}
 
 manifest_file.close()
-if os.path.isfile(BUILD_DATA_PATH):
+if os.path.isfile(path.BUILD_DATA_PATH):
   build_data_file.close()
 
 # if you want rebuild font file with icon unchanged, comment the following line of code.
@@ -56,7 +53,7 @@ font_name = build_data['font_name']
 m.update(build_data['class_name'] + ';')
 m.update(font_name + ';')
 
-for dirname, dirnames, filenames in os.walk(INPUT_SVG_DIR):
+for dirname, dirnames, filenames in os.walk(path.INPUT_SVG_DIR):
   for filename in filenames:
     name, ext = os.path.splitext(filename)
     filePath = os.path.join(dirname, filename)
@@ -138,7 +135,7 @@ for dirname, dirnames, filenames in os.walk(INPUT_SVG_DIR):
     if AUTO_WIDTH:
       f.autoWidth(0, 0, 512)
 
-  fontfile = '%s/icons' % (OUTPUT_FONT_DIR)
+  fontfile = '%s/icons' % (path.OUTPUT_FONT_DIR)
 
 build_hash = m.hexdigest()[0:10]
 
@@ -162,9 +159,8 @@ else:
   svgfile.write(svgtext.replace('''<svg>''', '''<svg xmlns="http://www.w3.org/2000/svg">'''))
   svgfile.close()
 
-  scriptPath = os.path.dirname(os.path.realpath(__file__))
   try:
-    subprocess.Popen([scriptPath + '/sfnt2woff', fontfile + '.ttf'], stdout=subprocess.PIPE)
+    subprocess.Popen([path.SCRIPT_PATH + '/sfnt2woff', fontfile + '.ttf'], stdout=subprocess.PIPE)
   except OSError:
     # If the local version of sfnt2woff fails (i.e., on Linux), try to use the
     # global version. This allows us to avoid forcing OS X users to compile
@@ -181,7 +177,7 @@ else:
   build_data['icons'] = sorted(build_data['icons'], key=lambda k: k['name'])
 
   print "Save Build, Icons: %s" % ( len(build_data['icons']) )
-  f = open(BUILD_DATA_PATH, 'w')
+  f = open(path.BUILD_DATA_PATH, 'w')
   f.write( json.dumps(build_data, indent=4, separators=(',', ': ')) )
   f.close()
 

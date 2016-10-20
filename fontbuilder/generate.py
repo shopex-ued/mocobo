@@ -1,13 +1,7 @@
 from subprocess import call
 import os
 import json
-
-
-BUILDER_PATH = os.path.dirname(os.path.abspath(__file__))
-ROOT_PATH = os.path.join(BUILDER_PATH, '..', '..')
-FONTS_FOLDER_PATH = os.path.join(BUILDER_PATH, '..', 'dist', 'fonts')
-SCSS_FOLDER_PATH = os.path.join(BUILDER_PATH, '..', 'src', 'scss', 'components')
-
+import path
 
 def main():
   generate_font_files()
@@ -21,13 +15,13 @@ def main():
 
 def generate_font_files():
   print "Generate Fonts"
-  cmd = "fontforge -script %s/scripts/generate_font.py" % (BUILDER_PATH)
+  cmd = "fontforge -script %s/generate_font.py" % (path.SCRIPT_PATH)
   call(cmd, shell=True)
 
 
 def rename_svg_glyph_names(data):
   # hacky and slow (but safe) way to rename glyph-name attributes
-  svg_path = os.path.join(FONTS_FOLDER_PATH, data['font_name'] + '.svg')
+  svg_path = os.path.join(path.OUTPUT_FONT_DIR, data['font_name'] + '.svg')
   svg_file = open(svg_path, 'r+')
   svg_text = svg_file.read()
   svg_file.seek(0)
@@ -47,7 +41,7 @@ def generate_scss(data):
   build_hash = data['build_hash']
   font_name = data['font_name']
   css_class = data['class_name']
-  icons_file_path = os.path.join(SCSS_FOLDER_PATH, '_icons.scss')
+  icons_file_path = os.path.join(path.OUTPUT_SCSS_DIR, '_icons.scss')
 
   d = []
   d.append('@import "global";\n')
@@ -108,15 +102,11 @@ def generate_scss(data):
 def generate_cheatsheet(data):
   print "Generate Cheatsheet"
 
-  cheatsheet_file_path = os.path.join(BUILDER_PATH, '..', 'docs', 'iconfonts.html')
-  template_path = os.path.join(BUILDER_PATH, 'cheatsheet', 'template.html')
-  icon_row_path = os.path.join(BUILDER_PATH, 'cheatsheet', 'icon-row.html')
-
-  f = open(template_path, 'r')
+  f = open(path.TEMPLATE_PATH, 'r')
   template_html = f.read()
   f.close()
 
-  f = open(icon_row_path, 'r')
+  f = open(path.ICON_ROW_PATH, 'r')
   icon_row_template = f.read()
   f.close()
 
@@ -142,14 +132,13 @@ def generate_cheatsheet(data):
   template_html = template_html.replace('{{content}}', '\n'.join(content) )
   template_html = template_html.replace('{{a_name}}', data['icons'][0]['name'])
 
-  f = open(cheatsheet_file_path, 'w')
+  f = open(path.CHEATSHEET_PATH, 'w')
   f.write(template_html)
   f.close()
 
 
 def get_build_data():
-  build_data_path = os.path.join(BUILDER_PATH, 'build_data.json')
-  f = open(build_data_path, 'r')
+  f = open(path.BUILD_DATA_PATH, 'r')
   data = json.loads(f.read())
   f.close()
   return data
