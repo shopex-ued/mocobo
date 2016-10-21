@@ -8,11 +8,11 @@ module.exports = {
     },
     font: {
         files: ['<%= paths.icons %>**/*.svg'],
-        tasks: ['shell:font', 'copy:font']
+        tasks: ['shell:font']
     },
     image: {
-        files: ['<%= paths.img %>**/*'],
-        tasks: ['newer:copy:dist'],
+        files: ['<%= paths.distImg %>**/*'],
+        tasks: ['newer:imagemin'],
     },
     sass: {
         files: ['<%= paths.scss %>**/*.scss'],
@@ -20,6 +20,10 @@ module.exports = {
     },
     js: {
         files: ['<%= paths.vendor %>**/*.js', '<%= paths.js %>**/*.js'],
-        tasks: ['newer:copy:vendor', 'newer:concat', 'newer:uglify']
+        tasks: ['newer:concat', 'newer:uglify']
+    },
+    vendor: {
+        files: ['<%= paths.vendor %>**/*.js'],
+        tasks: ['newer:copy:vendor']
     }
 };

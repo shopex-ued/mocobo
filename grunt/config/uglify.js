@@ -7,9 +7,9 @@ module.exports = {
     },
     dist: {
         files: {
-            '<%= paths.dist %>js/libs.min.js': ['<%= files.vendor %>'],
-            '<%= paths.dist %>js/mobile.min.js': ['<%= files.js %>'],
-            '<%= paths.dist %>js/main.min.js': ['<%= paths.src %>js/main.js']
+            '<%= paths.distJs %>libs.min.js': ['<%= files.vendor %>'],
+            '<%= paths.distJs %>mobile.min.js': ['<%= files.js %>'],
+            '<%= paths.distJs %>main.min.js': ['<%= paths.js %>main.js']
         }
     }
 };

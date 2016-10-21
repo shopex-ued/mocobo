@@ -1,45 +1,52 @@
 module.exports = function(grunt) {
     // Define project configuration
+    var path = require('path');
     var project = {};
+
     project.paths = {
         get config() {
             return this.grunt + 'config/';
         },
+        serverRoot: 'http://localhost/mocobo',
         src: 'src/',
         dist: 'dist/',
         docs: 'docs/',
         grunt: 'grunt/',
+        vendor: '<%= paths.src %>vendor/',
+        js: '<%= paths.src %>js/',
+        distJs: '<%= paths.dist %>js/',
+        distImg: '<%= paths.docs %>img/',
+        scss: '<%= paths.src %>scss/',
+        css: '<%= paths.dist %>css/',
         builder: 'fontbuilder/',
-        js: 'src/js/',
-        img: 'src/img/',
-        icons: 'src/icons/',
-        sassLoad: __dirname + '/src/scss',
-        scss: 'src/scss/',
-        vendor: 'src/vendor/'
+        icons: '<%= paths.builder %>icons/',
+        fonts: '<%= paths.dist %>fonts/',
+        sassLoad: path.join(__dirname, '<%= paths.scss %>')
     };
     project.files = {
         get config() {
-            return project.paths.config + '*.js';
+            return '<%= paths.config %>*.js';
         },
         grunt: 'Gruntfile.js',
         vendor: [
-            project.paths.vendor + 'jquery.js',
-            project.paths.vendor + 'jquery.cookie.js',
-            project.paths.vendor + '*.js'
+            '<%= paths.vendor %>jquery.js',
+            '<%= paths.vendor %>jquery.cookie.js',
+            '<%= paths.vendor %>*.js'
         ],
         js: [
-            project.paths.js + 'mobile.js',
-            project.paths.js + 'components/*.js'
+            '<%= paths.js %>mobile.js',
+            '<%= paths.js %>components/*.js'
         ],
         scss: [
-            project.paths.scss + 'mobile.scss'
+            '<%= paths.scss %>mobile.scss'
         ]
     };
     project.pkg = grunt.file.readJSON('package.json');
+    grunt.paths = project.paths;
 
     // Load Grunt configurations and tasks
     require('load-grunt-config')(grunt, {
-        configPath: require('path').join(process.cwd(), project.paths.config),
+        configPath: path.join(process.cwd(), project.paths.config),
         data: project
     });
 };

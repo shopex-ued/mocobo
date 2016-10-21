@@ -4,6 +4,6 @@ module.exports = {
         options: {
             force: true
         },
-        src: ['<%= paths.dist %>']
+        src: ['<%= paths.distJs %>', '<%= paths.css %>', '<%= paths.fonts %>']
     }
 };

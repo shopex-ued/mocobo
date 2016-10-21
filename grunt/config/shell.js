@@ -5,7 +5,7 @@ module.exports = {
             stderr: false,
             failOnError: false
         },
-        command: ['mkdir <%= paths.dist %>', 'mkdir <%= paths.dist %>fonts'].join('&&')
+        command: ['mkdir <%= paths.dist %>', 'mkdir <%= paths.fonts %>'].join('&')
     },
     font: {
         options: {},
