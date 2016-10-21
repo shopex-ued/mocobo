@@ -6,7 +6,7 @@ module.exports = {
             outputStyle: 'expanded',
             indentWidth: 4,
             sourceMap: false,
-            precision: 5,
+            precision: 6,
             update: true,
             bundleExec: true
         },
