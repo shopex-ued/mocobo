@@ -364,13 +364,6 @@
                     return !isNaN(o - 0) && o !== null && o !== '' && o !== false && o !== true;
                 }
 
-                function trim(str) {
-                    if (typeof str === 'string') {
-                        return $.trim(str);
-                    }
-                    return str;
-                }
-
                 while (ii--) {
                     p = opts_arr[ii].split(':');
                     p = [p[0], p.slice(1).join(':')];
@@ -390,7 +383,7 @@
                     }
 
                     if (p.length === 2 && p[0].length > 0) {
-                        opts[trim(p[0])] = trim(p[1]);
+                        opts[$.trim(p[0])] = $.trim(p[1]);
                     }
                 }
 
