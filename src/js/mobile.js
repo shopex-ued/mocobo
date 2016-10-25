@@ -76,7 +76,7 @@
             config = ($.isArray(options) ? options[0] : options) || method,
             bind = function() {
                 var $this = $(this),
-                    should_bind_events = !$(self).data(self.attr_name(true) + '-init');
+                    should_bind_events = !$this.data(self.attr_name(true) + '-init');
                 $this.data(self.attr_name(true) + '-init', $.extend(true, {}, self.settings, config, self.data_options($this)));
 
                 if (should_bind_events) {

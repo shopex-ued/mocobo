@@ -103,8 +103,9 @@
             form
                 .off('.validator')
                 .on('submit.validator', function(e) {
-                     var $this = $(this);
-                    var is_ajax = $this.data(self.attr_name(true)) === 'ajax' || self.settings.isAjax;
+                    var $this = $(this),
+                        is_ajax = $this.data(self.attr_name(true)) === 'ajax' || self.settings.isAjax;
+
                     return self.validate($this, $this.find('input, textarea, select, [' + self.attr_name() +  '-verifier]').not(settings.exception).get(), e, is_ajax);
                 })
                 .on('validate.validator', function(e) {
@@ -153,8 +154,19 @@
             $('input:radio, input:checkbox', form).prop('checked', false).removeAttr(this.invalid_attr);
         },
 
+        disabledSubmit: function(form) {
+            form.find('button[type=submit]').prop('disabled', true);
+            $('[form="' + form.attr('id') + '"]').prop('disabled', true).addClass('disabled');
+        },
+
+        enabledSubmit: function(form) {
+            form.find('button[type=submit]').prop('disabled', false);
+            $('[form="' + form.attr('id') + '"]').prop('disabled', false).removeClass('disabled');
+        },
+
         validate: function(form, els, e, is_ajax) {
-            var validations = this.parse_patterns(form, els),
+            var self = this,
+                validations = this.parse_patterns(form, els),
                 validation_count = validations.length,
                 submit_event = /submit/i.test(e.type);
 
@@ -165,12 +177,14 @@
                         els[i].focus();
                     }
                     form.trigger('invalid.validator', [e]).attr(this.invalid_attr, '');
+                    this.enabledSubmit(form);
                     return false;
                 }
             }
 
             if (submit_event || is_ajax) {
                 if (this.settings.preventDefault) e.preventDefault();
+                this.disabledSubmit(form);
                 form.trigger('valid.validator', [e]);
             }
 
@@ -182,6 +196,9 @@
                     type: form.attr('method'),
                     data: form.serialize(),
                     dataType: 'json'
+                })
+                .always(function() {
+                    self.enabledSubmit(form);
                 })
                 .done(function(rs) {
                     form.trigger('complete.validator', [rs]);
@@ -214,7 +231,8 @@
                 verifier = el.getAttribute(this.add_namespace(this.attr_name() + '-verifier')) || '',
                 eqTo = el.hasAttribute(this.add_namespace(this.attr_name() + '-equalto')),
                 oneOf = el.hasAttribute(this.add_namespace(this.attr_name() + '-oneof')),
-                patternKey, patternVal;
+                patternKey = null,
+                patternVal;
 
             if (this.settings.patterns.hasOwnProperty(pattern)) {
                 patternKey = pattern;
@@ -226,7 +244,6 @@
                 patternKey = type;
                 patternVal = this.settings.patterns[type];
             } else if (pattern) {
-                patternKey = null;
                 patternVal = new RegExp('^' + pattern.replace(/^\^(.+)\$$/, '$1') + '$');
             } else if (eqTo || oneOf) {
                 patternKey = eqTo ? 'equalto' : 'oneof';

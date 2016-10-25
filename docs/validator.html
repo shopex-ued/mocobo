@@ -359,6 +359,7 @@
   $('form')
     .on('valid.validator', function(e, event) {
       alert('验证通过!');
+      $(this).mobile('validator', 'enabledSubmit', $(this));
       event.preventDefault();
     });
 </script>
