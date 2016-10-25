@@ -26,6 +26,9 @@
                 positive: /^\+?\d*(?:[\.]\d+)?$/,
                 negative: /^-\d*(?:[\.]\d+)?$/,
                 number: /^[-+]?\d*(?:[\.]\d+)?$/,
+                mobile: /^0?(?:1(?:[38]\d)|(?:4[579])|(?:[57][0-35-9]))\d{8}$/,
+                tel: /^(0\d{2,3}-?)?[2-9]\d{5,7}(-\d{1,5})?$/,
+                zip: /^\d{6}$/,
                 // http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#valid-e-mail-address
                 email: /^[\w.!#$%&'*+\/=?^`{|}~-]+@[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}[a-zA-Z\d])?(?:\.[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}[a-zA-Z\d])?)*$/,
                 // http://blogs.lse.ac.uk/lti/2008/04/23/a-regular-expression-to-match-any-url/
@@ -38,10 +41,7 @@
                 // HH:MM:SS
                 time: /^(0?\d|1\d|2[0-3])(:[0-5]\d){2}$/,
                 // #FFF or #FFFFFF
-                color: /^#([a-fA-F\d]{6}|[a-fA-F\d]{3})$/,
-                mobile: /^0?(?:1(?:[38]\d)|(?:4[579])|(?:[57][0-35-9]))\d{8}$/,
-                tel: /^(0\d{2,3}-?)?[2-9]\d{5,7}(-\d{1,5})?$/,
-                zip: /^\d{6}$/
+                color: /^#([a-fA-F\d]{6}|[a-fA-F\d]{3})$/
             },
             verifiers: {
                 requiredone: function(el, required, parent) {
@@ -59,7 +59,7 @@
                 }
             },
             alerts: {
-                required: '请输入/选择{placeholder}！',
+                required: '请{how}{placeholder}！',
                 alpha: '请填写英文字母！',
                 digital: '只允许填写数字！',
                 alpha_digital: '请填写英文字母或数字！',
@@ -67,16 +67,16 @@
                 positive: '请填写正数！',
                 negative: '请填写负数！',
                 number: '请填写数值！',
-                email: '请填写正确d的邮箱地址！',
+                mobile: '手机号码有误，请重新填写！',
+                tel: '电话号码有误，请重新填写!',
+                zip: '邮政编码格式有误，请重新填写！',
+                email: '请填写正确的邮箱地址！',
                 url: '请填写正确的 URL 地址！',
                 domain: '请填写正确的域名！',
                 datetime: '请填写正确的日期和时间格式！',
                 date: '请填写正确的日期格式！',
                 time: '请填写正确的时间格式！',
-                color: '请填写十六进制颜色格式！',
-                mobile: '手机号码有误，请重新填写！',
-                tel: '电话号码有误，请重新填写!',
-                zip: '邮政编码格式有误，请重新填写！'
+                color: '请填写十六进制颜色格式！'
             }
         },
 
@@ -93,22 +93,23 @@
 
             this.invalid_attr = this.add_namespace('data-invalid');
 
-            function validate(originalSelf, e) {
+            function validate(el, originalSelf, e) {
                 clearTimeout(self.timer);
                 self.timer = setTimeout(function() {
-                    self.validate([originalSelf], e);
+                    self.validate(el, [].concat(originalSelf), e);
                 }.bind(originalSelf), settings.timeout);
             }
 
             form
                 .off('.validator')
                 .on('submit.validator', function(e) {
-                    var is_ajax = $(this).attr(self.attr_name()) === 'ajax' || self.settings.isAjax;
-                    return self.validate($(this).find('input, textarea, select, [' + self.attr_name() +  '-verifier]').not(settings.exception).get(), e, is_ajax);
+                     var $this = $(this);
+                    var is_ajax = $this.data(self.attr_name(true)) === 'ajax' || self.settings.isAjax;
+                    return self.validate($this, $this.find('input, textarea, select, [' + self.attr_name() +  '-verifier]').not(settings.exception).get(), e, is_ajax);
                 })
                 .on('validate.validator', function(e) {
                     if (settings.validate_on === 'manual') {
-                        self.validate([e.target], e);
+                        self.validate($(this), [e.target], e);
                     }
                 })
                 .on('reset', function(e) {
@@ -116,30 +117,22 @@
                 })
                 .find('input, textarea, select').not(settings.exception)
                 .off('.validator')
-                .on('blur.validator', function(e) {
+                .on('change.validator blur.validator', function(e) {
                     var id = this.id,
-                        eqTo = form.find('[' + self.attr_name() +  '-equalto="#' + id + '"]');
-                    // checks if there is an equalTo equivalent related by id
-                    if (typeof eqTo[0] !== "undefined" && eqTo.val().length) {
-                        validate(eqTo[0], e);
+                        $this = $(this),
+                        parent = $this.closest('[' + self.attr_name() + ']'),
+                        oneOf = parent.find('[' + self.attr_name() +  '-oneof]').filter(function() {
+                            if (parent.find($(this).data(self.attr_name(true) + '-oneof')).get().indexOf($this[0]) > -1) return this;
+                        })[0];
+
+                    if (oneOf) {
+                        validate(parent, oneOf, e);
                     }
 
-                    if (settings.validate_on === 'blur') {
-                        validate(this, e);
+                    if (settings.validate_on === e.type) {
+                        validate(parent, this, e);
                     }
                 })
-                .on('change.validator', function(e) {
-                    var id = this.id,
-                        eqTo = form.find('[' + self.attr_name() +  '-equalto="#' + id + '"]');
-                    // checks if there is an equalTo equivalent related by id
-                    if (typeof eqTo[0] !== "undefined" && eqTo.val().length) {
-                        validate(eqTo[0], e);
-                    }
-
-                    if (settings.validate_on === 'change') {
-                        validate(this, e);
-                    }
-                });
                 // Not compatible, so commet it for a while
                 // .on('focus.validator', function(e) {
                 //     if (navigator.userAgent.match(/iPad|iPhone|Android|BlackBerry|Windows Phone|webOS/i)) {
@@ -160,10 +153,9 @@
             $('input:radio, input:checkbox', form).prop('checked', false).removeAttr(this.invalid_attr);
         },
 
-        validate: function(els, e, is_ajax) {
-            var validations = this.parse_patterns(els),
+        validate: function(form, els, e, is_ajax) {
+            var validations = this.parse_patterns(form, els),
                 validation_count = validations.length,
-                form = $(els[0]).closest('form'),
                 submit_event = /submit/i.test(e.type);
 
             // Has to count up to make sure the focus gets applied to the top error
@@ -172,8 +164,7 @@
                     if (this.settings.focus_on_invalid) {
                         els[i].focus();
                     }
-                    form.trigger('invalid.validator', [e]);
-                    $(els[i]).closest('form').attr(this.invalid_attr, '');
+                    form.trigger('invalid.validator', [e]).attr(this.invalid_attr, '');
                     return false;
                 }
             }
@@ -186,7 +177,13 @@
             form.removeAttr(this.invalid_attr);
 
             if (is_ajax) {
-                $[form.attr('method')](form.attr('action'), form.serialize(), function(rs) {
+                $.ajax({
+                    url: form.attr('action'),
+                    type: form.attr('method'),
+                    data: form.serialize(),
+                    dataType: 'json'
+                })
+                .done(function(rs) {
                     form.trigger('complete.validator', [rs]);
                 });
                 return false;
@@ -195,7 +192,7 @@
             return true;
         },
 
-        parse_patterns: function(els) {
+        parse_patterns: function(form, els) {
             var i = els.length,
                 el_patterns = [];
 
@@ -203,36 +200,50 @@
                 el_patterns.push(this.pattern(els[i]));
             }
 
-            return this.check_validation(el_patterns);
+            if (el_patterns.length) {
+                el_patterns = this.check_validation(form, el_patterns);
+            }
+
+            return el_patterns;
         },
 
         pattern: function(el) {
             var type = el.type,
                 required = el.hasAttribute('required'),
-                pattern = el.getAttribute('pattern') || '';
+                pattern = el.getAttribute('pattern') || '',
+                verifier = el.getAttribute(this.add_namespace(this.attr_name() + '-verifier')) || '',
+                eqTo = el.hasAttribute(this.add_namespace(this.attr_name() + '-equalto')),
+                oneOf = el.hasAttribute(this.add_namespace(this.attr_name() + '-oneof')),
+                patternKey, patternVal;
 
-            if (this.settings.patterns.hasOwnProperty(pattern) && pattern.length > 0) {
-                return [el, pattern, this.settings.patterns[pattern], required];
-            } else if (pattern.length > 0) {
-                return [el, null, new RegExp('^' + pattern + '$'), required];
+            if (this.settings.patterns.hasOwnProperty(pattern)) {
+                patternKey = pattern;
+                patternVal = this.settings.patterns[pattern];
+            } else if (this.settings.patterns.hasOwnProperty(verifier)) {
+                patternKey = verifier;
+                patternVal = this.settings.patterns[verifier];
+            } else if (this.settings.patterns.hasOwnProperty(type)) {
+                patternKey = type;
+                patternVal = this.settings.patterns[type];
+            } else if (pattern) {
+                patternKey = null;
+                patternVal = new RegExp('^' + pattern.replace(/^\^(.+)\$$/, '$1') + '$');
+            } else if (eqTo || oneOf) {
+                patternKey = eqTo ? 'equalto' : 'oneof';
+                patternVal = /^[\s\S]*$/;
+            } else {
+                patternKey = required ? 'required' : null;
+                patternVal = /^[\s\S]*$/;
             }
-
-            if (this.settings.patterns.hasOwnProperty(type)) {
-                return [el, type, this.settings.patterns[type], required];
-            }
-
-            pattern = /^[\s\S]*$/;
-
-            return [el, 'required', pattern, required];
+            return [el, patternKey, patternVal, required];
         },
 
         // TODO: Break this up into smaller methods, getting hard to read.
-        check_validation: function(el_patterns) {
+        check_validation: function(form, el_patterns) {
             var i = el_patterns.length,
                 validations = [],
-                form = $(el_patterns[0][0]).closest('[' + this.attr_name() + ']'),
                 settings = form.data(this.attr_name(true) + '-init') || {};
-            if(!i) return validations;
+
             while (i--) {
                 var el = el_patterns[i][0],
                     required = el_patterns[i][3],
@@ -241,6 +252,8 @@
                     is_checkbox = el.type === 'checkbox',
                     direct_parent = $(el).parent(),
                     verifier = el.getAttribute(this.add_namespace(this.attr_name() + '-verifier')),
+                    // Validate using each of the specified (space-delimited) verifiers.
+                    verifiers = verifier ? verifier.split(' ') : [],
                     label = (function() {
                         var label = $(el).siblings('label');
                         if (!label.length) {
@@ -254,14 +267,14 @@
                     valid;
 
                 if ((is_radio || is_checkbox) && required) {
-                    verifier = 'requiredone';
+                    verifiers.push('requiredone');
                 }
                 // support old way to do equalTo validations
                 if (el.getAttribute(this.add_namespace(this.attr_name() + '-equalto'))) {
-                    verifier = 'equalto';
+                    verifiers.push('equalto');
                 }
                 if (el.getAttribute(this.add_namespace(this.attr_name() + '-oneof'))) {
-                    verifier = 'oneof';
+                    verifiers.push('oneof');
                 }
 
                 if (settings.feedback) {
@@ -275,9 +288,7 @@
                     }
                 }
 
-                if (verifier) {
-                    // Validate using each of the specified (space-delimited) verifiers.
-                    var verifiers = verifier.split(' ');
+                if (verifiers.length) {
                     var last_valid = true,
                         all_valid = true;
                     for (var iv = 0; iv < verifiers.length; iv++) {
@@ -331,9 +342,14 @@
             var errorElement = parent.find(this.settings.alert_element);
             var type = this.settings.alerts[el_patterns[i][1]];
             var msg = el_patterns[i][0].dataset.alerts;
+            var how = '输入';
+
             if(!msg) {
                 if (type) {
-                    msg = type.replace('{placeholder}', label.text().replace(/[：:]$/, '') || el_patterns[i][0].placeholder || '有一项');
+                    if (['radio', 'checked'].indexOf(el.type) > -1 || el.tagName === 'select') {
+                        how = '选择';
+                    }
+                    msg = type.replace('{how}', how).replace('{placeholder}', label.text().replace(/[：:]$/, '') || el_patterns[i][0].placeholder || '其中一项');
                 } else {
                     msg = '输入不符合要求，请检查！';
                 }
@@ -464,8 +480,8 @@
         reflow: function(scope, options) {
             var self = this,
                 form = $('[' + this.attr_name() + ']'); //.attr('novalidate', 'novalidate');
-            form.each(function(idx, el) {
-                self.events(el);
+            form.each(function() {
+                self.events(this);
             });
         }
     };
