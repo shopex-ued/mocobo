@@ -250,7 +250,7 @@
                 patternVal = this.settings.patterns[pattern];
             } else if (this.settings.patterns.hasOwnProperty(verifier)) {
                 patternKey = verifier;
-                patternVal = this.settings.patterns[verifier];
+                patternVal = this.settings.verifiers[verifier];
             } else if (pattern) {
                 patternVal = new RegExp('^' + pattern.replace(/^\^(.+)\$$/, '$1') + '$');
             } else if (eqTo || oneOf) {
@@ -328,7 +328,13 @@
                         if(validations.length) break;
                     }
                 } else {
-                    el_validations.push(required_valid && el_patterns[i][2].test(value) || !required && !value.length || el.disabled);
+                    var pattern = el_patterns[i][2];
+                    if ($.type(pattern) == 'function') {
+                        pattern = pattern(el, required, parent);
+                    } else {
+                        pattern = pattern.test(value);
+                    }
+                    el_validations.push(required_valid && pattern || !required && !value.length || el.disabled);
 
                     el_validations = [el_validations.every(function(valid) {
                         return valid;
