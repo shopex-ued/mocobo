@@ -17,7 +17,28 @@
 
 <div class="container">
 
-  <h1>示例</h1>
+  <h1>默认示例（错误消息弹出）</h1>
+  <form action="" method="post" data-validator>
+    <div class="form-row">
+      <div class="grid-12">
+        <label>用户名 <em class="text-alert">*</em>
+          <input type="text" required pattern="words">
+        </label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="grid-12">
+        <label>密码 <em class="text-alert">*</em>
+          <input type="password" required>
+        </label>
+      </div>
+    </div>
+    <div class="form-row">
+      <button type="submit">提交</button>
+    </div>
+  </form>
+
+  <h1>预定义错误消息显示</h1>
   <form action="" method="post" data-validator>
     <div class="form-row">
       <div class="grid-12">
@@ -264,14 +285,19 @@
       // the amount of time Validator will take before it validates the form (in ms).
       // smaller time will result in faster validation
       timeout: 1000,
+      // You can custom patterns
       patterns: {
         alpha: /^[a-zA-Z]*$/,
         digital: /^\d*$/,
         alpha_digital: /^[a-zA-Z\d]*$/,
+        words: /^\w*$/,
         int: /^[-+]?\d*$/,
         positive: /^\+?\d*(?:[\.]\d+)?$/,
         negative: /^-\d*(?:[\.]\d+)?$/,
         number: /^[-+]?\d*(?:[\.]\d+)?$/,
+        mobile: /^0?(?:1(?:[38]\d)|(?:4[579])|(?:[57][0-35-9]))\d{8}$/,
+        tel: /^(0\d{2,3}-?)?[2-9]\d{5,7}(-\d{1,5})?$/,
+        zip: /^\d{6}$/,
         // http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#valid-e-mail-address
         email: /^[\w.!#$%&'*+\/=?^`{|}~-]+@[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}[a-zA-Z\d])?(?:\.[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}[a-zA-Z\d])?)*$/,
         // http://blogs.lse.ac.uk/lti/2008/04/23/a-regular-expression-to-match-any-url/
@@ -284,10 +310,7 @@
         // HH:MM:SS
         time: /^(0?\d|1\d|2[0-3])(:[0-5]\d){2}$/,
         // #FFF or #FFFFFF
-        color: /^#([a-fA-F\d]{6}|[a-fA-F\d]{3})$/,
-        mobile: /^0?(?:1(?:[38]\d)|(?:4[579])|(?:[57][0-35-9]))\d{8}$/,
-        tel: /^(0\d{2,3}-?)?[2-9]\d{5,7}(-\d{1,5})?$/,
-        zip: /^\d{6}$/
+        color: /^#([a-fA-F\d]{6}|[a-fA-F\d]{3})$/
       },
       // You can custom verifiers
       verifiers: {
@@ -309,13 +332,17 @@
       },
       // You can custom alerts
       alerts: {
-        required: '请输入/选择{placeholder}！',
+        required: '请{how}{placeholder}！',
         alpha: '请填写英文字母！',
         digital: '只允许填写数字！',
         alpha_digital: '请填写英文字母或数字！',
+        words: '请输入英文字母、数字、下划线！',
         int: '请填写整数！',
         positive: '请填写正数！',
         negative: '请填写负数！',
+        mobile: '手机号码有误，请重新填写！',
+        tel: '电话号码有误，请重新填写!',
+        zip: '邮政编码格式有误，请重新填写！',
         number: '请填写数值！',
         email: '请填写正确的邮箱地址！',
         url: '请填写正确的 URL 地址！',
@@ -323,10 +350,7 @@
         datetime: '请填写正确的日期和时间格式！',
         date: '请填写正确的日期格式！',
         time: '请填写正确的时间格式！',
-        color: '请填写十六进制颜色格式！',
-        mobile: '手机号码有误，请重新填写！',
-        tel: '电话号码有误，请重新填写!',
-        zip: '邮政编码格式有误，请重新填写！'
+        color: '请填写十六进制颜色格式！'
       }
     }
   });
@@ -341,9 +365,21 @@
   })
   .on('valid.validator', function () {
     console.log('valid!');
+  })
+  .on('start.ajax.validator', function () {
+    console.log('ajax start!');
+  })
+  .on('complete.ajax.validator', function () {
+    console.log('ajax complete!');
+  })
+  .on('success.ajax.validator', function () {
+    console.log('ajax success!');
+  })
+  .on('error.ajax.validator', function () {
+    console.log('ajax error!');
   });
   </pre>
-  <p>如果需要异步提交表单，<code>form</code>的属性需改为<code>data-validator="ajax"</code>，然后在<code>valid.validator</code>事件里写异步代码。</p>
+  <p>如果需要异步提交表单，<code>form</code>的属性需改为<code>data-validator="ajax"</code>，然后在<code>success.ajax.validator</code>或<code>error.ajax.validator</code>事件里写异步回调代码。</p>
 
   <h1>当页面中添加了新的表单验证组件</h1>
   <pre>
@@ -356,12 +392,14 @@
 <script src="../dist/js/mobile.min.js"></script>
 <script src="../dist/js/main.min.js"></script>
 <script>
-  $('form')
-    .on('valid.validator', function(e, event) {
-      alert('验证通过!');
-      $(this).mobile('validator', 'enabledSubmit', $(this));
-      event.preventDefault();
-    });
+$('form').on('valid.validator', function(e, event) {
+    alert('验证通过!');
+    $(this).mobile('validator', 'enabledSubmit', $(this));
+    event.preventDefault();
+});
+$('[data-validator=ajax]').on('complete.ajax.validator', function(e, event) {
+    $(document).mobile('tips', 'show', '已提交处理');
+});
 </script>
 </body>
 </html>

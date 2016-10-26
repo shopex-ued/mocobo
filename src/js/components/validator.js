@@ -22,6 +22,7 @@
                 alpha: /^[a-zA-Z]*$/,
                 digital: /^\d*$/,
                 alpha_digital: /^[a-zA-Z\d]*$/,
+                words: /^\w*$/,
                 int: /^[-+]?\d*$/,
                 positive: /^\+?\d*(?:[\.]\d+)?$/,
                 negative: /^-\d*(?:[\.]\d+)?$/,
@@ -63,6 +64,7 @@
                 alpha: '请填写英文字母！',
                 digital: '只允许填写数字！',
                 alpha_digital: '请填写英文字母或数字！',
+                words: '请输入英文字母、数字、下划线！',
                 int: '请填写整数！',
                 positive: '请填写正数！',
                 negative: '请填写负数！',
@@ -195,13 +197,20 @@
                     url: form.attr('action'),
                     type: form.attr('method'),
                     data: form.serialize(),
-                    dataType: 'json'
+                    dataType: 'json',
+                    beforeSend: function() {
+                        return form.trigger('start.ajax.validator', arguments);
+                    }
                 })
                 .always(function() {
+                    form.trigger('complete.ajax.validator', arguments);
                     self.enabledSubmit(form);
                 })
-                .done(function(rs) {
-                    form.trigger('complete.validator', [rs]);
+                .done(function() {
+                    form.trigger('success.ajax.validator', arguments);
+                })
+                .fail(function() {
+                    form.trigger('error.ajax.validator', arguments);
                 });
                 return false;
             }
