@@ -236,30 +236,25 @@
         pattern: function(el) {
             var type = el.type,
                 required = el.hasAttribute('required'),
-                pattern = el.getAttribute('pattern') || '',
+                pattern = el.getAttribute('pattern') || type,
                 verifier = el.getAttribute(this.add_namespace(this.attr_name() + '-verifier')) || '',
                 eqTo = el.hasAttribute(this.add_namespace(this.attr_name() + '-equalto')),
                 oneOf = el.hasAttribute(this.add_namespace(this.attr_name() + '-oneof')),
                 patternKey = null,
-                patternVal;
+                patternVal = /^.*$/;
 
-            if (this.settings.patterns.hasOwnProperty(pattern)) {
+            if(required && !el.value.trim()) {
+                patternKey = 'required';
+            } else if (this.settings.patterns.hasOwnProperty(pattern)) {
                 patternKey = pattern;
                 patternVal = this.settings.patterns[pattern];
             } else if (this.settings.patterns.hasOwnProperty(verifier)) {
                 patternKey = verifier;
                 patternVal = this.settings.patterns[verifier];
-            } else if (this.settings.patterns.hasOwnProperty(type)) {
-                patternKey = type;
-                patternVal = this.settings.patterns[type];
             } else if (pattern) {
                 patternVal = new RegExp('^' + pattern.replace(/^\^(.+)\$$/, '$1') + '$');
             } else if (eqTo || oneOf) {
                 patternKey = eqTo ? 'equalto' : 'oneof';
-                patternVal = /^[\s\S]*$/;
-            } else {
-                patternKey = required ? 'required' : null;
-                patternVal = /^[\s\S]*$/;
             }
             return [el, patternKey, patternVal, required];
         },
@@ -277,19 +272,25 @@
                     is_radio = el.type === 'radio',
                     is_checkbox = el.type === 'checkbox',
                     direct_parent = $(el).parent(),
+                    parent = settings.feedback ? $(el).parents(settings.feedback)[0] : null,
                     verifier = el.getAttribute(this.add_namespace(this.attr_name() + '-verifier')),
                     // Validate using each of the specified (space-delimited) verifiers.
                     verifiers = verifier ? verifier.split(' ') : [],
                     label = (function() {
-                        var label = $(el).siblings('label');
+                        var label = [];
+                        if (direct_parent.is('label')) {
+                            label = direct_parent;
+                        } else if (parent) {
+                            label = parent.find('label');
+                        }
                         if (!label.length) {
                             label = $('label[for="' + el.id + '"]');
                         }
+
                         return label;
                     })(),
-                    valid_length = required ? (value.length > 0) : true,
+                    required_valid = required ? value : true,
                     el_validations = [],
-                    parent,
                     valid;
 
                 if ((is_radio || is_checkbox) && required) {
@@ -303,15 +304,12 @@
                     verifiers.push('oneof');
                 }
 
-                if (settings.feedback) {
-                    parent = $(el).parents(settings.feedback).eq(0);
-                }
-                if (!parent || !parent.length) {
-                    if (direct_parent.is('label')) {
-                        parent = direct_parent.parent();
-                    } else {
-                        parent = direct_parent;
-                    }
+                if (parent) {
+                    parent = $(parent);
+                } else if (direct_parent.is('label')) {
+                    parent = direct_parent.parent();
+                } else {
+                    parent = direct_parent;
                 }
 
                 if (verifiers.length) {
@@ -326,11 +324,11 @@
                     if (all_valid) {
                         this.validSuccess(el, parent, label);
                     } else {
-                        validations = this.validError(el, parent, label, i, el_patterns, el_validations);
+                        validations = this.validError(el, parent, label, el_patterns[i], el_validations);
                         if(validations.length) break;
                     }
                 } else {
-                    el_validations.push(el_patterns[i][2].test(value) && valid_length || !required && !value.length || el.disabled);
+                    el_validations.push(required_valid && el_patterns[i][2].test(value) || !required && !value.length || el.disabled);
 
                     el_validations = [el_validations.every(function(valid) {
                         return valid;
@@ -338,7 +336,7 @@
                     if (el_validations[0]) {
                         this.validSuccess(el, parent, label);
                     } else {
-                        validations = this.validError(el, parent, label, i, el_patterns, el_validations);
+                        validations = this.validError(el, parent, label, el_patterns[i], el_validations);
                         if(validations.length) break;
                     }
                 }
@@ -359,26 +357,22 @@
             $(el).triggerHandler('valid');
         },
 
-        validError: function(el, parent, label, i, el_patterns, el_validations) {
+        validError: function(el, parent, label, el_patterns, el_validations) {
             var validations = [];
             el.setAttribute(this.invalid_attr, '');
             el.setAttribute('aria-invalid', 'true');
 
             // Try to find the error associated with the input
+            var required = el_patterns[3];
             var errorElement = parent.find(this.settings.alert_element);
-            var type = this.settings.alerts[el_patterns[i][1]];
-            var msg = el_patterns[i][0].dataset.alerts;
-            var how = '输入';
+            var msg = el_patterns[0].dataset.alerts || this.settings.alerts[el_patterns[1]] || '输入不符合要求，请检查！';
 
-            if(!msg) {
-                if (type) {
-                    if (['radio', 'checked'].indexOf(el.type) > -1 || el.tagName === 'select') {
-                        how = '选择';
-                    }
-                    msg = type.replace('{how}', how).replace('{placeholder}', label.text().replace(/[：:]$/, '') || el_patterns[i][0].placeholder || '其中一项');
-                } else {
-                    msg = '输入不符合要求，请检查！';
+            if(required) {
+                var how = '输入';
+                if (['radio', 'checked'].indexOf(el.type) > -1 || el.tagName === 'select') {
+                    how = '选择';
                 }
+                msg = msg.replace('{how}', how).replace('{placeholder}', label.length ? label.text().trim().replace(/[：:*]$/, '') : el_patterns[0].placeholder || '其中一项');
             }
 
             if (!errorElement.length) {
@@ -404,80 +398,6 @@
 
             return validations;
         },
-
-        // valid_checkbox: function(el, required) {
-        //     var el = $(el),
-        //         valid = (el.is(':checked') || !required || el.get(0).getAttribute('disabled'));
-
-        //     if (valid) {
-        //         el.removeAttr(this.invalid_attr).parent().removeClass(this.settings.error_class);
-        //         $(el).triggerHandler('valid');
-        //     } else {
-        //         el.attr(this.invalid_attr, '').parent().addClass(this.settings.error_class);
-        //         $(el).triggerHandler('invalid');
-        //     }
-
-        //     return valid;
-        // },
-
-        // valid_radio: function(el, required) {
-        //     var name = el.getAttribute('name'),
-        //         group = $(el).closest('[data-' + this.attr_name(true) + ']').find("[name='" + name + "']"),
-        //         count = group.length,
-        //         valid = false,
-        //         disabled = false;
-
-        //     // Has to count up to make sure the focus gets applied to the top error
-        //     for (var i = 0; i < count; i++) {
-        //         if (group[i].getAttribute('disabled')) {
-        //             disabled = true;
-        //             valid = true;
-        //         } else {
-        //             if (group[i].checked) {
-        //                 valid = true;
-        //             } else {
-        //                 if (disabled) {
-        //                     valid = false;
-        //                 }
-        //             }
-        //         }
-        //     }
-
-        //     // Has to count up to make sure the focus gets applied to the top error
-        //     for (var i = 0; i < count; i++) {
-        //         if (valid) {
-        //             $(group[i]).removeAttr(this.invalid_attr).parent().removeClass(this.settings.error_class);
-        //             $(group[i]).triggerHandler('valid');
-        //         } else {
-        //             $(group[i]).attr(this.invalid_attr, '').parent().addClass(this.settings.error_class);
-        //             $(group[i]).triggerHandler('invalid');
-        //         }
-        //     }
-
-        //     return valid;
-        // },
-
-        // valid_equal: function(el, required, parent) {
-        //     var from = document.getElementById(el.getAttribute(this.add_namespace(this.attr_name() + '-equalto'))).value,
-        //         to = el.value,
-        //         valid = (from === to);
-
-        //     if (valid) {
-        //         $(el).removeAttr(this.invalid_attr);
-        //         parent.removeClass(this.settings.error_class);
-        //         if (label.length > 0 && settings.error_labels) {
-        //             label.removeClass(this.settings.error_class);
-        //         }
-        //     } else {
-        //         $(el).attr(this.invalid_attr, '');
-        //         parent.addClass(this.settings.error_class);
-        //         if (label.length > 0 && settings.error_labels) {
-        //             label.addClass(this.settings.error_class);
-        //         }
-        //     }
-
-        //     return valid;
-        // },
 
         valid_oneof: function(el, required, parent, doNotValidateOthers) {
             var el = $(el),
@@ -512,4 +432,3 @@
         }
     };
 }(jQuery, window, window.document));
-
