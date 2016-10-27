@@ -378,7 +378,7 @@
                 if (['radio', 'checked'].indexOf(el.type) > -1 || el.tagName === 'select') {
                     how = '选择';
                 }
-                msg = msg.replace('{how}', how).replace('{placeholder}', label.length ? label.text().trim().replace(/[：:*]$/, '') : el_patterns[0].placeholder || '其中一项');
+                msg = msg.replace('{how}', how).replace('{placeholder}', label.length ? label.text().replace(/[：:*]$/, '').trim() : el_patterns[0].placeholder || '其中一项');
             }
 
             if (!errorElement.length) {
