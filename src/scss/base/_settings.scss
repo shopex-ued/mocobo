@@ -433,9 +433,16 @@
 // $buttons-display: inline-block;
 // $buttons-margin-bottom: to-rem(15);
 
-// We use these to control button text styles.
+// We use these to control various hover effects.
+// $buttons-function-factor: -15%;
+// $buttons-function-factor-outline: .8;
+
+// We use these to control buttons text styles.
 // $buttons-font-color: $body-font-color;
 // $buttons-font-color-alt: $white;
+// $buttons-font-hover: lighten($body-font-color, 5%);
+// $buttons-font-color-outline: $buttons-font-color;
+// $buttons-font-hover-outline: rgba($buttons-font-color-outline, $buttons-function-factor-outline);
 // $buttons-font-weight: $font-weight-normal;
 // $buttons-font-align: center;
 
@@ -451,55 +458,74 @@
 // $buttons-font-size-large: to-rem(17);
 // $buttons-line-height-large: 2;
 
-// We use these to control various hover effects.
-// $buttons-function-factor: -20%;
-// $buttons-function-factor-outline: 0;
-
-// We use these to control button border styles.
+// We use these to control buttons border styles.
 // $buttons-border-width: 1px;
 // $buttons-border-style: solid;
 // $buttons-border-color: rgba($steel, .2);
+
+// We use these to control buttons background styles.
 // $buttons-bg-color: $ghost;
 // $buttons-bg-hover: scale-color($buttons-bg-color, $lightness: $buttons-function-factor);
-// $buttons-bg-hover-outline: transparentize($buttons-bg-color, $buttons-function-factor-outline);
+// $buttons-bg-color-outline: $white;
+// $buttons-bg-hover-outline: rgba($buttons-bg-color-outline, $buttons-function-factor-outline);
 
 // $primary-buttons-bg-color: $primary-color;
 // $primary-buttons-bg-hover: scale-color($primary-buttons-bg-color, $lightness: $buttons-function-factor);
-// $primary-buttons-bg-hover-outline: transparentize($primary-buttons-bg-color, $buttons-function-factor-outline);
+// $primary-buttons-bg-disabled: false;
+// // $primary-buttons-bg-hover-outline: transparentize($primary-buttons-bg-color, $buttons-function-factor-outline);
 // $primary-buttons-border-color: $primary-buttons-bg-hover;
+// $primary-buttons-font-color-outline: $primary-buttons-bg-color;
+// $primary-buttons-font-hover-outline: rgba($primary-buttons-font-color-outline, $buttons-function-factor-outline);
 
 // $secondary-buttons-bg-color: $secondary-color;
 // $secondary-buttons-bg-hover: scale-color($secondary-buttons-bg-color, $lightness: $buttons-function-factor);
-// $secondary-buttons-bg-hover-outline: transparentize($secondary-buttons-bg-color, $buttons-function-factor-outline);
+// $secondary-buttons-bg-disabled: false;
+// // $secondary-buttons-bg-hover-outline: transparentize($secondary-buttons-bg-color, $buttons-function-factor-outline);
 // $secondary-buttons-border-color: $secondary-buttons-bg-hover;
+// $secondary-buttons-font-color-outline: $secondary-buttons-bg-color;
+// $secondary-buttons-font-hover-outline: rgba($secondary-buttons-font-color-outline, $buttons-function-factor-outline);
 
 // $success-buttons-bg-color: $success-color;
 // $success-buttons-bg-hover: scale-color($success-buttons-bg-color, $lightness: $buttons-function-factor);
-// $success-buttons-bg-hover-outline: transparentize($success-buttons-bg-color, $buttons-function-factor-outline);
+// $success-buttons-bg-disabled: false;
+// // $success-buttons-bg-hover-outline: transparentize($success-buttons-bg-color, $buttons-function-factor-outline);
 // $success-buttons-border-color: $success-buttons-bg-hover;
+// $success-buttons-font-color-outline: $success-buttons-bg-color;
+// $success-buttons-font-hover-outline: rgba($success-buttons-font-color-outline, $buttons-function-factor-outline);
 
 // $alert-buttons-bg-color: $alert-color;
 // $alert-buttons-bg-hover: scale-color($alert-buttons-bg-color, $lightness: $buttons-function-factor);
-// $alert-buttons-bg-hover-outline: transparentize($alert-buttons-bg-color, $buttons-function-factor-outline);
+// $alert-buttons-bg-disabled: false;
+// // $alert-buttons-bg-hover-outline: transparentize($alert-buttons-bg-color, $buttons-function-factor-outline);
 // $alert-buttons-border-color: $alert-buttons-bg-hover;
+// $alert-buttons-font-color-outline: $alert-buttons-bg-color;
+// $alert-buttons-font-hover-outline: rgba($alert-buttons-font-color-outline, $buttons-function-factor-outline);
 
 // $warning-buttons-bg-color: $warning-color;
 // $warning-buttons-bg-hover: scale-color($warning-buttons-bg-color, $lightness: $buttons-function-factor);
-// $warning-buttons-bg-hover-outline: transparentize($warning-buttons-bg-color, $buttons-function-factor-outline);
+// $warning-buttons-bg-disabled: false;
+// // $warning-buttons-bg-hover-outline: transparentize($warning-buttons-bg-color, $buttons-function-factor-outline);
 // $warning-buttons-border-color: $warning-buttons-bg-hover;
+// $warning-buttons-font-color-outline: $warning-buttons-bg-color;
+// $warning-buttons-font-hover-outline: rgba($warning-buttons-font-color-outline, $buttons-function-factor-outline);
 
 // $info-buttons-bg-color: $info-color;
 // $info-buttons-bg-hover: scale-color($info-buttons-bg-color, $lightness: $buttons-function-factor);
-// $info-buttons-bg-hover-outline: transparentize($info-buttons-bg-color, $buttons-function-factor-outline);
+// $info-buttons-bg-disabled: false;
+// // $info-buttons-bg-hover-outline: transparentize($info-buttons-bg-color, $buttons-function-factor-outline);
 // $info-buttons-border-color: $info-buttons-bg-hover;
+// $info-buttons-font-color-outline: $info-buttons-bg-color;
+// $info-buttons-font-hover-outline: rgba($info-buttons-font-color-outline, $buttons-function-factor-outline);
 
 // We use this to set the default radius used throughout the core.
 // $buttons-radius: $global-radius;
-// $buttons-round: $global-rounded;
+// $buttons-rounded: $global-rounded;
 
 // We use this to set default opacity for disabled buttons.
 // $buttons-disabled-opacity: .6;
 // $buttons-disabled-bg: false;
+// $buttons-disabled-font-color: false;
+// $buttons-disabled-font-color-alt: false;
 
 // 07. Button Groups
 // - - - - - - - - - - - - - - - - - - - - - - - - -
