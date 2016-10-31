@@ -430,10 +430,14 @@ $input-transition-fade-timing-function: linear !default;
         }
         .#{$form-row-class} {
             display: flex;
+            margin-bottom: $form-bottom-margin;
             > :not(input).#{$grid-columns-class} {
                 @include grid-column($collapse: sides, $float: false);
             }
-            margin-bottom: $form-bottom-margin;
+            button,
+            .#{$buttons-class} {
+                margin-bottom: 0;
+            }
         }
         // Using forms within rows, we need to set some defaults
         form .#{$grid-row-class},
