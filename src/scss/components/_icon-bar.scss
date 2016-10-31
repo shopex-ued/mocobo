@@ -8,13 +8,22 @@ $include-html-icon-bar-classes: $include-html-classes !default;
 // We use these to style the icon-bar and items
 $icon-bar-class: 'icon-bar' !default;
 $icon-bar-bg: $oil !default;
+$icon-bar-bg-reverse: lighten($reverse-color, 15%) !default;
+$icon-bar-bg-hover: $primary-color !default;
+$icon-bar-bg-hover-reverse: transparent !default;
+// We use these to style the icon-bar's border direction and border color
+$icon-bar-border-color: false !default;
+$icon-bar-border-color-reverse: top darken($icon-bar-bg-reverse, 5%) !default;
 $icon-bar-shadow: false !default;
 $icon-bar-font-color: $white !default;
+$icon-bar-font-color-reverse: $oil !default;
 $icon-bar-font-color-hover: $icon-bar-font-color !default;
+$icon-bar-font-color-hover-reverse: $primary-color !default;
 $icon-bar-font-size: to-rem(12) !default;
-$icon-bar-bg-hover: $primary-color !default;
 $icon-bar-icon-color: $icon-bar-font-color !default;
+$icon-bar-icon-color-reverse: $icon-bar-font-color-reverse !default;
 $icon-bar-icon-color-hover: $icon-bar-icon-color !default;
+$icon-bar-icon-color-hover-reverse: $icon-bar-font-color-hover-reverse !default;
 $icon-bar-icon-size: $icon-bar-font-size * 2 !default;
 $icon-bar-icon-line-height: 1.33333 !default;
 $icon-bar-image-width: $icon-bar-icon-size !default;
@@ -60,8 +69,11 @@ $icon-bar-disabled-opacity: 0.7 !default;
 }
 
 // We use this mixin to create the other styles for icon bars.
-@mixin icon-bar-style($bg: $icon-bar-bg, $shadow: $icon-bar-shadow, $font-size: $icon-bar-font-size, $color: $icon-bar-font-color, $color-hover: $icon-bar-font-color-hover, $bg-hover: $icon-bar-bg-hover, $icon-size: $icon-bar-icon-size, $icon-color: $icon-bar-icon-color, $icon-color-hover: $icon-bar-icon-color-hover, $icon-line-height: $icon-bar-icon-line-height, $image-width: $icon-bar-image-width, $image-height: $icon-bar-image-height, $disabled: true) {
-    background: $bg;
+@mixin icon-bar-style($bg: $icon-bar-bg, $bg-hover: $icon-bar-bg-hover, $border: $icon-bar-border-color, $shadow: $icon-bar-shadow, $font-size: $icon-bar-font-size, $color: $icon-bar-font-color, $color-hover: $icon-bar-font-color-hover, $icon-size: $icon-bar-icon-size, $icon-color: $icon-bar-icon-color, $icon-color-hover: $icon-bar-icon-color-hover, $icon-line-height: $icon-bar-icon-line-height, $image-width: $icon-bar-image-width, $image-height: $icon-bar-image-height, $disabled: true) {
+    background-color: $bg;
+    @if $border {
+        border-#{nth($boder, 1)}: 1px solid nth($border, 2);
+    }
     @if $shadow {
         box-shadow: $shadow;
     }
@@ -83,7 +95,7 @@ $icon-bar-disabled-opacity: 0.7 !default;
         &:hover,
         &.active {
             @if $bg-hover {
-                background: $bg-hover;
+                background-color: $bg-hover;
             }
             @if $color-hover {
                 color: $color-hover;
@@ -112,6 +124,33 @@ $icon-bar-disabled-opacity: 0.7 !default;
         .#{$icon-bar-class} {
             @include icon-bar-base;
             @include icon-bar-style;
+            &.reverse {
+                background-color: $icon-bar-bg-reverse;
+                @if $icon-bar-border-color-reverse {
+                    border-#{nth($icon-bar-border-color-reverse, 1)}: 1px solid nth($icon-bar-border-color-reverse, 2);
+                }
+
+                > .item {
+                    label {
+                        color: $icon-bar-font-color-reverse;
+                    }
+                    i {
+                        color: $icon-bar-icon-color-reverse;
+                    }
+                    &:hover,
+                    &.active {
+                        @if $icon-bar-bg-hover-reverse {
+                            background-color: $icon-bar-bg-hover-reverse;
+                        }
+                        label {
+                            color: $icon-bar-font-color-hover-reverse;
+                        }
+                        i {
+                            color: $icon-bar-icon-color-hover-reverse;
+                        }
+                    }
+                }
+            }
             // Counts
             &.two-up > .item {
                 width: percentage(1 / 2);

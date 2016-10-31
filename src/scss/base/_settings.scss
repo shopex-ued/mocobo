@@ -732,13 +732,22 @@
 // We use these to style the icon-bar and items
 // $icon-bar-class: 'icon-bar';
 // $icon-bar-bg: $oil;
+// $icon-bar-bg-reverse: lighten($reverse-color, 15%);
+// $icon-bar-bg-hover: $primary-color;
+// $icon-bar-bg-hover-reverse: transparent;
+// We use these to style the icon-bar's border direction and border color
+// $icon-bar-border-color: false;
+// $icon-bar-border-color-reverse: top darken($icon-bar-bg-reverse, 5%);
 // $icon-bar-shadow: false;
 // $icon-bar-font-color: $white;
+// $icon-bar-font-color-reverse: $oil;
 // $icon-bar-font-color-hover: $icon-bar-font-color;
+// $icon-bar-font-color-hover-reverse: $primary-color;
 // $icon-bar-font-size: to-rem(12);
-// $icon-bar-bg-hover: $$primary-color;
 // $icon-bar-icon-color: $icon-bar-font-color;
+// $icon-bar-icon-color-reverse: $icon-bar-font-color-reverse;
 // $icon-bar-icon-color-hover: $icon-bar-icon-color;
+// $icon-bar-icon-color-hover-reverse: $icon-bar-font-color-hover-reverse;
 // $icon-bar-icon-size: $icon-bar-font-size * 2;
 // $icon-bar-icon-line-height: 1.33333;
 // $icon-bar-image-width: $icon-bar-icon-size;
