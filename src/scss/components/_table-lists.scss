@@ -206,11 +206,19 @@ $table-list-children-display: block !default;
                 // Table-lists with buttons, badges and switchs
                 .#{$buttons-class},
                 .#{$badge-class},
-                .#{$switch-class} {
+                .#{$switch-class},
+                input {
                     position: absolute;
                     top: 50%;
                     right: $table-list-item-border-start;
                     transform: translateY(-50%);
+                    margin-bottom: 0;
+                }
+                input {
+                    width: auto;
+                }
+                label {
+                    line-height: 2;
                 }
                 > .nav-right {
                     &::before {
@@ -228,12 +236,13 @@ $table-list-children-display: block !default;
                     }
                     > .#{$buttons-class},
                     > .#{$badge-class},
-                    > .#{$switch-class} {
+                    > .#{$switch-class},
+                    > input {
                         right: $table-list-nav-distance + $table-list-nav-icon-size + to-rem(4);
                     }
                 }
                 > .#{$table-list-class} {
-                    margin: $table-list-item-padding-top $table-list-item-margin-left $table-list-item-margin-top $table-list-item-margin-left * 2;
+                    margin: $table-list-item-padding-top $table-list-item-margin-left $table-list-item-margin-top $table-list-irem-margin-left * 2;
                     border: 0 none;
                     &::after {
                         left: $table-list-item-border-start;
