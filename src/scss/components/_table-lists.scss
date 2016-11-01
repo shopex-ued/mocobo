@@ -242,7 +242,7 @@ $table-list-children-display: block !default;
                     }
                 }
                 > .#{$table-list-class} {
-                    margin: $table-list-item-padding-top $table-list-item-margin-left $table-list-item-margin-top $table-list-irem-margin-left * 2;
+                    margin: $table-list-item-padding-top $table-list-item-margin-left $table-list-item-margin-top $table-list-item-margin-left * 2;
                     border: 0 none;
                     &::after {
                         left: $table-list-item-border-start;

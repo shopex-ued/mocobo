@@ -11,8 +11,9 @@ $table-bg: $white !default;
 $table-even-row-bg: $snowwhite !default;
 
 // These control the table cell border style
+$table-border-collapse: collapse !default;
+$table-border-size: to-rem(1) !default;
 $table-border-style: solid !default;
-$table-border-size: 1px !default;
 $table-border-color: $gainsboro !default;
 
 // These control the table head styles
@@ -43,7 +44,6 @@ $table-line-height: to-rem(18) !default;
 
 // These are for controlling the layout, display and margin of tables
 $table-layout: auto !default;
-// $table-display: table-cell !default;
 $table-margin-bottom: to-rem(20) !default;
 
 //
@@ -53,9 +53,10 @@ $table-margin-bottom: to-rem(20) !default;
 @mixin table {
     background: $table-bg;
     border: $table-border-style $table-border-size $table-border-color;
+    border-collapse: $table-border-collapse;
     margin-bottom: $table-margin-bottom;
     table-layout: $table-layout;
-    caption {
+    > caption {
         background: $table-caption-bg;
         color: $table-caption-font-color;
         font: {
@@ -63,7 +64,7 @@ $table-margin-bottom: to-rem(20) !default;
             weight: $table-caption-font-weight;
         };
     }
-    thead {
+    > thead {
         background: $table-head-bg;
         tr {
             th,
@@ -75,7 +76,7 @@ $table-margin-bottom: to-rem(20) !default;
             }
         }
     }
-    tfoot {
+    > tfoot {
         background: $table-foot-bg;
         tr {
             th,
@@ -96,7 +97,6 @@ $table-margin-bottom: to-rem(20) !default;
             text-align: left;
         }
         &.even,
-        &.alt,
         &:nth-of-type(even) {
             background: $table-even-row-bg;
         }
@@ -105,9 +105,7 @@ $table-margin-bottom: to-rem(20) !default;
     tfoot tr th,
     tfoot tr td,
     tbody tr th,
-    tbody tr td,
-    tr td {
-        // display: $table-display;
+    tbody tr td {
         line-height: $table-line-height;
     }
 }
@@ -120,19 +118,27 @@ $table-margin-bottom: to-rem(20) !default;
         }
         .table {
             display: table;
-            table-layout: auto;
-            // > .thead {
-            //     display: table-header-group;
-            // }
-            // > .tbody {
-            //     display: table-row-group;
-            // }
-            // > .tfoot {
-            //     display: table-footer-group;
-            // }
-            // > .colgroup {
-            //     display: table-column-group;
-            // }
+            width: 100%;
+            table-layout: $table-layout;
+            border-collapse: $table-border-collapse;
+            .caption {
+                display: table-caption;
+            }
+            > .colgroup {
+                display: table-column-group;
+            }
+            .col {
+                display: table-column;
+            }
+            > .thead {
+                display: table-header-group;
+            }
+            > .tbody {
+                display: table-row-group;
+            }
+            > .tfoot {
+                display: table-footer-group;
+            }
             .tr {
                 display: table-row;
                 // &.even,
@@ -140,14 +146,20 @@ $table-margin-bottom: to-rem(20) !default;
                 //     background: $table-even-row-bg;
                 // }
             }
+            .th,
             .td {
                 display: table-cell;
             }
-            .caption {
-                display: table-caption;
+            .th {
+                font-weight: bold;
+                text-align: center;
             }
-            .col {
-                display: table-column;
+            &.bordered {
+                border: $table-border-style $table-border-size $table-border-color;
+                .th,
+                .td {
+                    border: $table-border-style $table-border-size $table-border-color;
+                }
             }
         }
     }
