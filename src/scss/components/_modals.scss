@@ -271,7 +271,7 @@ $modal-button-bg-color-active: false !default;
                 @if $modal-footer-align {
                     text-align: $modal-footer-align;
                 }
-                .#{$buttons-class} {
+                > .#{$buttons-class} {
                     margin-bottom: 0;
                     @if $modal-button-font-color {
                         color: $modal-button-font-color;
