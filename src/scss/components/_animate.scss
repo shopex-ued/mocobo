@@ -4,6 +4,7 @@
 
 $include-html-animate-classes: $include-html-classes !default;
 
+$animate-duration-fastest: .1s !default;
 $animate-duration-faster:  .2s !default;
 $animate-duration-fast:    .3s !default;
 $animate-duration-normal:  .5s !default;
@@ -12,7 +13,7 @@ $animate-duration-slower: 1.5s !default;
 $animate-duration: $animate-duration-normal !default;
 
 // Included, add as needed.
-$animate-include: (slideInUp slideInDown slideOutUp slideOutDown fadeIn fadeOut circle) !default;
+$animate-include: (slideInUp slideInDown slideOutUp slideOutDown fadeIn fadeOut circle zoomIn zoomOut pulse) !default;
 
 //
 // Mixins
@@ -23,6 +24,9 @@ $animate-include: (slideInUp slideInDown slideOutUp slideOutDown fadeIn fadeOut 
         animation-fill-mode: both;
         &.infinite {
             animation-iteration-count: infinite;
+        }
+        &.fastest {
+            animation-duration: $animate-duration-fastest;
         }
         &.faster {
             animation-duration: $animate-duration-faster;
@@ -290,7 +294,7 @@ $animate-include: (slideInUp slideInDown slideOutUp slideOutDown fadeIn fadeOut 
     @keyframes zoomIn {
         from {
             opacity: 0;
-            transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.5, 0.5, 0.5);
         }
         50% {
             opacity: 1;
@@ -309,7 +313,7 @@ $animate-include: (slideInUp slideInDown slideOutUp slideOutDown fadeIn fadeOut 
         }
         50% {
             opacity: 0;
-            transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.5, 0.5, 0.5);
         }
         to {
             opacity: 0;
@@ -318,6 +322,25 @@ $animate-include: (slideInUp slideInDown slideOutUp slideOutDown fadeIn fadeOut 
 
     .zoom-out {
         animation-name: zoomOut;
+    }
+}
+
+@mixin pulse {
+    @keyframes pulse {
+        from {
+            transform: scale3d(1, 1, 1);
+        }
+        30% {
+            transform: scale3d(1.1, 1.1, 1.1);
+        }
+        to {
+            transform: scale3d(1, 1, 1);
+        }
+    }
+
+    .pulse {
+        animation-timing-function: ease;
+        animation-name: pulse;
     }
 }
 
@@ -375,6 +398,9 @@ $animate-include: (slideInUp slideInDown slideOutUp slideOutDown fadeIn fadeOut 
             }
             @else if $v == zoomOut {
                 @include zoomOut;
+            }
+            @else if $v == pulse {
+                @include pulse;
             }
         }
     }

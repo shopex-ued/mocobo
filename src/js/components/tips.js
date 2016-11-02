@@ -25,19 +25,23 @@
         effect: {
             pop: {
                 in: 'slide-in-down',
-                out: 'slide-out-up'
+                out: 'slide-out-up',
+                speed: 'fast'
             },
             msg: {
-                in: 'fade-in',
-                out: 'fade-out'
+                in: 'pulse',
+                out: 'zoom-out',
+                speed: 'faster'
             },
             slide: {
                 in: 'slide-in-up',
-                out: 'slide-out-down'
+                out: 'slide-out-down',
+                speed: 'fast'
             },
             overlay: {
                 in: 'fade-in',
-                out: 'fade-out'
+                out: 'fade-out',
+                speed: 'normal'
             }
         },
 
@@ -50,6 +54,7 @@
             var self = this;
             var attr = this.attr_name();
             $(this.scope)
+                .off('click.tips')
                 .on('click.tips', '[' + attr + ']', function(e) {
                     e.preventDefault();
 
@@ -79,15 +84,18 @@
             type = type || this.settings.type;
 
             clearTimeout(this.timer);
-            if(!this.element) this.create(content, type);
-            else {
-                this.element
-                    .off('animationend webkitAnimationEnd')
-                    .find('.content')
-                        .html(content);
+            this.destroy();
+            this.create(content, type);
 
-                if(this.overlay) this.overlay.off('animationend webkitAnimationEnd');
-            }
+            // if(!this.element) this.create(content, type);
+            // else {
+            //     this.element
+            //         .off('animationend webkitAnimationEnd')
+            //         .find('.content')
+            //             .html(content);
+
+            //     if(this.overlay) this.overlay.off('animationend webkitAnimationEnd');
+            // }
 
             if(type === 'pop' && this.settings.relativeTo) {
                 this.element.css('top', $(this.settings.relativeTo).offset().top);
@@ -98,6 +106,7 @@
                 .show()
                 .trigger('show.tips')
                 .find('.content')
+                    .addClass(type.speed)
                     .removeClass(type.out)
                     .addClass(type.in);
 
@@ -126,8 +135,7 @@
                     .removeClass(type.in)
                     .addClass(type.out)
                     .one('animationend webkitAnimationEnd', function() {
-                        $(this).parent().remove();
-                        self.element = null;
+                        self.destroy();
                     });
             if(this.overlay) {
                 this.overlay
@@ -139,6 +147,16 @@
                         self.overlay = null;
                     });
             }
+        },
+
+        destroy: function () {
+            if(this.element) {
+                this.element
+                    .off('animationend webkitAnimationEnd')
+                    .remove();
+                this.element = null;
+            }
+            return this;
         },
 
         reflow: function() {}
