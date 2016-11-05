@@ -51,7 +51,7 @@
                 container.append(bullets_container);
                 bullets_container.wrap('<div class="slide-bullets-container"></div>');
                 self.slides().each(function(idx, el) {
-                    var bullet = $('<li>').attr('data-slides-preview', idx);
+                    var bullet = $('<li>').data('slides-preview', idx);
                     bullets_container.append(bullet);
                 });
             }
@@ -372,19 +372,19 @@
         },
 
         events: function(instance) {
-            var slides_instance = new Slides($(instance), $(instance).data('slides-init'));
+            var slides_instance = new Slides($(instance), $(instance).data(this.name + '-init'));
             $(instance).data(this.name + '-instance', slides_instance);
         },
 
         reflow: function() {
             var self = this;
 
-            if ($(this.scope).is('[data-slides]')) {
+            if ($(this.scope).is('[data-' + this.name + ']')) {
                 var $el = $(this.scope);
                 var instance = $el.data(this.name + '-instance');
                 instance.compute_dimensions();
             } else {
-                $('[data-slides]', this.scope).each(function(idx) {
+                $('[data-' + this.name + ']', this.scope).each(function(idx) {
                     var $el = $(this);
                     var opts = self.data_options($el);
                     var instance = $el.data(self.name + '-instance');

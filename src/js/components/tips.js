@@ -52,10 +52,10 @@
 
         events: function() {
             var self = this;
-            var attr = this.attr_name();
+            var attr = 'data-' + this.name;
             $(this.scope)
-                .off('click.tips')
-                .on('click.tips', '[' + attr + ']', function(e) {
+                .off('click.' + this.name)
+                .on('click.' + this.name, '[' + attr + ']', function(e) {
                     e.preventDefault();
 
                     var content = $(this).attr(attr + '-content');
@@ -104,7 +104,7 @@
             type = this.effect[type];
             this.element
                 .show()
-                .trigger('show.tips')
+                .trigger('show.' + this.name)
                 .find('.content')
                     .addClass(type.speed)
                     .removeClass(type.out)
@@ -130,7 +130,7 @@
             type = type || this.effect[this.settings.type];
 
             this.element
-                .trigger('hide.tips')
+                .trigger('hide.' + this.name)
                 .find('.content')
                     .removeClass(type.in)
                     .addClass(type.out)

@@ -38,45 +38,46 @@
         events: function() {
             var self = this;
             $(this.scope)
-                .off('.numberspin')
-                .on('touchstart.numberspin', '[' + this.attr_name() + '] > button:not(:disabled)', function(e) {
+                .off('.' + this.name)
+                .on('touchstart.' + this.name, '[data-' + this.name + '] > button:not(:disabled)', function(e) {
                     e.preventDefault();
 
-                    var target = $(this).parent('[' + self.attr_name() + ']');
+                    var target = $(this).parent('[data-' + self.name + ']');
                     var input = target.find('input[type=text], input[type=number]');
                     var value = +input.val();
-                    var settings = self.getSettings(input, target, value);
+                    var settings = self.getSettings(input, value, target);
 
                     if (typeof settings.beforeValidate !== 'function' || settings.beforeValidate(input)) {
                         value += $(this).hasClass('prefix') ? -settings.step : settings.step;
-                        self.setNumber(input, value, settings);
+                        self.setValue(input, value, target, settings);
                     }
                 })
-                .on('focus.numberspin', '[' + this.attr_name() + '] > input', function(e) {
+                .on('focus.' + this.name, '[data-' + this.name + '] > input', function(e) {
                     // Make default value as a Number.
                     self.settings.defaultValue = +this.value;
                 })
-                .on('change.numberspin', '[' + this.attr_name() + '] > input', function(e) {
+                .on('change.' + this.name, '[data-' + this.name + '] > input', function(e) {
                     var input = $(this);
-                    var target = input.parent('[' + self.attr_name() + ']');
-                    var settings = self.getSettings(input, target, self.settings.defaultValue);
+                    var target = input.parent('[data-' + self.name + ']');
+                    var settings = self.getSettings(input, self.settings.defaultValue, target);
                     if (typeof settings.beforeValidate !== 'function' || settings.beforeValidate($(this))) {
-                        self.setNumber($(this), +input.val(), settings);
+                        self.setValue($(this), +input.val(), target, settings);
                     }
                 });
+
             if (this.settings.autoInit) {
-                $(this.scope).find('[' + this.attr_name() + ']').each(function() {
+                $(this.scope).find('[data-' + this.name + ']').each(function() {
                     var target = $(this);
                     var input = target.find('input');
-                    var settings = self.getSettings(input, target, input.val());
+                    var settings = self.getSettings(input, input.val(), target);
                     input.val(settings.defaultValue);
-                    target.trigger('init.numberspin', [input]);
+                    target.trigger('init.' + self.name, [input]);
                 });
             }
         },
 
-        getSettings: function(input, target, value) {
-            var settings = target.data(this.attr_name(true) + '-init');
+        getSettings: function(input, value, target) {
+            var settings = target.data(this.name + '-init');
             return $.extend(settings, {
                 min: +input.attr('min'),
                 max: +input.attr('max'),
@@ -85,47 +86,45 @@
             });
         },
 
-        setNumber: function(input, value, settings) {
-            this.validate(input, value, settings);
+        setValue: function(input, value, target, settings) {
+            if (this.validate(input, value, target, settings)) {
+                input.val(value);
+                settings.defaultValue = value;
+                target.trigger('valuechange.' + this.name, [input]);
+            }
         },
 
-        setValue: function(input, value) {
-            this.settings.defaultValue = value;
-            input.val(value).closest('[' + this.attr_name() + ']').trigger('valuechange.numberspin', [input]);
-        },
-
-        validate: function(input, value, settings) {
+        validate: function(input, value, target, settings) {
             var msg = '';
             var result = false;
-            var element = input.closest('[' + this.attr_name() + ']');
-            var alertBox = element.next(settings.validMessage.target);
+            var alertBox = target.next(settings.validMessage.target);
             alertBox = alertBox.length ? alertBox : $(settings.validMessage.target);
 
             if (value == settings.min) {
-                element.trigger('min.numberspin', [input]);
+                target.trigger('min.' + this.name, [input]);
             } else if (value < settings.min) {
                 value = settings.min;
                 msg = settings.validMessage.min.replace('{min}', settings.min);
             } else if (value == settings.max) {
-                element.trigger('max.numberspin', [input]);
+                target.trigger('max.' + this.name, [input]);
             } else if (value > settings.max) {
                 value = settings.max;
                 msg = settings.validMessage.max.replace('{max}', settings.max);
             } else if (!/^-?\d*$/.test(value)) {
                 value = settings.defaultValue;
-                element.trigger('notnumber.numberspin', [input]);
+                target.trigger('notnumber.' + this.name, [input]);
                 msg = settings.validMessage.notnumber;
             }
             if (msg) {
-                if (typeof settings.validError === 'function') settings.validError(element, input, msg);
+                if (typeof settings.validError === 'function') settings.validError(target, input, msg);
                 else if(alertBox.length) alertBox.css(settings.validMessage.show).html(msg);
                 else alert(msg);
+                result = false;
             } else {
-                if (typeof settings.validSuccess === 'function') settings.validSuccess(element, input);
+                if (typeof settings.validSuccess === 'function') settings.validSuccess(target, input);
                 else if(alertBox.length) alertBox.css(settings.validMessage.hide);
                 result = true;
             }
-            this.setValue(input, value);
             return result;
         },
 

@@ -15,16 +15,18 @@
         events: function() {
             var self = this;
 
-            $(this.scope).off('.alert').on('click.alert', '[' + this.attr_name() + '] .close', function(e) {
-                var alertBox = $(this).closest('[' + self.attr_name() + ']'),
-                    settings = alertBox.data(self.attr_name(true) + '-init') || self.settings;
+            $(this.scope).off('.' + this.name).on('click.' + this.name, '[data-' + this.name + '] .close', function(e) {
+                var container = $(this).closest('[data-' + self.name + ']'),
+                    settings = container.data(self.name + '-init') || self.settings;
 
                 e.preventDefault();
-                alertBox.addClass('alert-close');
-                alertBox.on('transitionend webkitTransitionEnd', function(e) {
-                    $(this).trigger('close.alert').remove();
-                    settings.callback();
-                });
+
+                container
+                    .addClass(this.name + '-close')
+                    .on('transitionend webkitTransitionEnd', function(e) {
+                        $(this).trigger('close.' + this.name).remove();
+                        settings.callback();
+                    });
             });
         },
 

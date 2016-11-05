@@ -18,23 +18,23 @@
         },
 
         events: function() {
-            $(window).off('.equalizer').on('resize.equalizer', function(e) {
+            $(window).off('.' + this.name).on('resize.' + this.name, function(e) {
                 this.reflow();
             }.bind(this));
         },
 
-        equalize: function(equalizer) {
+        equalize: function(container) {
             var isStacked = false,
-                equalizer = $(equalizer),
-                group = equalizer.data('equalizer'),
-                settings = equalizer.data(this.attr_name(true) + '-init') || this.settings,
+                container = $(container),
+                group = container.data(this.name),
+                settings = container.data(this.name + '-init') || this.settings,
                 vals,
                 firstTopOffset;
 
             if (settings.act_on_hidden) {
-                vals = group ? equalizer.find('[' + this.attr_name() + '-watch="' + group + '"]') : equalizer.find('[' + this.attr_name() + '-watch]');
+                vals = group ? container.find('[data-' + this.name + '-watch="' + group + '"]') : container.find('[data-' + this.name + '-watch]');
             } else {
-                vals = group ? equalizer.find('[' + this.attr_name() + '-watch="' + group + '"]:visible') : equalizer.find('[' + this.attr_name() + '-watch]:visible');
+                vals = group ? container.find('[data-' + this.name + '-watch="' + group + '"]:visible') : container.find('[data-' + this.name + '-watch]:visible');
             }
 
             if (vals.length === 0) {
@@ -42,7 +42,7 @@
             }
 
             settings.beforeChange();
-            equalizer.trigger('beforeChange.equalizer');
+            container.trigger('beforeChange.' + this.name);
             vals.height('inherit');
 
             if (settings.equalize_on_stack === false) {
@@ -71,13 +71,13 @@
             }
 
             settings.afterChange();
-            equalizer.trigger('afterChange.equalizer');
+            container.trigger('afterChange.' + this.name);
         },
 
         reflow: function() {
             var self = this;
 
-            $('[' + this.attr_name() + ']', this.scope).each(function() {
+            $('[data-' + this.name + ']', this.scope).each(function() {
                 self.equalize(this);
             });
         }

@@ -4,6 +4,10 @@
     Mobile.libs.validator = {
         name: 'validator',
 
+        data_attr: function() {
+            return 'data-' + this.name;
+        },
+
         settings: {
             validate_on: 'manual', // change (when input value changes), blur (when input blur), manual (when call custom events)
             exception: ':hidden, [data-validator-ignore]', // ignore validate with 'exception' setting
@@ -46,16 +50,16 @@
             },
             verifiers: {
                 requiredone: function(el, required, parent) {
-                    return $(el).closest('[' + this.attr_name() + ']').find('input[type="' + el.type + '"][name="' + el.name + '"]:checked:not(:disabled)').length;
+                    return !!$(el).closest('[' + this.data_attr() + ']').find('input[type="' + el.type + '"][name="' + el.name + '"]:checked:not(:disabled)').length;
                 },
                 equalto: function(el, required, parent) {
-                    var from = document.querySelector(el.getAttribute(this.add_namespace(this.attr_name() + '-equalto')));
+                    var from = document.querySelector(el.getAttribute(this.data_attr() + '-equalto'));
 
                     return from && (from.value === el.value);
 
                 },
                 oneof: function(el, required, parent) {
-                    var els = document.querySelectorAll(el.getAttribute(this.add_namespace(this.attr_name() + '-oneof')));
+                    var els = document.querySelectorAll(el.getAttribute(this.data_attr() + '-oneof'));
                     return this.valid_oneof(els, required, parent);
                 }
             },
@@ -90,10 +94,10 @@
 
         events: function(scope) {
             var self = this,
-                form = $(scope).attr('novalidate', 'novalidate'),
-                settings = form.data(this.attr_name(true) + '-init') || {};
+                form = $(scope).attr('novalidate', true),
+                settings = form.data(this.name + '-init') || {};
 
-            this.invalid_attr = this.add_namespace('data-invalid');
+            this.invalid_attr = 'data-invalid';
 
             function validate(el, originalSelf, e) {
                 clearTimeout(self.timer);
@@ -103,52 +107,52 @@
             }
 
             form
-                .off('.validator')
-                .on('submit.validator', function(e) {
+                .off('.' + this.name)
+                .on('submit.' + this.name, function(e) {
                     var $this = $(this),
-                        is_ajax = $this.data(self.attr_name(true)) === 'ajax' || self.settings.isAjax;
+                        is_ajax = $this.data(self.name) === 'ajax' || self.settings.isAjax;
 
-                    return self.validate($this, $this.find('input, textarea, select, [' + self.attr_name() +  '-verifier]').not(settings.exception).get(), e, is_ajax);
+                    return self.validate($this, $this.find('input, textarea, select, [' + self.data_attr() +  '-verifier]').not(settings.exception).get(), e, is_ajax);
                 })
-                .on('validate.validator', function(e) {
+                .on('validate.' + this.name, function(e) {
                     if (settings.validate_on === 'manual') {
                         self.validate($(this), [e.target], e);
                     }
                 })
-                .on('reset', function(e) {
+                .on('reset.' + this.name, function(e) {
                     return self.reset($(this), e);
                 })
                 .find('input, textarea, select').not(settings.exception)
-                .off('.validator')
-                .on('change.validator blur.validator', function(e) {
-                    var id = this.id,
-                        $this = $(this),
-                        parent = $this.closest('[' + self.attr_name() + ']'),
-                        oneOf = parent.find('[' + self.attr_name() +  '-oneof]').filter(function() {
-                            if (parent.find($(this).data(self.attr_name(true) + '-oneof')).get().indexOf($this[0]) > -1) return this;
-                        })[0];
+                    .off('.' + this.name)
+                    .on('change.' + this.name + ' blur.' + this.name, function(e) {
+                        var id = this.id,
+                            $this = $(this),
+                            parent = $this.closest('[' + self.data_attr() + ']'),
+                            oneOf = parent.find('[' + self.data_attr() +  '-oneof]').filter(function() {
+                                if (parent.find($(this).data(self.name + '-oneof')).get().indexOf($this[0]) > -1) return this;
+                            })[0];
 
-                    if (oneOf) {
-                        validate(parent, oneOf, e);
-                    }
+                        if (oneOf) {
+                            validate(parent, oneOf, e);
+                        }
 
-                    if (settings.validate_on === e.type) {
-                        validate(parent, this, e);
-                    }
-                })
-                // Not compatible, so commet it for a while
-                // .on('focus.validator', function(e) {
-                //     if (navigator.userAgent.match(/iPad|iPhone|Android|BlackBerry|Windows Phone|webOS/i)) {
-                //         $('html, body').animate({
-                //             scrollTop: $(e.target).offset().top
-                //         }, 100);
-                //     }
-                // });
+                        if (settings.validate_on === e.type) {
+                            validate(parent, this, e);
+                        }
+                    })
+                    // Not compatible, so commet it for a while
+                    // .on('focus.' + this.name, function(e) {
+                    //     if (navigator.userAgent.match(/iPad|iPhone|Android|BlackBerry|Windows Phone|webOS/i)) {
+                    //         $('html, body').animate({
+                    //             scrollTop: $(e.target).offset().top
+                    //         }, 100);
+                    //     }
+                    // });
         },
 
         reset: function(form, e) {
             form.removeAttr(this.invalid_attr);
-            var settings = form.data(this.attr_name(true) + '-init') || {};
+            var settings = form.data(this.name + '-init') || {};
 
             $('[' + this.invalid_attr + ']', form).removeAttr(this.invalid_attr);
             $('.' + settings.error_class, form).not(settings.alert_element).removeClass(settings.error_class);
@@ -178,7 +182,7 @@
                     if (this.settings.focus_on_invalid) {
                         els[i].focus();
                     }
-                    form.trigger('invalid.validator', [e]).attr(this.invalid_attr, '');
+                    form.trigger('invalid.' + this.name, [e]).attr(this.invalid_attr, '');
                     this.enabledSubmit(form);
                     return false;
                 }
@@ -187,7 +191,7 @@
             if (submit_event || is_ajax) {
                 if (this.settings.preventDefault) e.preventDefault();
                 this.disabledSubmit(form);
-                form.trigger('valid.validator', [e]);
+                form.trigger('valid.' + this.name, [e]);
             }
 
             form.removeAttr(this.invalid_attr);
@@ -199,18 +203,18 @@
                     data: form.serialize(),
                     dataType: 'json',
                     beforeSend: function() {
-                        return form.trigger('start.ajax.validator', arguments);
+                        return form.trigger('start.ajax.' + this.name, arguments);
                     }
                 })
                 .always(function() {
-                    form.trigger('complete.ajax.validator', arguments);
+                    form.trigger('complete.ajax.' + this.name, arguments);
                     self.enabledSubmit(form);
                 })
                 .done(function() {
-                    form.trigger('success.ajax.validator', arguments);
+                    form.trigger('success.ajax.' + this.name, arguments);
                 })
                 .fail(function() {
-                    form.trigger('error.ajax.validator', arguments);
+                    form.trigger('error.ajax.' + this.name, arguments);
                 });
                 return false;
             }
@@ -220,10 +224,12 @@
 
         parse_patterns: function(form, els) {
             var i = els.length,
+                el_valid,
                 el_patterns = [];
 
             while (i--) {
-                el_patterns.push(this.pattern(els[i]));
+                el_valid = this.pattern(els[i]);
+                el_valid && el_patterns.push(el_valid);
             }
 
             if (el_patterns.length) {
@@ -236,18 +242,22 @@
         pattern: function(el) {
             var type = el.type,
                 required = el.hasAttribute('required'),
-                pattern = el.getAttribute('pattern') || type,
-                verifier = el.getAttribute(this.add_namespace(this.attr_name() + '-verifier')) || '',
-                eqTo = el.hasAttribute(this.add_namespace(this.attr_name() + '-equalto')),
-                oneOf = el.hasAttribute(this.add_namespace(this.attr_name() + '-oneof')),
+                pattern = el.getAttribute('pattern'),
+                verifier = el.getAttribute(this.data_attr() + '-verifier') || '',
+                eqTo = el.hasAttribute(this.data_attr() + '-equalto'),
+                oneOf = el.hasAttribute(this.data_attr() + '-oneof'),
                 patternKey = null,
-                patternVal = /^.*$/;
+                patternVal = null;
 
-            if(required && !el.value.trim()) {
+            if(required) {
                 patternKey = 'required';
+                patternVal = /^.+$/;
             } else if (this.settings.patterns.hasOwnProperty(pattern)) {
                 patternKey = pattern;
                 patternVal = this.settings.patterns[pattern];
+            } else if (this.settings.patterns.hasOwnProperty(type)) {
+                patternKey = type;
+                patternVal = this.settings.patterns[type];
             } else if (this.settings.patterns.hasOwnProperty(verifier)) {
                 patternKey = verifier;
                 patternVal = this.settings.verifiers[verifier];
@@ -255,32 +265,35 @@
                 patternVal = new RegExp('^' + pattern.replace(/^\^(.+)\$$/, '$1') + '$');
             } else if (eqTo || oneOf) {
                 patternKey = eqTo ? 'equalto' : 'oneof';
+                patternVal = /^.*$/;
             }
-            return [el, patternKey, patternVal, required];
+
+            if (patternKey || patternVal || required) {
+                return [el, patternKey, patternVal, required];
+            }
         },
 
         // TODO: Break this up into smaller methods, getting hard to read.
         check_validation: function(form, el_patterns) {
             var i = el_patterns.length,
                 validations = [],
-                settings = form.data(this.attr_name(true) + '-init') || {};
+                settings = form.data(this.name + '-init') || {};
 
             while (i--) {
                 var el = el_patterns[i][0],
                     required = el_patterns[i][3],
                     value = el.value.trim(),
-                    is_radio = el.type === 'radio',
-                    is_checkbox = el.type === 'checkbox',
+                    is_checkable = ['radio', 'checkbox'].indexOf(el.type) > -1,
                     direct_parent = $(el).parent(),
-                    parent = settings.feedback ? $(el).parents(settings.feedback)[0] : null,
-                    verifier = el.getAttribute(this.add_namespace(this.attr_name() + '-verifier')),
+                    parent = settings.feedback ? $(el).parents(settings.feedback) : null,
+                    verifier = el.getAttribute(this.data_attr() + '-verifier'),
                     // Validate using each of the specified (space-delimited) verifiers.
                     verifiers = verifier ? verifier.split(' ') : [],
                     label = (function() {
                         var label = [];
                         if (direct_parent.is('label')) {
                             label = direct_parent;
-                        } else if (parent) {
+                        } else if (parent.length) {
                             label = parent.find('label');
                         }
                         if (!label.length) {
@@ -289,27 +302,26 @@
 
                         return label;
                     })(),
-                    required_valid = required ? value : true,
+                    required_valid = required ? value.length : true,
                     el_validations = [],
                     valid;
 
-                if ((is_radio || is_checkbox) && required) {
+                if (is_checkable && required) {
                     verifiers.push('requiredone');
                 }
                 // support old way to do equalTo validations
-                if (el.getAttribute(this.add_namespace(this.attr_name() + '-equalto'))) {
+                if (el.getAttribute(this.data_attr() + '-equalto')) {
                     verifiers.push('equalto');
                 }
-                if (el.getAttribute(this.add_namespace(this.attr_name() + '-oneof'))) {
+                if (el.getAttribute(this.data_attr() + '-oneof')) {
                     verifiers.push('oneof');
                 }
 
-                if (parent) {
-                    parent = $(parent);
-                } else if (direct_parent.is('label')) {
-                    parent = direct_parent.parent();
-                } else {
+                if (!parent.length) {
                     parent = direct_parent;
+                }
+                if (parent.is('label')) {
+                    parent = parent.parent();
                 }
 
                 if (verifiers.length) {
@@ -331,7 +343,7 @@
                     var pattern = el_patterns[i][2];
                     if ($.type(pattern) == 'function') {
                         pattern = pattern(el, required, parent);
-                    } else {
+                    } else if($.type(pattern) == 'regexp') {
                         pattern = pattern.test(value);
                     }
                     el_validations.push(required_valid && pattern || !required && !value.length || el.disabled);
@@ -378,7 +390,7 @@
                 if (['radio', 'checked'].indexOf(el.type) > -1 || el.tagName === 'select') {
                     how = '选择';
                 }
-                msg = msg.replace('{how}', how).replace('{placeholder}', label.length ? label.text().replace(/[：:*]$/, '').trim() : el_patterns[0].placeholder || '其中一项');
+                msg = msg.replace('{how}', how).replace('{placeholder}', label.length ? label.text().replace(/[：:*]\s*$/g, '').trim() : el_patterns[0].placeholder || '其中一项');
             }
 
             if (!errorElement.length) {
@@ -408,7 +420,7 @@
         valid_oneof: function(el, required, parent, doNotValidateOthers) {
             var el = $(el),
                 valid = el.filter(function() {
-                    return ['radio', 'checkbox'].indexOf(this.type) > -1 ? this.checked : !!this.value.trim();
+                    return ['radio', 'checkbox'].indexOf(this.type) > -1 ? this.checked : !!this.value.trim().length;
                 }).length > 0;
 
             if (valid) {
@@ -431,7 +443,7 @@
 
         reflow: function(scope, options) {
             var self = this,
-                form = $('[' + this.attr_name() + ']'); //.attr('novalidate', 'novalidate');
+                form = $('[' + this.data_attr() + ']'); //.attr('novalidate', 'novalidate');
             form.each(function() {
                 self.events(this);
             });

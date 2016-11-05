@@ -6,12 +6,9 @@
 
         cache: {},
 
-        images_loaded: false,
-        nodes_loaded: false,
+        loaded: false,
 
         settings: {
-            load_attr: 'responsive',
-
             named_queries: {
                 'default': 'only screen',
                 'small': Mobile.media_queries['small'],
@@ -32,6 +29,8 @@
 
             directives: {
                 replace: function(el, path, trigger) {
+                    var orig_path,
+                        last_path;
                     // The trigger argument, if called within the directive, fires
                     // an event named after the directive on the element, passing
                     // any parameters along to the event that you pass to trigger.
@@ -44,10 +43,10 @@
                     // });
 
                     if (el !== null && /IMG/.test(el[0].nodeName)) {
-                        // var orig_path = el[0].src;
-                        var orig_path = $.each(el, function() {
-                            this.src = path;
-                        });
+                        orig_path = el[0].src;
+                        // orig_path = el.each(function() {
+                        //     this.src = path;
+                        // });
 
                         if (new RegExp(path, 'i').test(orig_path)) {
                             return;
@@ -57,7 +56,7 @@
 
                         return trigger(el[0].src);
                     }
-                    var last_path = el.data(this.data_attr + '-last-path'),
+                    last_path = el.data(this.name + '-last-path'),
                         self = this;
 
                     if (last_path == path) {
@@ -66,13 +65,13 @@
 
                     if (/\.(gif|jpg|jpeg|tiff|png)([?#].*)?/i.test(path)) {
                         $(el).css('background-image', 'url(' + path + ')');
-                        el.data('responsive-last-path', path);
+                        el.data(this.name + '-last-path', path);
                         return trigger(path);
                     }
 
                     return $.get(path, function(response) {
                         el.html(response);
-                        el.data(self.data_attr + '-last-path', path);
+                        el.data(self.name + '-last-path', path);
                         trigger();
                     });
 
@@ -83,7 +82,7 @@
         init: function(scope, method, options) {
             Mobile.inherit(this, 'random_str');
 
-            this.data_attr = this.set_data_attr();
+            this.data_attr = 'data-' + this.name;
             $.extend(true, this.settings, method, options);
             this.bindings(method, options);
             this.reflow();
@@ -102,8 +101,8 @@
                 prevMediaHash;
 
             $(window)
-                .off('.responsive')
-                .on('resize.responsive', function() {
+                .off('.' + this.name)
+                .on('resize.' + this.name, function() {
                     var currMediaHash = self.get_media_hash();
                     if (currMediaHash !== prevMediaHash) {
                         self.resize();
@@ -115,23 +114,26 @@
         },
 
         resize: function() {
-            var cache = this.cache;
+            var cache = this.cache,
+                uuid,
+                passed,
+                args;
 
-            if (!this.images_loaded || !this.nodes_loaded) {
+            if (!this.loaded) {
                 setTimeout($.proxy(this.resize, this), 50);
                 return;
             }
 
-            for (var uuid in cache) {
+            for (uuid in cache) {
                 if (cache.hasOwnProperty(uuid)) {
-                    var passed = this.results(uuid, cache[uuid]);
+                    passed = this.results(uuid, cache[uuid]);
                     if (passed) {
                         this.settings.directives[passed.scenario[1]]
                         .call(this, passed.el, passed.scenario[0], (function(passed) {
                             if (arguments[0] instanceof Array) {
-                                var args = arguments[0];
+                                args = arguments[0];
                             } else {
-                                var args = Array.prototype.slice.call(arguments, 0);
+                                args = Array.prototype.slice.call(arguments, 0);
                             }
 
                             return function() {
@@ -145,103 +147,78 @@
         },
 
         results: function(uuid, scenarios) {
-            var count = scenarios.length;
+            var count = scenarios.length,
+                el = $('[data-uuid="' + uuid + '"]'),
+                mq,
+                rule,
+                res = false;
 
             if (count > 0) {
-                var el = $('[' + this.add_namespace('data-uuid') + '="' + uuid + '"]');
-
                 while (count--) {
-                    var mq, rule = scenarios[count][2];
+                    rule = scenarios[count][2];
                     if (this.settings.named_queries.hasOwnProperty(rule)) {
                         mq = matchMedia(this.settings.named_queries[rule]);
                     } else {
                         mq = matchMedia(rule);
                     }
                     if (mq.matches) {
-                        return {
+                        res = {
                             el: el,
                             scenario: scenarios[count]
                         };
+                        break;
                     }
                 }
             }
 
-            return false;
+            return res;
         },
 
-        load: function(type, force_update) {
-            if (typeof this['cached_' + type] === 'undefined' || force_update) {
-                this['update_' + type]();
+        load: function(force_update) {
+            if (typeof this.cached_nodes === 'undefined' || force_update) {
+                this.update_responsiveness();
             }
-
-            return this['cached_' + type];
         },
 
-        update_images: function() {
-            var images = $('img[' + this.data_attr + ']'),
-                count = images.length,
+        update_responsiveness: function() {
+            var data_attr = this.data_attr,
+                elements = $('[' + data_attr + ']'),
+                count = elements.length,
                 i = count,
-                loaded_count = 0,
-                data_attr = this.data_attr;
+                element,
+                str;
 
             this.cache = {};
-            this.cached_images = [];
-            this.images_loaded = (count === 0);
+            this.cached_nodes = [];
+            this.loaded = count === 0;
 
             while (i--) {
-                loaded_count++;
-                if (images[i]) {
-                    var str = images[i].getAttribute(data_attr) || '';
+                element = elements[i];
+
+                if (element) {
+                    str = element.getAttribute(data_attr) || '';
 
                     if (str.length > 0) {
-                        this.cached_images.push(images[i]);
+                        this.cached_nodes.push(element);
                     }
                 }
 
-                if (loaded_count === count) {
-                    this.images_loaded = true;
-                    this.enhance('images');
-                }
             }
+
+            this.loaded = true;
+            this.enhance();
 
             return this;
         },
 
-        update_nodes: function() {
-            var nodes = $('[' + this.data_attr + ']').not('img'),
-                count = nodes.length,
-                i = count,
-                loaded_count = 0,
-                data_attr = this.data_attr;
-
-            this.cached_nodes = [];
-            this.nodes_loaded = (count === 0);
+        enhance: function() {
+            var i = this.cached_nodes.length;
 
             while (i--) {
-                loaded_count++;
-                var str = nodes[i].getAttribute(data_attr) || '';
-
-                if (str.length > 0) {
-                    this.cached_nodes.push(nodes[i]);
-                }
-
-                if (loaded_count === count) {
-                    this.nodes_loaded = true;
-                    this.enhance('nodes');
-                }
+                this.object($(this.cached_nodes[i]));
             }
 
-            return this;
-        },
-
-        enhance: function(type) {
-            var i = this['cached_' + type].length;
-
-            while (i--) {
-                this.object($(this['cached_' + type][i]));
-            }
-
-            return $(window).trigger('resize.responsive');
+            $(window).trigger('resize.' + this.name);
         },
 
         convert_directive: function(directive) {
@@ -281,65 +258,40 @@
 
         object: function(el) {
             var raw_arr = this.parse_data_attr(el),
+                i = raw_arr.length,
                 scenarios = [],
-                i = raw_arr.length;
+                scenario,
+                params;
 
             if (i > 0) {
                 while (i--) {
                     // split array between comma delimited content and mq
                     // regex: comma, optional space, open parenthesis
-                    var scenario = raw_arr[i].split(/,\s*/);
+                    scenario = raw_arr[i].split(/,\s*/);
 
                     if (scenario.length <= 1) {
                         scenario.push('(default)');
                     }
-                    var params = this.parse_scenario(scenario);
+                    params = this.parse_scenario(scenario);
                     scenarios.push(params);
                 }
             }
 
-            return this.store(el, scenarios);
+            this.store(el, scenarios);
         },
 
         store: function(el, scenarios) {
             var uuid = this.random_str(),
-                current_uuid = el.data(this.add_namespace('uuid', true));
+                current_uuid = el.data('uuid');
 
-            if (this.cache[current_uuid]) {
-                return this.cache[current_uuid];
+            if (!this.cache[current_uuid]) {
+                el.attr('data-uuid', uuid);
+                this.cache[uuid] = scenarios;
             }
-
-            el.attr(this.add_namespace('data-uuid'), uuid);
-            return this.cache[uuid] = scenarios;
-        },
-
-        trim: function(str) {
-
-            if (typeof str === 'string') {
-                return $.trim(str);
-            }
-
-            return str;
-        },
-
-        set_data_attr: function(init) {
-            if (init) {
-                if (this.namespace.length > 0) {
-                    return this.namespace + '-' + this.settings.load_attr;
-                }
-
-                return this.settings.load_attr;
-            }
-
-            if (this.namespace.length > 0) {
-                return 'data-' + this.namespace + '-' + this.settings.load_attr;
-            }
-
-            return 'data-' + this.settings.load_attr;
         },
 
         parse_data_attr: function(el) {
-            var raw = el.attr(this.attr_name()).split(/\[(.*?)\]/),
+            var raw = el.data(this.name).split(/\[(.*?)\]/),
                 i = raw.length,
                 output = [];
 
@@ -353,8 +305,7 @@
         },
 
         reflow: function() {
-            this.load('images', true);
-            this.load('nodes', true);
+            this.load(true);
         }
 
     };

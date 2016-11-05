@@ -21,7 +21,7 @@
             // Store the default active tabs which will be referenced when the
             // location hash is absent, as in the case of navigating the tabs and
             // returning to the first viewing via the browser Back button.
-            $('[' + this.attr_name() + '] > .active > a', this.scope).each(function() {
+            $('[data-' + this.name + '] > .active > a', this.scope).each(function() {
                 self.default_tab_hashes.push(this.hash);
             });
 
@@ -37,7 +37,7 @@
             var self = this;
 
             var usual_tab_behavior = function(e, target) {
-                var settings = $(target).closest('[' + self.attr_name() + ']').data(self.attr_name(true) + '-init');
+                var settings = $(target).closest('[data-' + self.name + ']').data(self.name + '-init');
                 if ('ontouchstart' in document) {
                     e.preventDefault();
                     e.stopPropagation();
@@ -46,15 +46,15 @@
             };
 
             $(this.scope)
-                .off('.tab')
+                .off('.' + this.name)
                 // Click event: tab title
-                .on('click.tab', '[' + this.attr_name() + '] > * > a', function(e) {
+                .on('click.' + this.name, '[data-' + this.name + '] > * > a', function(e) {
                     var el = this;
                     usual_tab_behavior(e, el);
                 });
 
             // Location hash change event
-            $(window).on('hashchange.tab', function(e) {
+            $(window).on('hashchange.' + this.name, function(e) {
                 e.preventDefault();
                 self.handle_location_hash_change();
             });
@@ -64,8 +64,8 @@
 
             var self = this;
 
-            $('[' + this.attr_name() + ']', this.scope).each(function() {
-                var settings = $(this).data(self.attr_name(true) + '-init');
+            $('[data-' + this.name + ']', this.scope).each(function() {
+                var settings = $(this).data(self.name + '-init');
                 if (settings.deep_linking) {
                     // Match the location hash to a label
                     var hash;
@@ -81,19 +81,19 @@
                         var hash_element = $(hash);
                         if (hash_element.hasClass(settings.panel_class) && hash_element.parent().hasClass(settings.content_class)) {
                             // Tab content div
-                            self.toggle_active_tab($('[' + self.attr_name() + '] > * > a[href=' + hash + ']').parent());
+                            self.toggle_active_tab($('[data-' + self.name + '] > * > a[href=' + hash + ']').parent());
                         } else {
                             // Not the tab content div. If inside the tab content, find the
                             // containing tab and toggle it as active.
                             var hash_tab_container_id = hash_element.closest('.' + settings.panel_class).attr('id');
                             if (hash_tab_container_id != undefined) {
-                                self.toggle_active_tab($('[' + self.attr_name() + '] > * > a[href=#' + hash_tab_container_id + ']').parent(), hash);
+                                self.toggle_active_tab($('[data-' + self.name + '] > * > a[href=#' + hash_tab_container_id + ']').parent(), hash);
                             }
                         }
                     } else {
                         // Reference the default tab hashes which were initialized in the init function
                         for (var ind = 0; ind < self.default_tab_hashes.length; ind++) {
-                            self.toggle_active_tab($('[' + self.attr_name() + '] > * > a[href=' + self.default_tab_hashes[ind] + ']').parent());
+                            self.toggle_active_tab($('[data-' + self.name + '] > * > a[href=' + self.default_tab_hashes[ind] + ']').parent());
                         }
                     }
                 }
@@ -102,13 +102,13 @@
 
         toggle_active_tab: function(tab, location_hash) {
             var self = this,
-                tabs = tab.closest('[' + this.attr_name() + ']'),
+                tabs = tab.closest('[data-' + this.name + ']'),
                 tab_link = tab.find('a'),
                 anchor = tab.children('a').first(),
                 target_hash = '#' + anchor.attr('href').split('#')[1],
                 target = $(target_hash),
                 siblings = tab.siblings(),
-                settings = tabs.data(this.attr_name(true) + '-init'),
+                settings = tabs.data(this.name + '-init'),
                 go_to_hash = function(hash) {
                     // This function allows correct behaviour of the browser's back button when deep linking is enabled. Without it
                     // the user would get continually redirected to the default hash.
@@ -151,15 +151,15 @@
             // WARNING: The activation and deactivation of the tab content must
             // occur after the deep linking in order to properly refresh the browser window.
             // Clean up multiple attr instances to done once
-            tab.addClass(settings.active_class).triggerHandler('opened');
+            tab.addClass(settings.active_class).triggerHandler('opened.' + this.name);
             tab_link.attr('aria-selected', 'true');
             siblings.removeClass(settings.active_class);
             siblings.find('a').attr('aria-selected', 'false');
             target.siblings().removeClass(settings.active_class).attr('aria-hidden', 'true');
             target.addClass(settings.active_class).attr('aria-hidden', 'false');
             settings.callback(tab);
-            target.triggerHandler('toggled', [target]);
-            tabs.triggerHandler('toggled', [tab]);
+            target.triggerHandler('toggled.' + this.name, [target]);
+            tabs.triggerHandler('toggled.' + this.name, [tab]);
         },
 
         off: function() {},

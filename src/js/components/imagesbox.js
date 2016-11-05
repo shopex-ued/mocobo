@@ -41,10 +41,10 @@
 
             this.bindings(method, options);
 
-            if ($(this.scope).is('[' + this.attr_name() + ']')) {
+            if ($(this.scope).is('[data-' + this.name + ']')) {
                 this.assemble($('li', this.scope));
             } else {
-                $('[' + this.attr_name() + ']', this.scope).each(function() {
+                $('[data-' + this.name + ']', this.scope).each(function() {
                     self.assemble($('li', this));
                 });
             }
@@ -59,19 +59,19 @@
             }
 
             $(this.scope)
-                .off('.imagesbox')
-                .on('click.imagesbox', 'ul[' + this.attr_name() + '] li ' + this.settings.open_selectors, function(e, current, target) {
+                .off('.' + this.name)
+                .on('click.' + this.name, 'ul[data-' + this.name + '] li ' + this.settings.open_selectors, function(e, current, target) {
                         var current = current || $(this),
                             target = target || current,
                             next = current.next('li'),
-                            settings = current.closest('[' + self.attr_name() + ']').data(self.attr_name(true) + '-init'),
+                            settings = current.closest('[data-' + self.name + ']').data(self.name + '-init'),
                             image = $(e.target);
 
                         e.preventDefault();
 
                         if (!settings) {
                             self.init();
-                            settings = current.closest('[' + self.attr_name() + ']').data(self.attr_name(true) + '-init');
+                            settings = current.closest('[data-' + self.name + ']').data(self.name + '-init');
                         }
 
                         // if imagesbox is open and the current image is
@@ -87,11 +87,11 @@
                         self.open(image, current, target);
                     })
 
-            .on('click.imagesbox', this.settings.close_selectors, function(e) {
-                Mobile.libs.imagesbox.close(e, this);
+            .on('click.' + this.name, this.settings.close_selectors, function(e) {
+                self.close(e, this);
             });
 
-            $(window).off('.imagesbox').on('resize.imagesbox', function() {
+            $(window).off('.' + this.name).on('resize.' + this.name, function() {
                 self.resize();
             });
 
@@ -102,7 +102,7 @@
             var self = this;
 
             $(this.scope)
-                .on('touchstart.imagesbox', '.visible-img', function(e) {
+                .on('touchstart.' + this.name, '.visible-img', function(e) {
                     if (!e.touches) {
                         e = e.originalEvent;
                     }
@@ -117,7 +117,7 @@
                     $(this).data('swipe-transition', data);
                     e.stopPropagation();
                 })
-                .on('touchmove.imagesbox', '.visible-img', function(e) {
+                .on('touchmove.' + this.name, '.visible-img', function(e) {
                     if (!e.touches) {
                         e = e.originalEvent;
                     }
@@ -145,7 +145,7 @@
                         self.nav(e, direction);
                     }
                 })
-                .on('touchend.imagesbox', '.visible-img', function(e) {
+                .on('touchend.' + this.name, '.visible-img', function(e) {
                     $(this).data('swipe-transition', {});
                     e.stopPropagation();
                 });
@@ -170,7 +170,7 @@
             }
 
             var holder = $('#mobileImagesboxHolder'),
-                settings = $el.data(this.attr_name(true) + '-init'),
+                settings = $el.data(this.name + '-init'),
                 data = {
                     grid: '<div class="carousel">' + grid_outerHTML + '</div>',
                     viewing: settings.templates.viewing
@@ -232,11 +232,11 @@
                         target.closest('li').siblings().removeClass('visible');
                         target.closest('li').addClass('visible');
                     });
-                visible_image.trigger('opened.imagesbox')
+                visible_image.trigger('opened.' + this.name)
             }
 
             if (!this.locked()) {
-                visible_image.trigger('open.imagesbox');
+                visible_image.trigger('open.' + this.name);
                 // set the image to the selected thumbnail
                 loaded = this.load($image);
                 image.attr('src', loaded.src);
@@ -272,14 +272,14 @@
                 body.css('overflow', '');
                 container = $('div', root).first();
                 visible_image = $('.visible-img', container);
-                visible_image.trigger('close.imagesbox');
+                visible_image.trigger('close.' + this.name);
                 this.settings.prev_index = 0;
-                $('ul[' + this.attr_name() + ']', root)
+                $('ul[data-' + this.name + ']', root)
                     .attr('style', '').closest('.imagesbox-blackout')
                     .removeClass('imagesbox-blackout');
                 container.removeClass('imagesbox-container');
                 visible_image.hide();
-                visible_image.trigger('closed.imagesbox');
+                visible_image.trigger('closed.' + this.name);
             }
 
             // Event to re-enable scrolling on touch devices
@@ -293,10 +293,10 @@
         },
 
         nav: function(e, direction) {
-            var imagesbox = $('ul[' + this.attr_name() + ']', '.imagesbox-blackout');
+            var container = $('ul[data-' + this.name + ']', '.imagesbox-blackout');
 
             e.preventDefault();
-            this.go(imagesbox, direction);
+            this.go(container, direction);
         },
 
         resize: function() {
@@ -305,7 +305,7 @@
 
             if (image.length) {
                 this.center_and_label(image, label);
-                image.trigger('resized.imagesbox')
+                image.trigger('resized.' + this.name)
             }
         },
 
@@ -425,16 +425,16 @@
 
             if (target.length) {
                 $('img', target)
-                    .trigger('click.imagesbox', [current, target])
-                    .trigger('change.imagesbox');
+                    .trigger('click.' + this.name, [current, target])
+                    .trigger('change.' + this.name);
             }
         },
 
         shift: function(current, target, callback) {
-            var imagesbox = target.parent(),
+            var container = target.parent(),
                 old_index = this.settings.prev_index || target.index(),
-                direction = this.direction(imagesbox, current, target),
-                left = parseInt(imagesbox.css('left'), 10),
+                direction = this.direction(container, current, target),
+                left = parseInt(container.css('left'), 10),
                 width = target.outerWidth(),
                 skip_shift;
 
@@ -447,11 +447,11 @@
                 if (/left/.test(direction)) {
                     this.lock();
                     dir_obj.left = left + width;
-                    imagesbox.animate(dir_obj, 300, this.unlock());
+                    container.animate(dir_obj, 300, this.unlock());
                 } else if (/right/.test(direction)) {
                     this.lock();
                     dir_obj.left = left - width;
-                    imagesbox.animate(dir_obj, 300, this.unlock());
+                    container.animate(dir_obj, 300, this.unlock());
                 }
             } else if (/skip/.test(direction)) {
                 // the target image is not adjacent to the current image, so
@@ -461,10 +461,10 @@
 
                 if (skip_shift > 0) {
                     dir_obj.left = -(skip_shift * width);
-                    imagesbox.animate(dir_obj, 300, this.unlock());
+                    container.animate(dir_obj, 300, this.unlock());
                 } else {
                     dir_obj.left = 0;
-                    imagesbox.animate(dir_obj, 300, this.unlock());
+                    container.animate(dir_obj, 300, this.unlock());
                 }
             }
 
@@ -521,8 +521,8 @@
         },
 
         off: function() {
-            $(this.scope).off('.imagesbox');
-            $(window).off('.imagesbox');
+            $(this.scope).off('.' + this.name);
+            $(window).off('.' + this.name);
         },
 
         reflow: function() {

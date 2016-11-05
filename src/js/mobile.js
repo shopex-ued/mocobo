@@ -5,24 +5,6 @@
 (function($, window, document, undefined) {
     'use strict';
 
-    var header_helpers = function(class_array) {
-        var head = $('head');
-
-        head.prepend($.map(class_array, function(class_name) {
-            if (head.has('.' + class_name).length === 0) {
-                return '<meta class="' + class_name + '" />';
-            }
-        }));
-    };
-
-    header_helpers([
-        'mobile-mq-small',
-        'mobile-mq-small-only',
-        'mobile-mq-medium',
-        'mobile-mq-medium-only',
-        'mobile-data-attribute-namespace'
-    ]);
-
     // Enable FastClick if present
 
     $(function() {
@@ -33,90 +15,6 @@
             }
         }
     });
-
-    // Namespace functions.
-
-    var attr_name = function(init) {
-        var arr = [];
-        if (!init) {
-            arr.push('data');
-        }
-        if (this.namespace.length > 0) {
-            arr.push(this.namespace);
-        }
-        arr.push(this.name);
-
-        return arr.join('-');
-    };
-
-    var add_namespace = function(str) {
-        var parts = str.split('-'),
-            i = parts.length,
-            arr = [];
-
-        while (i--) {
-            if (i !== 0) {
-                arr.push(parts[i]);
-            } else {
-                if (this.namespace.length > 0) {
-                    arr.push(this.namespace, parts[i]);
-                } else {
-                    arr.push(parts[i]);
-                }
-            }
-        }
-
-        return arr.reverse().join('-');
-    };
-
-    // Event binding and data-options updating.
-
-    var bindings = function(method, options) {
-        var self = this,
-            config = ($.isArray(options) ? options[0] : options) || method,
-            bind = function() {
-                var $this = $(this),
-                    should_bind_events = !$this.data(self.attr_name(true) + '-init');
-                $this.data(self.attr_name(true) + '-init', $.extend(true, {}, self.settings, config, self.data_options($this)));
-
-                if (should_bind_events) {
-                    self.events(this);
-                }
-            };
-
-        if ($(this.scope).is('[' + this.attr_name() + ']')) {
-            bind.call(this.scope);
-        } else {
-            $('[' + this.attr_name() + ']', this.scope).each(bind);
-        }
-        // # Patch to fix #5043 to move this *after* the if/else clause in order for Backbone and similar frameworks to have improved control over event binding and data-options updating.
-        if (typeof method === 'string') {
-            if($.isArray(options)) return this[method].apply(this, options);
-            else return this[method].call(this, options);
-        }
-
-    };
-
-    var single_image_loaded = function(image, callback) {
-        function loaded() {
-            callback(image[0]);
-        }
-
-        function bindLoad() {
-            this.one('load', loaded);
-        }
-
-        if (!image.attr('src')) {
-            loaded();
-            return;
-        }
-
-        if (image[0].complete || image[0].readyState === 4) {
-            loaded();
-        } else {
-            bindLoad.call(image);
-        }
-    };
 
     /*
      * jquery.requestAnimationFrame
@@ -196,6 +94,83 @@
 
     }($));
 
+    /*
+     * Custom the Mobile Core functions
+    */
+
+    var header_helpers = function(class_array) {
+        var head = $('head');
+
+        head.prepend($.map(class_array, function(class_name) {
+            if (head.has('.' + class_name).length === 0) {
+                return '<meta class="' + class_name + '" />';
+            }
+        }));
+    };
+
+    header_helpers([
+        'mobile-mq-small',
+        'mobile-mq-small-only',
+        'mobile-mq-medium',
+        'mobile-mq-medium-only'
+    ]);
+
+    var trim = function(str) {
+        if (typeof str === 'string') {
+            return str.trim();
+        }
+        return str;
+    }
+
+    // Event binding and data-options updating.
+
+    var bindings = function(method, options) {
+        var self = this,
+            config = ($.isArray(options) ? options[0] : options) || method,
+            bind = function() {
+                var $this = $(this),
+                    should_bind_events = !$this.data(self.name + '-init');
+                $this.data(self.name + '-init', $.extend(true, {}, self.settings, config, self.data_options($this)));
+
+                if (should_bind_events) {
+                    self.events(this);
+                }
+            };
+
+        if ($(this.scope).is('[data-' + this.name + ']')) {
+            bind.call(this.scope);
+        } else {
+            $('[data-' + this.name + ']', this.scope).each(bind);
+        }
+        // # Patch to fix #5043 to move this *after* the if/else clause in order for Backbone and similar frameworks to have improved control over event binding and data-options updating.
+        if (typeof method === 'string') {
+            if($.isArray(options)) return this[method].apply(this, options);
+            else return this[method].call(this, options);
+        }
+
+    };
+
+    var single_image_loaded = function(image, callback) {
+        function loaded() {
+            callback(image[0]);
+        }
+
+        function bindLoad() {
+            this.one('load', loaded);
+        }
+
+        if (!image.attr('src')) {
+            loaded();
+            return;
+        }
+
+        if (image[0].complete || image[0].readyState === 4) {
+            loaded();
+        } else {
+            bindLoad.call(image);
+        }
+    };
+
     function removeQuotes(string) {
         if (typeof string === 'string' || string instanceof String) {
             string = string.replace(/^['\\/"]+|(;\s?})+|['\\/"]+$/g, '');
@@ -225,9 +200,7 @@
 
         stylesheet: $('<style></style>').appendTo('head')[0].sheet,
 
-        global: {
-            namespace: undefined
-        },
+        global: {},
 
         init: function(scope, libraries, method, options, response) {
             var args = [scope, method, options, response],
@@ -235,8 +208,6 @@
 
             // set mobile global scope
             this.scope = scope || this.scope;
-
-            this.set_namespace();
 
             if (libraries && typeof libraries === 'string' && !/reflow/i.test(libraries)) {
                 if (this.libs.hasOwnProperty(libraries)) {
@@ -283,11 +254,9 @@
 
         patch: function(lib) {
             lib.scope = this.scope;
-            lib.namespace = this.global.namespace;
             lib['data_options'] = this.utils.data_options;
-            lib['attr_name'] = attr_name;
-            lib['add_namespace'] = add_namespace;
             lib['bindings'] = bindings;
+            lib['trim'] = trim;
         },
 
         inherit: function(scope, methods) {
@@ -299,28 +268,6 @@
                     scope[methods_arr[i]] = this.utils[methods_arr[i]];
                 }
             }
-        },
-
-        set_namespace: function() {
-
-            // Description:
-            //    Don't bother reading the namespace out of the meta tag
-            //    if the namespace has been set globally in javascript
-            //
-            // Example:
-            //    Mobile.global.namespace = 'my-namespace';
-            // or make it an empty string:
-            //    Mobile.global.namespace = '';
-            //
-            //
-
-            // If the namespace has not been set (is undefined), try to read it out of the meta element.
-            // Otherwise use the globally defined namespace, even if it's empty ('')
-            var namespace = (this.global.namespace === undefined) ? $('.mobile-data-attribute-namespace').css('font-family') : this.global.namespace;
-
-            // Finally, if the namsepace is either undefined or false, set it to an empty string.
-            // Otherwise use the namespace value.
-            this.global.namespace = (namespace === undefined || /false/i.test(namespace)) ? '' : namespace;
         },
 
         libs: {},
@@ -340,18 +287,9 @@
             data_options: function(el, data_attr_name) {
                 data_attr_name = data_attr_name || 'options';
                 var opts = {},
-                    ii, p, opts_arr,
-                    data_options = function(el) {
-                        var namespace = Mobile.global.namespace;
+                    ii, p, opts_arr;
 
-                        if (namespace.length > 0) {
-                            return el.data(namespace + '-' + data_attr_name);
-                        }
-
-                        return el.data(data_attr_name);
-                    };
-
-                var cached_options = data_options(el);
+                var cached_options = el.data(data_attr_name);
 
                 if (typeof cached_options === 'object') {
                     return cached_options;
@@ -383,7 +321,7 @@
                     }
 
                     if (p.length === 2 && p[0].length > 0) {
-                        opts[$.trim(p[0])] = $.trim(p[1]);
+                        opts[trim(p[0])] = trim(p[1]);
                     }
                 }
 

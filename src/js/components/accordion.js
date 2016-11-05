@@ -21,20 +21,20 @@
             this.create($(instance));
 
             $(this.scope)
-                .off('.accordion')
-                .on('click.accordion', '[' + this.attr_name() + '] > .item > a', function(e) {
+                .off('.' + this.name)
+                .on('click.' + this.name, '[data-' + this.name + '] > .item > a', function(e) {
                     e.preventDefault();
 
-                    var accordion = $(this).closest('[' + self.attr_name() + ']'),
-                        groupSelector = self.attr_name() + '=' + accordion.attr(self.attr_name()),
-                        settings = accordion.data(self.attr_name(true) + '-init') || self.settings,
+                    var container = $(this).closest('[data-' + self.name + ']'),
+                        groupSelector = 'data-' + self.name + '=' + container.data(self.name),
+                        settings = container.data(self.name + '-init') || self.settings,
                         // target = $('#' + this.href.split('#')[1]).parent(),
                         contentAttr = $(this).context.attributes['data-content'],
                         target = $('#' + (contentAttr ? contentAttr.value : this.href.split('#')[1])).parent(),
-                        items = $('> .item', accordion),
+                        items = $('> .item', container),
                         active_item;
 
-                    if (accordion.attr(self.attr_name())) {
+                    if (container.data(self.name)) {
                         items = items.add('[' + groupSelector + '] > .item');
                     }
                     active_item = items.filter('.' + settings.active_class);
@@ -45,8 +45,8 @@
                             return attr === 'true' ? 'false' : 'true';
                         });
                         settings.callback(target);
-                        target.triggerHandler('toggled', [accordion]);
-                        accordion.triggerHandler('toggled', [target]);
+                        target.triggerHandler('toggled', [container]);
+                        container.triggerHandler('toggled', [target]);
                         return;
                     }
 
@@ -60,14 +60,14 @@
                     target.addClass(settings.active_class);
                     $(this).attr('aria-expanded', 'true');
                     settings.callback(target);
-                    target.triggerHandler('toggled', [accordion]);
-                    accordion.triggerHandler('toggled', [target]);
+                    target.triggerHandler('toggled', [container]);
+                    container.triggerHandler('toggled', [target]);
                 });
         },
 
-        create: function(accordion) {
-            var items = $('> .item', accordion),
-                settings = accordion.data(this.attr_name(true) + '-init') || this.settings;
+        create: function(container) {
+            var items = $('> .item', container),
+                settings = container.data(this.name + '-init') || this.settings;
 
             items
                 .children('a')
@@ -77,7 +77,7 @@
                     .attr('aria-expanded', 'true');
 
             if (settings.multi_expand) {
-                accordion.attr('aria-multiselectable', 'true');
+                container.attr('aria-multiselectable', 'true');
             }
         },
 

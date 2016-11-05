@@ -46,14 +46,14 @@
             var self = this;
 
             $(this.scope)
-                .off('.modal')
-                .on('click.modal', '[' + this.add_namespace('data-modal-id') + ']:not(:disabled):not(.disabled)', function(e) {
+                .off('.' + this.name)
+                .on('click.' + this.name, '[data-' + this.name + '-id]:not(:disabled):not(.disabled)', function(e) {
                     if(self.settings.preventTargetDefault) e.preventDefault();
 
                     if (!self.locked) {
                         var element = $(this),
-                            ajax = element.data('modal-ajax'),
-                            replaceContentSel = element.data('modal-replace-content');
+                            ajax = element.data(this.name + '-ajax'),
+                            replaceContentSel = element.data(this.name + '-replace-content');
 
                         self.locked = true;
 
@@ -71,10 +71,11 @@
                 });
 
             $(document)
-                .on('click.modal', this.close_targets(), function(e) {
+                // .off('click.' + this.name)
+                .on('click.' + this.name, this.close_targets(), function(e) {
                     if (self.settings.preventTargetDefault) e.preventDefault();
                     if (!self.locked) {
-                        var settings = $('[' + self.attr_name() + '].open').data(self.attr_name(true) + '-init') || self.settings,
+                        var settings = $('[data-' + self.name + '].open').data(self.name + '-init') || self.settings,
                             backdrop_clicked = settings.backdrop && ($(e.target)[0] === $('.' + settings.backdrop_class)[0]);
 
                         if (backdrop_clicked) {
@@ -86,28 +87,28 @@
                         }
 
                         self.locked = true;
-                        self.close.call(self, backdrop_clicked ? $('[' + self.attr_name() + '].open:not(.toback)') : $(this).closest('[' + self.attr_name() + ']'));
+                        self.close.call(self, backdrop_clicked ? $('[data-' + self.name + '].open:not(.toback)') : $(this).closest('[data-' + self.name + ']'));
                     }
                 });
 
-            if ($('[' + this.attr_name() + ']', this.scope).length > 0) {
+            if ($('[data-' + this.name + ']', this.scope).length > 0) {
                 $(this.scope)
-                    // .off('.modal')
-                    .on('open.modal', this.settings.open)
-                    .on('opened.modal', this.settings.opened)
-                    .on('opened.modal', this.open_video)
-                    .on('close.modal', this.settings.close)
-                    .on('closed.modal', this.settings.closed)
-                    .on('closed.modal', this.close_video);
+                    // .off('.' + this.name)
+                    .on('open.' + this.name, this.settings.open)
+                    .on('opened.' + this.name, this.settings.opened)
+                    .on('opened.' + this.name, this.open_video)
+                    .on('close.' + this.name, this.settings.close)
+                    .on('closed.' + this.name, this.settings.closed)
+                    .on('closed.' + this.name, this.close_video);
             } else {
                 $(this.scope)
-                    // .off('.modal')
-                    .on('open.modal', '[' + this.attr_name() + ']', this.settings.open)
-                    .on('opened.modal', '[' + this.attr_name() + ']', this.settings.opened)
-                    .on('opened.modal', '[' + this.attr_name() + ']', this.open_video)
-                    .on('close.modal', '[' + this.attr_name() + ']', this.settings.close)
-                    .on('closed.modal', '[' + this.attr_name() + ']', this.settings.closed)
-                    .on('closed.modal', '[' + this.attr_name() + ']', this.close_video);
+                    // .off('.' + this.name)
+                    .on('open.' + this.name, '[data-' + this.name + ']', this.settings.open)
+                    .on('opened.' + this.name, '[data-' + this.name + ']', this.settings.opened)
+                    .on('opened.' + this.name, '[data-' + this.name + ']', this.open_video)
+                    .on('close.' + this.name, '[data-' + this.name + ']', this.settings.close)
+                    .on('closed.' + this.name, '[data-' + this.name + ']', this.settings.closed)
+                    .on('closed.' + this.name, '[data-' + this.name + ']', this.close_video);
             }
 
             return true;
@@ -115,52 +116,52 @@
 
         open: function(target, ajax_settings) {
             var self = this,
-                modal;
+                container;
 
             if (target) {
                 if (typeof target.selector !== 'undefined') {
                     // Find the named node; only use the first one found, since the rest of the code assumes there's only one node
-                    modal = $('#' + target.data('modal-id')).first();
+                    container = $('#' + target.data(this.name + '-id')).first();
                 } else {
-                    modal = $(this.scope);
+                    container = $(this.scope);
 
                     ajax_settings = target;
                 }
             } else {
-                modal = $(this.scope);
+                container = $(this.scope);
             }
 
-            var settings = modal.data(this.attr_name(true) + '-init');
+            var settings = container.data(this.name + '-init');
             settings = settings || this.settings;
 
-            if (modal.hasClass('open') && target !== undefined && target.attr('data-modal-id') == modal.attr('id')) {
-                return this.close(modal);
+            if (container.hasClass('open') && target !== undefined && target.data(this.name + '-id') == container.attr('id')) {
+                return this.close(container);
             }
 
-            if (!modal.hasClass('open')) {
-                var open_modal = $('[' + this.attr_name() + '].open');
+            if (!container.hasClass('open')) {
+                var open_container = $('[data-' + this.name + '].open');
 
-                modal.attr('tabindex', '0').attr('aria-hidden', 'false');
+                container.attr('tabindex', '0').attr('aria-hidden', 'false');
 
                 // prevents annoying scroll positioning bug with position: absolute;
                 if (settings.no_scroll) {
                     var $doc = $('html');
-                    $doc.one('open.modal', function() {
+                    $doc.one('open.' + this.name, function() {
                         $(this).addClass('modal-open');
-                    }).on('touchmove', function(e) {
+                    }).on('touchmove.' + this.name, function(e) {
                         e.preventDefault();
                     });
                 }
 
                 // Prevent namespace event from triggering twice
-                modal.on('open.modal', function(e) {
-                    if (e.namespace !== 'modal') return;
+                container.on('open.' + this.name, function(e) {
+                    if (e.namespace !== this.name) return;
                 });
 
-                modal.on('open.modal').trigger('open.modal');
+                container.on('open.' + this.name).trigger('open.' + this.name);
 
-                if (open_modal.length < 1) {
-                    this.toggle_backdrop(modal, true);
+                if (open_container.length < 1) {
+                    this.toggle_backdrop(container, true);
                 }
 
                 if (typeof ajax_settings === 'string') {
@@ -170,20 +171,20 @@
                 }
 
                 var openModal = function() {
-                    if (open_modal.length > 0) {
+                    if (open_container.length > 0) {
                         if (settings.multiple_opened) {
-                            self.to_back(open_modal);
+                            self.to_back(open_container);
                         } else {
-                            self.hide(open_modal, settings.css.close);
+                            self.hide(open_container, settings.css.close);
                         }
                     }
 
-                    // bl: add the open_modal that isn't already in the background to the openModals array
+                    // bl: add the open_container that isn't already in the background to the openModals array
                     if (settings.multiple_opened) {
-                        openModals.push(modal);
+                        openModals.push(container);
                     }
 
-                    self.show(modal, settings.css.open);
+                    self.show(container, settings.css.open);
                 };
 
                 if (typeof ajax_settings === 'undefined' || !ajax_settings.url) {
@@ -200,13 +201,14 @@
                             }
 
                             if (typeof options !== 'undefined' && typeof options.replaceContentSel !== 'undefined') {
-                                modal.find(options.replaceContentSel).html(data);
+                                container.find(options.replaceContentSel).html(data);
                             } else {
-                                modal.html(data);
+                                container.html(data);
                             }
 
-                            $(modal).mobile('section', 'reflow');
-                            $(modal).children().mobile();
+                            $(container)
+                                .mobile('section', 'reflow')
+                                .children().mobile();
 
                             openModal();
                         }
@@ -225,20 +227,20 @@
             $(window).trigger('resize');
         },
 
-        close: function(modal) {
-            var modal = modal && modal.length ? modal : $(this.scope),
-                open_modals = $('[' + this.attr_name() + '].open'),
-                settings = modal.data(this.attr_name(true) + '-init') || this.settings,
+        close: function(container) {
+            var container = container && container.length ? container : $(this.scope),
+                open_containers = $('[data-' + this.name + '].open'),
+                settings = container.data(this.name + '-init') || this.settings,
                 self = this;
 
-            if (open_modals.length > 0) {
+            if (open_containers.length > 0) {
 
-                modal.removeAttr('tabindex', '0').attr('aria-hidden', 'true');
+                container.removeAttr('tabindex', '0').attr('aria-hidden', 'true');
 
                 // prevents annoying scroll positioning bug with position: absolute;
                 if (settings.no_scroll) {
                     var $doc = $('html');
-                    $doc.one('close.modal', function() {
+                    $doc.one('close.' + this.name, function() {
                         $(this).removeClass('modal-open');
                     })
                     .off('touchmove');
@@ -246,37 +248,37 @@
 
                 this.locked = true;
 
-                modal.trigger('close.modal');
+                container.trigger('close.' + this.name);
 
-                if ((settings.multiple_opened && open_modals.length === 1) || !settings.multiple_opened || modal.length > 1) {
-                    this.toggle_backdrop(modal, false);
-                    this.to_front(modal);
+                if ((settings.multiple_opened && open_containers.length === 1) || !settings.multiple_opened || container.length > 1) {
+                    this.toggle_backdrop(container, false);
+                    this.to_front(container);
                 }
 
                 if (settings.multiple_opened) {
-                    var isCurrent = modal.is(':not(.toback)');
-                    this.hide(modal, settings.css.close, settings);
+                    var isCurrent = container.is(':not(.toback)');
+                    this.hide(container, settings.css.close, settings);
                     if (isCurrent) {
-                        // remove the last modal since it is now closed
+                        // remove the last container since it is now closed
                         openModals.pop();
                     } else {
-                        // if this isn't the current modal, then find it in the array and remove it
+                        // if this isn't the current container, then find it in the array and remove it
                         openModals = $.grep(openModals, function(elt) {
-                            var isThis = elt[0] === modal[0];
+                            var isThis = elt[0] === container[0];
                             if (isThis) {
                                 // since it's not currently in the front, put it in the front now that it is hidden
                                 // so that if it's re-opened, it won't be .toback
-                                self.to_front(modal);
+                                self.to_front(container);
                             }
                             return !isThis;
                         });
                     }
-                    // finally, show the next modal in the stack, if there is one
+                    // finally, show the next container in the stack, if there is one
                     if (openModals.length > 0) {
                         this.to_front(openModals[openModals.length - 1]);
                     }
                 } else {
-                    this.hide(open_modals, settings.css.close, settings);
+                    this.hide(open_containers, settings.css.close, settings);
                 }
             }
         },
@@ -291,7 +293,7 @@
             return base;
         },
 
-        toggle_backdrop: function(modal, state) {
+        toggle_backdrop: function(container, state) {
             if (!this.settings.backdrop) return;
             if ($('.' + this.settings.backdrop_class).length === 0) {
                 this.settings.backdrop = $('<div />', {
@@ -311,18 +313,19 @@
         },
 
         show: function(el, css) {
-            // is modal
+            // is container
+            var self = this;
             if (css) {
-                var settings = el.data(this.attr_name(true) + '-init') || this.settings,
+                var settings = el.data(this.name + '-init') || this.settings,
                     root_element = settings.root_element,
                     context = this;
 
                 if (el.parent(root_element).length === 0) {
                     var placeholder = el.wrap('<div style="display: none;" />').parent();
 
-                    el.on('closed.modal.wrapped', function() {
+                    el.on('closed.' + this.name + '.wrapped', function() {
                         el.detach().appendTo(placeholder);
-                        el.unwrap().unbind('closed.modal.wrapped');
+                        el.unwrap().unbind('closed.' + this.name + '.wrapped');
                     });
 
                     el.detach().appendTo(root_element);
@@ -343,16 +346,16 @@
                             .css(css)
                             .animate(end_css, settings.animation_speed, 'linear', function() {
                                 context.locked = false;
-                                el.trigger('opened.modal');
+                                el.trigger('opened.' + self.name);
                             })
                             .addClass('open')
-                            .trigger('open.modal');
+                            .trigger('open.' + self.name);
                     });
                 }
 
                 return el.css(css)
                     .addClass('open')
-                    .trigger('opened.modal');
+                    .trigger('opened.' + this.name);
             }
 
             var settings = this.settings;
@@ -376,9 +379,10 @@
         },
 
         hide: function(el, css) {
-            // is modal
+            // is container
+            var self = this;
             if (css) {
-                var settings = el.data(this.attr_name(true) + '-init'),
+                var settings = el.data(this.name + '-init'),
                     context = this;
                 settings = settings || this.settings;
 
@@ -396,13 +400,13 @@
                         return el
                             .animate(end_css, settings.animation_speed, 'linear', function() {
                                 context.locked = false;
-                                el.css(css).trigger('closed.modal');
+                                el.css(css).trigger('closed.' + self.name);
                             })
                             .removeClass('open');
                     });
                 }
 
-                return el.css(css).removeClass('open').trigger('closed.modal');
+                return el.css(css).removeClass('open').trigger('closed.' + this.name);
             }
 
             var settings = this.settings;
@@ -444,7 +448,7 @@
         },
 
         off: function() {
-            $(this.scope).off('.modal');
+            $(this.scope).off('.' + this.name);
         },
 
         reflow: function() {}

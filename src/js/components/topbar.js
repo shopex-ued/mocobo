@@ -16,11 +16,11 @@
 
             this.bindings(method, options);
 
-            $('[' + this.attr_name() + ']', this.scope).each(function() {
+            $('[data-' + this.name + ']', this.scope).each(function() {
                 var topbar = $(this),
                     topbarContainer = topbar.parent(),
                     maxHeight = Math.max(topbarContainer.outerHeight(), topbar.outerHeight()),
-                    settings = topbar.data(self.attr_name(true) + '-init');
+                    settings = topbar.data(self.name + '-init');
                 if (topbarContainer.hasClass('fixed')) {
                     if (topbarContainer.hasClass('bottom')) {
                         $('body').css('padding-bottom', maxHeight);
@@ -60,11 +60,11 @@
             var self = this;
 
             $(this.scope)
-                .off('.topbar')
-                .on('click.topbar contextmenu.topbar', '.top-bar .top-bar-section li a[href^="#"],[' + this.attr_name() + '] .top-bar-section li a[href^="#"]', function(e) {
+                .off('.' + this.name)
+                .on('click.' + this.name + ' contextmenu.' + this.name, '.top-bar .top-bar-section li a[href^="#"],[data-' + this.name + '] .top-bar-section li a[href^="#"]', function(e) {
                     var li = $(this).closest('li'),
-                        topbar = li.closest('[' + self.attr_name() + ']'),
-                        settings = topbar.data(self.attr_name(true) + '-init');
+                        topbar = li.closest('[data-' + self.name + ']'),
+                        settings = topbar.data(self.name + '-init');
 
                     if (settings.is_hover) {
                         var hoverLi = $(this).closest('.hover');
@@ -72,22 +72,22 @@
                     }
                 });
 
-            $(window).off('.topbar')
-                .on('resize.topbar', this.resize())
-                .trigger('resize.topbar')
+            $(window).off('.' + this.name)
+                .on('resize.' + this.name, this.resize())
+                .trigger('resize.' + this.name)
                 .load(function() {
                     // Ensure that the offset is calculated after all of the pages resources have loaded
-                    $(this).trigger('resize.topbar');
+                    $(this).trigger('resize.' + this.name);
                 });
 
-            $('body').off('.topbar').on('click.topbar', function(e) {
+            $('body').off('.' + this.name).on('click.' + this.name, function(e) {
                 var parent = $(e.target).closest('li').closest('li.hover');
 
                 if (parent.length > 0) {
                     return;
                 }
 
-                $('[' + self.attr_name() + '] li.hover').removeClass('hover');
+                $('[data-' + self.name + '] li.hover').removeClass('hover');
             });
 
             // Show dropdown menus when their items are focused
@@ -102,9 +102,9 @@
 
         resize: function() {
             var self = this;
-            $('[' + this.attr_name() + ']').each(function() {
+            $('[data-' + this.name + ']').each(function() {
                 var topbar = $(this),
-                    settings = topbar.data(self.attr_name(true) + '-init');
+                    settings = topbar.data(self.name + '-init');
 
                 var stickyContainer = topbar.parent('.' + self.settings.sticky_class);
                 var stickyOffset;
@@ -134,7 +134,7 @@
             // check for sticky
             this.sticky(topbar.parent());
 
-            topbar.data(this.attr_name(true), $.extend({}, topbar.data(this.attr_name(true)), {
+            topbar.data(this.name, $.extend({}, topbar.data(this.name), {
                 sticked: true
             }));
         },

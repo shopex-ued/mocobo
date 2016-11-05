@@ -65,58 +65,58 @@
 
   <h1>带圆角的选项卡</h1>
   <ul class="tabs radius" data-tab>
-    <li class="controller active"><a href="#panel1">Tab 1</a></li>
-    <li class="controller"><a href="#panel2">Tab 2</a></li>
-    <li class="controller"><a href="#panel3">Tab 3</a></li>
-    <li class="controller"><a href="#panel4">Tab 4</a></li>
+    <li class="controller active"><a href="#panel21">Tab 1</a></li>
+    <li class="controller"><a href="#panel22">Tab 2</a></li>
+    <li class="controller"><a href="#panel23">Tab 3</a></li>
+    <li class="controller"><a href="#panel24">Tab 4</a></li>
   </ul>
   <div class="tabs-content">
-    <div class="content active" id="panel1">
+    <div class="content active" id="panel21">
       <p>This is the first panel of the basic tab example. You can place all sorts of content here including a grid.</p>
     </div>
-    <div class="content" id="panel2">
+    <div class="content" id="panel22">
       <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
     </div>
-    <div class="content" id="panel3">
+    <div class="content" id="panel23">
       <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
     </div>
-    <div class="content" id="panel4">
+    <div class="content" id="panel24">
       <p>This is the fourth panel of the basic tab example. This is the fourth panel of the basic tab example.</p>
     </div>
   </div>
 
   <h1>仿iOS分节选项卡</h1>
   <ul class="segmented-tabs" data-tab>
-    <li class="controller active"><a href="#content1">全部</a></li>
-    <li class="controller"><a href="#content2">已使用</a></li>
-    <li class="controller"><a href="#content3">未使用</a></li>
+    <li class="controller active"><a href="#content31">全部</a></li>
+    <li class="controller"><a href="#content32">已使用</a></li>
+    <li class="controller"><a href="#content33">未使用</a></li>
   </ul>
   <div class="tabs-content">
-    <div class="content active" id="content1">
+    <div class="content active" id="content31">
       <p>This is the first panel of the basic tab example. You can place all sorts of content here including a grid.</p>
     </div>
-    <div class="content" id="content2">
+    <div class="content" id="content32">
       <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
     </div>
-    <div class="content" id="content3">
+    <div class="content" id="content33">
       <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
     </div>
   </div>
 
   <h1>仿Android条形选项卡</h1>
   <ul class="bar-tabs" data-tab>
-    <li class="controller active"><a href="#content11">全部</a></li>
-    <li class="controller"><a href="#content21">已使用</a></li>
-    <li class="controller"><a href="#content31">未使用</a></li>
+    <li class="controller active"><a href="#content41">全部</a></li>
+    <li class="controller"><a href="#content42">已使用</a></li>
+    <li class="controller"><a href="#content43">未使用</a></li>
   </ul>
   <div class="tabs-content">
-    <div class="content active" id="content11">
+    <div class="content active" id="content41">
       <p>This is the first panel of the basic tab example. You can place all sorts of content here including a grid.</p>
     </div>
-    <div class="content" id="content21">
+    <div class="content" id="content42">
       <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
     </div>
-    <div class="content" id="content31">
+    <div class="content" id="content43">
       <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
     </div>
   </div>
@@ -162,7 +162,7 @@
   </pre>
   以及
   <pre>
-  $('#myTabs').on('toggled', function (event, tab) {
+  $('#myTabs').on('toggled.tab', function (event, tab) {
     console.log(tab);
   });
   </pre>

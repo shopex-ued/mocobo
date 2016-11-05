@@ -24,7 +24,7 @@
   <img data-responsive="[img/launch.jpg, (only screen and (min-width: 1px))], [img/space@2x.jpg, (only screen and (min-width: 321px))], [img/comet@2x.jpg, (only screen and (min-width: 481px))]" src="img/moon.jpg">
 
   <h1>用于背景图片</h1>
-  <div data-responsive="[img/launch.jpg, (only screen and (min-width: 1px))], [img/space@2x.jpg, (only screen and (min-width: 321px))], [img/comet@2x.jpg, (only screen and (min-width: 481px))]" src="img/moon.jpg" style="height:200px;background-size:cover;"></div>
+  <div data-responsive="[img/launch.jpg, (only screen and (min-width: 1px))], [img/space@2x.jpg, (only screen and (min-width: 321px))], [img/comet@2x.jpg, (only screen and (min-width: 481px))]" style="height:200px;background-size:cover;"></div>
 
   <h1>响应式页面</h1>
   <p>在不同分辨率下请求不同的页面并插入到容器中。</p>
@@ -105,5 +105,10 @@
 <script src="../dist/js/libs.min.js"></script>
 <script src="../dist/js/mobile.min.js"></script>
 <script src="../dist/js/main.min.js"></script>
+<script>
+$('[data-responsive]').on('replace', function (e, a) {
+  console.log(a);
+});
+</script>
 </body>
 </html>

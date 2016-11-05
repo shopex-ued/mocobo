@@ -15,6 +15,7 @@
         },
 
         init: function(scope, method, options) {
+            this.data_attr = 'data-' + this.name;
             $.extend(true, this.settings, method, options);
             this.bindings(method, options);
         },
@@ -23,9 +24,9 @@
             var self = this;
 
             $(this.scope)
-                .off('.dropdown')
-                .on('click.dropdown', '[' + this.attr_name() + ']', function(e) {
-                    var settings = $(this).data(self.attr_name(true) + '-init') || self.settings;
+                .off('.' + this.name)
+                .on('click.' + this.name, '[' + this.data_attr + ']', function(e) {
+                    var settings = $(this).data(self.name + '-init') || self.settings;
                     if ('ontouchstart' in document) {
                         e.preventDefault();
                         if ($(this).parent('[data-modal-id]').length) {
@@ -34,41 +35,41 @@
                         self.toggle($(this));
                     }
                 })
-                .on('click.dropdown', function(e) {
-                    var parent = $(e.target).closest('[' + self.attr_name() + '-content]');
+                .on('click.' + this.name, function(e) {
+                    var parent = $(e.target).closest('[' + self.data_attr + '-content]');
                     var links = parent.find('a');
 
                     if (links.length > 0 && parent.attr('aria-autoclose') !== 'false') {
-                        self.close.call(self, $('[' + self.attr_name() + '-content]'));
+                        self.close.call(self, $('[' + self.data_attr + '-content]'));
                     }
 
                     if (e.target !== document && !$.contains(document.documentElement, e.target)) {
                         return;
                     }
 
-                    if ($(e.target).closest('[' + self.attr_name() + ']').length > 0) {
+                    if ($(e.target).closest('[' + self.data_attr + ']').length > 0) {
                         return;
                     }
 
                     if (!($(e.target).data('modalId')) &&
-                        (parent.length > 0 && ($(e.target).is('[' + self.attr_name() + '-content]') ||
+                        (parent.length > 0 && ($(e.target).is('[' + self.data_attr + '-content]') ||
                             $.contains(parent.first()[0], e.target)))) {
                         e.stopPropagation();
                         return;
                     }
 
-                    self.close.call(self, $('[' + self.attr_name() + '-content]'));
+                    self.close.call(self, $('[' + self.data_attr + '-content]'));
                 })
-                .on('opened.dropdown', '[' + self.attr_name() + '-content]', function() {
+                .on('opened.' + this.name, '[' + this.data_attr + '-content]', function() {
                     self.settings.opened.call(this);
                 })
-                .on('closed.dropdown', '[' + self.attr_name() + '-content]', function() {
+                .on('closed.' + this.name, '[' + this.data_attr + '-content]', function() {
                     self.settings.closed.call(this);
                 });
 
             $(window)
-                .off('.dropdown')
-                .on('resize.dropdown', function() {
+                .off('.' + this.name)
+                .on('resize.' + this.name, function() {
                     self.resize.call(self);
                 });
 
@@ -78,58 +79,50 @@
         close: function(dropdown) {
             var self = this;
             dropdown.each(function(idx) {
-                var original_target = $('[' + self.attr_name() + '=' + dropdown[idx].id + ']') || $('aria-controls=' + dropdown[idx].id + ']');
+                var original_target = $('[' + self.data_attr + '=' + dropdown[idx].id + ']') || $('aria-controls=' + dropdown[idx].id + ']');
                 original_target.attr('aria-expanded', 'false');
                 if ($(this).hasClass(self.settings.active_class)) {
                     $(this)
                         .css('left', '-99999px')
                         .attr('aria-hidden', 'true')
                         .removeClass(self.settings.active_class)
-                        .prev('[' + self.attr_name() + ']')
+                        .prev('[' + self.data_attr + ']')
                         .removeClass(self.settings.active_class)
                         .removeData('target');
 
-                    $(this).trigger('closed.dropdown', [dropdown]);
+                    $(this).trigger('closed.' + self.name, [dropdown]);
                 }
             });
-            dropdown.removeClass('act-open-' + this.attr_name(true));
+            dropdown.removeClass('act-open-' + this.name);
         },
 
         closeall: function() {
             var self = this;
-            $.each($('.act-open-' + this.attr_name(true)), function() {
+            $.each($('.act-open-' + this.name), function() {
                 self.close.call(self, $(this));
             });
         },
 
         open: function(dropdown, target) {
             this.css(dropdown.addClass(this.settings.active_class), target);
-            dropdown.prev('[' + this.attr_name() + ']').addClass(this.settings.active_class);
+            dropdown.prev('[' + this.data_attr + ']').addClass(this.settings.active_class);
             dropdown.data('target', target.get(0)).trigger('opened.dropdown', [dropdown, target]);
             dropdown.attr('aria-hidden', 'false');
             target.attr('aria-expanded', 'true');
             dropdown.focus();
-            dropdown.addClass('act-open-' + this.attr_name(true));
-        },
-
-        data_attr: function() {
-            if (this.namespace.length > 0) {
-                return this.namespace + '-' + this.name;
-            }
-
-            return this.name;
+            dropdown.addClass('act-open-' + this.name);
         },
 
         toggle: function(target) {
             if (target.hasClass(this.settings.disabled_class)) {
                 return;
             }
-            var dropdown = $('#' + target.data(this.data_attr()));
+            var dropdown = $('#' + target.data(this.name));
             if (dropdown.length === 0) {
                 return;
             }
 
-            this.close.call(this, $('[' + this.attr_name() + '-content]').not(dropdown));
+            this.close.call(this, $('[' + this.data_attr + '-content]').not(dropdown));
 
             if (dropdown.hasClass(this.settings.active_class)) {
                 this.close.call(this, dropdown);
@@ -142,7 +135,7 @@
         },
 
         resize: function() {
-            var dropdown = $('[' + this.attr_name() + '-content].open');
+            var dropdown = $('[' + this.data_attr + '-content].open');
             var target = $(dropdown.data("target"));
 
             if (dropdown.length && target.length) {
@@ -152,7 +145,7 @@
 
         css: function(dropdown, target) {
             var left_offset = Math.max((target.width() - dropdown.width()) / 2, 8),
-                settings = target.data(this.attr_name(true) + '-init') || this.settings;
+                settings = target.data(this.name + '-init') || this.settings;
 
             this.clear_idx();
 
@@ -368,10 +361,10 @@
         },
 
         off: function() {
-            $(this.scope).off('.dropdown');
-            $('html, body').off('.dropdown');
+            $(this.scope).off('.' + this.name);
+            $('html, body').off('.' + this.name);
             $(window).off('.dropdown');
-            $('[data-dropdown-content]').off('.dropdown');
+            $('[' + this.data_attr + '-content]').off('.' + this.name);
         },
 
         reflow: function() {}
