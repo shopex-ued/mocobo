@@ -37,7 +37,7 @@
                 // http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#valid-e-mail-address
                 email: /^[\w.!#$%&'*+\/=?^`{|}~-]+@[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}[a-zA-Z\d])?(?:\.[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}[a-zA-Z\d])?)*$/,
                 // http://blogs.lse.ac.uk/lti/2008/04/23/a-regular-expression-to-match-any-url/
-                url: /^(https?|ftp|file|ssh):\/\/([-;:&=\+\$,\w]+@{1})?([-A-Za-z\d\.]+)+:?(\d+)?((\/[-\+~%\/\.\w]+)?\??([-\+=&;%@\.\w]+)?#?([\w]+)?)?/,
+                url: /^(?:(https?|ftp|file|ssh):\/\/([-;:&=\+\$,\w]+@{1})?([-A-Za-z\d\.]+)+:?(\d+)?((\/[-\+~%\/\.\w]+)?\??([-\+=&;%@\.\w]+)?#?([\w]+)?)?)?$/,
                 // abc.de
                 domain: /^([a-zA-Z\d]([a-zA-Z\d\-]{0,61}[a-zA-Z\d])?\.)+[a-zA-Z]{2,8}$/,
                 datetime: /^([0-2]\d{3})\-([0-1]\d)\-([0-3]\d)\s([0-2]\d):([0-5]\d):([0-5]\d)([-+]([0-1]\d)\:00)?$/,
@@ -249,9 +249,8 @@
                 patternKey = null,
                 patternVal = null;
 
-            if(required) {
+            if(required && !el.value.trim().length) {
                 patternKey = 'required';
-                patternVal = /^.+$/;
             } else if (this.settings.patterns.hasOwnProperty(pattern)) {
                 patternKey = pattern;
                 patternVal = this.settings.patterns[pattern];
@@ -281,6 +280,7 @@
 
             while (i--) {
                 var el = el_patterns[i][0],
+                    pattern = el_patterns[i][2],
                     required = el_patterns[i][3],
                     value = el.value.trim(),
                     is_checkable = ['radio', 'checkbox'].indexOf(el.type) > -1,
@@ -302,9 +302,12 @@
 
                         return label;
                     })(),
-                    required_valid = required ? value.length : true,
                     el_validations = [],
-                    valid;
+                    valid,
+                    last_valid = true,
+                    all_valid = true;
+
+                if (el.disabled) continue;
 
                 if (is_checkable && required) {
                     verifiers.push('requiredone');
@@ -324,9 +327,19 @@
                     parent = parent.parent();
                 }
 
+                if (required) {
+                    valid = value.length;
+                    el_validations.push(valid);
+                    if (valid) {
+                        this.validSuccess(el, parent, label);
+                    }
+                    else {
+                        // el_patterns[i][1] = 'required';
+                        validations = this.validError(el, parent, label, el_patterns[i], el_validations);
+                        if(validations.length) break;
+                    }
+                }
                 if (verifiers.length) {
-                    var last_valid = true,
-                        all_valid = true;
                     for (var iv = 0; iv < verifiers.length; iv++) {
                         valid = this.settings.verifiers[verifiers[iv]].apply(this, [el, required, parent]);
                         el_validations.push(valid);
@@ -339,19 +352,22 @@
                         validations = this.validError(el, parent, label, el_patterns[i], el_validations);
                         if(validations.length) break;
                     }
-                } else {
-                    var pattern = el_patterns[i][2];
+                } else if(pattern) {
                     if ($.type(pattern) == 'function') {
-                        pattern = pattern(el, required, parent);
-                    } else if($.type(pattern) == 'regexp') {
-                        pattern = pattern.test(value);
+                        valid = pattern(el, required, parent);
+                    } else if ($.type(pattern) == 'regexp') {
+                        valid = pattern.test(value);
                     }
-                    el_validations.push(required_valid && pattern || !required && !value.length || el.disabled);
+                    if (!value.length) {
+                        valid = el.checkValidity();
+                    }
 
-                    el_validations = [el_validations.every(function(valid) {
-                        return valid;
-                    })];
-                    if (el_validations[0]) {
+                    el_validations.push(valid);
+
+                    // el_validations = [el_validations.every(function(valid) {
+                    //     return valid;
+                    // })];
+                    if (valid) {
                         this.validSuccess(el, parent, label);
                     } else {
                         validations = this.validError(el, parent, label, el_patterns[i], el_validations);
