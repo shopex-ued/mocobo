@@ -207,7 +207,8 @@ $table-list-children-display: block !default;
                 .#{$buttons-class},
                 .#{$badge-class},
                 .#{$switch-class},
-                input {
+                input,
+                select {
                     position: absolute;
                     top: 50%;
                     right: $table-list-item-border-start;
@@ -215,7 +216,14 @@ $table-list-children-display: block !default;
                     margin-bottom: 0;
                 }
                 input {
-                    width: auto;
+                    &[type=text],
+                    &[type=email],
+                    &[type=url],
+                    &[type=search],
+                    &[type=tel],
+                    &[type=number] {
+                        width: auto;
+                    }
                 }
                 label {
                     line-height: 2;
