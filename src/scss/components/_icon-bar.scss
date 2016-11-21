@@ -70,7 +70,7 @@ $icon-bar-disabled-opacity: 0.7 !default;
 
 // We use this mixin to create the other styles for icon bars.
 @mixin icon-bar-style($bg: $icon-bar-bg, $bg-hover: $icon-bar-bg-hover, $border: $icon-bar-border-color, $shadow: $icon-bar-shadow, $font-size: $icon-bar-font-size, $color: $icon-bar-font-color, $color-hover: $icon-bar-font-color-hover, $icon-size: $icon-bar-icon-size, $icon-color: $icon-bar-icon-color, $icon-color-hover: $icon-bar-icon-color-hover, $icon-line-height: $icon-bar-icon-line-height, $image-width: $icon-bar-image-width, $image-height: $icon-bar-image-height, $disabled: true) {
-    background-color: $bg;
+    background: $bg;
     @if $border {
         border-#{nth($boder, 1)}: 1px solid nth($border, 2);
     }
