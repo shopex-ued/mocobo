@@ -2,7 +2,7 @@
 
 mocobo is a MObile front-end COdeBase for quickly develOp. You can quickly prototype and build sites or apps that work on any mobile device with mocobo.
 
-#Requirement
+## Requirement
 
 - [Git 1.7+](https://git-scm.com/)
 - [NodeJS 0.10+](https://nodejs.org/)
@@ -11,7 +11,7 @@ mocobo is a MObile front-end COdeBase for quickly develOp. You can quickly proto
 - [ttfautohint](http://www.freetype.org/ttfautohint/)
 - [Python 2.7+](https://www.python.org/downloads/)
 
-#Getting Started
+## Getting Started
 
 ```bash
 git clone https://github.com/shopex-ued/mocobo
@@ -20,7 +20,7 @@ npm install -g grunt-cli
 npm install
 grunt
 ```
-#Project Structure
+## Project Structure
 
 ```
 mocobo/
@@ -44,17 +44,17 @@ grunt watches
 
 Enjoy!
 
-#Standing On the Shoulder Of Giants
+## Standing On the Shoulder Of Giants
 
 - Foundation
 - mui
 - Frozen UI
 - animate.css
 
-#Case
+## Case
 
 drpmob, csc, omsmob, penkr ecom, penkr cms, dianxiaoer, post, steelcase
 
-#License
+## License
 
 mocobo is licensed under the [MIT license](LICENSE).
